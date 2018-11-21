@@ -21,6 +21,6 @@ class SplashActivity: BaseActivity() {
     override fun close() {
     }
 
-    override fun onClick(p0: View?) {
+    override fun onClick(view: View) {
     }
 }
