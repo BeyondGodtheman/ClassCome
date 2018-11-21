@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--base-->
+    <item name="frameTitle" type="id" />
+    <item name="frameBody" type="id" />
+    <item name="frameContent" type="id" />
+
+    <!--TextView-->
+    <item name="tvTitle" type="id" />
+    <item name="tvLeft" type="id" />
+    <item name="tvRight" type="id"/>
+    <item name="tvDesc" type="id" />
+    <item name="tvChecked" type="id" />
+    <item name="tvPhone" type="id" />
+    <item name="tvDelete" type="id" />
+    <item name="tvName" type="id" />
+    <item name="tvNo" type="id" />
+    <item name="tvIcon" type="id" />
+
+    <!--Button-->
+    <item name="btnNext" type="id" />
+    <item name="btnCode" type="id" />
+    <item name="btnLogOut" type="id"/>
+</resources>
