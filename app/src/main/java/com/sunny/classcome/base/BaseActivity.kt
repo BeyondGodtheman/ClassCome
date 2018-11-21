@@ -17,19 +17,20 @@ import kotlinx.android.synthetic.main.layout_error.view.*
 
 abstract class BaseActivity : AppCompatActivity(), IBaseView, View.OnClickListener {
 
-    private val loadingView: View by lazy {
+    val loadingView: View by lazy {
         View.inflate(this, R.layout.layout_loading, null)
     }
 
-    private val errorView: View by lazy {
+    val errorView: View by lazy {
         View.inflate(this, R.layout.layout_error, null)
     }
 
-    lateinit var titleManager: TitleManager
+    val titleManager: TitleManager by lazy {
+        TitleManager()
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT //强制屏幕
-        titleManager = TitleManager()
         setContentView(R.layout.activity_base)
         val bodyView = LayoutInflater.from(this).inflate(setLayout(), null, false)
         frameBody.addView(bodyView)

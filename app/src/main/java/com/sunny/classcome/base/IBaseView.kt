@@ -2,11 +2,6 @@ package com.sunny.classcome.base
 
 import com.sunny.classcome.utils.ErrorViewType
 
-
-/**
- *
- * Created by zhangye on 2018/8/2.
- */
 interface IBaseView {
 
     fun showLoading()
