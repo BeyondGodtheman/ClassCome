@@ -5,6 +5,9 @@
     <item name="frameBody" type="id" />
     <item name="frameContent" type="id" />
 
+    <item name="view_pager" type="id" />
+    <item name="recycler_view" type="id" />
+
     <!--TextView-->
     <item name="tvTitle" type="id" />
     <item name="tvLeft" type="id" />

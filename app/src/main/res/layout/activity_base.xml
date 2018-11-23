@@ -6,7 +6,7 @@
     <FrameLayout
         android:id="@id/frameTitle"
         style="@style/Title"
-        android:background="@color/white"/>
+        android:background="@color/color_white"/>
 
     <FrameLayout
         android:id="@id/frameBody"

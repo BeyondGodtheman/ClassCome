@@ -1,9 +1,20 @@
 <resources>
+
+    <string name="app">test</string>
     <string name="app_name">课来了</string>
 
+    <!--首页底部导航栏-->
+
+    <string name="nav_home">首页</string>
+    <string name="nav_publish">发布</string>
+    <string name="nav_mine">我的</string>
+
+
     <!--错误信息-->
+
     <string name="networkError">请检查网络连接</string>
     <string name="timeoutError">网络请求超时,请稍后重试！</string>
     <string name="connectError">无法连接到服务器！</string>
     <string name="retry">重试</string>
+
 </resources>

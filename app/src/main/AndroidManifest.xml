@@ -34,12 +34,16 @@
         tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:allowBackup">
 
-        <activity android:name=".activity.SplashActivity">
+        <activity android:name=".activity.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
+        <!--<activity android:name=".activity.HomeActivity"/>-->
+        <activity android:name=".activity.MineActivity"/>
 
     </application>
 </manifest>

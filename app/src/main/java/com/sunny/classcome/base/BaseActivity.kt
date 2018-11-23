@@ -28,6 +28,7 @@ abstract class BaseActivity : AppCompatActivity(), IBaseView, View.OnClickListen
     val titleManager: TitleManager by lazy {
         TitleManager()
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT //强制屏幕
@@ -35,8 +36,8 @@ abstract class BaseActivity : AppCompatActivity(), IBaseView, View.OnClickListen
         val bodyView = LayoutInflater.from(this).inflate(setLayout(), null, false)
         frameBody.addView(bodyView)
 
-        loadingView.setOnClickListener {  }
-        errorView.setOnClickListener {  }
+        loadingView.setOnClickListener { }
+        errorView.setOnClickListener { }
         errorView.btnNext.setOnClickListener {
             hideError()
             loadData()
@@ -51,13 +52,11 @@ abstract class BaseActivity : AppCompatActivity(), IBaseView, View.OnClickListen
 
     abstract fun initView()
 
-    abstract fun update()
+    open fun loadData() {}
 
+    open fun update() {}
 
-    abstract fun loadData()
-
-    abstract fun close()
-
+    open fun close() {}
 
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
@@ -84,7 +83,7 @@ abstract class BaseActivity : AppCompatActivity(), IBaseView, View.OnClickListen
 
     override fun showLoading() {
         hideLoading()
-        loadingView.setOnClickListener {  }
+        loadingView.setOnClickListener { }
 
         frameBody.addView(loadingView)
     }
@@ -96,7 +95,7 @@ abstract class BaseActivity : AppCompatActivity(), IBaseView, View.OnClickListen
     override fun showError(errorType: ErrorViewType) {
         hideError()
         frameBody.addView(errorView)
-        errorView.setOnClickListener {  }
+        errorView.setOnClickListener { }
         errorView.tvDesc.text = errorType.errorMessage
     }
 

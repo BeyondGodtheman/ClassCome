@@ -30,7 +30,7 @@ abstract class BaseFragment : Fragment(), IBaseView, View.OnClickListener {
         mView?.iframeBody?.apply {
             (layoutParams as RelativeLayout.LayoutParams).addRule(RelativeLayout.BELOW, 0)
         }
-        mView?.iframeTitle?.setBackgroundResource(R.color.transparent)
+        mView?.iframeTitle?.setBackgroundResource(R.color.color_transparent)
 
     }
 
@@ -39,24 +39,15 @@ abstract class BaseFragment : Fragment(), IBaseView, View.OnClickListener {
     fun getBaseActivity(): BaseActivity = activity as BaseActivity
 
 
-    override fun onDestroy() {
-        super.onDestroy()
-        close()
-    }
-
-
-    override fun onResume() {
-        super.onResume()
-        update()
-    }
-
     abstract fun setLayout(): Int
 
     abstract fun initView()
 
-    abstract fun update()
+    open fun close(){}
 
-    abstract fun loadData()
+    open fun update(){}
+
+    open fun loadData(){}
 
 
     override fun showMessage(message: String) {
@@ -84,5 +75,14 @@ abstract class BaseFragment : Fragment(), IBaseView, View.OnClickListener {
     }
 
 
-    abstract fun close()
+    override fun onResume() {
+        super.onResume()
+        update()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        close()
+    }
+
 }
