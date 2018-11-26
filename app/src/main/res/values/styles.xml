@@ -2,15 +2,11 @@
 
     <!--底部导航栏-->
 
-    <style name="Style_Home_Bottom_Navigation">
-        <item name="android:layout_width">@dimen/dimen_0</item>
+    <style name="HomeNavText">
+        <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_weight">1</item>
-        <item name="android:gravity">center</item>
-        <item name="android:paddingTop">@dimen/dimen_5</item>
-        <item name="android:drawablePadding">@dimen/dimen_2</item>
-        <item name="android:textSize">@dimen/dimen_text_10</item>
-        <item name="android:textColor">@drawable/selector_home_tab_text_color</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/color_nav_gray</item>
     </style>
 
 
@@ -20,6 +16,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColor">@color/color_default_text</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowNoTitle">true</item>

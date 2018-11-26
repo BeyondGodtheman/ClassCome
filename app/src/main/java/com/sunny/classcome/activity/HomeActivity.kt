@@ -4,6 +4,7 @@ import android.graphics.Color
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
+import android.support.v4.content.ContextCompat
 import android.support.v4.graphics.ColorUtils
 import android.support.v4.view.PagerAdapter
 import android.support.v4.view.ViewPager
@@ -11,14 +12,14 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.SimpleItemAnimator
 import android.view.View
+import android.widget.FrameLayout
+import android.widget.TextView
 import com.sunny.classcome.R
 import com.sunny.classcome.base.BaseActivity
 import com.sunny.classcome.fragment.MineFragment
-import com.sunny.classcome.utils.IntentUtil
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.view_bookshelf_header.*
 import java.util.*
-import kotlin.math.min
 
 
 /**
@@ -42,7 +43,7 @@ class HomeActivity : BaseActivity() {
     var blendCorlor = Color.parseColor("#1098AE")
 
     private val headerNormalHeight by lazy {
-        resources.getDimensionPixelSize(R.dimen.bookshelf_head_recommend_height)
+        resources.getDimensionPixelSize(0)
     }
 
     private val homeFragment: MineFragment by lazy {
@@ -57,14 +58,43 @@ class HomeActivity : BaseActivity() {
         MineFragment()
     }
 
+    private val homeNavText: Array<String> by lazy {
+        arrayOf(
+                resources.getString(R.string.nav_home),
+                resources.getString(R.string.nav_publish),
+                resources.getString(R.string.nav_mine))
+    }
+
+    private val homeNavIcon: Array<Int> by lazy {
+        arrayOf(
+                R.mipmap.ic_nav_home_gray,
+                R.mipmap.ic_nav_add_gray,
+                R.mipmap.ic_nav_mine_gray)
+    }
+
+    private val homeNavIconSelect: Array<Int> by lazy {
+        arrayOf(
+                R.mipmap.ic_nav_home_blue,
+                R.mipmap.ic_nav_add_blue,
+                R.mipmap.ic_nav_mine_blue)
+    }
+
+    private val frameLayouts: Array<FrameLayout> by lazy {
+        arrayOf(
+                flHome,
+                flAdd,
+                flMine)
+    }
+
+
     override fun setLayout(): Int = R.layout.activity_home
 
 
     override fun onClick(v: View) {
         when (v.id) {
-            R.id.txt_home -> clickNavigationItem(homePage)
-            R.id.txt_publish -> clickNavigationItem(publishPage)
-            R.id.txt_mine -> clickNavigationItem(minePage)
+            R.id.flHome -> initTabView(0)
+            R.id.flAdd -> initTabView(1)
+            R.id.flMine -> initTabView(2)
         }
     }
 
@@ -72,12 +102,16 @@ class HomeActivity : BaseActivity() {
     override fun initView() {
         initRecyclerView()
         initViewPager()
-
         changeNavigationState(currentPosition)
 
-        txt_home.setOnClickListener(this)
-        txt_publish.setOnClickListener(this)
-        txt_mine.setOnClickListener(this)
+
+        initTabView(0)
+
+
+
+        flHome.setOnClickListener(this)
+        flAdd.setOnClickListener(this)
+        flMine.setOnClickListener(this)
     }
 
     private fun initViewPager() {
@@ -138,9 +172,9 @@ class HomeActivity : BaseActivity() {
      * 设置导航栏选中状态
      */
     private fun changeNavigationState(position: Int) {
-        txt_home?.isSelected = position == homePage
-        txt_publish?.isSelected = position == publishPage
-        txt_mine?.isSelected = position == minePage
+//        txt_home?.isSelected = position == homePage
+//        txt_publish?.isSelected = position == publishPage
+//        txt_mine?.isSelected = position == minePage
     }
 
     /**
@@ -210,4 +244,28 @@ class HomeActivity : BaseActivity() {
         }
     }
 
+
+    private fun initTabView(index: Int) {
+
+        frameLayouts.forEachIndexed { i, frameLayout ->
+            frameLayout.removeAllViews()
+
+            var layout = R.layout.layout_nav_home_gray
+            var color = R.color.color_nav_gray
+            var icon = homeNavIcon[i]
+
+            if (i == index) {
+                layout = R.layout.layout_nav_home_blue
+                color = R.color.color_nav_blue
+                icon = homeNavIconSelect[i]
+            }
+            val view = View.inflate(this, layout, null)
+            view.findViewById<TextView>(R.id.tvName)?.apply {
+                text = homeNavText[i]
+                setTextColor(ContextCompat.getColor(context, color))
+            }
+            view.findViewById<View>(R.id.vIcon)?.setBackgroundResource(icon)
+            frameLayout.addView(view)
+        }
+    }
 }

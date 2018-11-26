@@ -7,6 +7,7 @@
 
     <item name="view_pager" type="id" />
     <item name="recycler_view" type="id" />
+    <item name="tabLayout" type="id"/>
 
     <!--TextView-->
     <item name="tvTitle" type="id" />
@@ -19,6 +20,7 @@
     <item name="tvName" type="id" />
     <item name="tvNo" type="id" />
     <item name="tvIcon" type="id" />
+    <item name="vIcon" type="id"/>
 
     <!--Button-->
     <item name="btnNext" type="id" />

@@ -45,4 +45,6 @@ dependencies {
 
     //google的JSON解析库
     implementation 'com.google.code.gson:gson:2.8.2'
+    //屏幕适配
+    implementation 'me.jessyan:autosize:1.1.0'
 }
