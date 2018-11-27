@@ -9,7 +9,7 @@ class SplashActivity: BaseActivity() {
     override fun setLayout(): Int = R.layout.activity_splash
 
     override fun initView() {
-        btnNet.setOnClickListener(this)
+        goneTitle()
     }
 
     override fun update() {
