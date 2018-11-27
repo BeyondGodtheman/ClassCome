@@ -26,7 +26,7 @@ abstract class BaseActivity : AppCompatActivity(), IBaseView, View.OnClickListen
     }
 
     val titleManager: TitleManager by lazy {
-        TitleManager()
+        TitleManager(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -119,6 +119,7 @@ abstract class BaseActivity : AppCompatActivity(), IBaseView, View.OnClickListen
 
     override fun onDestroy() {
         super.onDestroy()
+        titleManager.onDestroy()
         close()
     }
 }

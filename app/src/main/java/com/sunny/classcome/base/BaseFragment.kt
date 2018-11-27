@@ -8,12 +8,16 @@ import android.view.ViewGroup
 import android.widget.RelativeLayout
 import com.sunny.classcome.R
 import com.sunny.classcome.utils.ErrorViewType
+import com.sunny.classcome.utils.TitleManager
 import kotlinx.android.synthetic.main.fragment_base.*
 import kotlinx.android.synthetic.main.fragment_base.view.*
 
 abstract class BaseFragment : Fragment(), IBaseView, View.OnClickListener {
     private var savedInstanceState: Bundle? = null
     private var mView: View? = null
+    val titleManager: TitleManager by lazy {
+        getBaseActivity().titleManager
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         this.savedInstanceState = savedInstanceState
@@ -47,16 +51,17 @@ abstract class BaseFragment : Fragment(), IBaseView, View.OnClickListener {
 
     abstract fun initView()
 
-    open fun close(){}
+    open fun close() {}
 
-    open fun update(){}
+    open fun update() {}
 
-    open fun loadData(){}
+    open fun loadData() {}
 
-    fun showTitle(){
+    fun showTitle(view: View): View {
         iframeTitle.visibility = View.VISIBLE
+        iframeTitle.addView(view)
+        return view
     }
-
 
     override fun showMessage(message: String) {
         getBaseActivity().showMessage(message)

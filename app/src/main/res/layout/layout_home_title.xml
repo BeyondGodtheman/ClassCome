@@ -10,7 +10,7 @@
         android:layout_height="match_parent"
         tools:ignore="RelativeOverlap">
     <TextView
-        android:id="@id/tvLeft"
+        android:id="@+id/tvLocation"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:gravity="center_vertical"
@@ -24,7 +24,7 @@
         android:layout_width="32dp"
         android:layout_height="32dp"
         android:layout_centerVertical="true"
-        android:layout_toEndOf="@id/tvLeft"
+        android:layout_toEndOf="@id/tvLocation"
         android:gravity="center_vertical"
         android:src="@drawable/ic_title_down"
         android:contentDescription="@string/more" />

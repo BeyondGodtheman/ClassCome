@@ -10,6 +10,7 @@
     <string name="nav_mine">我的</string>
     <string name="defaultLocation">上海</string>
     <string name="message">消息</string>
+    <string name="back">返回</string>
     <string name="more">更多</string>
 
     <!--错误信息-->
