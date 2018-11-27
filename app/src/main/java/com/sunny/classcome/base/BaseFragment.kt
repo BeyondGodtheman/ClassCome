@@ -19,11 +19,15 @@ abstract class BaseFragment : Fragment(), IBaseView, View.OnClickListener {
         this.savedInstanceState = savedInstanceState
         mView = inflater.inflate(R.layout.fragment_base, container, false)
         mView?.iframeBody?.addView(inflater.inflate(setLayout(), container, false))
-        initView()
-        loadData()
+
         return mView
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initView()
+        loadData()
+    }
 
     //沉浸式Title
     fun immersionTitle() {
@@ -48,6 +52,10 @@ abstract class BaseFragment : Fragment(), IBaseView, View.OnClickListener {
     open fun update(){}
 
     open fun loadData(){}
+
+    fun showTitle(){
+        iframeTitle.visibility = View.VISIBLE
+    }
 
 
     override fun showMessage(message: String) {

@@ -25,7 +25,7 @@
     <!--Title-->
     <style name="Title">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">93dp</item>
+        <item name="android:layout_height">82dp</item>
     </style>
 
 </resources>

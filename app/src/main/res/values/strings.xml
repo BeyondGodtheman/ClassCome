@@ -8,7 +8,9 @@
     <string name="nav_home">首页</string>
     <string name="nav_publish">发布</string>
     <string name="nav_mine">我的</string>
-
+    <string name="defaultLocation">上海</string>
+    <string name="message">消息</string>
+    <string name="more">更多</string>
 
     <!--错误信息-->
 
@@ -16,5 +18,4 @@
     <string name="timeoutError">网络请求超时,请稍后重试！</string>
     <string name="connectError">无法连接到服务器！</string>
     <string name="retry">重试</string>
-
 </resources>

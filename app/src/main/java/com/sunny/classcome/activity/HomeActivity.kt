@@ -1,24 +1,19 @@
 package com.sunny.classcome.activity
 
-import android.graphics.Color
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import android.support.v4.content.ContextCompat
-import android.support.v4.graphics.ColorUtils
 import android.support.v4.view.PagerAdapter
 import android.support.v4.view.ViewPager
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.SimpleItemAnimator
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.TextView
 import com.sunny.classcome.R
 import com.sunny.classcome.base.BaseActivity
+import com.sunny.classcome.fragment.HomeFragment
 import com.sunny.classcome.fragment.MineFragment
 import kotlinx.android.synthetic.main.activity_home.*
-import kotlinx.android.synthetic.main.view_bookshelf_header.*
 import java.util.*
 
 
@@ -32,22 +27,12 @@ class HomeActivity : BaseActivity() {
 
     private var currentPosition = 0
 
-    private val homePage = 0
-    private val publishPage = 1
-    private val minePage = 2
 
     private val fragmentList = ArrayList<Fragment>()
 
-    internal var scrollOffset = 0f
-    private val statusNoramlColor = Color.parseColor("#1098AE")
-    var blendCorlor = Color.parseColor("#1098AE")
 
-    private val headerNormalHeight by lazy {
-        resources.getDimensionPixelSize(0)
-    }
-
-    private val homeFragment: MineFragment by lazy {
-        MineFragment()
+    private val homeFragment: HomeFragment by lazy {
+        HomeFragment()
     }
 
     private val publishFragment: MineFragment by lazy {
@@ -100,13 +85,10 @@ class HomeActivity : BaseActivity() {
 
 
     override fun initView() {
-        initRecyclerView()
+        goneTitle()
         initViewPager()
-        changeNavigationState(currentPosition)
-
 
         initTabView(0)
-
 
 
         flHome.setOnClickListener(this)
@@ -121,17 +103,16 @@ class HomeActivity : BaseActivity() {
         fragmentList.add(publishFragment)
         fragmentList.add(mineFragment)
 
-        view_pager?.adapter = fragmentAdapter(supportFragmentManager)
-        view_pager?.offscreenPageLimit = fragmentList.size
+        view_pager.adapter = FragmentAdapter(supportFragmentManager)
+        view_pager.offscreenPageLimit = fragmentList.size
 
-        view_pager?.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+        view_pager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
 
             }
 
             override fun onPageSelected(position: Int) {
                 currentPosition = position
-                changeNavigationState(currentPosition)
             }
 
             override fun onPageScrollStateChanged(state: Int) {
@@ -141,95 +122,13 @@ class HomeActivity : BaseActivity() {
     }
 
 
-    private fun initRecyclerView() {
 
-        recycler_view.recycledViewPool.setMaxRecycledViews(0, 12)
-
-        recycler_view.layoutManager = LinearLayoutManager(this)
-        recycler_view.isFocusable = false
-        recycler_view.itemAnimator?.addDuration = 0
-        recycler_view.itemAnimator?.changeDuration = 0
-        recycler_view.itemAnimator?.moveDuration = 0
-        recycler_view.itemAnimator?.removeDuration = 0
-
-        (recycler_view.itemAnimator as SimpleItemAnimator).supportsChangeAnimations = false
-
-//        recycler_view.adapter = bookShelfAdapter
-
-        recycler_view.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-
-                changeTitleBarBackground(dy)
-
-            }
-        })
-    }
-
-
-    /**
-     * 设置导航栏选中状态
-     */
-    private fun changeNavigationState(position: Int) {
-//        txt_home?.isSelected = position == homePage
-//        txt_publish?.isSelected = position == publishPage
-//        txt_mine?.isSelected = position == minePage
-    }
-
-    /**
-     * 点击导航栏选项
-     */
-    private fun clickNavigationItem(position: Int) {
-        if (currentPosition == position) {
-            return
-        }
-
-        view_pager?.currentItem = position
-        currentPosition = position
-
-        changeNavigationState(currentPosition)
-    }
-
-    /**
-     * 根据偏移量改变TitleBar颜色
-     */
-    private fun changeTitleBarBackground(scrollY: Int) {
-        if (headerNormalHeight != 0) {
-            scrollOffset += scrollY.toFloat()
-            if (scrollOffset > headerNormalHeight) {
-                scrollOffset = headerNormalHeight.toFloat()
-            } else if (scrollOffset < 0) {
-                scrollOffset = 0f
-            }
-
-            val ratio = scrollOffset / headerNormalHeight
-            blendCorlor = ColorUtils.blendARGB(Color.parseColor("#1098AE"), Color.WHITE, ratio)
-            layout_title.setBackgroundColor(blendCorlor)
-
-            val textColor = ColorUtils.blendARGB(Color.WHITE, Color.BLACK, ratio)
-            txt_bookshelf.setTextColor(textColor)
-
-            //icon透明度
-            img_head_more2.alpha = ratio
-            img_head_more.alpha = 1 - ratio
-
-            img_head_search2.alpha = ratio
-            img_head_search.alpha = 1 - ratio
-
-            img_download_manager2.alpha = ratio
-            img_download_manager.alpha = 1 - ratio
-
-            img_head_setting2.alpha = ratio
-            img_head_setting.alpha = 1 - ratio
-        }
-    }
 
 
     /**
      * ViewPager的Adapter
      */
-    inner class fragmentAdapter internal constructor(fragmentManager: FragmentManager) : FragmentPagerAdapter(fragmentManager) {
+    inner class FragmentAdapter internal constructor(fragmentManager: FragmentManager) : FragmentPagerAdapter(fragmentManager) {
 
         override fun getCount(): Int {
             return fragmentList.size
@@ -267,5 +166,7 @@ class HomeActivity : BaseActivity() {
             view.findViewById<View>(R.id.vIcon)?.setBackgroundResource(icon)
             frameLayout.addView(view)
         }
+
+        view_pager.currentItem = index
     }
 }

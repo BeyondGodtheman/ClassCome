@@ -81,6 +81,10 @@ abstract class BaseActivity : AppCompatActivity(), IBaseView, View.OnClickListen
         im.hideSoftInputFromWindow(this.currentFocus?.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
     }
 
+    fun goneTitle(){
+        frameTitle.visibility = View.GONE
+    }
+
     override fun showLoading() {
         hideLoading()
         loadingView.setOnClickListener { }
