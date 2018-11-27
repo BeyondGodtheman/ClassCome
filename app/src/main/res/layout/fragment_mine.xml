@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/color_divider"
+            android:scrollbars="none">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_white"
+        android:orientation="vertical">
+
+        <!--横向列表-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_height="200dp">
+
+            <TextView
+                android:id="@+id/tvMyTrip"
+                style="@style/style_item_text_top_icon"
+                android:drawableTop="@mipmap/ic_nav_add_blue"
+                android:text="@string/my_trip"/>
+
+            <View style="@style/style_view_vertical_line"/>
+
+            <TextView
+                android:id="@+id/tvMyPublish"
+                style="@style/style_item_text_top_icon"
+                android:drawableTop="@mipmap/ic_nav_add_blue"
+                android:text="@string/my_publish"/>
+
+            <View style="@style/style_view_vertical_line"/>
+
+            <TextView
+                android:id="@+id/tvMyPartake"
+                style="@style/style_item_text_top_icon"
+                android:drawableTop="@mipmap/ic_nav_add_blue"
+                android:text="@string/my_partake"/>
+
+        </LinearLayout>
+
+        <!--纵向列表-->
+
+        <View style="@style/style_view_divider"/>
+
+        <TextView
+            android:id="@+id/tvMyCheques"
+            style="@style/style_item_text_icon"
+            android:drawableStart="@mipmap/ic_nav_add_blue"
+            android:text="@string/my_cheques"/>
+
+        <View style="@style/style_view_divider"/>
+
+
+        <TextView
+            android:id="@+id/tvInvitationRecord"
+            style="@style/style_item_text_icon"
+            android:drawableStart="@mipmap/ic_nav_add_blue"
+            android:text="@string/invitation_record"/>
+
+        <View style="@style/style_view_line"/>
+
+        <TextView
+            android:id="@+id/tvMyProfile"
+            style="@style/style_item_text_icon"
+            android:drawableStart="@mipmap/ic_nav_add_blue"
+            android:text="@string/my_profile"/>
+
+        <View style="@style/style_view_line"/>
+
+        <TextView
+            android:id="@+id/tvMyCollection"
+            style="@style/style_item_text_icon"
+            android:drawableStart="@mipmap/ic_nav_add_blue"
+            android:text="@string/my_collection"/>
+
+        <View style="@style/style_view_line"/>
+
+        <TextView
+            android:id="@+id/tvFeedback"
+            style="@style/style_item_text_icon"
+            android:drawableStart="@mipmap/ic_nav_add_blue"
+            android:text="@string/feedback"/>
+
+        <View style="@style/style_view_divider"/>
+
+
+        <TextView
+            android:id="@+id/tvSetting"
+            style="@style/style_item_text_icon"
+            android:drawableStart="@mipmap/ic_nav_add_blue"
+            android:text="@string/setting"/>
+
+        <View style="@style/style_view_line"/>
+
+        <TextView
+            android:id="@+id/tvBusinessCooperation"
+            style="@style/style_item_text_icon"
+            android:drawableStart="@mipmap/ic_nav_add_blue"
+            android:text="@string/business_cooperation"/>
+
+    </LinearLayout>
+</ScrollView>

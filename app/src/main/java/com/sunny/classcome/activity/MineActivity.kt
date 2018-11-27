@@ -13,7 +13,7 @@ import com.sunny.classcome.base.BaseActivity
  */
 class MineActivity : BaseActivity() {
 
-    override fun setLayout(): Int = R.layout.activity_mine
+    override fun setLayout(): Int = R.layout.fragment_mine
 
     override fun initView() {
     }

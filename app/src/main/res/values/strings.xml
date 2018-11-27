@@ -3,21 +3,104 @@
     <string name="app">test</string>
     <string name="app_name">课来了</string>
 
-    <!--首页底部导航栏-->
-
-    <string name="nav_home">首页</string>
-    <string name="nav_publish">发布</string>
-    <string name="nav_mine">我的</string>
-    <string name="defaultLocation">上海</string>
-    <string name="message">消息</string>
-    <string name="back">返回</string>
-    <string name="more">更多</string>
-    <string name="close">关闭</string>
-    <string name="sure">确定</string>
     <!--错误信息-->
 
     <string name="networkError">请检查网络连接</string>
     <string name="timeoutError">网络请求超时,请稍后重试！</string>
     <string name="connectError">无法连接到服务器！</string>
     <string name="retry">重试</string>
+
+    <!--首页底部导航栏-->
+
+    <string name="nav_home">首页</string>
+    <string name="nav_mine">我的</string>
+    <string name="nav_publish">发布</string>
+
+    <!--首页-->
+
+    <string name="defaultLocation">上海</string>
+    <string name="message">消息</string>
+    <string name="more">更多</string>
+    <string name="type">类型</string>
+    <string name="back">返回</string>
+    <string name="close">关闭</string>
+    <string name="sure">确定</string>
+
+    <string name="publish">发布</string>
+    <string name="train">培训</string>
+    <string name="train_info">让学习更简单</string>
+    <string name="field">场地</string>
+    <string name="field_info">发现精彩活动场地</string>
+    <string name="substitute">代课</string>
+    <string name="substitute_info">你的代课好帮手</string>
+    <string name="tutor">家教</string>
+    <string name="tutor_info">一对一辅导</string>
+    <string name="active">活动</string>
+    <string name="active_info">生活更精彩</string>
+    <string name="place">地点</string>
+    <string name="heat">热度</string>
+    <string name="price">价格</string>
+    <string name="class_time">上课时间</string>
+
+    <!--发布-->
+
+    <string name="publish_choice">在这里选择你要发布的内容吧</string>
+    <string name="publish_train">发布培训</string>
+    <string name="publish_train_prompt">轻便好用，轻松管理培训项目</string>
+    <string name="publish_field">发布场地</string>
+    <string name="publish_field_prompt">有空闲场地，帮你高效推广</string>
+    <string name="publish_substitute">发布代课</string>
+    <string name="publish_substitute_prompt">想找人代课，随时随地想找就找</string>
+    <string name="publish_tutor">发布家教</string>
+    <string name="publish_tutor_prompt">快速发现你身边的好家教</string>
+    <string name="publish_activity">发布活动</string>
+    <string name="publish_activity_prompt">方便快捷，轻松发布活动</string>
+
+    <!--我的-->
+
+    <string name="my_trip">我的行程</string>
+    <string name="my_publish">我的发布</string>
+    <string name="my_partake">我的参与</string>
+    <string name="my_cheques">我的收款</string>
+    <string name="invitation_record">邀约记录</string>
+    <string name="my_profile">我的简介</string>
+    <string name="my_collection">我的收藏</string>
+    <string name="feedback">意见反馈</string>
+    <string name="setting">设置</string>
+    <string name="business_cooperation">商务合作</string>
+    <string name="ordinary_member">普通会员</string>
+
+    <!--我的发布-->
+
+    <string name="list_train">培训列表</string>
+    <string name="list_field">场地列表</string>
+    <string name="list_substitute">代课列表</string>
+    <string name="list_tutor">家教列表</string>
+    <string name="list_activity">活动列表</string>
+
+    <!--我的收款-->
+
+    <string name="detailed">明细</string>
+    <string name="bind_wechat_cheques">绑定微信收款</string>
+    <string name="bind_alipay_cheques">绑定支付宝收款</string>
+    <string name="default_way">默认</string>
+    <string name="unbind">未绑定</string>
+    <string name="binding">已绑定</string>
+    <string name="prompt_cheques_bind">绑定账户后，订单结算完成后自动打入您的账户</string>
+
+    <!--意见反馈-->
+
+    <string name="commit">提交</string>
+    <string name="prompt_feedback">亲爱的用户您好，如果您对我们有任何建议，请在此留言，我们将不断改进。</string>
+
+    <!--设置-->
+
+    <string name="login_password">登录密码</string>
+    <string name="logout">退出登录</string>
+    <string name="about_us">关于我们</string>
+    <string name="invitation_points">邀请得积分</string>
+    <string name="help">帮助</string>
+    <string name="modify">修改</string>
+
+
 </resources>

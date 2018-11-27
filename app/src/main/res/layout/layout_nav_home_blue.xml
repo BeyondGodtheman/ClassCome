@@ -4,7 +4,7 @@
     android:layout_height="match_parent">
 
     <View
-        android:id="@id/vIcon"
+        android:id="@id/viewIcon"
         android:layout_width="58dp"
         android:layout_height="58dp"
         android:layout_above="@id/tvName"
@@ -14,7 +14,7 @@
 
     <TextView
         android:id="@id/tvName"
-        style="@style/HomeNavText"
+        style="@style/style_home_nav_text"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="2dp"

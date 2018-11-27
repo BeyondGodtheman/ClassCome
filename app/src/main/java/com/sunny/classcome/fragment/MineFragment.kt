@@ -6,14 +6,14 @@ import com.sunny.classcome.base.BaseFragment
 
 
 /**
- * Desc：
+ * Desc：我的
  * Author：JoannChen
  * Mail：yongzuo_chen@dingyuegroup.cn
  * Date：2018/11/22 0022 18:29
  */
 class MineFragment : BaseFragment() {
 
-    override fun setLayout(): Int = R.layout.activity_mine
+    override fun setLayout(): Int = R.layout.fragment_mine
 
     override fun initView() {
     }

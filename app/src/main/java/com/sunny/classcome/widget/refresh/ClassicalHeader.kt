@@ -41,7 +41,7 @@ class ClassicalHeader constructor(context: Context) : FrameLayout(context), KRef
         (root.layoutParams as FrameLayout.LayoutParams).gravity = Gravity.CENTER
 
         arrawImg = ImageView(context)
-        arrawImg.setImageResource(R.drawable.ic_arrow_down)
+        arrawImg.setImageResource(R.mipmap.ic_arrow_down)
         arrawImg.scaleType = ImageView.ScaleType.CENTER
         root.addView(arrawImg)
 
@@ -77,19 +77,19 @@ class ClassicalHeader constructor(context: Context) : FrameLayout(context), KRef
     }
 
     override fun onReset(refreshLayout: KRefreshLayout) {
-        arrawImg.setImageResource(R.drawable.ic_arrow_down)
+        arrawImg.setImageResource(R.mipmap.ic_arrow_down)
         textTitle.text = "下拉刷新..."
         isReset = true
         arrawImg.visibility = View.VISIBLE
     }
 
     override fun onPrepare(refreshLayout: KRefreshLayout) {
-        arrawImg.setImageResource(R.drawable.ic_arrow_down)
+        arrawImg.setImageResource(R.mipmap.ic_arrow_down)
         textTitle.text = "下拉刷新..."
     }
 
     override fun onRefresh(refreshLayout: KRefreshLayout) {
-        arrawImg.setImageResource(R.drawable.ic_loading)
+        arrawImg.setImageResource(R.mipmap.ic_loading)
         arrawImg.startAnimation(rotateAnimation)
         textTitle.text = "加载中..."
         isReset = false

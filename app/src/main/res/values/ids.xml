@@ -1,12 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+
+   <!--
+   TextView	txt
+    EditText	etxt
+    ImageView	img
+    Button	btn
+    ImageButton	ibtn
+    RadioButton	rbtn
+    ToggleButton	tbtn
+    CheckBox	ckb
+    ProgressBar	pgbar
+    SeekBar	skbar
+    AutoCompleteTextView actxt
+    ScrollView	scroll
+    TextSwitch	tswt
+    ImageSwitch	iswt
+    listView	list
+    RecyclerView recl
+    ViewPager	vp
+    -->
+
+
     <!--base-->
     <item name="frameTitle" type="id" />
     <item name="frameBody" type="id" />
     <item name="frameContent" type="id" />
 
-    <item name="view_pager" type="id" />
-    <item name="recycler_view" type="id" />
+    <!--基础控件-->
+    <item name="viewPager" type="id" />
+    <item name="scrollView" type="id" />
+    <item name="recyclerView" type="id" />
     <item name="tabLayout" type="id"/>
 
     <!--TextView-->
@@ -20,10 +45,11 @@
     <item name="tvName" type="id" />
     <item name="tvNo" type="id" />
     <item name="tvIcon" type="id" />
-    <item name="vIcon" type="id"/>
+    <item name="viewIcon" type="id"/>
 
     <!--Button-->
     <item name="btnNext" type="id" />
     <item name="btnCode" type="id" />
-    <item name="btnLogOut" type="id"/>
+    <item name="btnLogout" type="id"/>
+
 </resources>

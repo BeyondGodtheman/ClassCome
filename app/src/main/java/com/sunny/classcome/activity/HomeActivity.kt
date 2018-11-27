@@ -163,7 +163,7 @@ class HomeActivity : BaseActivity() {
                 text = homeNavText[i]
                 setTextColor(ContextCompat.getColor(context, color))
             }
-            view.findViewById<View>(R.id.vIcon)?.setBackgroundResource(icon)
+            view.findViewById<View>(R.id.viewIcon)?.setBackgroundResource(icon)
             frameLayout.addView(view)
         }
 
