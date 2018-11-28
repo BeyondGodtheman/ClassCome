@@ -13,6 +13,7 @@ import com.sunny.classcome.R
 import com.sunny.classcome.base.BaseActivity
 import com.sunny.classcome.fragment.HomeFragment
 import com.sunny.classcome.fragment.MineFragment
+import com.sunny.classcome.fragment.PublishFragment
 import kotlinx.android.synthetic.main.activity_home.*
 import java.util.*
 
@@ -35,8 +36,8 @@ class HomeActivity : BaseActivity() {
         HomeFragment()
     }
 
-    private val publishFragment: MineFragment by lazy {
-        MineFragment()
+    private val publishFragment: PublishFragment by lazy {
+        PublishFragment()
     }
 
     private val mineFragment: MineFragment by lazy {

@@ -10,7 +10,7 @@
     <color name="color_transparent">#00000000</color>
     <color name="color_nav_bg">#F8F9FF</color>
     <color name="color_nav_gray">#AAAAAA</color>
-    <color name="color_nav_blue">#4090FE</color>
+    <color name="color_nav_blue">@color/color_primary</color>
 
     <color name="color_default_text">#4A4A4A</color>
     <color name="color_gray_font">#9B9B9B</color>

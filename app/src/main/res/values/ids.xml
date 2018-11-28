@@ -20,10 +20,13 @@
      ViewPager	vp
      -->
 
-    <!---->
+    <item name="img_icon" type="id" />
     <item name="img_back" type="id" />
     <item name="img_more" type="id" />
     <item name="img_message" type="id" />
+
+    <item name="txt_type" type="id" />
+    <item name="txt_info" type="id" />
 
     <!--基础控件-->
 
