@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@id/scrollView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/color_divider"
-            android:scrollbars="none">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@id/scroll_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_divider"
+    android:scrollbars="none">
 
 
     <LinearLayout
@@ -13,96 +14,168 @@
         android:background="@color/color_white"
         android:orientation="vertical">
 
+        <!--用户信息-->
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp">
+
+            <ImageView
+                android:id="@+id/img_user_head"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/app"
+                android:src="@mipmap/ic_nav_home_blue" />
+
+            <TextView
+                android:id="@+id/txt_user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/img_user_head"
+                android:textSize="30sp"
+                tools:text="课多多" />
+
+            <TextView
+                android:id="@+id/txt_user_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txt_user_name"
+                android:layout_toEndOf="@id/img_user_head"
+                android:textSize="30sp"
+                tools:text="上海" />
+
+            <TextView
+                android:id="@+id/txt_points"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txt_user_address"
+                android:layout_toEndOf="@id/img_user_head"
+                android:drawableStart="@mipmap/ic_nav_home_blue"
+                android:textSize="30sp"
+                tools:text="2000积分" />
+
+            <TextView
+                android:id="@+id/txt_member"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txt_user_address"
+                android:layout_toEndOf="@id/txt_points"
+                android:drawableStart="@mipmap/ic_nav_home_blue"
+                android:textSize="30sp"
+                tools:text="2000积分" />
+
+            <ImageView
+                android:id="@id/img_more"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="100dp"
+                android:contentDescription="@string/app"
+                android:src="@mipmap/ic_nav_home_blue" />
+
+            <ImageView
+                android:id="@id/img_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="100dp"
+                android:contentDescription="@string/app"
+                android:src="@mipmap/ic_nav_home_blue" />
+
+        </RelativeLayout>
+
         <!--横向列表-->
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:gravity="center"
-            android:layout_height="200dp">
+            android:layout_height="200dp"
+            android:gravity="center">
 
             <TextView
-                android:id="@+id/tvMyTrip"
+                android:id="@+id/txt_my_trip"
                 style="@style/style_item_text_top_icon"
                 android:drawableTop="@mipmap/ic_nav_add_blue"
-                android:text="@string/my_trip"/>
+                android:text="@string/my_trip" />
 
-            <View style="@style/style_view_vertical_line"/>
+            <View style="@style/style_view_vertical_line" />
 
             <TextView
-                android:id="@+id/tvMyPublish"
+                android:id="@+id/txt_my_publish"
                 style="@style/style_item_text_top_icon"
                 android:drawableTop="@mipmap/ic_nav_add_blue"
-                android:text="@string/my_publish"/>
+                android:text="@string/my_publish" />
 
-            <View style="@style/style_view_vertical_line"/>
+            <View style="@style/style_view_vertical_line" />
 
             <TextView
-                android:id="@+id/tvMyPartake"
+                android:id="@+id/txt_my_partake"
                 style="@style/style_item_text_top_icon"
                 android:drawableTop="@mipmap/ic_nav_add_blue"
-                android:text="@string/my_partake"/>
+                android:text="@string/my_partake" />
 
         </LinearLayout>
 
         <!--纵向列表-->
 
-        <View style="@style/style_view_divider"/>
+        <View style="@style/style_view_divider" />
 
         <TextView
-            android:id="@+id/tvMyCheques"
+            android:id="@+id/txt_my_cheques"
             style="@style/style_item_text_icon"
             android:drawableStart="@mipmap/ic_nav_add_blue"
-            android:text="@string/my_cheques"/>
+            android:text="@string/my_cheques" />
 
-        <View style="@style/style_view_divider"/>
-
-
-        <TextView
-            android:id="@+id/tvInvitationRecord"
-            style="@style/style_item_text_icon"
-            android:drawableStart="@mipmap/ic_nav_add_blue"
-            android:text="@string/invitation_record"/>
-
-        <View style="@style/style_view_line"/>
-
-        <TextView
-            android:id="@+id/tvMyProfile"
-            style="@style/style_item_text_icon"
-            android:drawableStart="@mipmap/ic_nav_add_blue"
-            android:text="@string/my_profile"/>
-
-        <View style="@style/style_view_line"/>
-
-        <TextView
-            android:id="@+id/tvMyCollection"
-            style="@style/style_item_text_icon"
-            android:drawableStart="@mipmap/ic_nav_add_blue"
-            android:text="@string/my_collection"/>
-
-        <View style="@style/style_view_line"/>
-
-        <TextView
-            android:id="@+id/tvFeedback"
-            style="@style/style_item_text_icon"
-            android:drawableStart="@mipmap/ic_nav_add_blue"
-            android:text="@string/feedback"/>
-
-        <View style="@style/style_view_divider"/>
+        <View style="@style/style_view_divider" />
 
 
         <TextView
-            android:id="@+id/tvSetting"
+            android:id="@+id/txt_invitation_record"
             style="@style/style_item_text_icon"
             android:drawableStart="@mipmap/ic_nav_add_blue"
-            android:text="@string/setting"/>
+            android:text="@string/invitation_record" />
 
-        <View style="@style/style_view_line"/>
+        <View style="@style/style_view_line" />
 
         <TextView
-            android:id="@+id/tvBusinessCooperation"
+            android:id="@+id/txt_my_profile"
             style="@style/style_item_text_icon"
             android:drawableStart="@mipmap/ic_nav_add_blue"
-            android:text="@string/business_cooperation"/>
+            android:text="@string/my_profile" />
+
+        <View style="@style/style_view_line" />
+
+        <TextView
+            android:id="@+id/txt_my_collection"
+            style="@style/style_item_text_icon"
+            android:drawableStart="@mipmap/ic_nav_add_blue"
+            android:text="@string/my_collection" />
+
+        <View style="@style/style_view_line" />
+
+        <TextView
+            android:id="@+id/txt_feedback"
+            style="@style/style_item_text_icon"
+            android:drawableStart="@mipmap/ic_nav_add_blue"
+            android:text="@string/feedback" />
+
+        <View style="@style/style_view_divider" />
+
+
+        <TextView
+            android:id="@+id/txt_setting"
+            style="@style/style_item_text_icon"
+            android:drawableStart="@mipmap/ic_nav_add_blue"
+            android:text="@string/setting" />
+
+        <View style="@style/style_view_line" />
+
+        <TextView
+            android:id="@+id/txt_business_cooperation"
+            style="@style/style_item_text_icon"
+            android:drawableStart="@mipmap/ic_nav_add_blue"
+            android:text="@string/business_cooperation" />
 
     </LinearLayout>
 </ScrollView>

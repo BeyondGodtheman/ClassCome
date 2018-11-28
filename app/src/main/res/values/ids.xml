@@ -1,42 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-   <!--
-   TextView	txt
-    EditText	etxt
-    ImageView	img
-    Button	btn
-    ImageButton	ibtn
-    RadioButton	rbtn
-    ToggleButton	tbtn
-    CheckBox	ckb
-    ProgressBar	pgbar
-    SeekBar	skbar
-    AutoCompleteTextView actxt
-    ScrollView	scroll
-    TextSwitch	tswt
-    ImageSwitch	iswt
-    listView	list
-    RecyclerView recl
-    ViewPager	vp
-    -->
+    <!--
+     TextView	txt
+     ImageView	img
+     EditText	etxt
+     Button	btn
+     ImageButton	ibtn
+     RadioButton	rbtn
+     ToggleButton	tbtn
+     CheckBox	ckb
+     ProgressBar	pgbar
+     SeekBar	skbar
+     AutoCompleteTextView actxt
+     ScrollView	scroll
+     TextSwitch	tswt
+     ImageSwitch	iswt
+     RecyclerView recl
+     ViewPager	vp
+     -->
+
+    <!---->
+    <item name="img_back" type="id" />
+    <item name="img_more" type="id" />
+    <item name="img_message" type="id" />
+
+    <!--基础控件-->
+
+    <item name="recycler_view" type="id" />
+    <item name="scroll_view" type="id" />
+    <item name="view_pager" type="id" />
 
     <!--base-->
     <item name="frameTitle" type="id" />
     <item name="frameBody" type="id" />
     <item name="frameContent" type="id" />
 
-    <!--基础控件-->
-    <item name="flContent" type="id"/>
+    <item name="flContent" type="id" />
     <item name="viewPager" type="id" />
-    <item name="scrollView" type="id" />
     <item name="recyclerView" type="id" />
-    <item name="tabLayout" type="id"/>
+    <item name="tabLayout" type="id" />
 
     <!--TextView-->
     <item name="tvTitle" type="id" />
     <item name="tvLeft" type="id" />
-    <item name="tvRight" type="id"/>
+    <item name="tvRight" type="id" />
     <item name="tvDesc" type="id" />
     <item name="tvChecked" type="id" />
     <item name="tvPhone" type="id" />
@@ -44,11 +52,11 @@
     <item name="tvName" type="id" />
     <item name="tvNo" type="id" />
     <item name="tvIcon" type="id" />
-    <item name="viewIcon" type="id"/>
+    <item name="viewIcon" type="id" />
 
     <!--Button-->
     <item name="btnNext" type="id" />
     <item name="btnCode" type="id" />
-    <item name="btnLogout" type="id"/>
+    <item name="btnLogout" type="id" />
 
 </resources>
