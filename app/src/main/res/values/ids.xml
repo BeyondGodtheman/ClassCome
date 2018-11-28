@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-
    <!--
    TextView	txt
     EditText	etxt
@@ -22,13 +21,13 @@
     ViewPager	vp
     -->
 
-
     <!--base-->
     <item name="frameTitle" type="id" />
     <item name="frameBody" type="id" />
     <item name="frameContent" type="id" />
 
     <!--基础控件-->
+    <item name="flContent" type="id"/>
     <item name="viewPager" type="id" />
     <item name="scrollView" type="id" />
     <item name="recyclerView" type="id" />

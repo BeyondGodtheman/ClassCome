@@ -7,6 +7,11 @@ import kotlinx.android.synthetic.main.fragment_base.*
 import kotlinx.android.synthetic.main.layout_home_title.view.*
 
 class HomeFragment : BaseFragment() {
+
+    private val classListFragment: ClassListFragment by lazy {
+        ClassListFragment()
+    }
+
     private val titleView: View by lazy {
         showTitle(titleManager.homeTitle())
     }
@@ -16,6 +21,7 @@ class HomeFragment : BaseFragment() {
     override fun initView() {
         titleView.rlLocation.setOnClickListener(this)
         titleView.ivMessage.setOnClickListener(this)
+        childFragmentManager.beginTransaction().add(R.id.flContent, classListFragment).commit()
     }
 
     override fun onClick(v: View) {

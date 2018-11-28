@@ -20,15 +20,9 @@
         android:layout_height="92dp"
         android:background="@color/color_white" />
 
-    <View
+    <FrameLayout
+        android:id="@id/flContent"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_marginTop="7dp"
-        android:background="@color/color_white" />
-
-    <android.support.v7.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/color_white"/>
+        android:layout_height="match_parent"/>
 </LinearLayout>
 </android.support.v4.widget.NestedScrollView>
