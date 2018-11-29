@@ -114,6 +114,7 @@ class HomeActivity : BaseActivity() {
 
             override fun onPageSelected(position: Int) {
                 currentPosition = position
+                initTabView(position)
             }
 
             override fun onPageScrollStateChanged(state: Int) {
