@@ -14,7 +14,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginStart="30dp"
             android:contentDescription="@string/back"
-            android:src="@drawable/ic_title_back" />
+            android:src="@drawable/draw_ic_title_back" />
     </LinearLayout>
 
 

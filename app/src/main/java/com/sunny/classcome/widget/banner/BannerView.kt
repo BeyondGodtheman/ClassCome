@@ -104,7 +104,7 @@ class BannerView : RelativeLayout {
         for (i in 0 until list.size) {
             val view = View(context)
             view.alpha = 0.3F
-            view.setBackgroundResource(R.drawable.bg_banner_point)
+            view.setBackgroundResource(R.drawable.draw_bg_banner_point)
             LinearLayout.LayoutParams(resources.getDimension(R.dimen.dp14).toInt(), resources.getDimension(R.dimen.dp14).toInt()).apply {
                 leftMargin = 15
                 llPoint.addView(view, this)

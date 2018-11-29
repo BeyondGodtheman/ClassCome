@@ -4,21 +4,32 @@
     <!--
      TextView	txt
      ImageView	img
-     EditText	etxt
-     Button	btn
+     EditText	edit
+     Button	    btn
+
+     RelativeLayout  rl
+     ScrollView	    sv
+     ViewPager	    vp
+     WebView        wv
+     RecyclerView   rv
+     ListView   lv
+     GridView   gv
+
+     CheckBox	ckb
+
      ImageButton	ibtn
      RadioButton	rbtn
      ToggleButton	tbtn
-     CheckBox	ckb
+
      ProgressBar	pgbar
+
      SeekBar	skbar
-     AutoCompleteTextView actxt
-     ScrollView	scroll
      TextSwitch	tswt
      ImageSwitch	iswt
-     RecyclerView recl
-     ViewPager	vp
+     AutoCompleteTextView actxt
+
      -->
+
 
     <item name="img_icon" type="id" />
     <item name="img_back" type="id" />

@@ -30,11 +30,11 @@ class PublishFragment : BaseFragment() {
     override fun setLayout(): Int = R.layout.fragment_publish
 
     override fun initView() {
-        recycler_view.isNestedScrollingEnabled = false
-        recycler_view.setHasFixedSize(true)
+        rv_publish.isNestedScrollingEnabled = false
+        rv_publish.setHasFixedSize(true)
 
-        recycler_view.layoutManager = LinearLayoutManager(context)
-        recycler_view.adapter = PublishAdapter(list)
+        rv_publish.layoutManager = LinearLayoutManager(context)
+        rv_publish.adapter = PublishAdapter(list)
 
     }
 
