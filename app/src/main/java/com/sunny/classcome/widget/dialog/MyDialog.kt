@@ -24,6 +24,7 @@ class MyDialog(context: Context) : Dialog(context), View.OnClickListener {
         tvCancel.setOnClickListener(this)
         tvSure.setOnClickListener(this)
         setCanceledOnTouchOutside(false)
+        window?.attributes?.width = context.resources.getDimension(R.dimen.dp570).toInt()
         window?.setBackgroundDrawableResource(R.color.color_transparent)
     }
 
@@ -35,7 +36,6 @@ class MyDialog(context: Context) : Dialog(context), View.OnClickListener {
             }
             tvSure.id -> {
                 onClickListener1?.onClick(v)
-                dismiss()
             }
         }
     }
@@ -66,4 +66,7 @@ class MyDialog(context: Context) : Dialog(context), View.OnClickListener {
         tvCancel.visibility = View.GONE
     }
 
+
+    override fun onBackPressed() {
+    }
 }
