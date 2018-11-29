@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tool="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="330dp"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/img_class_photo"
+            android:layout_width="230dp"
+            android:layout_height="206dp"
+            android:layout_marginStart="23dp"
+            android:layout_marginTop="33dp"
+            android:layout_marginEnd="23dp"
+            android:contentDescription="@string/app"
+            android:src="@color/color_divider" />
+
+        <TextView
+            android:id="@+id/text_class_name"
+            android:layout_width="475dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="33dp"
+            android:layout_toEndOf="@id/img_class_photo"
+            android:ellipsize="end"
+            android:lines="2"
+            android:textColor="@color/color_default_font"
+            android:textSize="32sp"
+            tool:text="初中英语班课教研员-要求有专业教学资质" />
+
+        <TextView
+            android:id="@+id/text_class_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/text_class_name"
+            android:layout_marginTop="58dp"
+            android:layout_toEndOf="@id/img_class_photo"
+            android:textColor="@color/color_gray_font"
+            android:textSize="24sp"
+            tool:text="周一至周三 18:00-20:00" />
+
+
+        <TextView
+            android:id="@+id/text_class_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="139dp"
+            android:layout_marginEnd="25dp"
+            android:textColor="@color/color_price_red"
+            android:textSize="36sp"
+            tool:text="¥4000" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_below="@id/text_class_time"
+            android:layout_marginTop="14dp"
+            android:layout_toEndOf="@id/img_class_photo"
+            android:background="@color/color_divider" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp">
+
+        <View
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="78dp"
+            android:background="@color/color_divider" />
+
+        <TextView
+            android:id="@+id/text_class_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="119dp"
+            android:textColor="@color/color_default_font"
+            android:textSize="24sp"
+            tool:text="拉丁舞" />
+
+        <View
+            android:id="@+id/view_sex"
+            android:layout_width="46dp"
+            android:layout_height="46dp"
+            android:layout_marginStart="71dp"
+            android:layout_toEndOf="@id/text_class_type"
+            android:background="@color/color_gray_font" />
+
+        <TextView
+            android:id="@+id/text_class_author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="16dp"
+            android:layout_toEndOf="@id/view_sex"
+            android:textColor="@color/color_gray_font"
+            android:textSize="24sp"
+            tool:text="米斯特教育" />
+
+        <TextView
+            android:id="@+id/text_class_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:textColor="@color/color_gray_font"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="23dp"
+            android:layout_marginStart="14dp"
+            android:textSize="24sp"
+            tool:text="静安寺" />
+
+        <View
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginStart="71dp"
+            android:layout_toStartOf="@id/text_class_address"
+            android:layout_centerVertical="true"
+            android:background="@color/color_gray_font" />
+    </RelativeLayout>
+
+</LinearLayout>

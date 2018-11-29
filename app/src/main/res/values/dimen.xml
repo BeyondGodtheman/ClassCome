@@ -3,5 +3,6 @@
     <item name="dp15" type="dimen">15dp</item>
     <item name="dp14" type="dimen">14dp</item>
     <item name="dp58" type="dimen">58dp</item>
+    <dimen name="dp500">500dp</dimen>
     <dimen name="dp570">570dp</dimen>
 </resources>
