@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center_horizontal"
-    android:background="@drawable/bg_fillet_white"
+    android:background="@drawable/draw_bg_fillet_white"
     android:orientation="vertical">
 
     <LinearLayout
@@ -47,7 +47,7 @@
             android:layout_width="0px"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/bg_fillet_blue"
+            android:background="@drawable/draw_bg_fillet_blue"
             android:gravity="center"
             android:text="@string/close"
             android:textColor="@color/color_white"
@@ -62,7 +62,7 @@
             android:layout_width="0px"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/bg_fillet_blue"
+            android:background="@drawable/draw_bg_fillet_blue"
             android:gravity="center"
             android:text="@string/sure"
             android:textColor="@color/color_white"

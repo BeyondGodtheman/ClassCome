@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@id/scroll_view"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/color_divider"
-    android:scrollbars="none">
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@id/scroll_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/color_divider"
+            android:scrollbars="none">
 
 
     <LinearLayout
@@ -18,71 +18,81 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp">
+            android:layout_height="250dp"
+            android:background="@color/color_primary">
 
             <ImageView
                 android:id="@+id/img_user_head"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="182dp"
+                android:layout_height="182dp"
                 android:layout_centerVertical="true"
+                android:layout_marginStart="56dp"
+                android:layout_marginTop="42dp"
                 android:contentDescription="@string/app"
-                android:src="@mipmap/ic_nav_home_blue" />
+                android:src="@mipmap/ic_nav_home_blue"/>
 
             <TextView
                 android:id="@+id/txt_user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="56dp"
                 android:layout_toEndOf="@id/img_user_head"
-                android:textSize="30sp"
-                tools:text="课多多" />
+                android:textColor="@color/color_white"
+                android:textSize="34sp"
+                tools:text="课多多"/>
 
             <TextView
                 android:id="@+id/txt_user_address"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/style_font_white_24sp"
                 android:layout_below="@id/txt_user_name"
+                android:layout_alignStart="@id/txt_user_name"
                 android:layout_toEndOf="@id/img_user_head"
-                android:textSize="30sp"
-                tools:text="上海" />
+                tools:text="上海"/>
 
             <TextView
                 android:id="@+id/txt_points"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/style_font_white_24sp"
                 android:layout_below="@id/txt_user_address"
+                android:layout_alignStart="@id/txt_user_name"
+                android:layout_marginTop="36dp"
                 android:layout_toEndOf="@id/img_user_head"
                 android:drawableStart="@mipmap/ic_nav_home_blue"
-                android:textSize="30sp"
-                tools:text="2000积分" />
+                android:drawablePadding="14dp"
+                android:gravity="center"
+                tools:text="2000积分"/>
 
             <TextView
                 android:id="@+id/txt_member"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/style_font_white_24sp"
                 android:layout_below="@id/txt_user_address"
+                android:layout_alignTop="@id/txt_points"
+                android:layout_marginStart="62dp"
                 android:layout_toEndOf="@id/txt_points"
                 android:drawableStart="@mipmap/ic_nav_home_blue"
-                android:textSize="30sp"
-                tools:text="2000积分" />
+                android:drawablePadding="14dp"
+                android:gravity="center"
+                tools:text="普通会员"/>
 
             <ImageView
                 android:id="@id/img_more"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="46dp"
+                android:layout_height="46dp"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:layout_marginEnd="100dp"
+                android:layout_marginEnd="150dp"
                 android:contentDescription="@string/app"
-                android:src="@mipmap/ic_nav_home_blue" />
+                android:src="@drawable/ic_mine_more"/>
 
             <ImageView
                 android:id="@id/img_message"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="58dp"
+                android:layout_height="58dp"
                 android:layout_alignParentEnd="true"
-                android:layout_marginEnd="100dp"
+                android:layout_marginEnd="44dp"
+                android:layout_marginTop="14dp"
                 android:contentDescription="@string/app"
-                android:src="@mipmap/ic_nav_home_blue" />
+                android:src="@drawable/draw_ic_title_msg"/>
 
         </RelativeLayout>
 
@@ -96,86 +106,86 @@
             <TextView
                 android:id="@+id/txt_my_trip"
                 style="@style/style_item_text_top_icon"
-                android:drawableTop="@mipmap/ic_nav_add_blue"
-                android:text="@string/my_trip" />
+                android:drawableTop="@drawable/ic_mine_trip"
+                android:text="@string/my_trip"/>
 
-            <View style="@style/style_view_vertical_line" />
+            <View style="@style/style_view_vertical_line"/>
 
             <TextView
                 android:id="@+id/txt_my_publish"
                 style="@style/style_item_text_top_icon"
                 android:drawableTop="@mipmap/ic_nav_add_blue"
-                android:text="@string/my_publish" />
+                android:text="@string/my_publish"/>
 
-            <View style="@style/style_view_vertical_line" />
+            <View style="@style/style_view_vertical_line"/>
 
             <TextView
                 android:id="@+id/txt_my_partake"
                 style="@style/style_item_text_top_icon"
                 android:drawableTop="@mipmap/ic_nav_add_blue"
-                android:text="@string/my_partake" />
+                android:text="@string/my_partake"/>
 
         </LinearLayout>
 
         <!--纵向列表-->
 
-        <View style="@style/style_view_divider" />
+        <View style="@style/style_view_divider"/>
 
         <TextView
             android:id="@+id/txt_my_cheques"
             style="@style/style_item_text_icon"
-            android:drawableStart="@mipmap/ic_nav_add_blue"
-            android:text="@string/my_cheques" />
+            android:drawableStart="@drawable/ic_mine_trip"
+            android:text="@string/my_cheques"/>
 
-        <View style="@style/style_view_divider" />
+        <View style="@style/style_view_divider"/>
 
 
         <TextView
             android:id="@+id/txt_invitation_record"
             style="@style/style_item_text_icon"
             android:drawableStart="@mipmap/ic_nav_add_blue"
-            android:text="@string/invitation_record" />
+            android:text="@string/invitation_record"/>
 
-        <View style="@style/style_view_line" />
+        <View style="@style/style_view_line"/>
 
         <TextView
             android:id="@+id/txt_my_profile"
             style="@style/style_item_text_icon"
             android:drawableStart="@mipmap/ic_nav_add_blue"
-            android:text="@string/my_profile" />
+            android:text="@string/my_profile"/>
 
-        <View style="@style/style_view_line" />
+        <View style="@style/style_view_line"/>
 
         <TextView
             android:id="@+id/txt_my_collection"
             style="@style/style_item_text_icon"
             android:drawableStart="@mipmap/ic_nav_add_blue"
-            android:text="@string/my_collection" />
+            android:text="@string/my_collection"/>
 
-        <View style="@style/style_view_line" />
+        <View style="@style/style_view_line"/>
 
         <TextView
             android:id="@+id/txt_feedback"
             style="@style/style_item_text_icon"
             android:drawableStart="@mipmap/ic_nav_add_blue"
-            android:text="@string/feedback" />
+            android:text="@string/feedback"/>
 
-        <View style="@style/style_view_divider" />
+        <View style="@style/style_view_divider"/>
 
 
         <TextView
             android:id="@+id/txt_setting"
             style="@style/style_item_text_icon"
             android:drawableStart="@mipmap/ic_nav_add_blue"
-            android:text="@string/setting" />
+            android:text="@string/setting"/>
 
-        <View style="@style/style_view_line" />
+        <View style="@style/style_view_line"/>
 
         <TextView
             android:id="@+id/txt_business_cooperation"
             style="@style/style_item_text_icon"
             android:drawableStart="@mipmap/ic_nav_add_blue"
-            android:text="@string/business_cooperation" />
+            android:text="@string/business_cooperation"/>
 
     </LinearLayout>
 </ScrollView>
