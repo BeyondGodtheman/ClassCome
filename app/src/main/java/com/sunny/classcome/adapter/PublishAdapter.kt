@@ -27,5 +27,4 @@ class PublishAdapter(list: ArrayList<PublishBean>) : BaseRecycleAdapter<PublishB
         }
     }
 
-
 }

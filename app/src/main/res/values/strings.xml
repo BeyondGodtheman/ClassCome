@@ -56,6 +56,41 @@
     <string name="publish_activity">发布活动</string>
     <string name="publish_activity_prompt">方便快捷，轻松发布活动</string>
 
+    <!--发布培训-->
+    <string name="publish_title">发布标题</string>
+    <string name="please_input_title">请在此输入标题</string>
+    <string name="filed_location">场地位置</string>
+    <string name="current_location">所在地区</string>
+    <string name="detail_address">详细地址</string>
+    <string name="street_building_number">街道、楼牌号等</string>
+    <string name="training_cost">培训费用(次)</string>
+    <string name="single_cost">单次费用</string>
+    <string name="rmb">￥</string>
+    <string name="group_purchase">团购（非必填，入无团购可不填写）</string>
+    <string name="separate_purchase_cost">单独购买费用</string>
+    <string name="group_purchase_cost">拼团购买费用</string>
+    <string name="people_limit">成团人数限制</string>
+    <string name="time_limit">团购时间限制</string>
+    <string name="train_long">单次培训时长</string>
+    <string name="hour">小时</string>
+    <string name="accommodating_population">容纳人数</string>
+    <string name="people">人</string>
+    <string name="field_square">场地空间</string>
+    <string name="per_square_metre">m2</string>
+    <string name="train_time">培训时间</string>
+    <string name="site_facility">场地设施</string>
+    <string name="common_facility">通用设施</string>
+    <string name="wifi">WIFI</string>
+    <string name="parking_lot">停车场</string>
+    <string name="air_conditioner">空调</string>
+    <string name="television">电视</string>
+    <string name="conference_facility">会议设施</string>
+    <string name="special_facility">特殊设施</string>
+    <string name="training_brief">培训简介</string>
+    <string name="site_server">请描述一下您的场地服务情况</string>
+    <string name="photo_video">照片/视频</string>
+
+
     <!--我的-->
 
     <string name="my_trip">我的行程</string>
@@ -69,6 +104,18 @@
     <string name="setting">设置</string>
     <string name="business_cooperation">商务合作</string>
     <string name="ordinary_member">普通会员</string>
+
+
+    ic_mine_my_trip
+    ic_mine_my_publish
+    ic_mine_my_partake
+    ic_mine_my_cheques
+    ic_mine_invitation_record
+    ic_mine_my_profile
+    ic_mine_my_collection
+    ic_mine_feedback
+    ic_mine_setting
+    ic_mine_business_cooperation
 
     <!--我的发布-->
 

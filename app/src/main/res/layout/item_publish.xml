@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="158dp"
+                android:layout_marginBottom="42dp"
                 android:background="@drawable/draw_bg_fillet_white">
 
     <TextView
@@ -32,11 +33,11 @@
     <ImageView
         android:id="@+id/img_icon"
         android:layout_width="84dp"
-        android:layout_height="84dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
         android:layout_marginEnd="64dp"
         android:contentDescription="@string/app"
-        tools:src="@mipmap/ic_nav_home_blue"/>
+        tools:src="@mipmap/ic_publish_tutor"/>
 
 </RelativeLayout>

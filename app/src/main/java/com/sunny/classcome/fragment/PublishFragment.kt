@@ -3,9 +3,11 @@ package com.sunny.classcome.fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import com.sunny.classcome.R
+import com.sunny.classcome.activity.HomeActivity
 import com.sunny.classcome.adapter.PublishAdapter
 import com.sunny.classcome.base.BaseFragment
 import com.sunny.classcome.bean.PublishBean
+import com.sunny.classcome.utils.IntentUtil
 import kotlinx.android.synthetic.main.fragment_publish.*
 
 /**
@@ -18,13 +20,22 @@ class PublishFragment : BaseFragment() {
 
     private val list: ArrayList<PublishBean> by lazy {
         arrayListOf(
-                PublishBean(resources.getString(R.string.publish_train), resources.getString(R.string.publish_train_prompt), R.mipmap.ic_nav_add_blue),
-                PublishBean(resources.getString(R.string.publish_field), resources.getString(R.string.publish_field_prompt), R.mipmap.ic_nav_add_blue),
-                PublishBean(resources.getString(R.string.publish_substitute), resources.getString(R.string.publish_substitute_prompt), R.mipmap.ic_nav_add_blue),
-                PublishBean(resources.getString(R.string.publish_tutor), resources.getString(R.string.publish_tutor_prompt), R.mipmap.ic_nav_add_blue),
-                PublishBean(resources.getString(R.string.publish_activity), resources.getString(R.string.publish_activity_prompt), R.mipmap.ic_nav_add_blue)
+                PublishBean(resources.getString(R.string.publish_train), resources.getString(R.string.publish_train_prompt), R.mipmap.ic_publish_train),
+                PublishBean(resources.getString(R.string.publish_field), resources.getString(R.string.publish_field_prompt), R.mipmap.ic_publish_field),
+                PublishBean(resources.getString(R.string.publish_substitute), resources.getString(R.string.publish_substitute_prompt), R.mipmap.ic_publish_substitute),
+                PublishBean(resources.getString(R.string.publish_tutor), resources.getString(R.string.publish_tutor_prompt), R.mipmap.ic_publish_tutor),
+                PublishBean(resources.getString(R.string.publish_activity), resources.getString(R.string.publish_activity_prompt), R.mipmap.ic_publish_activity)
         )
     }
+
+    private val activityList = arrayListOf(
+            HomeActivity::class.java,
+            HomeActivity::class.java,
+            HomeActivity::class.java,
+            HomeActivity::class.java,
+            HomeActivity::class.java
+    )
+
 
 
     override fun setLayout(): Int = R.layout.fragment_publish
@@ -34,7 +45,12 @@ class PublishFragment : BaseFragment() {
         rv_publish.setHasFixedSize(true)
 
         rv_publish.layoutManager = LinearLayoutManager(context)
-        rv_publish.adapter = PublishAdapter(list)
+
+        val adapter = PublishAdapter(list)
+        rv_publish.adapter = adapter
+        adapter.setOnItemClickListener { _, index ->
+
+        }
 
     }
 
