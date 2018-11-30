@@ -3,7 +3,9 @@
     xmlns:tool="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="330dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_marginBottom="10dp"
+    android:background="@color/color_white">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -17,13 +19,15 @@
             android:layout_marginTop="33dp"
             android:layout_marginEnd="23dp"
             android:contentDescription="@string/app"
-            android:src="@color/color_divider" />
+            android:scaleType="fitXY"
+            android:src="@drawable/bg_default_photo" />
 
         <TextView
             android:id="@+id/text_class_name"
-            android:layout_width="475dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="33dp"
+            android:layout_marginEnd="13dp"
             android:layout_toEndOf="@id/img_class_photo"
             android:ellipsize="end"
             android:lines="2"
@@ -71,9 +75,10 @@
         <View
             android:layout_width="32dp"
             android:layout_height="32dp"
-            android:layout_centerVertical="true"
+            android:layout_alignParentTop="true"
             android:layout_marginStart="78dp"
-            android:background="@color/color_divider" />
+            android:layout_marginTop="7dp"
+            android:background="@mipmap/ic_thumbtack_blue" />
 
         <TextView
             android:id="@+id/text_class_type"
@@ -85,13 +90,14 @@
             android:textSize="24sp"
             tool:text="拉丁舞" />
 
-        <View
+        <ImageView
             android:id="@+id/view_sex"
             android:layout_width="46dp"
             android:layout_height="46dp"
             android:layout_marginStart="71dp"
             android:layout_toEndOf="@id/text_class_type"
-            android:background="@color/color_gray_font" />
+            android:scaleType="centerCrop"
+            android:src="@mipmap/ic_default_head" />
 
         <TextView
             android:id="@+id/text_class_author"
@@ -117,12 +123,12 @@
             tool:text="静安寺" />
 
         <View
-            android:layout_width="28dp"
+            android:layout_width="22dp"
             android:layout_height="28dp"
             android:layout_marginStart="71dp"
             android:layout_toStartOf="@id/text_class_address"
             android:layout_centerVertical="true"
-            android:background="@color/color_gray_font" />
+            android:background="@mipmap/ic_home_location" />
     </RelativeLayout>
 
 </LinearLayout>

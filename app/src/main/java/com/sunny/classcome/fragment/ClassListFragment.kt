@@ -42,6 +42,7 @@ class ClassListFragment : BaseFragment() {
         val classList = arrayListOf(classBean, classBean, classBean, classBean, classBean
         )
         recl.layoutManager = LinearLayoutManager(context)
+        recl.isNestedScrollingEnabled = false
         recl.adapter = ClassListAdapter(classList)
         sort(0)
     }

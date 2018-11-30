@@ -16,6 +16,7 @@ class ClassListAdapter(list: ArrayList<ClassBean>) : BaseRecycleAdapter<ClassBea
     override fun onBindViewHolder(holder: BaseRecycleViewHolder, position: Int) {
         holder.itemView.text_class_name.text = getData(position).title
         holder.itemView.text_class_time.text = getData(position).time
+        holder.itemView.text_class_price.text = getData(position).price
         holder.itemView.text_class_author.text = getData(position).author
         holder.itemView.text_class_address.text = getData(position).address
         holder.itemView.text_class_type.text = getData(position).type

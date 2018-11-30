@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentPagerAdapter
 import android.support.v4.content.ContextCompat
 import android.support.v4.view.PagerAdapter
 import android.support.v4.view.ViewPager
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.TextView
@@ -15,6 +16,7 @@ import com.sunny.classcome.fragment.HomeFragment
 import com.sunny.classcome.fragment.MineFragment
 import com.sunny.classcome.fragment.PublishFragment
 import kotlinx.android.synthetic.main.activity_home.*
+import kotlinx.android.synthetic.main.fragment_home.*
 import java.util.*
 
 
@@ -88,9 +90,7 @@ class HomeActivity : BaseActivity() {
     override fun initView() {
         goneTitle()
         initViewPager()
-
         initTabView(0)
-
 
         flHome.setOnClickListener(this)
         flAdd.setOnClickListener(this)
@@ -122,7 +122,6 @@ class HomeActivity : BaseActivity() {
             }
         })
     }
-
 
 
 
