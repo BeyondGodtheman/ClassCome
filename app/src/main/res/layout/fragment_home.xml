@@ -36,8 +36,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="32dp"
-                android:inAnimation="@anim/anim_come_in"
-                android:outAnimation="@anim/anim_get_out"/>
+                android:inAnimation="@anim/anim_translate_in"
+                android:outAnimation="@anim/anim_translate_out"/>
         </LinearLayout>
 
         <FrameLayout
