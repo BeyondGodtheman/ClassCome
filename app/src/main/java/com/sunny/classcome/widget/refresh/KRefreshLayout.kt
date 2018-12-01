@@ -88,6 +88,8 @@ class KRefreshLayout(context: Context, attrs: AttributeSet?, defStyleAttr: Int) 
         defaultRefreshHeight = a.getLayoutDimension(R.styleable.KRefreshLayout_k_def_refresh_height, Int.MAX_VALUE)
         defaultMaxOffset = a.getLayoutDimension(R.styleable.KRefreshLayout_k_def_max_offset, defaultMaxOffset)
         a.recycle()
+
+        setHeader(ClassicalHeader(context))
     }
 
     override fun onFinishInflate() {

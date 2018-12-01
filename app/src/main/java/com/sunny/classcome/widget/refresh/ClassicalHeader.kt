@@ -12,7 +12,6 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.sunny.classcome.R
-import com.sunny.classcome.utils.DensityUtil
 
 
 /**
@@ -22,7 +21,7 @@ import com.sunny.classcome.utils.DensityUtil
 
 class ClassicalHeader constructor(context: Context) : FrameLayout(context), KRefreshHeader {
 
-    private val arrawImg: ImageView
+    private val arrowImg: ImageView
     private val textTitle: TextView
 
     private val rotateAnimation = RotateAnimation(0f, 360f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
@@ -40,13 +39,13 @@ class ClassicalHeader constructor(context: Context) : FrameLayout(context), KRef
         addView(root, FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT)
         (root.layoutParams as FrameLayout.LayoutParams).gravity = Gravity.CENTER
 
-        arrawImg = ImageView(context)
-        arrawImg.setImageResource(R.mipmap.ic_arrow_down)
-        arrawImg.scaleType = ImageView.ScaleType.CENTER
-        root.addView(arrawImg)
+        arrowImg = ImageView(context)
+        arrowImg.setImageResource(R.mipmap.ic_krl_loading)
+        arrowImg.scaleType = ImageView.ScaleType.CENTER
+        root.addView(arrowImg,context.resources.getDimension(R.dimen.dp64).toInt(),context.resources.getDimension(R.dimen.dp54).toInt())
 
         textTitle = TextView(context)
-        textTitle.textSize = 13f
+        textTitle.textSize = context.resources.getDimension(R.dimen.dp22)
         textTitle.text = "下拉刷新..."
         textTitle.setTextColor(Color.parseColor("#999999"))
         val params = LinearLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT)
@@ -57,7 +56,7 @@ class ClassicalHeader constructor(context: Context) : FrameLayout(context), KRef
         rotateAnimation.interpolator = LinearInterpolator()
         rotateAnimation.repeatCount = Animation.INFINITE
         rotateAnimation.repeatMode = Animation.RESTART
-        setPadding(0, DensityUtil.dip2px(15), 0, DensityUtil.dip2px(15))
+        setPadding(0, context.resources.getDimension(R.dimen.dp15).toInt(), 0, context.resources.getDimension(R.dimen.dp15).toInt())
     }
 
     override fun succeedRetention(): Long {
@@ -77,27 +76,27 @@ class ClassicalHeader constructor(context: Context) : FrameLayout(context), KRef
     }
 
     override fun onReset(refreshLayout: KRefreshLayout) {
-        arrawImg.setImageResource(R.mipmap.ic_arrow_down)
+//        arrowImg.setImageResource(R.mipmap.ic_arrow_down)
         textTitle.text = "下拉刷新..."
         isReset = true
-        arrawImg.visibility = View.VISIBLE
+        arrowImg.visibility = View.VISIBLE
     }
 
     override fun onPrepare(refreshLayout: KRefreshLayout) {
-        arrawImg.setImageResource(R.mipmap.ic_arrow_down)
+//        arrowImg.setImageResource(R.mipmap.ic_arrow_down)
         textTitle.text = "下拉刷新..."
     }
 
     override fun onRefresh(refreshLayout: KRefreshLayout) {
-        arrawImg.setImageResource(R.mipmap.ic_loading)
-        arrawImg.startAnimation(rotateAnimation)
+//        arrowImg.setImageResource(R.mipmap.ic_loading)
+        arrowImg.startAnimation(rotateAnimation)
         textTitle.text = "加载中..."
         isReset = false
     }
 
     override fun onComplete(refreshLayout: KRefreshLayout, isSuccess: Boolean) {
-        arrawImg.clearAnimation()
-        arrawImg.visibility = GONE
+        arrowImg.clearAnimation()
+        arrowImg.visibility = GONE
         if (isSuccess) {
             textTitle.text = "刷新完成..."
         } else {
@@ -110,10 +109,10 @@ class ClassicalHeader constructor(context: Context) : FrameLayout(context), KRef
             if (percent >= 1 && !attain) {
                 attain = true
                 textTitle.text = "释放刷新..."
-                arrawImg.animate().rotation(-180f).start()
+                arrowImg.animate().rotation(-180f).start()
             } else if (percent < 1 && attain) {
                 attain = false
-                arrawImg.animate().rotation(0f).start()
+                arrowImg.animate().rotation(0f).start()
                 textTitle.text = "下拉刷新..."
             }
         }

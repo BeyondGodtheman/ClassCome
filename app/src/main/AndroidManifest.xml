@@ -49,6 +49,9 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".activity.MyMsgActivity"
+            android:launchMode="singleTop"/>
+
         <activity android:name=".activity.MineActivity" />
 
         <activity android:name=".activity.PublishTrainActivity" />

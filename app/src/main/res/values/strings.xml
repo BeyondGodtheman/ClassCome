@@ -3,6 +3,9 @@
     <string name="app">test</string>
     <string name="app_name">课来了</string>
 
+    <!--Title-->
+    <string name="myMsg">我的消息</string>
+
     <!--错误信息-->
 
     <string name="networkError">请检查网络连接</string>

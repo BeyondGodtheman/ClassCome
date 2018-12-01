@@ -8,9 +8,7 @@ import kotlinx.android.synthetic.main.layout_home_title.view.*
 
 class TitleManager(var activity: Activity?) {
 
-    fun defaultTitle(title: String) {
-        defaultTitle(title, true)
-    }
+    fun defaultTitle(title: String): View = defaultTitle(title, true)
 
     fun defaultTitle(title: String, isShowIcon: Boolean): View {
         val view = View.inflate(activity, R.layout.layout_default_title, null)

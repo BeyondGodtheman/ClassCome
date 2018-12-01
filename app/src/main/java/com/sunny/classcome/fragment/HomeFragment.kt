@@ -1,8 +1,10 @@
 package com.sunny.classcome.fragment
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import com.sunny.classcome.R
+import com.sunny.classcome.activity.MyMsgActivity
 import com.sunny.classcome.base.BaseFragment
 import com.sunny.classcome.bean.BannerBean
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -30,6 +32,7 @@ class HomeFragment : BaseFragment() {
     override fun setLayout(): Int = R.layout.fragment_home
 
     override fun initView() {
+
         titleView.rlLocation.setOnClickListener(this)
         titleView.ivMessage.setOnClickListener(this)
         rl_banner.loadData(bannerList)
@@ -39,12 +42,11 @@ class HomeFragment : BaseFragment() {
 
     override fun onClick(v: View) {
         when (v.id) {
+
             R.id.rlLocation -> {
 
             }
-            R.id.ivMessage -> {
-
-            }
+            R.id.ivMessage -> startActivity(Intent(context, MyMsgActivity::class.java))
 
         }
 
