@@ -7,6 +7,7 @@ import com.sunny.classcome.R
 import com.sunny.classcome.activity.MyMsgActivity
 import com.sunny.classcome.base.BaseFragment
 import com.sunny.classcome.bean.BannerBean
+import com.sunny.classcome.utils.LocationUtil
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.layout_home_recommend_text.view.*
 import kotlinx.android.synthetic.main.layout_home_title.view.*
@@ -25,6 +26,12 @@ class HomeFragment : BaseFragment() {
         ClassListFragment()
     }
 
+    private val locationUtil:LocationUtil by lazy {
+        LocationUtil(requireContext()){
+            titleView.text_home_Location.text = it
+        }
+    }
+
     private val titleView: View by lazy {
         showTitle(titleManager.homeTitle())
     }
@@ -32,6 +39,8 @@ class HomeFragment : BaseFragment() {
     override fun setLayout(): Int = R.layout.fragment_home
 
     override fun initView() {
+
+        locationUtil.startLocation()
 
         titleView.rlLocation.setOnClickListener(this)
         titleView.ivMessage.setOnClickListener(this)
