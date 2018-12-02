@@ -17,14 +17,32 @@ class MineFragment : BaseFragment() {
     override fun setLayout(): Int = R.layout.fragment_mine
 
     override fun initView() {
+
+        img_user_head.setImageResource(R.mipmap.ic_default_head)
+        txt_user_name.text = "课多多"
         txt_user_address.text = "上海"
+        txt_points.text = "2000积分"
+        txt_member.text = "黄金会员"
+
+        img_message.setOnClickListener(this)
+
+        rl_my_trip.setOnClickListener(this)
+        rl_my_publish.setOnClickListener(this)
+        rl_my_partake.setOnClickListener(this)
+
+        txt_my_cheques.setOnClickListener(this)
+        txt_invitation_record.setOnClickListener(this)
+        txt_my_profile.setOnClickListener(this)
+        txt_my_collection.setOnClickListener(this)
+        txt_feedback.setOnClickListener(this)
+        txt_setting.setOnClickListener(this)
+        txt_business_cooperation.setOnClickListener(this)
+
     }
-
-    override fun update() {
-    }
-
-
 
     override fun onClick(v: View) {
+        when(v.id){
+
+        }
     }
 }

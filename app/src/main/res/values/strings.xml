@@ -106,17 +106,6 @@
     <string name="ordinary_member">普通会员</string>
 
 
-    ic_mine_my_trip
-    ic_mine_my_publish
-    ic_mine_my_partake
-    ic_mine_my_cheques
-    ic_mine_invitation_record
-    ic_mine_my_profile
-    ic_mine_my_collection
-    ic_mine_feedback
-    ic_mine_setting
-    ic_mine_business_cooperation
-
     <!--我的发布-->
 
     <string name="list_train">培训列表</string>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools"
             android:id="@id/scroll_view"
             android:layout_width="match_parent"
@@ -11,7 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/color_white"
-        android:layout_marginBottom="60dp"
         android:orientation="vertical">
 
         <!--用户信息-->
@@ -23,13 +23,13 @@
 
             <ImageView
                 android:id="@+id/img_user_head"
-                android:layout_width="182dp"
-                android:layout_height="182dp"
+                android:layout_width="144dp"
+                android:layout_height="144dp"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="56dp"
                 android:layout_marginTop="42dp"
                 android:contentDescription="@string/app"
-                android:src="@mipmap/ic_nav_home_blue"/>
+                android:src="@mipmap/ic_default_head"/>
 
             <TextView
                 android:id="@+id/txt_user_name"
@@ -40,6 +40,7 @@
                 android:layout_toEndOf="@id/img_user_head"
                 android:textColor="@color/color_white"
                 android:textSize="34sp"
+                tools:ignore="RelativeOverlap"
                 tools:text="课多多"/>
 
             <TextView
@@ -57,7 +58,7 @@
                 android:layout_alignStart="@id/txt_user_name"
                 android:layout_marginTop="36dp"
                 android:layout_toEndOf="@id/img_user_head"
-                android:drawableStart="@mipmap/ic_nav_home_blue"
+                android:drawableStart="@mipmap/ic_mine_points"
                 android:drawablePadding="14dp"
                 android:gravity="center"
                 tools:text="2000积分"/>
@@ -69,10 +70,10 @@
                 android:layout_alignTop="@id/txt_points"
                 android:layout_marginStart="62dp"
                 android:layout_toEndOf="@id/txt_points"
-                android:drawableStart="@mipmap/ic_nav_home_blue"
+                android:drawableStart="@mipmap/ic_mine_member"
                 android:drawablePadding="14dp"
                 android:gravity="center"
-                tools:text="普通会员"/>
+                android:text="@string/ordinary_member"/>
 
             <ImageView
                 android:id="@id/img_more"
@@ -135,7 +136,7 @@
                     android:layout_height="50dp"
                     android:layout_centerHorizontal="true"
                     android:contentDescription="@string/app"
-                    android:src="@drawable/ic_mine_trip"/>
+                    android:src="@mipmap/ic_mine_my_publish"/>
 
                 <TextView
                     style="@style/style_item_text_top_icon"
@@ -157,7 +158,7 @@
                     android:layout_height="50dp"
                     android:layout_centerHorizontal="true"
                     android:contentDescription="@string/app"
-                    android:src="@drawable/ic_mine_trip"/>
+                    android:src="@mipmap/ic_mine_my_partake"/>
 
                 <TextView
                     style="@style/style_item_text_top_icon"
@@ -173,61 +174,65 @@
 
         <View style="@style/style_view_divider"/>
 
-        <TextView
+        <com.sunny.classcome.widget.MineItemLayout
             android:id="@+id/txt_my_cheques"
             style="@style/style_item_text_icon"
-            android:drawableStart="@drawable/ic_mine_trip"
-            android:text="@string/my_cheques"/>
+            app:mine_layout_icon="@mipmap/ic_mine_my_cheques"
+            app:mine_layout_text="@string/my_cheques"/>
 
         <View style="@style/style_view_divider"/>
 
 
-        <TextView
+        <com.sunny.classcome.widget.MineItemLayout
             android:id="@+id/txt_invitation_record"
             style="@style/style_item_text_icon"
-            android:drawableStart="@mipmap/ic_nav_add_blue"
-            android:text="@string/invitation_record"/>
+            app:mine_layout_icon="@mipmap/ic_mine_invitation_record"
+            app:mine_layout_text="@string/invitation_record"/>
 
         <View style="@style/style_view_line"/>
 
-        <TextView
+        <com.sunny.classcome.widget.MineItemLayout
             android:id="@+id/txt_my_profile"
             style="@style/style_item_text_icon"
-            android:drawableStart="@mipmap/ic_nav_add_blue"
-            android:text="@string/my_profile"/>
+            app:mine_layout_icon="@mipmap/ic_mine_my_profile"
+            app:mine_layout_text="@string/my_profile"/>
 
         <View style="@style/style_view_line"/>
 
-        <TextView
+        <com.sunny.classcome.widget.MineItemLayout
             android:id="@+id/txt_my_collection"
             style="@style/style_item_text_icon"
-            android:drawableStart="@mipmap/ic_nav_add_blue"
-            android:text="@string/my_collection"/>
+            app:mine_layout_icon="@mipmap/ic_mine_my_collection"
+            app:mine_layout_text="@string/my_collection"/>
 
         <View style="@style/style_view_line"/>
 
-        <TextView
+        <com.sunny.classcome.widget.MineItemLayout
             android:id="@+id/txt_feedback"
             style="@style/style_item_text_icon"
-            android:drawableStart="@mipmap/ic_nav_add_blue"
-            android:text="@string/feedback"/>
+            app:mine_layout_icon="@mipmap/ic_mine_feedback"
+            app:mine_layout_text="@string/feedback"/>
 
         <View style="@style/style_view_divider"/>
 
 
-        <TextView
+        <com.sunny.classcome.widget.MineItemLayout
             android:id="@+id/txt_setting"
             style="@style/style_item_text_icon"
-            android:drawableStart="@mipmap/ic_nav_add_blue"
-            android:text="@string/setting"/>
+            app:mine_layout_icon="@mipmap/ic_mine_setting"
+            app:mine_layout_text="@string/setting"/>
 
         <View style="@style/style_view_line"/>
 
-        <TextView
+        <com.sunny.classcome.widget.MineItemLayout
             android:id="@+id/txt_business_cooperation"
             style="@style/style_item_text_icon"
-            android:drawableStart="@mipmap/ic_nav_add_blue"
-            android:text="@string/business_cooperation"/>
+            app:mine_layout_icon="@mipmap/ic_mine_business_cooperation"
+            app:mine_layout_text="@string/business_cooperation"/>
+
+        <View
+            style="@style/style_view_line"
+            android:layout_height="60dp"/>
 
     </LinearLayout>
 </ScrollView>

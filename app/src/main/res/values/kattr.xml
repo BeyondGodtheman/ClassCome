@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!--个人中心子条目-->
+    <declare-styleable name="MineItemLayout">
+        <attr name="mine_layout_icon" format="reference"/>
+        <attr name="mine_layout_text" format="string"/>
+    </declare-styleable>
+
+    <!--下拉刷新-->
     <declare-styleable name="KRefreshLayout">
         <attr name="k_pin_content" format="boolean" />
         <attr name="k_keep_header" format="boolean" />
