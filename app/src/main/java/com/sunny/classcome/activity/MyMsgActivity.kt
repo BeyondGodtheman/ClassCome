@@ -38,8 +38,8 @@ class MyMsgActivity : BaseActivity() {
         msgList.add(MsgBean("系统提示","[米斯特教育]邀请您来参加课程竞标，快来看看","2018/02/02  13:12:33","初中英语班课教研员-要求有专业教学资质"))
         msgList.add(MsgBean("系统提示","[米斯特教育]邀请您来参加课程竞标，快来看看","2018/02/02  13:12:33","初中英语班课教研员-要求有专业教学资质"))
 
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.addItemDecoration(object :RecyclerView.ItemDecoration(){
+        recl.layoutManager = LinearLayoutManager(this)
+        recl.addItemDecoration(object :RecyclerView.ItemDecoration(){
             override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
                 if (parent.indexOfChild(view) == 0){
                     outRect.top = resources.getDimension(R.dimen.dp26).toInt()
@@ -48,7 +48,7 @@ class MyMsgActivity : BaseActivity() {
             }
         })
 
-        recyclerView.adapter = myMsgAdapter
+        recl.adapter = myMsgAdapter
 
         krl.setKRefreshListener {
 

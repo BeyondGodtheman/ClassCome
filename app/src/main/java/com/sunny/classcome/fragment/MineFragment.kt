@@ -2,8 +2,7 @@ package com.sunny.classcome.fragment
 
 import android.view.View
 import com.sunny.classcome.R
-import com.sunny.classcome.activity.FeedbackActivity
-import com.sunny.classcome.activity.MineActivity
+import com.sunny.classcome.activity.*
 import com.sunny.classcome.base.BaseFragment
 import com.sunny.classcome.utils.IntentUtil
 import kotlinx.android.synthetic.main.fragment_mine.*
@@ -24,8 +23,11 @@ class MineFragment : BaseFragment() {
         img_user_head.setImageResource(R.mipmap.ic_default_head)
         txt_user_name.text = "课多多"
         txt_user_address.text = "上海"
+
         txt_points.text = "2000积分"
+        txt_points.setOnClickListener(this)
         txt_member.text = "黄金会员"
+        txt_member.setOnClickListener(this)
 
         img_message.setOnClickListener(this)
         img_user_head.setOnClickListener(this)
@@ -48,23 +50,27 @@ class MineFragment : BaseFragment() {
     override fun onClick(v: View) {
         when (v.id) {
             R.id.img_user_head,
-            R.id.img_more -> IntentUtil.start(requireActivity(), MineActivity::class.java)
-            R.id.img_message -> IntentUtil.start(requireActivity(), MineActivity::class.java)
+            R.id.img_more -> intent(MineActivity::class.java)
+            R.id.img_message -> intent(MyMsgActivity::class.java)
 
-            R.id.txt_points -> IntentUtil.start(requireActivity(), MineActivity::class.java)
-            R.id.txt_member -> IntentUtil.start(requireActivity(), MineActivity::class.java)
+            R.id.txt_points -> intent(PointActivity::class.java)
+            R.id.txt_member -> intent(MineActivity::class.java)
 
-            R.id.rl_my_trip -> IntentUtil.start(requireActivity(), MineActivity::class.java)
-            R.id.rl_my_publish -> IntentUtil.start(requireActivity(), MineActivity::class.java)
-            R.id.rl_my_partake -> IntentUtil.start(requireActivity(), MineActivity::class.java)
+            R.id.rl_my_trip -> intent(MineActivity::class.java)
+            R.id.rl_my_publish -> intent(MineActivity::class.java)
+            R.id.rl_my_partake -> intent(MineActivity::class.java)
 
-            R.id.txt_my_cheques -> IntentUtil.start(requireActivity(), MineActivity::class.java)
-            R.id.txt_invitation_record -> IntentUtil.start(requireActivity(), MineActivity::class.java)
-            R.id.txt_my_profile -> IntentUtil.start(requireActivity(), MineActivity::class.java)
-            R.id.txt_my_collection -> IntentUtil.start(requireActivity(), MineActivity::class.java)
-            R.id.txt_feedback -> IntentUtil.start(requireActivity(), FeedbackActivity::class.java)
-            R.id.txt_setting -> IntentUtil.start(requireActivity(), MineActivity::class.java)
-            R.id.txt_business_cooperation -> IntentUtil.start(requireActivity(), MineActivity::class.java)
+            R.id.txt_my_cheques -> intent(MineActivity::class.java)
+            R.id.txt_invitation_record -> intent(MineActivity::class.java)
+            R.id.txt_my_profile -> intent(MineActivity::class.java)
+            R.id.txt_my_collection -> intent(MyCollectionActivity::class.java)
+            R.id.txt_feedback -> intent(FeedbackActivity::class.java)
+            R.id.txt_setting -> intent(SettingActivity::class.java)
+            R.id.txt_business_cooperation -> intent(MineActivity::class.java)
         }
+    }
+
+    private fun intent(clazz: Class<*>) {
+        IntentUtil.start(requireActivity(), clazz)
     }
 }

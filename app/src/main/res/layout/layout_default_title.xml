@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/Title">
+    style="@style/style_title">
 
     <LinearLayout
-        android:id="@+id/rlLeft"
+        android:id="@+id/ll_back"
         android:layout_width="74dp"
         android:layout_height="match_parent"
         android:orientation="horizontal">
@@ -19,13 +19,13 @@
 
 
     <TextView
-        android:id="@id/tvTitle"
+        android:id="@id/txt_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:layout_marginEnd="74dp"
-        android:layout_toEndOf="@id/rlLeft"
+        android:layout_toEndOf="@id/ll_back"
         android:gravity="center"
         android:text="@string/app_name"
         android:textColor="@color/color_default_text"

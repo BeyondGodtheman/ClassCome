@@ -13,7 +13,7 @@
 
     <FrameLayout
         android:id="@+id/iframeTitle"
-        style="@style/Title"
+        style="@style/style_title"
         android:background="@color/color_white"
         android:visibility="gone" />
 </RelativeLayout>

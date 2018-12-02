@@ -41,7 +41,7 @@ class MyDialog(context: Context) : Dialog(context), View.OnClickListener {
     }
 
     override fun setTitle(title: CharSequence?) {
-        tvTitle.text = title
+        txt_title.text = title
     }
 
     fun setDesc(desc: String) {
