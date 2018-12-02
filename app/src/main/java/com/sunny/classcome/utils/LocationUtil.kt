@@ -5,6 +5,8 @@ import com.amap.api.location.AMapLocation
 import com.amap.api.location.AMapLocationClient
 import com.amap.api.location.AMapLocationClientOption
 import com.amap.api.location.AMapLocationListener
+import com.sunny.classcome.MyApplication
+import com.sunny.classcome.http.Constant
 
 /**
  * Desc
@@ -33,6 +35,7 @@ class LocationUtil(context: Context, var onLocation: (String) -> Unit) : AMapLoc
 
     override fun onLocationChanged(location: AMapLocation?) {
         location?.let {
+            MyApplication.getApp().setData(Constant.LOCATION_NAME,it.city)
             onLocation(it.city)
         }
     }

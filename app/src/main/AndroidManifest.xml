@@ -46,7 +46,7 @@
         <!--高德定位Key-->
         <meta-data
             android:name="com.amap.api.v2.apikey"
-            android:value="a064daa0d9fb1abe05b2565a32bfff05" />
+            android:value="cc4ce41cecd4205b1c46b8ccb1381901" />
 
         <!--高德定位服务-->
         <service android:name="com.amap.api.location.APSService" />
@@ -67,6 +67,11 @@
         <activity android:name=".activity.MineActivity" />
 
         <activity android:name=".activity.PublishTrainActivity" />
+
+        <!--位置页面-->
+        <activity
+            android:name=".activity.LocationActivity"
+            android:launchMode="singleTop" />
 
     </application>
 </manifest>

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import com.sunny.classcome.R
+import com.sunny.classcome.activity.LocationActivity
 import com.sunny.classcome.activity.MyMsgActivity
 import com.sunny.classcome.base.BaseFragment
 import com.sunny.classcome.bean.BannerBean
@@ -26,8 +27,8 @@ class HomeFragment : BaseFragment() {
         ClassListFragment()
     }
 
-    private val locationUtil:LocationUtil by lazy {
-        LocationUtil(requireContext()){
+    private val locationUtil: LocationUtil by lazy {
+        LocationUtil(requireContext()) {
             titleView.text_home_Location.text = it
         }
     }
@@ -52,9 +53,7 @@ class HomeFragment : BaseFragment() {
     override fun onClick(v: View) {
         when (v.id) {
 
-            R.id.rlLocation -> {
-
-            }
+            R.id.rlLocation -> startActivity(Intent(context, LocationActivity::class.java))
             R.id.ivMessage -> startActivity(Intent(context, MyMsgActivity::class.java))
 
         }
