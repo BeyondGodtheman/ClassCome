@@ -65,6 +65,7 @@
             android:launchMode="singleTop" />
 
         <activity android:name=".activity.MineActivity" />
+        <activity android:name=".activity.FeedbackActivity" />
 
         <activity android:name=".activity.PublishTrainActivity" />
 
