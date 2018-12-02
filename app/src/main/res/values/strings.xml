@@ -3,6 +3,9 @@
     <string name="app">test</string>
     <string name="app_name">课来了</string>
 
+    <!--Title-->
+    <string name="myMsg">我的消息</string>
+
     <!--错误信息-->
 
     <string name="networkError">请检查网络连接</string>
@@ -18,7 +21,7 @@
 
     <!--首页-->
 
-    <string name="defaultLocation">上海</string>
+    <string name="defaultLocation">上海市</string>
     <string name="message">消息</string>
     <string name="more">更多</string>
     <string name="type">类型</string>
@@ -41,7 +44,11 @@
     <string name="heat">热度</string>
     <string name="price">价格</string>
     <string name="class_time">上课时间</string>
-
+    
+    <!--定位-->
+    <string name="gps_location_city">GPS定位城市</string>
+    <string name="open_city">开通城市</string>
+    <string name="location_desc">目前只开通上海市，\n更多城市敬请期待。</string>
     <!--发布-->
 
     <string name="publish_choice">在这里选择你要发布的内容吧</string>

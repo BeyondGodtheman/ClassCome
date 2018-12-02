@@ -1,5 +1,6 @@
 package com.sunny.classcome.activity
 
+import android.content.Intent
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
@@ -91,7 +92,6 @@ class HomeActivity : BaseActivity() {
         goneTitle()
         initViewPager()
         initTabView(0)
-
         flHome.setOnClickListener(this)
         flAdd.setOnClickListener(this)
         flMine.setOnClickListener(this)

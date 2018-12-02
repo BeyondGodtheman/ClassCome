@@ -35,6 +35,7 @@
         tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:allowBackup">
 
+        <!--适配尺寸-->
         <meta-data
             android:name="design_width_in_dp"
             android:value="750" />
@@ -42,6 +43,15 @@
             android:name="design_height_in_dp"
             android:value="1334" />
 
+        <!--高德定位Key-->
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="cc4ce41cecd4205b1c46b8ccb1381901" />
+
+        <!--高德定位服务-->
+        <service android:name="com.amap.api.location.APSService" />
+
+        <!--首页-->
         <activity android:name=".activity.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -49,9 +59,19 @@
             </intent-filter>
         </activity>
 
+        <!--我的消息-->
+        <activity
+            android:name=".activity.MyMsgActivity"
+            android:launchMode="singleTop" />
+
         <activity android:name=".activity.MineActivity" />
 
         <activity android:name=".activity.PublishTrainActivity" />
+
+        <!--位置页面-->
+        <activity
+            android:name=".activity.LocationActivity"
+            android:launchMode="singleTop" />
 
     </application>
 </manifest>

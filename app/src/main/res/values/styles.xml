@@ -1,39 +1,36 @@
 <resources>
 
     <!--字体样式-->
-    <style name="style_font_white_24sp">
+    <style name="style_font">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/color_default_font</item>
+    </style>
+
+    <style name="style_font_white_24sp" parent="style_font">
         <item name="android:textSize">24sp</item>
         <item name="android:textColor">@color/color_white</item>
     </style>
 
-    <style name="style_font_white_36sp">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
+    <style name="style_font_white_36sp" parent="style_font">
         <item name="android:textSize">36sp</item>
         <item name="android:textColor">@color/color_white</item>
     </style>
 
-    <style name="style_font_default_24sp">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
+    <style name="style_font_default_22sp" parent="style_font">
+        <item name="android:textSize">22sp</item>
+    </style>
+
+    <style name="style_font_default_24sp" parent="style_font">
         <item name="android:textSize">24sp</item>
-        <item name="android:textColor">@color/color_default_font</item>
     </style>
 
-    <style name="style_font_default_28sp">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
+    <style name="style_font_default_28sp" parent="style_font">
         <item name="android:textSize">28sp</item>
-        <item name="android:textColor">@color/color_default_font</item>
     </style>
 
-    <style name="style_font_default_32sp">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
+    <style name="style_font_default_32sp" parent="style_font">
         <item name="android:textSize">32sp</item>
-        <item name="android:textColor">@color/color_default_font</item>
     </style>
 
     <!-- 分割块样式 -->
@@ -105,7 +102,7 @@
     <!--Title-->
     <style name="Title">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">82dp</item>
+        <item name="android:layout_height">84dp</item>
     </style>
 
 

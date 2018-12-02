@@ -10,6 +10,8 @@ object Constant {
 
     const val COMMON_UPLOADS = ""
 
+    const val LOCATION_NAME = "locationName"
+
     /**
      * 权限CODE
      */

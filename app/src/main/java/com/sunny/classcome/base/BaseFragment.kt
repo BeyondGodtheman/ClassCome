@@ -63,6 +63,11 @@ abstract class BaseFragment : Fragment(), IBaseView, View.OnClickListener {
         return view
     }
 
+    fun goneTitle(){
+        iframeTitle.visibility = View.GONE
+    }
+
+
     override fun showMessage(message: String) {
         getBaseActivity().showMessage(message)
     }

@@ -1,10 +1,14 @@
 package com.sunny.classcome.fragment
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import com.sunny.classcome.R
+import com.sunny.classcome.activity.LocationActivity
+import com.sunny.classcome.activity.MyMsgActivity
 import com.sunny.classcome.base.BaseFragment
 import com.sunny.classcome.bean.BannerBean
+import com.sunny.classcome.utils.LocationUtil
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.layout_home_recommend_text.view.*
 import kotlinx.android.synthetic.main.layout_home_title.view.*
@@ -23,6 +27,12 @@ class HomeFragment : BaseFragment() {
         ClassListFragment()
     }
 
+    private val locationUtil: LocationUtil by lazy {
+        LocationUtil(requireContext()) {
+            titleView.text_home_Location.text = it
+        }
+    }
+
     private val titleView: View by lazy {
         showTitle(titleManager.homeTitle())
     }
@@ -30,6 +40,9 @@ class HomeFragment : BaseFragment() {
     override fun setLayout(): Int = R.layout.fragment_home
 
     override fun initView() {
+
+        locationUtil.startLocation()
+
         titleView.rlLocation.setOnClickListener(this)
         titleView.ivMessage.setOnClickListener(this)
         rl_banner.loadData(bannerList)
@@ -39,12 +52,9 @@ class HomeFragment : BaseFragment() {
 
     override fun onClick(v: View) {
         when (v.id) {
-            R.id.rlLocation -> {
 
-            }
-            R.id.ivMessage -> {
-
-            }
+            R.id.rlLocation -> startActivity(Intent(context, LocationActivity::class.java))
+            R.id.ivMessage -> startActivity(Intent(context, MyMsgActivity::class.java))
 
         }
 
