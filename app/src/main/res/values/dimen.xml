@@ -8,6 +8,7 @@
     <dimen name="dp54">54dp</dimen>
     <dimen name="dp58">58dp</dimen>
     <dimen name="dp64">64dp</dimen>
+    <dimen name="dp325">325dp</dimen>
     <dimen name="dp500">500dp</dimen>
     <dimen name="dp570">570dp</dimen>
 </resources>

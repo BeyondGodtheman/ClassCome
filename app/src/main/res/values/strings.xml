@@ -19,6 +19,17 @@
     <string name="nav_mine">我的</string>
     <string name="nav_publish">发布</string>
 
+    <!--注册-->
+    <string name="reg_title">欢迎注册</string>
+    <string name="phone">手机号</string>
+    <string name="reg_hint_phone">请输入手机号</string>
+    <string name="password">密码</string>
+    <string name="reg_hint_pass">设置您的登录密码，至少6位</string>
+    <string name="code">验证码</string>
+    <string name="reg_hint_code">请输入验证码</string>
+    <string name="get_code">获取验证码</string>
+    <string name="complete">完成</string>
+    <string name="reg_protocol">点击完成代表您已同意《用户使用协议》</string>
     <!--首页-->
 
     <string name="defaultLocation">上海市</string>
@@ -44,7 +55,7 @@
     <string name="heat">热度</string>
     <string name="price">价格</string>
     <string name="class_time">上课时间</string>
-    
+
     <!--定位-->
     <string name="gps_location_city">GPS定位城市</string>
     <string name="open_city">开通城市</string>

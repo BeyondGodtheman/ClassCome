@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="115dp"
+        android:layout_marginTop="14dp"
+        android:gravity="bottom">
+
+        <TextView
+            style="@style/style_font"
+            android:layout_width="match_parent"
+            android:layout_marginStart="45dp"
+            android:text="@string/phone"
+            android:textSize="34sp" />
+
+        <EditText
+            android:id="@+id/edit_reg_phone"
+            style="@style/EditDefaultStyle"
+            android:layout_marginStart="222dp"
+            android:layout_marginEnd="44dp"
+            android:hint="@string/reg_hint_phone"
+            android:inputType="phone"
+            android:maxLength="11"
+            android:maxLines="1"
+            android:textSize="28sp" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="9dp"
+        android:layout_marginEnd="44dp"
+        android:background="@color/color_divider" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="115dp"
+        android:gravity="bottom">
+
+        <TextView
+            style="@style/style_font"
+            android:layout_marginStart="45dp"
+            android:text="@string/password"
+            android:textSize="34sp" />
+
+        <EditText
+            android:id="@+id/edit_reg_pass"
+            style="@style/EditDefaultStyle"
+            android:layout_width="match_parent"
+            android:layout_marginStart="222dp"
+            android:layout_marginEnd="44dp"
+            android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+            android:hint="@string/reg_hint_pass"
+            android:maxLength="18"
+            android:maxLines="1"
+            android:textSize="28sp"
+            tools:ignore="Autofill" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="9dp"
+        android:layout_marginEnd="44dp"
+        android:background="@color/color_divider" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="118dp">
+
+        <TextView
+            style="@style/style_font"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="45dp"
+            android:text="@string/code"
+            android:textSize="34sp" />
+
+        <EditText
+            android:id="@+id/edit_reg_code"
+            style="@style/EditDefaultStyle"
+            android:layout_width="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="222dp"
+            android:layout_marginEnd="44dp"
+            android:hint="@string/reg_hint_code"
+            android:inputType="number"
+            android:maxLength="8"
+            android:maxLines="1"
+            android:textSize="28sp"
+            tools:ignore="Autofill" />
+
+        <TextView
+            android:id="@+id/txt_reg_code"
+            android:layout_width="164dp"
+            android:layout_height="60dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="64dp"
+            android:background="@drawable/draw_btn_fillet_gray"
+            android:gravity="center"
+            android:text="@string/get_code"
+            android:textColor="@color/color_white"
+            android:textSize="28sp" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="9dp"
+        android:layout_marginEnd="44dp"
+        android:background="@color/color_divider" />
+
+    <Button
+        android:id="@+id/btn_reg_complete"
+        style="@style/style_button"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="44dp"
+        android:text="@string/complete" />
+
+    <TextView
+        android:id="@+id/txt_reg_protocol"
+        style="@style/style_font_default_24sp"
+        android:layout_width="match_parent"
+        android:layout_height="128dp"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:text="@string/reg_protocol" />
+</LinearLayout>

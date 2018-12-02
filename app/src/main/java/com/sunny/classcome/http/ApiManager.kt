@@ -1,6 +1,9 @@
 package com.sunny.classcome.http
 
+import android.os.Build
+import android.provider.Settings
 import com.google.gson.Gson
+import com.sunny.classcome.BuildConfig
 import com.sunny.classcome.MyApplication
 import com.sunny.classcome.R
 import com.sunny.classcome.bean.BaseBean
@@ -13,6 +16,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import okhttp3.*
+import org.json.JSONObject
 import retrofit2.HttpException
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -57,8 +61,7 @@ object ApiManager {
     const val OTHER = 0x2
 
 
-    private fun getHost(): String = if (Constant.isDebug()) "http://dev.api.shoumeiapp.com" else "http://api.shoumeiapp.com"
-
+    private fun getHost(): String = "http://www.coursecoming.com/api/"
 
     /**
      * 发起一个网络请求并解析成实体类
@@ -131,7 +134,15 @@ object ApiManager {
      *  Post请求
      */
     fun <T> post(composites: CompositeDisposable?, params: Map<String, String>, url: String, onResult: OnResult<T>) {
-        request(composites, apiService.post(params, url), onResult)
+        val jsonObj = JSONObject()
+        params.forEach {
+            jsonObj.put(it.key,it.value)
+        }
+        jsonObj.put("deviceId", Build.SERIAL)
+        jsonObj.put("os_version",Build.VERSION.RELEASE)
+        jsonObj.put("platform","Android")
+        jsonObj.put("version", BuildConfig.VERSION_NAME)
+        postJson(composites,jsonObj.toString(),url,onResult)
     }
 
 

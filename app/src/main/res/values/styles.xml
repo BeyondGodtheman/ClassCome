@@ -122,4 +122,13 @@
         <item name="android:textSize">28sp</item>
         <item name="android:textColor">@color/color_default_font</item>
     </style>
+
+    <!--默认输入框样式-->
+    <style name="EditDefaultStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:cursorVisible">true</item>
+        <item name="android:background">@color/color_transparent</item>
+        <item name="android:textCursorDrawable">@drawable/edit_cursor</item>
+    </style>
 </resources>

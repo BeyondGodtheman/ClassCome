@@ -52,12 +52,17 @@
         <service android:name="com.amap.api.location.APSService" />
 
         <!--首页-->
-        <activity android:name=".activity.HomeActivity">
+        <activity android:name=".activity.RegisterActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!--&lt;!&ndash;注册页面&ndash;&gt;-->
+        <!--<activity-->
+            <!--android:name=".activity.RegisterActivity"-->
+            <!--android:launchMode="singleTop" />-->
 
         <!--我的消息-->
         <activity

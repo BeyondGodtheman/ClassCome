@@ -12,10 +12,15 @@ import com.sunny.classcome.R
 import com.sunny.classcome.utils.ErrorViewType
 import com.sunny.classcome.utils.TitleManager
 import com.sunny.classcome.utils.ToastUtil
+import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_base.*
 import kotlinx.android.synthetic.main.layout_error.view.*
 
 abstract class BaseActivity : AppCompatActivity(), IBaseView, View.OnClickListener {
+
+    val composites: CompositeDisposable by lazy {
+        CompositeDisposable()
+    }
 
     val loadingView: View by lazy {
         View.inflate(this, R.layout.layout_loading, null)

@@ -6,11 +6,14 @@ package com.sunny.classcome.bean
  */
 
 class BaseBean<T> {
-    var result = ""
-    var status = "200"
-    var message: T? = null
+    var msg = ""
+    var code = "200"
+    var content: T? = null
     var type = javaClass
 
-    override fun toString(): String =
-            "BaseModel(result='$result', status=$status, message=$message, value=$type)"
+    override fun toString(): String {
+        return "BaseBean(msg='$msg', code='$code', content=$content, type=$type)"
+    }
+
+
 }

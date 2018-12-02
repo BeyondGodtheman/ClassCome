@@ -22,5 +22,8 @@ object Constant {
     const val STORAGE = 5 //读写
     const val LOCATION = 6//定位
     const val PHONE = 7 //电话
+
+
+    const val USER_REGISTERUSER = "user/registerUser"
 }
 
