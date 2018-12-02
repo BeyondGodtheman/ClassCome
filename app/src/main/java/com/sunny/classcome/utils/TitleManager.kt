@@ -12,12 +12,12 @@ class TitleManager(var activity: Activity?) {
 
     fun defaultTitle(title: String, isShowIcon: Boolean): View {
         val view = View.inflate(activity, R.layout.layout_default_title, null)
-        view.tvTitle.text = title
+        view.txt_title.text = title
 
         if (!isShowIcon) {
-            view.rlLeft.visibility = View.GONE
+            view.ll_back.visibility = View.GONE
         } else {
-            view.rlLeft.setOnClickListener {
+            view.ll_back.setOnClickListener {
                 activity?.finish()
             }
         }

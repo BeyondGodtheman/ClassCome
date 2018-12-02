@@ -4,6 +4,8 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import com.sunny.classcome.R
 import com.sunny.classcome.activity.HomeActivity
+import com.sunny.classcome.activity.MineActivity
+import com.sunny.classcome.activity.PublishTrainActivity
 import com.sunny.classcome.adapter.PublishAdapter
 import com.sunny.classcome.base.BaseFragment
 import com.sunny.classcome.bean.PublishBean
@@ -29,27 +31,26 @@ class PublishFragment : BaseFragment() {
     }
 
     private val activityList = arrayListOf(
+            PublishTrainActivity::class.java,
             HomeActivity::class.java,
-            HomeActivity::class.java,
-            HomeActivity::class.java,
+            MineActivity::class.java,
             HomeActivity::class.java,
             HomeActivity::class.java
     )
 
 
-
     override fun setLayout(): Int = R.layout.fragment_publish
 
     override fun initView() {
-        rv_publish.isNestedScrollingEnabled = false
-        rv_publish.setHasFixedSize(true)
+        recl_publish.isNestedScrollingEnabled = false
+        recl_publish.setHasFixedSize(true)
 
-        rv_publish.layoutManager = LinearLayoutManager(context)
+        recl_publish.layoutManager = LinearLayoutManager(context)
 
         val adapter = PublishAdapter(list)
-        rv_publish.adapter = adapter
+        recl_publish.adapter = adapter
         adapter.setOnItemClickListener { _, index ->
-
+            IntentUtil.start(requireActivity(), activityList[index])
         }
 
     }

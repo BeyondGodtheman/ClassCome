@@ -3,7 +3,7 @@
     <string name="app">test</string>
     <string name="app_name">课来了</string>
 
-    <!--Title-->
+    <!--style_title-->
     <string name="myMsg">我的消息</string>
 
     <!--错误信息-->
@@ -144,6 +144,13 @@
     <string name="invitation_points">邀请得积分</string>
     <string name="help">帮助</string>
     <string name="modify">修改</string>
+
+    <!--积分-->
+    <string name="point">积分</string>
+    <string name="my_point">我的积分</string>
+    <string name="point_description">积分说明</string>
+    <string name="novice_function">新手功能</string>
+    <string name="daily_function">每日功能</string>
 
 
 </resources>

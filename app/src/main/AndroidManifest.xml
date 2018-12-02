@@ -65,7 +65,11 @@
             android:launchMode="singleTop" />
 
         <activity android:name=".activity.MineActivity" />
+        <activity android:name=".activity.MyCollectionActivity" />
         <activity android:name=".activity.FeedbackActivity" />
+        <activity android:name=".activity.SettingActivity" />
+        <activity android:name=".activity.PointActivity" />
+        <activity android:name=".activity.PointDescActivity" />
 
         <activity android:name=".activity.PublishTrainActivity" />
 
