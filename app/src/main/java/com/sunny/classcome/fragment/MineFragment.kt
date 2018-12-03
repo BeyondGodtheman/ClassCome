@@ -25,9 +25,10 @@ class MineFragment : BaseFragment() {
         txt_user_address.text = "上海"
 
         txt_points.text = "2000积分"
-        txt_points.setOnClickListener(this)
         txt_member.text = "黄金会员"
-        txt_member.setOnClickListener(this)
+
+        rl_points.setOnClickListener(this)
+        rl_member.setOnClickListener(this)
 
         img_message.setOnClickListener(this)
         img_user_head.setOnClickListener(this)
@@ -53,10 +54,10 @@ class MineFragment : BaseFragment() {
             R.id.img_more -> intent(MineActivity::class.java)
             R.id.img_message -> intent(MyMsgActivity::class.java)
 
-            R.id.txt_points -> intent(PointActivity::class.java)
-            R.id.txt_member -> intent(MineActivity::class.java)
+            R.id.rl_points -> intent(PointActivity::class.java)
+            R.id.rl_member -> intent(MineActivity::class.java)
 
-            R.id.rl_my_trip -> intent(MineActivity::class.java)
+            R.id.rl_my_trip -> intent(PurchaserActivity::class.java)
             R.id.rl_my_publish -> intent(MineActivity::class.java)
             R.id.rl_my_partake -> intent(MineActivity::class.java)
 

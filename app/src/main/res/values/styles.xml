@@ -12,10 +12,16 @@
         <item name="android:textColor">@color/color_white</item>
     </style>
 
-
-    <style name="style_button_two" parent="style_button">
+    <!--白底蓝字蓝框-->
+    <style name="style_btn_border_blue" parent="style_button">
         <item name="android:background">@drawable/draw_bg_fillet_blue_border</item>
         <item name="android:textColor">@color/color_nav_blue</item>
+    </style>
+
+    <!--白底灰字灰框-->
+    <style name="style_btn_border_gray" parent="style_button">
+        <item name="android:background">@drawable/draw_bg_fillet_blue_border</item>
+        <item name="android:textColor">@color/color_nav_gray</item>
     </style>
 
 

@@ -2,6 +2,7 @@
 <resources>
     <dimen name="pt14">14pt</dimen>
     <dimen name="pt15">15pt</dimen>
+    <dimen name="pt20">20pt</dimen>
     <dimen name="pt22">22pt</dimen>
     <dimen name="pt26">26pt</dimen>
     <dimen name="pt30">30pt</dimen>

@@ -21,7 +21,7 @@
 
     <Button
         android:id="@+id/btn_reg_finish"
-        style="@style/style_button_two"
+        style="@style/style_btn_border_blue"
         android:layout_marginTop="40pt"
         android:text="@string/stroll_around" />
 </LinearLayout>

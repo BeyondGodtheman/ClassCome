@@ -7,8 +7,9 @@
 
     <ImageView
         android:id="@+id/img_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="56pt"
+        android:layout_height="56pt"
+        android:scaleType="centerCrop"
         android:layout_centerVertical="true"
         android:layout_marginStart="32pt"
         android:contentDescription="@string/app"
@@ -25,8 +26,8 @@
 
     <ImageView
         android:id="@+id/img_more"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="40pt"
+        android:layout_height="40pt"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
         android:layout_marginEnd="34pt"
