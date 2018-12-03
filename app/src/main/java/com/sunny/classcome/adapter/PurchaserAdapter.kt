@@ -35,7 +35,7 @@ class PurchaserAdapter(list: ArrayList<PurchaserBean>) : BaseRecycleAdapter<Purc
             val textColor: Int
             if (isFinish) {
                 str = "已核销"
-                textColor = R.color.color_nav_gray
+                textColor = R.color.color_gray_font
                 bgColor = R.drawable.draw_bg_fillet_gray_border
             } else {
                 str = "核销"

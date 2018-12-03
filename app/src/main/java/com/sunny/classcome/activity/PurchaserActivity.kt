@@ -35,6 +35,8 @@ class PurchaserActivity : BaseActivity() {
         recl.layoutManager = LinearLayoutManager(this)
         val adapter = PurchaserAdapter(list)
         recl.adapter = adapter
+
+        // 最后一条view底部添加边距
         recl.addItemDecoration(object : RecyclerView.ItemDecoration() {
             override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
                 super.getItemOffsets(outRect, view, parent, state)
