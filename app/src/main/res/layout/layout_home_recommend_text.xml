@@ -6,32 +6,32 @@
     android:orientation="horizontal">
 
     <View
-        android:layout_width="32dp"
-        android:layout_height="32dp"
+        android:layout_width="32pt"
+        android:layout_height="32pt"
         android:background="@mipmap/ic_thumbtack_blue" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="9dp"
+        android:layout_marginStart="9pt"
+        android:text="@string/active"
         android:textColor="@color/color_default_font"
-        android:textSize="24sp"
-        android:text="@string/active" />
+        android:textSize="24pt" />
 
     <View
-        android:layout_width="2dp"
-        android:layout_height="20dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginEnd="11dp"
+        android:layout_width="2pt"
+        android:layout_height="20pt"
+        android:layout_marginStart="12pt"
+        android:layout_marginEnd="11pt"
         android:background="@color/color_divider" />
 
     <TextView
         android:id="@+id/txt_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/color_default_font"
-        android:text="@string/prompt_feedback"
-        android:lines="1"
         android:ellipsize="end"
-        android:textSize="24sp"/>
+        android:lines="1"
+        android:text="@string/prompt_feedback"
+        android:textColor="@color/color_default_font"
+        android:textSize="24pt" />
 </LinearLayout>

@@ -10,14 +10,14 @@
     <RelativeLayout
         android:id="@+id/rl_login_password"
         android:layout_width="match_parent"
-        android:layout_height="98dp"
+        android:layout_height="98pt"
         android:background="@drawable/draw_bg_fillet_white"
-        android:paddingStart="52dp"
+        android:paddingStart="52pt"
         tools:ignore="RtlSymmetry">
 
         <TextView
             android:id="@+id/txt_info"
-            style="@style/style_font_default_32sp"
+            style="@style/style_font_default_32pt"
             android:layout_below="@id/txt_type"
             android:layout_centerVertical="true"
             android:layout_toEndOf="@id/img_icon"
@@ -29,27 +29,27 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_marginEnd="34dp"
+            android:layout_marginEnd="34pt"
             android:contentDescription="@string/app"
             android:src="@mipmap/ic_more"/>
 
         <TextView
-            style="@style/style_font_default_32sp"
+            style="@style/style_font_default_32pt"
             android:layout_below="@id/txt_type"
             android:layout_centerVertical="true"
-            android:layout_marginEnd="12dp"
+            android:layout_marginEnd="12pt"
             android:layout_toStartOf="@id/img_more"
             android:layout_toEndOf="@id/img_icon"
             android:text="@string/modify"
             android:textColor="@color/color_gray_font"
-            android:textSize="30sp"/>
+            android:textSize="30pt"/>
     </RelativeLayout>
 
     <View style="@style/style_view_line"/>
 
     <View
         style="@style/style_view_line"
-        android:layout_height="98dp"
+        android:layout_height="98pt"
         android:background="@color/color_white"/>
 
     <View style="@style/style_view_divider"/>
@@ -78,7 +78,7 @@
     <TextView
         android:id="@+id/txt_logout"
         style="@style/style_button"
-        android:layout_marginTop="69dp"
+        android:layout_marginTop="69pt"
         android:text="@string/logout"/>
 
 </LinearLayout>

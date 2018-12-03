@@ -2,7 +2,6 @@ package com.sunny.classcome.utils
 
 import android.annotation.SuppressLint
 import android.util.TypedValue
-import android.view.Gravity
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
@@ -18,13 +17,7 @@ import com.sunny.classcome.R
 object ToastUtil {
 
     private val toast:Toast by lazy {
-        Toast.makeText(MyApplication.getApp(), "", Toast.LENGTH_SHORT).apply {
-            val textView = (view as LinearLayout).getChildAt(0) as TextView
-            val layoutParams =  textView.layoutParams as LinearLayout.LayoutParams
-            layoutParams.width = textView.resources.getDimension(R.dimen.dp325).toInt()
-            textView.layoutParams = layoutParams
-            textView.setTextSize(TypedValue.COMPLEX_UNIT_PX,textView.resources.getDimension(R.dimen.dp26))
-        }
+        Toast.makeText(MyApplication.getApp(), "", Toast.LENGTH_SHORT)
     }
     /**
      * 显示Toast

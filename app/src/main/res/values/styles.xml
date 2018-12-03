@@ -3,12 +3,12 @@
     <!--公用按钮样式-蓝底白字-->
     <style name="style_button">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">90dp</item>
-        <item name="android:layout_marginStart">44dp</item>
-        <item name="android:layout_marginEnd">44dp</item>
+        <item name="android:layout_height">90pt</item>
+        <item name="android:layout_marginStart">44pt</item>
+        <item name="android:layout_marginEnd">44pt</item>
         <item name="android:gravity">center</item>
         <item name="android:background">@drawable/draw_btn_bg_blue</item>
-        <item name="android:textSize">36sp</item>
+        <item name="android:textSize">36pt</item>
         <item name="android:textColor">@color/color_white</item>
     </style>
 
@@ -19,46 +19,46 @@
         <item name="android:textColor">@color/color_default_font</item>
     </style>
 
-    <style name="style_font_white_24sp" parent="style_font">
-        <item name="android:textSize">24sp</item>
+    <style name="style_font_white_24pt" parent="style_font">
+        <item name="android:textSize">24pt</item>
         <item name="android:textColor">@color/color_white</item>
     </style>
 
-    <style name="style_font_white_36sp" parent="style_font">
-        <item name="android:textSize">36sp</item>
+    <style name="style_font_white_36pt" parent="style_font">
+        <item name="android:textSize">36pt</item>
         <item name="android:textColor">@color/color_white</item>
     </style>
 
-    <style name="style_font_default_22sp" parent="style_font">
-        <item name="android:textSize">22sp</item>
+    <style name="style_font_default_22pt" parent="style_font">
+        <item name="android:textSize">22pt</item>
     </style>
 
-    <style name="style_font_default_24sp" parent="style_font">
-        <item name="android:textSize">24sp</item>
+    <style name="style_font_default_24pt" parent="style_font">
+        <item name="android:textSize">24pt</item>
     </style>
 
-    <style name="style_font_default_28sp" parent="style_font">
-        <item name="android:textSize">28sp</item>
+    <style name="style_font_default_28pt" parent="style_font">
+        <item name="android:textSize">28pt</item>
     </style>
 
-    <style name="style_font_default_30sp" parent="style_font">
-        <item name="android:textSize">30sp</item>
+    <style name="style_font_default_30pt" parent="style_font">
+        <item name="android:textSize">30pt</item>
     </style>
 
-    <style name="style_font_default_32sp" parent="style_font">
-        <item name="android:textSize">32sp</item>
+    <style name="style_font_default_32pt" parent="style_font">
+        <item name="android:textSize">32pt</item>
     </style>
 
     <!-- 分割块样式 -->
     <style name="style_view_divider">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">20dp</item>
+        <item name="android:layout_height">20pt</item>
         <item name="android:background">@color/color_base_bg</item>
     </style>
 
     <!-- 分割竖线样式 -->
     <style name="style_view_vertical_line">
-        <item name="android:layout_width">6dp</item>
+        <item name="android:layout_width">6pt</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:background">@color/color_divider</item>
     </style>
@@ -66,7 +66,7 @@
     <!-- 分割横线样式 -->
     <style name="style_view_line">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">2dp</item>
+        <item name="android:layout_height">2pt</item>
         <item name="android:background">@color/color_divider</item>
     </style>
 
@@ -76,12 +76,12 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_centerHorizontal">true</item>
-        <item name="android:textSize">28sp</item>
+        <item name="android:textSize">28pt</item>
         <item name="android:textColor">@color/color_default_font</item>
     </style>
 
     <style name="style_item_layout_top_icon">
-        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_width">0pt</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_weight">1</item>
     </style>
@@ -90,7 +90,7 @@
     <!-- 子条目-公用样式（左侧自定义图标，右侧更多按钮） -->
     <style name="style_item_text_icon">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">98dp</item>
+        <item name="android:layout_height">98pt</item>
     </style>
 
 
@@ -98,7 +98,7 @@
     <style name="style_home_nav_text">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">20pt</item>
         <item name="android:textColor">@color/color_nav_gray</item>
     </style>
 
@@ -118,14 +118,14 @@
     <!--style_title-->
     <style name="style_title">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">84dp</item>
+        <item name="android:layout_height">84pt</item>
     </style>
 
 
     <style name="ClassListNavText">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">28sp</item>
+        <item name="android:textSize">28pt</item>
         <item name="android:textColor">@color/color_default_font</item>
     </style>
 

@@ -42,9 +42,9 @@ class MyMsgActivity : BaseActivity() {
         recl.addItemDecoration(object :RecyclerView.ItemDecoration(){
             override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
                 if (parent.indexOfChild(view) == 0){
-                    outRect.top = resources.getDimension(R.dimen.dp26).toInt()
+                    outRect.top = resources.getDimension(R.dimen.pt26).toInt()
                 }
-                outRect.bottom = resources.getDimension(R.dimen.dp30).toInt()
+                outRect.bottom = resources.getDimension(R.dimen.pt30).toInt()
             }
         })
 

@@ -9,13 +9,13 @@
     <EditText
         android:id="@+id/edit_feedback"
         android:layout_width="match_parent"
-        android:layout_height="424dp"
-        android:layout_margin="45dp"
+        android:layout_height="424pt"
+        android:layout_margin="45pt"
         android:background="@null"
         android:gravity="top"
         android:hint="@string/prompt_feedback"
         android:textColorHint="@color/color_gray_font"
-        android:textSize="28sp"
+        android:textSize="28pt"
         tools:ignore="Autofill,TextFields"/>
 
     <TextView

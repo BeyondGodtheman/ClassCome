@@ -42,10 +42,10 @@ class ClassicalHeader constructor(context: Context) : FrameLayout(context), KRef
         arrowImg = ImageView(context)
         arrowImg.setImageResource(R.mipmap.ic_krl_loading)
         arrowImg.scaleType = ImageView.ScaleType.CENTER
-        root.addView(arrowImg,context.resources.getDimension(R.dimen.dp64).toInt(),context.resources.getDimension(R.dimen.dp54).toInt())
+        root.addView(arrowImg,context.resources.getDimension(R.dimen.pt64).toInt(),context.resources.getDimension(R.dimen.pt54).toInt())
 
         textTitle = TextView(context)
-        textTitle.textSize = context.resources.getDimension(R.dimen.dp22)
+        textTitle.textSize = context.resources.getDimension(R.dimen.pt22)
         textTitle.text = "下拉刷新..."
         textTitle.setTextColor(Color.parseColor("#999999"))
         val params = LinearLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT)
@@ -56,7 +56,7 @@ class ClassicalHeader constructor(context: Context) : FrameLayout(context), KRef
         rotateAnimation.interpolator = LinearInterpolator()
         rotateAnimation.repeatCount = Animation.INFINITE
         rotateAnimation.repeatMode = Animation.RESTART
-        setPadding(0, context.resources.getDimension(R.dimen.dp15).toInt(), 0, context.resources.getDimension(R.dimen.dp15).toInt())
+        setPadding(0, context.resources.getDimension(R.dimen.pt15).toInt(), 0, context.resources.getDimension(R.dimen.pt15).toInt())
     }
 
     override fun succeedRetention(): Long {

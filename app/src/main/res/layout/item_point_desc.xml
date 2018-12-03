@@ -7,16 +7,16 @@
 
     <TextView
         android:id="@+id/txt_desc"
-        style="@style/style_font_default_28sp"
+        style="@style/style_font_default_28pt"
         android:layout_width="match_parent"
         android:layout_weight="1"
         tools:text="@string/app"/>
 
     <TextView
         android:id="@+id/txt_point"
-        style="@style/style_font_default_28sp"
+        style="@style/style_font_default_28pt"
         android:layout_width="match_parent"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="20pt"
         android:layout_weight="1"
         tools:text="@string/app"/>
 

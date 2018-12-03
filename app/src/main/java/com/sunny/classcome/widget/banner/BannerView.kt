@@ -50,8 +50,8 @@ class BannerView : RelativeLayout {
             override fun onPageSelected(position: Int) {
                 currentPosition = position
                 pointList[currentIndex].alpha = 0.3F
-                pointList[currentIndex].layoutParams = LinearLayout.LayoutParams(resources.getDimension(R.dimen.dp14).toInt(), resources.getDimension(R.dimen.dp14).toInt())
-                        .apply { leftMargin = resources.getDimension(R.dimen.dp15).toInt() }
+                pointList[currentIndex].layoutParams = LinearLayout.LayoutParams(resources.getDimension(R.dimen.pt14).toInt(), resources.getDimension(R.dimen.pt14).toInt())
+                        .apply { leftMargin = resources.getDimension(R.dimen.pt15).toInt() }
 
                 currentIndex = currentPosition - 1
 
@@ -64,8 +64,8 @@ class BannerView : RelativeLayout {
                 }
 
                 pointList[currentIndex].alpha = 1F
-                pointList[currentIndex].layoutParams = LinearLayout.LayoutParams(resources.getDimension(R.dimen.dp58).toInt(), resources.getDimension(R.dimen.dp14).toInt())
-                        .apply { leftMargin = resources.getDimension(R.dimen.dp15).toInt() }
+                pointList[currentIndex].layoutParams = LinearLayout.LayoutParams(resources.getDimension(R.dimen.pt58).toInt(), resources.getDimension(R.dimen.pt14).toInt())
+                        .apply { leftMargin = resources.getDimension(R.dimen.pt15).toInt() }
             }
         })
 
@@ -105,7 +105,7 @@ class BannerView : RelativeLayout {
             val view = View(context)
             view.alpha = 0.3F
             view.setBackgroundResource(R.drawable.draw_bg_banner_point)
-            LinearLayout.LayoutParams(resources.getDimension(R.dimen.dp14).toInt(), resources.getDimension(R.dimen.dp14).toInt()).apply {
+            LinearLayout.LayoutParams(resources.getDimension(R.dimen.pt14).toInt(), resources.getDimension(R.dimen.pt14).toInt()).apply {
                 leftMargin = 15
                 llPoint.addView(view, this)
             }

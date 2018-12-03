@@ -11,27 +11,27 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="248dp"
+            android:layout_height="248pt"
             android:background="@color/color_primary"
             android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="40dp"
+                android:layout_marginStart="30pt"
+                android:layout_marginTop="16pt"
+                android:layout_marginBottom="40pt"
                 android:text="@string/publish"
                 android:textColor="@color/color_white"
-                android:textSize="36sp"/>
+                android:textSize="36pt"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="50dp"
+                android:layout_marginStart="50pt"
                 android:text="@string/publish_choice"
                 android:textColor="@color/color_white"
-                android:textSize="24sp"/>
+                android:textSize="24pt"/>
 
         </LinearLayout>
 
@@ -39,9 +39,9 @@
             android:id="@+id/recl_publish"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="44dp"
-            android:layout_marginTop="160dp"
-            android:layout_marginEnd="44dp"/>
+            android:layout_marginStart="44pt"
+            android:layout_marginTop="160pt"
+            android:layout_marginEnd="44pt"/>
 
     </FrameLayout>
 

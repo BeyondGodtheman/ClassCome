@@ -5,11 +5,11 @@
 
     <View
         android:id="@id/viewIcon"
-        android:layout_width="58dp"
-        android:layout_height="58dp"
+        android:layout_width="58pt"
+        android:layout_height="58pt"
         android:layout_above="@id/tvName"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="1dp"
+        android:layout_marginBottom="1pt"
         android:background="@mipmap/ic_nav_home_blue" />
 
     <TextView
@@ -17,7 +17,7 @@
         style="@style/style_home_nav_text"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="2dp"
+        android:layout_marginBottom="2pt"
         android:text="@string/nav_home"
         android:textColor="@color/color_nav_blue" />
 </RelativeLayout>

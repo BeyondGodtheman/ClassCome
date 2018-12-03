@@ -15,7 +15,7 @@ class LocationPopup(context: Context) : PopupWindow(context) {
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         contentView = inflater.inflate(R.layout.popup_location,null)
         width = WindowManager.LayoutParams.MATCH_PARENT
-        height = context.resources.getDimension(R.dimen.dp500).toInt()
+        height = context.resources.getDimension(R.dimen.pt500).toInt()
         setBackgroundDrawable(ColorDrawable(0))
         isFocusable = true
         isOutsideTouchable = true

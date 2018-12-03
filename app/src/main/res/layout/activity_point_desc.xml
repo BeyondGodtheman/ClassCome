@@ -15,16 +15,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="44dp"
+            android:layout_marginStart="40pt"
+            android:layout_marginTop="44pt"
             android:contentDescription="@string/app"
             android:src="@mipmap/ic_circle_new"/>
 
         <TextView
-            style="@style/style_font_default_32sp"
+            style="@style/style_font_default_32pt"
             android:layout_below="@id/txt_type"
             android:layout_centerVertical="true"
-            android:layout_marginStart="28dp"
+            android:layout_marginStart="28pt"
             android:layout_toEndOf="@id/img_icon"
             android:text="@string/novice_function"
             android:textStyle="bold"/>
@@ -38,10 +38,10 @@
         android:layout_height="wrap_content"
         android:background="@color/color_white"
         android:overScrollMode="never"
-        android:paddingStart="128dp"
-        android:paddingTop="20dp"
-        android:paddingEnd="34dp"
-        android:paddingBottom="42dp"/>
+        android:paddingStart="128pt"
+        android:paddingTop="20pt"
+        android:paddingEnd="34pt"
+        android:paddingBottom="42pt"/>
 
     <View style="@style/style_view_divider"/>
 
@@ -55,16 +55,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="44dp"
+            android:layout_marginStart="40pt"
+            android:layout_marginTop="44pt"
             android:contentDescription="@string/app"
             android:src="@mipmap/ic_circle_day"/>
 
         <TextView
-            style="@style/style_font_default_32sp"
+            style="@style/style_font_default_32pt"
             android:layout_below="@id/txt_type"
             android:layout_centerVertical="true"
-            android:layout_marginStart="28dp"
+            android:layout_marginStart="28pt"
             android:layout_toEndOf="@id/img_icon2"
             android:text="@string/daily_function"
             android:textStyle="bold"/>
@@ -77,9 +77,9 @@
         android:layout_height="wrap_content"
         android:background="@color/color_white"
         android:overScrollMode="never"
-        android:paddingStart="128dp"
-        android:paddingTop="20dp"
-        android:paddingEnd="34dp"
-        android:paddingBottom="42dp"/>
+        android:paddingStart="128pt"
+        android:paddingTop="20pt"
+        android:paddingEnd="34pt"
+        android:paddingBottom="42pt"/>
 
 </LinearLayout>

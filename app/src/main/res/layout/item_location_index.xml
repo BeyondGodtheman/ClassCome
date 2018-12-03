@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/style_font_default_24sp"
-    android:layout_marginStart="24dp"
-    android:layout_marginEnd="24dp"
-    android:layout_marginTop="12dp"
-    android:layout_marginBottom="12dp"
+    style="@style/style_font_default_24pt"
+    android:layout_marginStart="24pt"
+    android:layout_marginEnd="24pt"
+    android:layout_marginTop="12pt"
+    android:layout_marginBottom="12pt"
     android:text="@string/app"
     android:textColor="@color/color_nav_blue" />

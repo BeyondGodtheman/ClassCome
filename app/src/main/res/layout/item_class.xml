@@ -2,9 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tool="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="330dp"
+    android:layout_height="330pt"
     android:orientation="vertical"
-    android:layout_marginBottom="10dp"
+    android:layout_marginBottom="10pt"
     android:background="@color/color_white">
 
     <RelativeLayout
@@ -13,11 +13,11 @@
 
         <ImageView
             android:id="@+id/img_class_photo"
-            android:layout_width="230dp"
-            android:layout_height="206dp"
-            android:layout_marginStart="23dp"
-            android:layout_marginTop="33dp"
-            android:layout_marginEnd="23dp"
+            android:layout_width="230pt"
+            android:layout_height="206pt"
+            android:layout_marginStart="23pt"
+            android:layout_marginTop="33pt"
+            android:layout_marginEnd="23pt"
             android:contentDescription="@string/app"
             android:scaleType="fitXY"
             android:src="@drawable/bg_default_photo" />
@@ -26,13 +26,13 @@
             android:id="@+id/text_class_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="33dp"
-            android:layout_marginEnd="13dp"
+            android:layout_marginTop="33pt"
+            android:layout_marginEnd="13pt"
             android:layout_toEndOf="@id/img_class_photo"
             android:ellipsize="end"
             android:lines="2"
             android:textColor="@color/color_default_font"
-            android:textSize="32sp"
+            android:textSize="32pt"
             tool:text="初中英语班课教研员-要求有专业教学资质" />
 
         <TextView
@@ -40,10 +40,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/text_class_name"
-            android:layout_marginTop="58dp"
+            android:layout_marginTop="58pt"
             android:layout_toEndOf="@id/img_class_photo"
             android:textColor="@color/color_gray_font"
-            android:textSize="24sp"
+            android:textSize="24pt"
             tool:text="周一至周三 18:00-20:00" />
 
 
@@ -52,17 +52,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="139dp"
-            android:layout_marginEnd="25dp"
+            android:layout_marginTop="139pt"
+            android:layout_marginEnd="25pt"
             android:textColor="@color/color_price_red"
-            android:textSize="36sp"
+            android:textSize="36pt"
             tool:text="¥4000" />
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="2dp"
+            android:layout_height="2pt"
             android:layout_below="@id/text_class_time"
-            android:layout_marginTop="14dp"
+            android:layout_marginTop="14pt"
             android:layout_toEndOf="@id/img_class_photo"
             android:background="@color/color_divider" />
     </RelativeLayout>
@@ -70,14 +70,14 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp">
+        android:layout_marginTop="25pt">
 
         <View
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+            android:layout_width="32pt"
+            android:layout_height="32pt"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="78dp"
-            android:layout_marginTop="7dp"
+            android:layout_marginStart="78pt"
+            android:layout_marginTop="7pt"
             android:background="@mipmap/ic_thumbtack_blue" />
 
         <TextView
@@ -85,16 +85,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginStart="119dp"
+            android:layout_marginStart="119pt"
             android:textColor="@color/color_default_font"
-            android:textSize="24sp"
+            android:textSize="24pt"
             tool:text="拉丁舞" />
 
         <ImageView
             android:id="@+id/view_sex"
-            android:layout_width="46dp"
-            android:layout_height="46dp"
-            android:layout_marginStart="71dp"
+            android:layout_width="46pt"
+            android:layout_height="46pt"
+            android:layout_marginStart="71pt"
             android:layout_toEndOf="@id/text_class_type"
             android:scaleType="centerCrop"
             android:src="@mipmap/ic_default_head" />
@@ -104,10 +104,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="16pt"
             android:layout_toEndOf="@id/view_sex"
             android:textColor="@color/color_gray_font"
-            android:textSize="24sp"
+            android:textSize="24pt"
             tool:text="米斯特教育" />
 
         <TextView
@@ -117,15 +117,15 @@
             android:layout_centerVertical="true"
             android:textColor="@color/color_gray_font"
             android:layout_alignParentEnd="true"
-            android:layout_marginEnd="23dp"
-            android:layout_marginStart="14dp"
-            android:textSize="24sp"
+            android:layout_marginEnd="23pt"
+            android:layout_marginStart="14pt"
+            android:textSize="24pt"
             tool:text="静安寺" />
 
         <View
-            android:layout_width="22dp"
-            android:layout_height="28dp"
-            android:layout_marginStart="71dp"
+            android:layout_width="22pt"
+            android:layout_height="28pt"
+            android:layout_marginStart="71pt"
             android:layout_toStartOf="@id/text_class_address"
             android:layout_centerVertical="true"
             android:background="@mipmap/ic_home_location" />

@@ -6,18 +6,18 @@
     android:orientation="vertical">
 
     <ImageView
-        android:layout_width="277dp"
-        android:layout_height="277dp"
+        android:layout_width="277pt"
+        android:layout_height="277pt"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="337dp"
+        android:layout_marginTop="337pt"
         android:background="@drawable/ic_launcher_web"
         android:contentDescription="@string/app_name" />
 
     <ImageView
-        android:layout_width="366dp"
+        android:layout_width="366pt"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="40pt"
         android:contentDescription="@string/app_name"
         android:src="@drawable/bg_text_splash" />
 </LinearLayout>

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="dp14">14dp</dimen>
-    <dimen name="dp15">15dp</dimen>
-    <dimen name="dp22">22dp</dimen>
-    <dimen name="dp26">26dp</dimen>
-    <dimen name="dp30">30dp</dimen>
-    <dimen name="dp54">54dp</dimen>
-    <dimen name="dp58">58dp</dimen>
-    <dimen name="dp64">64dp</dimen>
-    <dimen name="dp325">325dp</dimen>
-    <dimen name="dp500">500dp</dimen>
-    <dimen name="dp570">570dp</dimen>
+    <dimen name="pt14">14pt</dimen>
+    <dimen name="pt15">15pt</dimen>
+    <dimen name="pt22">22pt</dimen>
+    <dimen name="pt26">26pt</dimen>
+    <dimen name="pt30">30pt</dimen>
+    <dimen name="pt54">54pt</dimen>
+    <dimen name="pt58">58pt</dimen>
+    <dimen name="pt64">64pt</dimen>
+    <dimen name="pt325">325pt</dimen>
+    <dimen name="pt500">500pt</dimen>
+    <dimen name="pt570">570pt</dimen>
 </resources>

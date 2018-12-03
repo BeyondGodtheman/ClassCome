@@ -13,15 +13,15 @@
 
         <LinearLayout
             android:id="@+id/ll_back"
-            android:layout_width="74dp"
+            android:layout_width="74pt"
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="44dp"
-                android:layout_height="44dp"
+                android:layout_width="44pt"
+                android:layout_height="44pt"
                 android:layout_gravity="center_vertical"
-                android:layout_marginStart="30dp"
+                android:layout_marginStart="30pt"
                 android:contentDescription="@string/back"
                 android:src="@drawable/draw_ic_title_back_white"/>
         </LinearLayout>
@@ -32,25 +32,25 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:layout_marginEnd="74dp"
+            android:layout_marginEnd="74pt"
             android:layout_toEndOf="@id/ll_back"
             android:gravity="center"
             android:text="@string/point"
             android:textColor="@color/color_white"
-            android:textSize="40sp"/>
+            android:textSize="40pt"/>
 
         <LinearLayout
             android:id="@+id/ll_prompt"
-            android:layout_width="74dp"
+            android:layout_width="74pt"
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="44dp"
-                android:layout_height="44dp"
+                android:layout_width="44pt"
+                android:layout_height="44pt"
                 android:layout_gravity="center_vertical"
-                android:layout_marginEnd="30dp"
+                android:layout_marginEnd="30pt"
                 android:contentDescription="@string/back"
                 android:src="@mipmap/ic_prompt"/>
         </LinearLayout>
@@ -59,25 +59,25 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="180dp"
+        android:layout_height="180pt"
         android:background="@color/color_primary">
 
         <TextView
             android:id="@+id/txt_point"
-            style="@style/style_font_white_36sp"
+            style="@style/style_font_white_36pt"
             android:layout_centerInParent="true"
             android:layout_toEndOf="@id/img_icon"
-            android:textSize="74sp"
+            android:textSize="74pt"
             android:textStyle="bold"
             tools:text="500"/>
 
         <TextView
-            style="@style/style_font_white_24sp"
+            style="@style/style_font_white_24pt"
             android:layout_alignBaseline="@id/txt_point"
-            android:layout_marginEnd="40dp"
+            android:layout_marginEnd="40pt"
             android:layout_toStartOf="@id/txt_point"
             android:text="@string/my_point"
-            android:textSize="26sp"/>
+            android:textSize="26pt"/>
 
 
     </RelativeLayout>
@@ -89,7 +89,7 @@
         android:layout_height="wrap_content"
         android:background="@color/color_white"
         android:overScrollMode="never"
-        android:paddingTop="20dp"
-        android:paddingBottom="42dp"/>
+        android:paddingTop="20pt"
+        android:paddingBottom="42pt"/>
 
 </LinearLayout>

@@ -1,6 +1,8 @@
 package com.sunny.classcome
 
 import android.app.Application
+import me.jessyan.autosize.AutoSizeConfig
+import me.jessyan.autosize.unit.Subunits
 
 @Suppress("UNCHECKED_CAST")
 class MyApplication : Application() {
@@ -15,6 +17,9 @@ class MyApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         instance = this
+        AutoSizeConfig.getInstance().unitsManager
+                .setSupportDP(false)
+                .setSupportSP(false).supportSubunits = Subunits.PT
     }
 
     fun <T> getData(key: String, isDelete: Boolean): T? {

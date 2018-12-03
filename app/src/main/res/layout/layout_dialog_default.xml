@@ -15,32 +15,32 @@
             android:id="@id/txt_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="58dp"
+            android:layout_marginTop="58pt"
             android:gravity="center_horizontal"
             android:text="@string/app_name"
-            android:textSize="30sp" />
+            android:textSize="30pt" />
 
         <TextView
             android:id="@id/tvDesc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="37dp"
-            android:layout_marginTop="25dp"
-            android:layout_marginEnd="37dp"
+            android:layout_marginStart="37pt"
+            android:layout_marginTop="25pt"
+            android:layout_marginEnd="37pt"
             android:text="@string/app"
-            android:textSize="24sp"
+            android:textSize="24pt"
             android:visibility="gone" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="71dp"
+        android:layout_height="71pt"
         android:orientation="horizontal"
-        android:layout_marginStart="36dp"
-        android:layout_marginEnd="36dp"
-        android:layout_marginTop="39dp"
-        android:layout_marginBottom="34dp">
+        android:layout_marginStart="36pt"
+        android:layout_marginEnd="36pt"
+        android:layout_marginTop="39pt"
+        android:layout_marginBottom="34pt">
 
         <TextView
             android:id="@+id/tvCancel"
@@ -51,10 +51,10 @@
             android:gravity="center"
             android:text="@string/close"
             android:textColor="@color/color_white"
-            android:textSize="32sp" />
+            android:textSize="32pt" />
 
         <View
-            android:layout_width="30dp"
+            android:layout_width="30pt"
             android:layout_height="match_parent"/>
 
         <TextView
@@ -66,6 +66,6 @@
             android:gravity="center"
             android:text="@string/sure"
             android:textColor="@color/color_white"
-            android:textSize="32sp" />
+            android:textSize="32pt" />
     </LinearLayout>
 </LinearLayout>

@@ -9,7 +9,7 @@
         android:orientation="vertical">
 
         <TextView
-            style="@style/style_font_default_32sp"
+            style="@style/style_font_default_32pt"
             android:text="@string/publish_choice"/>
     </LinearLayout>
 

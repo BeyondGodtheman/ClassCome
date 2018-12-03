@@ -15,7 +15,7 @@
     <LinearLayout
         android:id="@id/tabLayout"
         android:layout_width="match_parent"
-        android:layout_height="98dp"
+        android:layout_height="98pt"
         android:layout_alignParentBottom="true"
         android:background="@color/color_nav_bg"
         android:orientation="horizontal"
@@ -23,19 +23,19 @@
 
         <FrameLayout
             android:id="@+id/flHome"
-            android:layout_width="0dp"
+            android:layout_width="0pt"
             android:layout_height="match_parent"
             android:layout_weight="1" />
 
         <FrameLayout
             android:id="@+id/flAdd"
-            android:layout_width="0dp"
+            android:layout_width="0pt"
             android:layout_height="match_parent"
             android:layout_weight="1" />
 
         <FrameLayout
             android:id="@+id/flMine"
-            android:layout_width="0dp"
+            android:layout_width="0pt"
             android:layout_height="match_parent"
             android:layout_weight="1" />
     </LinearLayout>

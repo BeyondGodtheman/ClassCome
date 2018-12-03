@@ -2,8 +2,6 @@ package com.sunny.classcome.widget.dialog
 
 import android.app.Dialog
 import android.content.Context
-import android.content.pm.PackageManager
-import android.os.Build
 import android.support.v4.content.ContextCompat
 import android.view.View
 import android.view.Window
@@ -24,7 +22,7 @@ class MyDialog(context: Context) : Dialog(context), View.OnClickListener {
         tvCancel.setOnClickListener(this)
         tvSure.setOnClickListener(this)
         setCanceledOnTouchOutside(false)
-        window?.attributes?.width = context.resources.getDimension(R.dimen.dp570).toInt()
+        window?.attributes?.width = context.resources.getDimension(R.dimen.pt570).toInt()
         window?.setBackgroundDrawableResource(R.color.color_transparent)
     }
 
