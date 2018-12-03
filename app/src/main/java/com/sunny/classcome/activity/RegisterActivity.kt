@@ -14,6 +14,7 @@ import com.sunny.classcome.bean.BaseBean
 import com.sunny.classcome.bean.RegBean
 import com.sunny.classcome.http.ApiManager
 import com.sunny.classcome.http.Constant
+import com.sunny.classcome.utils.DigestUtils
 import com.sunny.classcome.utils.ToastUtil
 import kotlinx.android.synthetic.main.activity_register.*
 
@@ -96,7 +97,7 @@ class RegisterActivity : BaseActivity() {
         val params = HashMap<String, String>()
         params["authCode"] = edit_reg_code.text.toString()
         params["telephone"] = edit_reg_phone.text.toString()
-        params["passWord"] = edit_reg_pass.text.toString()
+        params["passWord"] = DigestUtils.md5(edit_reg_pass.text.toString())
         ApiManager.post(composites, params, Constant.USER_REGISTERUSER, object : ApiManager.OnResult<BaseBean<RegBean>>() {
             override fun onSuccess(data: BaseBean<RegBean>) {
                 hideLoading()
