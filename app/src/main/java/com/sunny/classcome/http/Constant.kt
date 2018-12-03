@@ -12,6 +12,8 @@ object Constant {
 
     const val LOCATION_NAME = "locationName"
 
+    const val LOGIN_PHONE = "loginPhone" //存储登录手机
+
     /**
      * 权限CODE
      */

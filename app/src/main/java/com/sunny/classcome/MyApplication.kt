@@ -46,4 +46,11 @@ class MyApplication : Application() {
         }
     }
 
+    /**
+     * 删除数据
+     */
+    fun removeData(key: String) {
+        storeMap.remove(key)
+    }
+
 }

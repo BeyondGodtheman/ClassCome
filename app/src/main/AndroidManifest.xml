@@ -52,7 +52,7 @@
         <service android:name="com.amap.api.location.APSService" />
 
         <!--首页-->
-        <activity android:name=".activity.HomeActivity">
+        <activity android:name=".activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -66,6 +66,11 @@
         <!--注册成功页面-->
         <activity android:name=".activity.RegSuccessActivity"
             android:launchMode="singleTop"/>
+
+        <!--&lt;!&ndash;登录页面&ndash;&gt;-->
+        <!--<activity android:name=".activity.LoginActivity"-->
+            <!--android:launchMode="singleTop"/>-->
+
         <!--我的消息-->
         <activity
             android:name=".activity.MyMsgActivity"

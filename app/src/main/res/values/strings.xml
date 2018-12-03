@@ -20,6 +20,7 @@
     <string name="nav_publish">发布</string>
 
     <!--注册-->
+    <string name="reg">注册</string>
     <string name="reg_title">欢迎注册</string>
     <string name="phone">手机号</string>
     <string name="reg_hint_phone">请输入手机号</string>
@@ -33,6 +34,16 @@
     <string name="reg_success">注册成功</string>
     <string name="reg_success_desc">您已注册成功，可以发布/搜寻内容啦</string>
     <string name="stroll_around">先逛逛</string>
+
+    <!--登录-->
+    <string name="login_pass_title">密码登录</string>
+    <string name="login_pass_hint">请输入密码，至少6位</string>
+    <string name="forget_pass">忘记密码？</string>
+    <string name="login">登录</string>
+    <string name="fast_login">快捷登录</string>
+    <string name="other_login">其他方式登录</string>
+    <string name="bind_phone_desc">为了您的账户安全，请绑定手机后再进行操作</string>
+
     <!--首页-->
 
     <string name="defaultLocation">上海市</string>
