@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_white"
+    android:orientation="vertical">
+
+    <TextView
+        style="@style/style_font"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="196pt"
+        android:textStyle="bold"
+        android:text="@string/reg_success_desc"
+        android:textSize="36pt" />
+
+    <Button
+        android:id="@+id/btn_reg_publish"
+        style="@style/style_button"
+        android:layout_marginTop="238pt"
+        android:text="@string/go_publish" />
+
+    <Button
+        android:id="@+id/btn_reg_finish"
+        style="@style/style_button_two"
+        android:layout_marginTop="40pt"
+        android:text="@string/stroll_around" />
+</LinearLayout>

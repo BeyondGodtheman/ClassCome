@@ -5,5 +5,5 @@
     <!-- 填充的颜色 -->
     <solid android:color="@color/color_white" />
     <!-- 设置矩形的四个角为弧形 -->
-    <corners android:radius="12dp" />
+    <corners android:radius="12pt" />
 </shape>

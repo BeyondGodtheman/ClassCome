@@ -25,5 +25,7 @@ object Constant {
 
 
     const val USER_REGISTERUSER = "user/registerUser"
+
+    const val USER_SENDCODEMSG ="user/sendCodeMsg"
 }
 

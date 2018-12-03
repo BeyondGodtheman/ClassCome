@@ -30,6 +30,9 @@
     <string name="get_code">获取验证码</string>
     <string name="complete">完成</string>
     <string name="reg_protocol">点击完成代表您已同意《用户使用协议》</string>
+    <string name="reg_success">注册成功</string>
+    <string name="reg_success_desc">您已注册成功，可以发布/搜寻内容啦</string>
+    <string name="stroll_around">先逛逛</string>
     <!--首页-->
 
     <string name="defaultLocation">上海市</string>
@@ -40,6 +43,7 @@
     <string name="close">关闭</string>
     <string name="sure">确定</string>
 
+    <string name="go_publish">去发布</string>
     <string name="publish">发布</string>
     <string name="train">培训</string>
     <string name="train_info">让学习更简单</string>
