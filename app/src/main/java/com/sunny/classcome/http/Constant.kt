@@ -33,5 +33,9 @@ object Constant {
     const val USER_SENDCODEOFSHORTCUT = "user/sendCodeOfShortcut" //快捷登录或找回密码发送验证码
 
     const val USER_RSETPASSWORD = "user/rsetPassword" //忘记密码修改
+
+    const val USER_LOGINUSER = "user/loginUser" //用户登录
+
+    const val USER_LOGINUSERBYTELEPHONECODE = "user/loginUserByTelePhoneCode" //快捷登录
 }
 

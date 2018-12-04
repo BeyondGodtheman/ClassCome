@@ -8,7 +8,11 @@ import com.sunny.classcome.MyApplication
 import com.sunny.classcome.R
 import com.sunny.classcome.activity.ForgetPassActivity
 import com.sunny.classcome.base.BaseFragment
+import com.sunny.classcome.bean.BaseBean
+import com.sunny.classcome.http.ApiManager
 import com.sunny.classcome.http.Constant
+import com.sunny.classcome.utils.DigestUtils
+import com.sunny.classcome.utils.ToastUtil
 import kotlinx.android.synthetic.main.fragment_pass_login.*
 
 /**
@@ -26,7 +30,6 @@ class PassLoginFragment: BaseFragment() {
     override fun initView() {
         txt_pass_login.setOnClickListener(this)
         txt_forget_pass.setOnClickListener(this)
-
         edit_login_phone.addTextChangedListener(object :TextWatcher{
             override fun afterTextChanged(s: Editable?) {
 
@@ -40,6 +43,7 @@ class PassLoginFragment: BaseFragment() {
                 MyApplication.getApp().setData(Constant.LOGIN_PHONE,edit_login_phone.text.toString())
             }
         })
+        btn_login.setOnClickListener(this)
 
     }
 
@@ -56,6 +60,38 @@ class PassLoginFragment: BaseFragment() {
             txt_pass_login.id -> {
                 onChangeLogin?.invoke()
             }
+            btn_login.id -> {
+                login()
+            }
         }
+    }
+
+
+    fun login(){
+        if (edit_login_phone.text.isEmpty()) {
+            ToastUtil.show("请输入手机号")
+            return
+        }
+
+        if (edit_login_pass.text.isEmpty()) {
+            ToastUtil.show("请输入密码")
+            return
+        }
+
+        getBaseActivity().showLoading()
+        val params = HashMap<String, String>()
+        params["telephone"] = edit_login_phone.text.toString()
+        params["passWord"] = DigestUtils.md5(edit_login_pass.text.toString())
+        ApiManager.post(getBaseActivity().composites, params, Constant.USER_LOGINUSER, object : ApiManager.OnResult<BaseBean<String>>() {
+            override fun onSuccess(data: BaseBean<String>) {
+                getBaseActivity().hideLoading()
+                ToastUtil.show(data.content?.info)
+            }
+
+            override fun onFailed(code: String, message: String) {
+                getBaseActivity().hideLoading()
+            }
+        })
+
     }
 }
