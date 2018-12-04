@@ -77,31 +77,21 @@
 
     <TextView
         android:id="@+id/txt_finish"
-        android:layout_width="164pt"
-        android:layout_height="58pt"
+        style="@style/style_small_btn_border_gray"
         android:layout_below="@id/line3"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="20pt"
         android:layout_marginEnd="50pt"
         android:layout_marginBottom="20pt"
-        android:background="@drawable/draw_bg_fillet_gray_border"
-        android:gravity="center"
-        android:textColor="@color/color_nav_gray"
-        android:textSize="28pt"
         tools:text="已核销"/>
 
 
     <TextView
         android:id="@+id/txt_evaluate"
-        android:layout_width="164pt"
-        android:layout_height="58pt"
+        style="@style/style_small_btn_border_blue"
         android:layout_alignTop="@id/txt_finish"
         android:layout_marginEnd="16pt"
         android:layout_toStartOf="@id/txt_finish"
-        android:background="@drawable/draw_bg_fillet_blue_border"
-        android:gravity="center"
-        android:text="@string/evaluate"
-        android:textColor="@color/color_nav_blue"
-        android:textSize="28pt"/>
+        android:text="@string/evaluate"/>
 
 </RelativeLayout>

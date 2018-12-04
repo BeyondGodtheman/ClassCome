@@ -52,7 +52,7 @@
         <service android:name="com.amap.api.location.APSService" />
 
         <!--首页-->
-        <activity android:name=".activity.LoginActivity">
+        <activity android:name=".activity.OrderDetailActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -63,6 +63,7 @@
         <activity
             android:name=".activity.RegisterActivity"
             android:launchMode="singleTop" />
+
         <!--注册成功页面-->
         <activity
             android:name=".activity.RegSuccessActivity"
@@ -88,6 +89,8 @@
             android:hardwareAccelerated="false" />
 
         <activity android:name=".activity.PublishTrainActivity" />
+        <!--<activity android:name=".activity.OrderDetailActivity" />-->
+        <activity android:name=".activity.CancelPromptActivity" />
 
         <!--位置页面-->
         <activity

@@ -18,12 +18,26 @@
         <item name="android:textColor">@color/color_nav_blue</item>
     </style>
 
-    <!--白底灰字灰框-->
-    <style name="style_btn_border_gray" parent="style_button">
+
+    <!--小按钮 - 白底蓝字蓝框-->
+    <style name="style_small_btn_border_blue">
+        <item name="android:layout_width">164pt</item>
+        <item name="android:layout_height">58pt</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">28pt</item>
+        <item name="android:textColor">@color/color_nav_blue</item>
         <item name="android:background">@drawable/draw_bg_fillet_blue_border</item>
-        <item name="android:textColor">@color/color_nav_gray</item>
     </style>
 
+    <!--小按钮 - 白底灰字灰框-->
+    <style name="style_small_btn_border_gray">
+        <item name="android:layout_width">164pt</item>
+        <item name="android:layout_height">58pt</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">28pt</item>
+        <item name="android:textColor">@color/color_nav_gray</item>
+        <item name="android:background">@drawable/draw_bg_fillet_gray_border</item>
+    </style>
 
     <!--字体样式-->
     <style name="style_font">
@@ -34,6 +48,16 @@
 
     <style name="style_font_white_24pt" parent="style_font">
         <item name="android:textSize">24pt</item>
+        <item name="android:textColor">@color/color_white</item>
+    </style>
+
+    <style name="style_font_white_26pt" parent="style_font">
+        <item name="android:textSize">26pt</item>
+        <item name="android:textColor">@color/color_white</item>
+    </style>
+
+    <style name="style_font_white_30pt" parent="style_font">
+        <item name="android:textSize">30pt</item>
         <item name="android:textColor">@color/color_white</item>
     </style>
 
