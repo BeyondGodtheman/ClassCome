@@ -127,14 +127,8 @@
 
     <RelativeLayout
         android:id="@+id/rl_money"
-        android:layout_width="match_parent"
-        android:layout_height="90pt"
+        style="@style/style_item_layout_txt_txt_img"
         android:layout_marginTop="10pt"
-        android:background="@color/color_white"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:paddingStart="40pt"
-        android:paddingEnd="40pt"
         android:visibility="gone">
 
         <TextView
@@ -151,14 +145,8 @@
 
     <RelativeLayout
         android:id="@+id/rl_contact"
-        android:layout_width="match_parent"
-        android:layout_height="90pt"
+        style="@style/style_item_layout_txt_txt_img"
         android:layout_marginTop="10pt"
-        android:background="@color/color_white"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:paddingStart="40pt"
-        android:paddingEnd="40pt"
         android:visibility="gone">
 
         <TextView
@@ -176,14 +164,8 @@
 
     <RelativeLayout
         android:id="@+id/rl_info"
-        android:layout_width="match_parent"
-        android:layout_height="90pt"
+        style="@style/style_item_layout_txt_txt_img"
         android:layout_marginTop="10pt"
-        android:background="@color/color_white"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:paddingStart="40pt"
-        android:paddingEnd="40pt"
         android:visibility="gone">
 
         <TextView

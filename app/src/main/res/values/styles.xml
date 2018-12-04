@@ -1,5 +1,16 @@
 <resources>
 
+    <!--子条目布局样式 -文字-文字-更多图标-->
+    <style name="style_item_layout_txt_txt_img">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">90pt</item>
+        <item name="android:background">@color/color_white</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingStart">40pt</item>
+        <item name="android:paddingEnd">40pt</item>
+    </style>
+
+
     <!--公用按钮样式-蓝底白字-->
     <style name="style_button">
         <item name="android:layout_width">match_parent</item>

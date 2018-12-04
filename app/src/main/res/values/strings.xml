@@ -143,6 +143,14 @@
     <string name="ordinary_member">普通会员</string>
 
 
+    <!--完善信息-->
+    <string name="head">头像</string>
+    <string name="name">姓名</string>
+    <string name="sex">性别</string>
+    <string name="city">所在城市</string>
+    <string name="bind_phone">绑定手机</string>
+    <string name="identity_verification">身份验证</string>
+
     <!--我的发布-->
 
     <string name="list_train">培训列表</string>

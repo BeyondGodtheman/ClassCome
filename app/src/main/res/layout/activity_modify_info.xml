@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rl_head"
+        android:layout_width="match_parent"
+        android:layout_height="120pt"
+        android:background="@color/color_white"
+        android:paddingStart="40pt"
+        android:paddingEnd="40pt">
+
+        <TextView
+            style="@style/style_font_default_28pt"
+            android:layout_centerVertical="true"
+            android:text="@string/head"/>
+
+        <ImageView
+            android:id="@+id/img_head"
+            android:layout_width="80pt"
+            android:layout_height="80pt"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="10pt"
+            android:layout_toStartOf="@id/img_more"
+            android:contentDescription="@string/head"
+            android:src="@mipmap/ic_default_head"/>
+
+        <ImageView
+            android:id="@+id/img_more"
+            android:layout_width="21pt"
+            android:layout_height="35pt"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:contentDescription="@string/app"
+            android:src="@mipmap/ic_more"/>
+    </RelativeLayout>
+
+    <View style="@style/style_view_line"/>
+
+    <RelativeLayout
+        android:id="@+id/rl_name"
+        style="@style/style_item_layout_txt_txt_img">
+
+        <TextView
+            style="@style/style_font_default_28pt"
+            android:text="@string/name"/>
+
+        <TextView
+            android:id="@+id/txt_name"
+            style="@style/style_font_default_28pt"
+            android:layout_marginEnd="10pt"
+            android:layout_toStartOf="@id/img_more2"
+            tools:text="左郁"/>
+
+        <ImageView
+            android:id="@+id/img_more2"
+            android:layout_width="21pt"
+            android:layout_height="35pt"
+            android:layout_alignParentEnd="true"
+            android:contentDescription="@string/app"
+            android:src="@mipmap/ic_more"/>
+    </RelativeLayout>
+
+    <View style="@style/style_view_line"/>
+
+    <RelativeLayout
+        android:id="@+id/rl_sex"
+        style="@style/style_item_layout_txt_txt_img">
+
+        <TextView
+            style="@style/style_font_default_28pt"
+            android:text="@string/sex"/>
+
+        <TextView
+            android:id="@+id/txt_sex"
+            style="@style/style_font_default_28pt"
+            android:layout_marginEnd="10pt"
+            android:layout_toStartOf="@id/img_more3"
+            tools:text="男"/>
+
+        <ImageView
+            android:id="@+id/img_more3"
+            android:layout_width="21pt"
+            android:layout_height="35pt"
+            android:layout_alignParentEnd="true"
+            android:contentDescription="@string/app"
+            android:src="@mipmap/ic_more"/>
+    </RelativeLayout>
+
+
+    <View style="@style/style_view_line"/>
+
+    <RelativeLayout
+        android:id="@+id/rl_city"
+        style="@style/style_item_layout_txt_txt_img">
+
+        <TextView
+            style="@style/style_font_default_28pt"
+            android:text="@string/city"/>
+
+        <TextView
+            android:id="@+id/txt_city"
+            style="@style/style_font_default_28pt"
+            android:layout_marginEnd="10pt"
+            android:layout_toStartOf="@id/img_more4"
+            tools:text="上海"/>
+
+        <ImageView
+            android:id="@+id/img_more4"
+            android:layout_width="21pt"
+            android:layout_height="35pt"
+            android:layout_alignParentEnd="true"
+            android:contentDescription="@string/app"
+            android:src="@mipmap/ic_more"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_phone"
+        style="@style/style_item_layout_txt_txt_img"
+        android:layout_marginTop="16pt">
+
+        <TextView
+            style="@style/style_font_default_28pt"
+            android:text="@string/bind_phone"/>
+
+        <TextView
+            android:id="@+id/txt_phone"
+            style="@style/style_font_default_28pt"
+            android:layout_marginEnd="10pt"
+            android:layout_toStartOf="@id/img_more5"
+            tools:text="13126597878"/>
+
+        <ImageView
+            android:id="@+id/img_more5"
+            android:layout_width="21pt"
+            android:layout_height="35pt"
+            android:layout_alignParentEnd="true"
+            android:contentDescription="@string/app"
+            android:src="@mipmap/ic_more"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_identity"
+        style="@style/style_item_layout_txt_txt_img"
+        android:layout_marginTop="16pt">
+
+        <TextView
+            style="@style/style_font_default_28pt"
+            android:text="@string/identity_verification"/>
+
+        <TextView
+            android:id="@+id/txt_identity"
+            style="@style/style_font_default_28pt"
+            android:layout_marginEnd="10pt"
+            android:layout_toStartOf="@id/img_more6"
+            tools:text="未验证"/>
+
+        <ImageView
+            android:id="@+id/img_more6"
+            android:layout_width="21pt"
+            android:layout_height="35pt"
+            android:layout_alignParentEnd="true"
+            android:contentDescription="@string/app"
+            android:src="@mipmap/ic_more"/>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/img_commit"
+        style="@style/style_button"
+        android:layout_marginTop="124pt"
+        android:text="@string/commit"/>
+
+
+</LinearLayout>
