@@ -9,6 +9,7 @@ import com.sunny.classcome.R
 import com.sunny.classcome.bean.BaseBean
 import com.sunny.classcome.utils.LogUtil
 import com.sunny.classcome.utils.ToastUtil
+import com.sunny.classcome.utils.UserManger
 import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -55,7 +56,7 @@ object ApiManager {
         retrofit.create(ApiService::class.java)
     }
 
-    private val gSon = Gson()
+    val gSon = Gson()
 
     const val STRING = 0X1
     const val OTHER = 0x2
@@ -133,15 +134,19 @@ object ApiManager {
     /**
      *  Post请求
      */
-    fun <T> post(composites: CompositeDisposable?, params: Map<String, String>, url: String, onResult: OnResult<T>) {
+    fun <T> post(composites: CompositeDisposable?, params: Map<String, String>?, url: String, onResult: OnResult<T>) {
         val jsonObj = JSONObject()
-        params.forEach {
+        params?.forEach {
             jsonObj.put(it.key,it.value)
         }
         jsonObj.put("deviceId", Build.SERIAL)
         jsonObj.put("os_version",Build.VERSION.RELEASE)
         jsonObj.put("platform","Android")
         jsonObj.put("version", BuildConfig.VERSION_NAME)
+        UserManger.getLogin()?.let {
+            jsonObj.put("token",it.content.token)
+        }
+
         postJson(composites,jsonObj.toString(),url,onResult)
     }
 

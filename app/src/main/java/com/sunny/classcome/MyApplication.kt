@@ -1,11 +1,18 @@
 package com.sunny.classcome
 
 import android.app.Application
+import com.sunny.classcome.http.Constant
+import com.tencent.mm.opensdk.openapi.IWXAPI
+import com.tencent.mm.opensdk.openapi.WXAPIFactory
 import me.jessyan.autosize.AutoSizeConfig
 import me.jessyan.autosize.unit.Subunits
 
 @Suppress("UNCHECKED_CAST")
 class MyApplication : Application() {
+
+    val wxApi: IWXAPI by lazy {
+        WXAPIFactory.createWXAPI(this, Constant.WX_APP_ID, true)
+    }
 
     companion object {
         private lateinit var instance: MyApplication
@@ -14,13 +21,19 @@ class MyApplication : Application() {
 
     private val storeMap = HashMap<String, Any>() //内存数据存储
 
+
     override fun onCreate() {
         super.onCreate()
         instance = this
+
+        wxApi.registerApp(Constant.WX_APP_ID)
+
         AutoSizeConfig.getInstance().unitsManager
                 .setSupportDP(false)
                 .setSupportSP(false).supportSubunits = Subunits.PT
     }
+
+
 
     fun <T> getData(key: String, isDelete: Boolean): T? {
 

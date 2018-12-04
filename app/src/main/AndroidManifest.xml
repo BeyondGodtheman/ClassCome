@@ -51,6 +51,13 @@
         <!--高德定位服务-->
         <service android:name="com.amap.api.location.APSService" />
 
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
+            android:exported="true"
+            android:launchMode="singleTop">
+        </activity>
+
         <!--首页-->
         <activity android:name=".activity.OrderDetailActivity">
             <intent-filter>
@@ -69,9 +76,9 @@
             android:name=".activity.RegSuccessActivity"
             android:launchMode="singleTop" />
 
-        <!--&lt;!&ndash;登录页面&ndash;&gt;-->
-        <!--<activity android:name=".activity.LoginActivity"-->
-        <!--android:launchMode="singleTop"/>-->
+        <!--登录页面-->
+        <activity android:name=".activity.LoginActivity"
+        android:launchMode="singleTask"/>
 
         <!--我的消息-->
         <activity
@@ -101,5 +108,8 @@
         <activity
             android:name=".activity.ForgetPassActivity"
             android:launchMode="singleTop" />
+
+        <activity android:name=".activity.BindPhoneActivity"
+            android:launchMode="singleTop"/>
     </application>
 </manifest>

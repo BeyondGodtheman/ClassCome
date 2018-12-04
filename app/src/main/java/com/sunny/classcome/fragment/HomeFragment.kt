@@ -5,10 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import com.sunny.classcome.R
 import com.sunny.classcome.activity.LocationActivity
+import com.sunny.classcome.activity.LoginActivity
 import com.sunny.classcome.activity.MyMsgActivity
 import com.sunny.classcome.base.BaseFragment
 import com.sunny.classcome.bean.BannerBean
 import com.sunny.classcome.utils.LocationUtil
+import com.sunny.classcome.utils.UserManger
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.layout_home_recommend_text.view.*
 import kotlinx.android.synthetic.main.layout_home_title.view.*
@@ -54,7 +56,13 @@ class HomeFragment : BaseFragment() {
         when (v.id) {
 
             R.id.rlLocation -> startActivity(Intent(context, LocationActivity::class.java))
-            R.id.ivMessage -> startActivity(Intent(context, MyMsgActivity::class.java))
+            R.id.ivMessage -> {
+                if (UserManger.isLogin()) {
+                    startActivity(Intent(context, MyMsgActivity::class.java))
+                } else {
+                    startActivity(Intent(context, LoginActivity::class.java))
+                }
+            }
 
         }
 

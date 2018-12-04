@@ -21,14 +21,14 @@
             android:layout_height="250pt"
             android:background="@color/color_primary">
 
-            <ImageView
+            <com.makeramen.roundedimageview.RoundedImageView
                 android:id="@+id/img_user_head"
                 android:layout_width="144pt"
                 android:layout_height="144pt"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="56pt"
                 android:layout_marginTop="42pt"
-                android:contentDescription="@string/app"
+                app:riv_oval="true"
                 android:src="@mipmap/ic_default_head"/>
 
             <TextView
@@ -94,10 +94,11 @@
                     android:id="@+id/img_icon2"
                     android:layout_width="36pt"
                     android:layout_height="36pt"
-                    android:layout_centerVertical="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="0dp"
                     android:contentDescription="@string/app"
                     android:scaleType="centerCrop"
-                    android:src="@mipmap/ic_mine_member"/>
+                    android:src="@mipmap/ic_mine_member" />
 
                 <TextView
                     android:id="@+id/txt_member"

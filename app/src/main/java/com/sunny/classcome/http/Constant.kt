@@ -6,13 +6,14 @@ object Constant {
 
     var isLog = true //是否打印LOG
 
-    const val CLIENT = "android"
+    const val WX_APP_ID = "wx91082899601368ba"
+    const val WX_APP_SECRET = "50b644b0398c1940bb831182f91606f1"
 
     const val COMMON_UPLOADS = ""
 
     const val LOCATION_NAME = "locationName"
 
-    const val LOGIN_PHONE = "loginPhone" //存储登录手机
+    const val LOGIN_PHONE = "loginPhone" //手机帐号
 
     /**
      * 权限CODE
@@ -28,7 +29,7 @@ object Constant {
 
     const val USER_REGISTERUSER = "user/registerUser" //用户注册
 
-    const val USER_SENDCODEMSG ="user/sendCodeMsg" //注册获取验证码
+    const val USER_SENDCODEMSG = "user/sendCodeMsg" //注册获取验证码
 
     const val USER_SENDCODEOFSHORTCUT = "user/sendCodeOfShortcut" //快捷登录或找回密码发送验证码
 
@@ -37,5 +38,13 @@ object Constant {
     const val USER_LOGINUSER = "user/loginUser" //用户登录
 
     const val USER_LOGINUSERBYTELEPHONECODE = "user/loginUserByTelePhoneCode" //快捷登录
+
+    const val VCHARLOGIN_LOGINOFVCHAR = "vcharLogin/loginOfVchar" //微信登录
+
+    const val USER_SENDCODEMSGPUB = "user/sendCodeMsgPub" //发送短信验证码（需要TOKEN）
+
+    const val USER_VCHARBINDPHONE = "user/vcharBindPhone" //微信绑定手机
+
+    const val USER_MYPAGE = "user/myPage" //我的
 }
 

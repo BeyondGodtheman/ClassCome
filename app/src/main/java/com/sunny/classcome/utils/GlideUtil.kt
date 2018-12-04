@@ -20,4 +20,9 @@ object GlideUtil {
     fun loadBanner(context: Context, imageView: ImageView, url: String) {
         load(context, url).placeholder(ColorDrawable(ContextCompat.getColor(context, R.color.color_nav_gray))).into(imageView)
     }
+
+    //加载头像
+    fun loadHead(context: Context, imageView: ImageView, url: String) {
+        load(context, url).placeholder(R.mipmap.ic_default_head).centerCrop().into(imageView)
+    }
 }

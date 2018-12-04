@@ -9,10 +9,12 @@ import com.sunny.classcome.R
 import com.sunny.classcome.activity.ForgetPassActivity
 import com.sunny.classcome.base.BaseFragment
 import com.sunny.classcome.bean.BaseBean
+import com.sunny.classcome.bean.LoginBean
 import com.sunny.classcome.http.ApiManager
 import com.sunny.classcome.http.Constant
 import com.sunny.classcome.utils.DigestUtils
 import com.sunny.classcome.utils.ToastUtil
+import com.sunny.classcome.utils.UserManger
 import kotlinx.android.synthetic.main.fragment_pass_login.*
 
 /**
@@ -82,10 +84,15 @@ class PassLoginFragment: BaseFragment() {
         val params = HashMap<String, String>()
         params["telephone"] = edit_login_phone.text.toString()
         params["passWord"] = DigestUtils.md5(edit_login_pass.text.toString())
-        ApiManager.post(getBaseActivity().composites, params, Constant.USER_LOGINUSER, object : ApiManager.OnResult<BaseBean<String>>() {
-            override fun onSuccess(data: BaseBean<String>) {
+        ApiManager.post(getBaseActivity().composites, params, Constant.USER_LOGINUSER, object : ApiManager.OnResult<LoginBean>() {
+            override fun onSuccess(data: LoginBean) {
                 getBaseActivity().hideLoading()
-                ToastUtil.show(data.content?.info)
+                if (data.content.statu != "0"){
+                    UserManger.setLogin(data)
+                    getBaseActivity().finish()
+                }else{
+                    ToastUtil.show(data.content.info)
+                }
             }
 
             override fun onFailed(code: String, message: String) {

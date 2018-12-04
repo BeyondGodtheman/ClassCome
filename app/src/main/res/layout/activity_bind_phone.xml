@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/color_white">
 
     <TextView
         style="@style/style_font_default_32pt"
@@ -24,7 +25,7 @@
             android:textSize="34pt" />
 
         <EditText
-            android:id="@+id/edit_login_phone"
+            android:id="@+id/edit_bind_phone"
             style="@style/EditDefaultStyle"
             android:layout_width="match_parent"
             android:layout_alignParentBottom="true"
@@ -57,7 +58,7 @@
             android:textSize="34pt" />
 
         <EditText
-            android:id="@+id/edit_login_code"
+            android:id="@+id/edit_bind_code"
             style="@style/EditDefaultStyle"
             android:layout_width="match_parent"
             android:layout_alignParentBottom="true"
@@ -71,7 +72,7 @@
             tools:ignore="Autofill" />
 
         <com.sunny.classcome.widget.button.TimerButton
-            android:id="@+id/txt_login_code"
+            android:id="@+id/txt_bind_code"
             android:layout_width="164pt"
             android:layout_height="60pt"
             android:layout_alignParentEnd="true"

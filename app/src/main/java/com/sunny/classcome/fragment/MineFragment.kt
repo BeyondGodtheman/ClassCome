@@ -4,7 +4,13 @@ import android.view.View
 import com.sunny.classcome.R
 import com.sunny.classcome.activity.*
 import com.sunny.classcome.base.BaseFragment
+import com.sunny.classcome.bean.BaseBean
+import com.sunny.classcome.bean.MineBean
+import com.sunny.classcome.http.ApiManager
+import com.sunny.classcome.http.Constant
+import com.sunny.classcome.utils.GlideUtil
 import com.sunny.classcome.utils.IntentUtil
+import com.sunny.classcome.utils.UserManger
 import kotlinx.android.synthetic.main.fragment_mine.*
 
 
@@ -21,11 +27,6 @@ class MineFragment : BaseFragment() {
     override fun initView() {
 
         img_user_head.setImageResource(R.mipmap.ic_default_head)
-        txt_user_name.text = "课多多"
-        txt_user_address.text = "上海"
-
-        txt_points.text = "2000积分"
-        txt_member.text = "黄金会员"
 
         rl_points.setOnClickListener(this)
         rl_member.setOnClickListener(this)
@@ -74,4 +75,29 @@ class MineFragment : BaseFragment() {
     private fun intent(clazz: Class<*>) {
         IntentUtil.start(requireActivity(), clazz)
     }
+
+    override fun loadData() {
+
+        ApiManager.post(getBaseActivity().composites,null, Constant.USER_MYPAGE, object : ApiManager.OnResult<BaseBean<MineBean>>() {
+            override fun onSuccess(data: BaseBean<MineBean>) {
+
+                data.content?.let {
+                    if (it.statu == "1"){
+                        GlideUtil.loadHead(requireContext(),img_user_head,it.data?.userPic?:"")
+                        txt_user_name.text = it.data?.userName
+                        txt_user_address.text = it.data?.address
+                        txt_points.text = it.data?.source
+                        txt_member.text = it.data?.gradeName
+                    }
+                }
+
+
+            }
+
+            override fun onFailed(code: String, message: String) {
+
+            }
+        })
+    }
+
 }
