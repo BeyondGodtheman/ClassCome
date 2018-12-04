@@ -8,12 +8,16 @@ package com.sunny.classcome.bean
 class BaseBean<T> {
     var msg = ""
     var code = "200"
-    var content: T? = null
+    var content: Content<T>? = null
     var type = javaClass
 
     override fun toString(): String {
         return "BaseBean(msg='$msg', code='$code', content=$content, type=$type)"
     }
 
-
+    class Content<T> {
+        var statu = ""
+        var info = ""
+        var data: T? = null
+    }
 }

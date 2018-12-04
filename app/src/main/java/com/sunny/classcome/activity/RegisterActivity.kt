@@ -11,7 +11,6 @@ import android.view.View
 import com.sunny.classcome.R
 import com.sunny.classcome.base.BaseActivity
 import com.sunny.classcome.bean.BaseBean
-import com.sunny.classcome.bean.RegBean
 import com.sunny.classcome.http.ApiManager
 import com.sunny.classcome.http.Constant
 import com.sunny.classcome.utils.DigestUtils
@@ -74,8 +73,8 @@ class RegisterActivity : BaseActivity() {
         showLoading()
         val params = HashMap<String, String>()
         params["telephone"] = edit_reg_phone.text.toString()
-        ApiManager.post(composites, params, Constant.USER_SENDCODEMSG, object : ApiManager.OnResult<BaseBean<RegBean>>() {
-            override fun onSuccess(data: BaseBean<RegBean>) {
+        ApiManager.post(composites, params, Constant.USER_SENDCODEMSG, object : ApiManager.OnResult<BaseBean<String>>() {
+            override fun onSuccess(data: BaseBean<String>) {
                 hideLoading()
                 if (data.content?.statu == "1") {
                     txt_reg_code.action()
@@ -98,8 +97,8 @@ class RegisterActivity : BaseActivity() {
         params["authCode"] = edit_reg_code.text.toString()
         params["telephone"] = edit_reg_phone.text.toString()
         params["passWord"] = DigestUtils.md5(edit_reg_pass.text.toString())
-        ApiManager.post(composites, params, Constant.USER_REGISTERUSER, object : ApiManager.OnResult<BaseBean<RegBean>>() {
-            override fun onSuccess(data: BaseBean<RegBean>) {
+        ApiManager.post(composites, params, Constant.USER_REGISTERUSER, object : ApiManager.OnResult<BaseBean<String>>() {
+            override fun onSuccess(data: BaseBean<String>) {
                 hideLoading()
                 ToastUtil.show(data.content?.info)
                 if (data.content?.statu == "1") {

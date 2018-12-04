@@ -26,8 +26,12 @@ object Constant {
     const val PHONE = 7 //电话
 
 
-    const val USER_REGISTERUSER = "user/registerUser"
+    const val USER_REGISTERUSER = "user/registerUser" //用户注册
 
-    const val USER_SENDCODEMSG ="user/sendCodeMsg"
+    const val USER_SENDCODEMSG ="user/sendCodeMsg" //注册获取验证码
+
+    const val USER_SENDCODEOFSHORTCUT = "user/sendCodeOfShortcut" //快捷登录或找回密码发送验证码
+
+    const val USER_RSETPASSWORD = "user/rsetPassword" //忘记密码修改
 }
 

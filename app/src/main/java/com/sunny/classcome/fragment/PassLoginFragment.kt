@@ -1,10 +1,12 @@
 package com.sunny.classcome.fragment
 
+import android.content.Intent
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import com.sunny.classcome.MyApplication
 import com.sunny.classcome.R
+import com.sunny.classcome.activity.ForgetPassActivity
 import com.sunny.classcome.base.BaseFragment
 import com.sunny.classcome.http.Constant
 import kotlinx.android.synthetic.main.fragment_pass_login.*
@@ -49,6 +51,7 @@ class PassLoginFragment: BaseFragment() {
     override fun onClick(v: View) {
         when(v.id){
             txt_forget_pass.id -> {
+                startActivity(Intent(context,ForgetPassActivity::class.java))
             }
             txt_pass_login.id -> {
                 onChangeLogin?.invoke()

@@ -61,7 +61,9 @@ abstract class BaseActivity : AppCompatActivity(), IBaseView, View.OnClickListen
 
     open fun update() {}
 
-    open fun close() {}
+    open fun close() {
+        composites.dispose()
+    }
 
 
     override fun onTouchEvent(event: MotionEvent): Boolean {

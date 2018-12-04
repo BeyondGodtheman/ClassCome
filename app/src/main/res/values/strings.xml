@@ -43,7 +43,11 @@
     <string name="fast_login">快捷登录</string>
     <string name="other_login">其他方式登录</string>
     <string name="bind_phone_desc">为了您的账户安全，请绑定手机后再进行操作</string>
-
+    <string name="find_pass">找回密码</string>
+    <string name="reg_phone">注册手机号</string>
+    <string name="new_pass">新密码</string>
+    <string name="sure_pass">确认密码</string>
+    <string name="sure_pass_desc">请再次输入密码</string>
     <!--首页-->
 
     <string name="defaultLocation">上海市</string>
