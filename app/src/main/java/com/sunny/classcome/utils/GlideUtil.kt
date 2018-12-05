@@ -18,7 +18,7 @@ object GlideUtil {
 
     //加载banner
     fun loadBanner(context: Context, imageView: ImageView, url: String) {
-        load(context, url).placeholder(ColorDrawable(ContextCompat.getColor(context, R.color.color_nav_gray))).into(imageView)
+        load(context, url).placeholder(ColorDrawable(ContextCompat.getColor(context, R.color.color_nav_gray))).centerCrop().into(imageView)
     }
 
     //加载头像

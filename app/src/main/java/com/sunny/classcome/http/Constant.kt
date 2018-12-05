@@ -45,6 +45,8 @@ object Constant {
 
     const val USER_VCHARBINDPHONE = "user/vcharBindPhone" //微信绑定手机
 
+    const val COURSE_GETIMAGEOFPAGE = "course/getImageOfPage" //首页轮播图
+
     const val USER_MYPAGE = "user/myPage" //我的
 }
 

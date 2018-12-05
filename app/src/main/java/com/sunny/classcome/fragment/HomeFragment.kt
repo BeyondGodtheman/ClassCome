@@ -9,6 +9,9 @@ import com.sunny.classcome.activity.LoginActivity
 import com.sunny.classcome.activity.MyMsgActivity
 import com.sunny.classcome.base.BaseFragment
 import com.sunny.classcome.bean.BannerBean
+import com.sunny.classcome.bean.BaseBean
+import com.sunny.classcome.http.ApiManager
+import com.sunny.classcome.http.Constant
 import com.sunny.classcome.utils.LocationUtil
 import com.sunny.classcome.utils.UserManger
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -16,14 +19,6 @@ import kotlinx.android.synthetic.main.layout_home_recommend_text.view.*
 import kotlinx.android.synthetic.main.layout_home_title.view.*
 
 class HomeFragment : BaseFragment() {
-
-    private val bannerList = arrayListOf(
-            BannerBean("测试1", "http://img0.imgtn.bdimg.com/it/u=2626971423,1863586993&fm=26&gp=0.jpg"),
-            BannerBean("测试2", "http://bpic.588ku.com/back_pic/04/23/93/095835574167a48.jpg"),
-            BannerBean("测试3", "http://bpic.588ku.com/back_pic/05/33/76/075a27679aa8595.jpg"),
-            BannerBean("测试4", "http://bpic.588ku.com/back_pic/05/15/42/7659ad0545326ad.jpg")
-    )
-
 
     private val classListFragment: ClassListFragment by lazy {
         ClassListFragment()
@@ -47,7 +42,8 @@ class HomeFragment : BaseFragment() {
 
         titleView.rlLocation.setOnClickListener(this)
         titleView.ivMessage.setOnClickListener(this)
-        rl_banner.loadData(bannerList)
+
+        loadBanner()
         initRecommend()
         childFragmentManager.beginTransaction().add(R.id.flContent, classListFragment).commit()
     }
@@ -87,4 +83,16 @@ class HomeFragment : BaseFragment() {
         vf_home_commend.startFlipping()
     }
 
+
+    fun loadBanner(){
+        ApiManager.post(getBaseActivity().composites,null,Constant.COURSE_GETIMAGEOFPAGE,object :ApiManager.OnResult<BannerBean>(){
+            override fun onSuccess(data: BannerBean) {
+                rl_banner.loadData(data.content)
+            }
+
+            override fun onFailed(code: String, message: String) {
+            }
+
+        })
+    }
 }

@@ -87,7 +87,7 @@ class BannerView : RelativeLayout {
 
     }
 
-    fun loadData(list: ArrayList<BannerBean>) {
+    fun loadData(list: ArrayList<BannerBean.Bean>) {
         stopLoop()
         currentIndex = 0
         pointList.clear()
