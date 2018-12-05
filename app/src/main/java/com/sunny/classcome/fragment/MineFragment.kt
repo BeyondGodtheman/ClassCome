@@ -51,6 +51,29 @@ class MineFragment : BaseFragment() {
 
     }
 
+
+    override fun update() {
+        super.update()
+        if (UserManger.isLogin()){
+            ApiManager.post(getBaseActivity().composites,null, Constant.USER_MYPAGE, object : ApiManager.OnResult<BaseBean<MineBean>>() {
+                override fun onSuccess(data: BaseBean<MineBean>) {
+                    data.content?.let {
+                        if (it.statu == "1"){
+                            GlideUtil.loadHead(requireContext(),img_user_head,it.data?.userPic?:"")
+                            txt_user_name.text = it.data?.userName
+                            txt_user_address.text = it.data?.address
+                            txt_points.text = it.data?.source
+                            txt_member.text = it.data?.gradeName
+                        }
+                    }
+                }
+                override fun onFailed(code: String, message: String) {
+
+                }
+            })
+        }
+    }
+
     override fun onClick(v: View) {
         when (v.id) {
             R.id.img_user_head,
@@ -77,28 +100,6 @@ class MineFragment : BaseFragment() {
     private fun intent(clazz: Class<*>) {
         IntentUtil.start(requireActivity(), clazz)
     }
-
-    override fun loadData() {
-        ApiManager.post(getBaseActivity().composites,null, Constant.USER_MYPAGE, object : ApiManager.OnResult<BaseBean<MineBean>>() {
-            override fun onSuccess(data: BaseBean<MineBean>) {
-                data.content?.let {
-                    if (it.statu == "1"){
-                        GlideUtil.loadHead(requireContext(),img_user_head,it.data?.userPic?:"")
-                        txt_user_name.text = it.data?.userName
-                        txt_user_address.text = it.data?.address
-                        txt_points.text = it.data?.source
-                        txt_member.text = it.data?.gradeName
-                    }
-                }
-
-
-            }
-            override fun onFailed(code: String, message: String) {
-
-            }
-        })
-    }
-
 
 
     private fun startWeb(url:String){

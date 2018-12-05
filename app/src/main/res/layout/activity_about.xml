@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <View
+        android:layout_width="180pt"
+        android:layout_height="180pt"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="62pt"
+        android:background="@drawable/ic_launcher_web" />
+
+    <TextView
+        style="@style/style_font"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="43pt"
+        android:text="@string/app_name"
+        android:textSize="42pt"
+        android:textStyle="bold" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100pt"
+        android:layout_marginTop="60pt"
+        android:background="@color/color_white">
+
+        <TextView
+            style="@style/style_font_default_32pt"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="44pt"
+            android:text="@string/current_version" />
+
+        <TextView
+            android:id="@+id/txt_about_version"
+            style="@style/style_font_default_32pt"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="42pt"
+            tools:text="@string/app" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2pt"
+        android:background="@color/color_divider" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_white"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="100pt">
+
+            <TextView
+                style="@style/style_font_default_32pt"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="44pt"
+                android:text="@string/customer_service" />
+
+            <TextView
+                style="@style/style_font_default_32pt"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="45pt"
+                android:text="@string/phoneNo"
+                android:textColor="@color/color_orange" />
+
+            <View
+                android:layout_width="42pt"
+                android:layout_height="42pt"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="474pt"
+                android:background="@mipmap/ic_phone" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2pt"
+            android:layout_marginStart="40pt"
+            android:background="@color/color_divider" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="100pt">
+
+            <TextView
+                style="@style/style_font_default_32pt"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="130pt"
+                android:text="@string/qqNo" />
+
+            <View
+                android:layout_width="54pt"
+                android:layout_height="54pt"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="54pt"
+                android:background="@mipmap/ic_qq" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2pt"
+            android:layout_marginStart="40pt"
+            android:background="@color/color_divider" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="100pt">
+
+            <TextView
+                style="@style/style_font_default_32pt"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="130pt"
+                android:text="@string/wxNo" />
+
+            <View
+                android:layout_width="54pt"
+                android:layout_height="54pt"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="54pt"
+                android:background="@mipmap/ic_wx" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <TextView
+        style="@style/style_font_default_28pt"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="120pt"
+        android:gravity="center"
+        android:textColor="@color/color_gray_font"
+        android:lineSpacingExtra="10pt"
+        android:text="@string/copyright" />
+
+</LinearLayout>

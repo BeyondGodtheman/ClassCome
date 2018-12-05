@@ -34,7 +34,7 @@ class SettingActivity : BaseActivity() {
     override fun onClick(v: View) {
         when (v.id) {
             R.id.rl_login_password -> IntentUtil.start(this, MineActivity::class.java)
-            R.id.txt_about_us -> IntentUtil.start(this, MineActivity::class.java)
+            R.id.txt_about_us -> IntentUtil.start(this, AboutActivity::class.java)
             R.id.txt_invitation_points -> share()
             R.id.txt_help -> startWeb(Constant.PUB_HELP)
             R.id.txt_logout -> ToastUtil.show("退出登录")

@@ -16,6 +16,7 @@ import com.sunny.classcome.base.BaseActivity
 import com.sunny.classcome.fragment.HomeFragment
 import com.sunny.classcome.fragment.MineFragment
 import com.sunny.classcome.fragment.PublishFragment
+import com.sunny.classcome.utils.UserManger
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import java.util.*
@@ -146,6 +147,11 @@ class HomeActivity : BaseActivity() {
 
 
     private fun initTabView(index: Int) {
+        if (index != 0 && !UserManger.isLogin()){
+            startActivity(Intent(this,LoginActivity::class.java))
+            initTabView(0)
+            return
+        }
 
         frameLayouts.forEachIndexed { i, frameLayout ->
             frameLayout.removeAllViews()

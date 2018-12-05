@@ -55,7 +55,7 @@
             android:name=".wxapi.WXEntryActivity"
             android:exported="true"
             android:launchMode="singleTop"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"></activity>
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
 
         <!--首页-->
         <activity android:name=".activity.HomeActivity">
@@ -117,5 +117,10 @@
         <activity
             android:name=".activity.WebActivity"
             android:launchMode="singleTask" />
+
+        <!--关于-->
+        <activity
+            android:name=".activity.AboutActivity"
+            android:launchMode="singleTop" />
     </application>
 </manifest>

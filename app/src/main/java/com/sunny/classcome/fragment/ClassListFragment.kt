@@ -10,7 +10,6 @@ import com.sunny.classcome.bean.ClassBean
 import com.sunny.classcome.http.ApiManager
 import com.sunny.classcome.http.Constant
 import com.sunny.classcome.utils.UserManger
-import com.sunny.classcome.widget.popup.LocationPopup
 import kotlinx.android.synthetic.main.fragment_class_list.*
 
 class ClassListFragment : BaseFragment() {

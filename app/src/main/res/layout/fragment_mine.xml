@@ -63,8 +63,8 @@
 
                 <ImageView
                     android:id="@+id/img_icon"
-                    android:layout_width="36pt"
-                    android:layout_height="36pt"
+                    android:layout_width="38pt"
+                    android:layout_height="40pt"
                     android:layout_centerVertical="true"
                     android:contentDescription="@string/app"
                     android:scaleType="centerCrop"
@@ -92,9 +92,9 @@
 
                 <ImageView
                     android:id="@+id/img_icon2"
-                    android:layout_width="36pt"
+                    android:layout_width="50pt"
                     android:layout_height="36pt"
-                    android:layout_alignParentBottom="true"
+                    android:layout_centerVertical="true"
                     android:layout_marginBottom="0dp"
                     android:contentDescription="@string/app"
                     android:scaleType="centerCrop"
