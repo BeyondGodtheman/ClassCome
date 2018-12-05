@@ -10,7 +10,8 @@ import com.sunny.classcome.http.ApiManager
  * Date 2018/12/5 00:45
  */
 object UserManger {
-    val LOGIN = "login"
+    private const val LOGIN = "login"
+    private const val CITY = "city"
 
     fun isLogin():Boolean{
         return getLogin() != null
@@ -28,4 +29,12 @@ object UserManger {
         return ApiManager.gSon.fromJson<LoginBean>(json, LoginBean::class.java)
     }
 
+
+    //保存选择地址
+    fun setAddress(id:String,name:String){
+        SharedUtil.setString(CITY, "$id,$name")
+    }
+
+    //获取选择地址
+    fun getAddress():String = SharedUtil.getString(CITY)
 }

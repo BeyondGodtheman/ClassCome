@@ -2,8 +2,10 @@ package com.sunny.classcome.wxapi
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import com.sunny.classcome.MyApplication
+import com.sunny.classcome.R
 import com.sunny.classcome.activity.LoginActivity
 import com.sunny.classcome.bean.LoginBean
 import com.sunny.classcome.http.ApiManager
@@ -13,6 +15,9 @@ import com.sunny.classcome.utils.UserManger
 import com.tencent.mm.opensdk.modelbase.BaseReq
 import com.tencent.mm.opensdk.modelbase.BaseResp
 import com.tencent.mm.opensdk.modelmsg.SendAuth
+import com.tencent.mm.opensdk.modelmsg.SendMessageToWX
+import com.tencent.mm.opensdk.modelmsg.WXMediaMessage
+import com.tencent.mm.opensdk.modelmsg.WXWebpageObject
 import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler
 
 /**
@@ -30,7 +35,6 @@ class WXEntryActivity : Activity(), IWXAPIEventHandler {
 
     companion object {
         fun loginWeixin() {
-
             // 判断是否安装了微信客户端
             if (!MyApplication.getApp().wxApi.isWXAppInstalled) {
                 ToastUtil.show("您还未安装微信客户端！")
@@ -44,6 +48,25 @@ class WXEntryActivity : Activity(), IWXAPIEventHandler {
             req.state = "wechat_sdk_classcome"
             MyApplication.getApp().wxApi.sendReq(req)
         }
+
+
+        fun shareWeb(url:String){
+            // 判断是否安装了微信客户端
+            if (!MyApplication.getApp().wxApi.isWXAppInstalled) {
+                ToastUtil.show("您还未安装微信客户端！")
+                return
+            }
+            val wxWebPageObject = WXWebpageObject()
+            wxWebPageObject.webpageUrl = url
+
+            val msg = WXMediaMessage(wxWebPageObject)
+            msg.title = MyApplication.getApp().getString(R.string.app_name)
+            msg.description = ""
+            val req = SendMessageToWX.Req()
+            req.message = msg
+            MyApplication.getApp().wxApi.sendReq(req)
+        }
+
     }
 
 

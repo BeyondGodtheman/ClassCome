@@ -7,9 +7,10 @@ import com.sunny.classcome.R
 import com.sunny.classcome.adapter.LocationCityAdapter
 import com.sunny.classcome.base.BaseActivity
 import com.sunny.classcome.bean.LocalCityBean
+import com.sunny.classcome.http.ApiManager
 import com.sunny.classcome.http.Constant
+import com.sunny.classcome.utils.UserManger
 import kotlinx.android.synthetic.main.activity_location.*
-import java.util.*
 
 
 /**
@@ -21,12 +22,16 @@ import java.util.*
 class LocationActivity : BaseActivity() {
 
 
-   private val cityList = arrayListOf<LocalCityBean>()
-
-    private val indexMap = HashMap<String, Int>()
+    private val cityList = arrayListOf<LocalCityBean.City>()
 
     private val locationCityAdapter by lazy {
-        LocationCityAdapter(cityList)
+        LocationCityAdapter(cityList).apply {
+            setOnItemClickListener { _, index ->
+                UserManger.setAddress(cityList[index].cityVoId, cityList[index].cityVoName)
+                setResult(1)
+                finish()
+            }
+        }
     }
 
     override fun setLayout(): Int = R.layout.activity_location
@@ -36,17 +41,29 @@ class LocationActivity : BaseActivity() {
         MyApplication.getApp().getData<String>(Constant.LOCATION_NAME, false).let {
             txt_location_name.text = it ?: getString(R.string.defaultLocation)
         }
-
-        recl_city.layoutManager  = LinearLayoutManager(this)
+        recl_city.layoutManager = LinearLayoutManager(this)
+        recl_city.adapter = locationCityAdapter
         initData()
     }
 
 
-
     private fun initData() {
+        showLoading()
+        ApiManager.post(composites, null, Constant.PUB_GETCITYLIST, object : ApiManager.OnResult<LocalCityBean>() {
+            override fun onSuccess(data: LocalCityBean) {
+                hideLoading()
+                cityList.clear()
+                cityList.addAll(data.content)
+                locationCityAdapter.notifyDataSetChanged()
+            }
 
+            override fun onFailed(code: String, message: String) {
+                hideLoading()
+            }
+
+        })
     }
 
-    override fun onClick(v: View?) {
+    override fun onClick(v: View) {
     }
 }

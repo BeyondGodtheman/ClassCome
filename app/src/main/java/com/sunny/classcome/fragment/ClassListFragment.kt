@@ -7,6 +7,9 @@ import com.sunny.classcome.R
 import com.sunny.classcome.adapter.ClassListAdapter
 import com.sunny.classcome.base.BaseFragment
 import com.sunny.classcome.bean.ClassBean
+import com.sunny.classcome.http.ApiManager
+import com.sunny.classcome.http.Constant
+import com.sunny.classcome.utils.UserManger
 import com.sunny.classcome.widget.popup.LocationPopup
 import kotlinx.android.synthetic.main.fragment_class_list.*
 
@@ -17,6 +20,7 @@ class ClassListFragment : BaseFragment() {
 
     private var sortFlag = false
 
+    val dataList = arrayListOf<ClassBean.Bean.Data>()
 
     private val topArrowList: ArrayList<ImageView> by lazy {
         arrayListOf(img_hot_top, img_price_top, img_time_top)
@@ -35,15 +39,10 @@ class ClassListFragment : BaseFragment() {
         ll_price.setOnClickListener(this)
         ll_time.setOnClickListener(this)
 
-        val classBean = ClassBean(
-                "初中英语班课教研员-要求有专业教学资质", "", "拉丁舞", "米斯特教育", "静安寺", "2018-07-01至2018-08-26", "¥4000"
-        )
 
-        val classList = arrayListOf(classBean, classBean, classBean, classBean, classBean
-        )
         recl.layoutManager = LinearLayoutManager(context)
         recl.isNestedScrollingEnabled = false
-        recl.adapter = ClassListAdapter(classList)
+        recl.adapter = ClassListAdapter(dataList)
         sort(0)
     }
 
@@ -95,5 +94,24 @@ class ClassListFragment : BaseFragment() {
             locationPopup.showAsDropDown(ll_location)
         }
         locationFlag = !locationFlag
+    }
+
+
+    fun loadClass() {
+        val params = HashMap<String, String>()
+        params["cityId"] =  UserManger.getAddress().split(",")[0]
+        ApiManager.post(getBaseActivity().composites, params, Constant.COURSE_GETCOURSELISTS, object : ApiManager.OnResult<ClassBean>() {
+            override fun onSuccess(data: ClassBean) {
+                dataList.clear()
+                data.content.dataList?.let {
+                    dataList.addAll(it)
+                    recl.adapter?.notifyDataSetChanged()
+                }
+            }
+
+            override fun onFailed(code: String, message: String) {
+            }
+
+        })
     }
 }

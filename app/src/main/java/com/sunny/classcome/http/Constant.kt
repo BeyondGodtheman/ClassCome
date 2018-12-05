@@ -49,5 +49,13 @@ object Constant {
 
     const val USER_MYPAGE = "user/myPage" //我的
     const val PUB_COOPERATION = "pub/cooperation" //商务合作
+
+    const val PUB_HELP = "pub/help" //帮助
+
+    const val PUB_GETSHOWURL = "pub/getShowUrl" //分享获取积分
+
+    const val PUB_GETCITYLIST = "pub/getCityList" //获取城市地区
+
+    const val COURSE_GETCOURSELISTS = "course/getCourselists" //获取课程列表
 }
 

@@ -10,15 +10,24 @@ import com.sunny.classcome.activity.MyMsgActivity
 import com.sunny.classcome.base.BaseFragment
 import com.sunny.classcome.bean.BannerBean
 import com.sunny.classcome.bean.BaseBean
+import com.sunny.classcome.bean.ClassBean
+import com.sunny.classcome.bean.LocalCityBean
 import com.sunny.classcome.http.ApiManager
 import com.sunny.classcome.http.Constant
 import com.sunny.classcome.utils.LocationUtil
+import com.sunny.classcome.utils.SharedUtil
 import com.sunny.classcome.utils.UserManger
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.layout_home_recommend_text.view.*
 import kotlinx.android.synthetic.main.layout_home_title.view.*
+import kotlinx.coroutines.experimental.android.UI
+import kotlinx.coroutines.experimental.delay
+import kotlinx.coroutines.experimental.launch
 
 class HomeFragment : BaseFragment() {
+
+    private var isShowLocal = false
+    private var localStr = listOf<String>()
 
     private val classListFragment: ClassListFragment by lazy {
         ClassListFragment()
@@ -26,7 +35,12 @@ class HomeFragment : BaseFragment() {
 
     private val locationUtil: LocationUtil by lazy {
         LocationUtil(requireContext()) {
-            titleView.text_home_Location.text = it
+            if (isShowLocal) {
+                titleView.text_home_Location.text = localStr[1]
+            } else {
+                titleView.text_home_Location.text = it
+                loadAddress()
+            }
         }
     }
 
@@ -38,7 +52,15 @@ class HomeFragment : BaseFragment() {
 
     override fun initView() {
 
-        locationUtil.startLocation()
+        localStr = UserManger.getAddress().apply {
+            if (isNotEmpty()) {
+                isShowLocal = true
+                launch(UI){
+                    delay(100)
+                    classListFragment.loadClass()
+                }
+            }
+        }.split(",")
 
         titleView.rlLocation.setOnClickListener(this)
         titleView.ivMessage.setOnClickListener(this)
@@ -46,12 +68,14 @@ class HomeFragment : BaseFragment() {
         loadBanner()
         initRecommend()
         childFragmentManager.beginTransaction().add(R.id.flContent, classListFragment).commit()
+
+        locationUtil.startLocation()
     }
 
     override fun onClick(v: View) {
         when (v.id) {
 
-            R.id.rlLocation -> startActivity(Intent(context, LocationActivity::class.java))
+            R.id.rlLocation -> startActivityForResult(Intent(context, LocationActivity::class.java), 1)
             R.id.ivMessage -> {
                 if (UserManger.isLogin()) {
                     startActivity(Intent(context, MyMsgActivity::class.java))
@@ -84,8 +108,8 @@ class HomeFragment : BaseFragment() {
     }
 
 
-    fun loadBanner(){
-        ApiManager.post(getBaseActivity().composites,null,Constant.COURSE_GETIMAGEOFPAGE,object :ApiManager.OnResult<BannerBean>(){
+    private fun loadBanner() {
+        ApiManager.post(getBaseActivity().composites, null, Constant.COURSE_GETIMAGEOFPAGE, object : ApiManager.OnResult<BannerBean>() {
             override fun onSuccess(data: BannerBean) {
                 rl_banner.loadData(data.content)
             }
@@ -94,5 +118,32 @@ class HomeFragment : BaseFragment() {
             }
 
         })
+    }
+
+    private fun loadAddress() {
+        ApiManager.post(getBaseActivity().composites, null, Constant.PUB_GETCITYLIST, object : ApiManager.OnResult<LocalCityBean>() {
+            override fun onSuccess(data: LocalCityBean) {
+                data.content.first { it.cityVoName == titleView.text_home_Location.text.toString() }.let {
+                    UserManger.setAddress(it.cityVoId, it.cityVoName)
+                    classListFragment.loadClass()
+                }
+            }
+
+            override fun onFailed(code: String, message: String) {
+            }
+
+        })
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 1 && resultCode == 1) {
+            UserManger.getAddress().apply {
+                localStr = split(",")
+                isShowLocal = true
+                titleView.text_home_Location.text = localStr[1]
+                classListFragment.loadClass()
+            }
+        }
     }
 }

@@ -22,15 +22,15 @@ class MyCollectionActivity : BaseActivity() {
 
         showTitle(titleManager.defaultTitle(getString(R.string.my_collection)))
 
-        val classBean = ClassBean(
-                "初中英语班课教研员-要求有专业教学资质", "", "拉丁舞", "米斯特教育", "静安寺", "2018-07-01至2018-08-26", "¥4000"
-        )
-
-        val classList = arrayListOf(classBean, classBean, classBean)
-
-        recl.layoutManager = LinearLayoutManager(this)
-        recl.isNestedScrollingEnabled = false
-        recl.adapter = ClassListAdapter(classList)
+//        val classBean = ClassBean(
+//                "初中英语班课教研员-要求有专业教学资质", "", "拉丁舞", "米斯特教育", "静安寺", "2018-07-01至2018-08-26", "¥4000"
+//        )
+//
+//        val classList = arrayListOf(classBean, classBean, classBean)
+//
+//        recl.layoutManager = LinearLayoutManager(this)
+//        recl.isNestedScrollingEnabled = false
+//        recl.adapter = ClassListAdapter(classList)
     }
 
     override fun onClick(v: View?) {

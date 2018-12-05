@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="@color/color_base_bg"
-              android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_base_bg"
+    android:orientation="vertical">
 
     <RelativeLayout
         android:id="@+id/rl_login_password"
         android:layout_width="match_parent"
         android:layout_height="98pt"
         android:background="@drawable/draw_bg_fillet_white"
-        android:paddingStart="52pt"
+        android:paddingStart="40pt"
         tools:ignore="RtlSymmetry">
 
         <TextView
@@ -21,17 +21,17 @@
             android:layout_below="@id/txt_type"
             android:layout_centerVertical="true"
             android:layout_toEndOf="@id/img_icon"
-            android:text="@string/login_password"/>
+            android:text="@string/login_password" />
 
         <ImageView
             android:id="@+id/img_more"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="21pt"
+            android:layout_height="35pt"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_marginEnd="34pt"
             android:contentDescription="@string/app"
-            android:src="@mipmap/ic_more"/>
+            android:src="@mipmap/ic_more" />
 
         <TextView
             style="@style/style_font_default_32pt"
@@ -42,43 +42,47 @@
             android:layout_toEndOf="@id/img_icon"
             android:text="@string/modify"
             android:textColor="@color/color_gray_font"
-            android:textSize="30pt"/>
+            android:textSize="30pt" />
     </RelativeLayout>
 
-    <View style="@style/style_view_line"/>
+    <View style="@style/style_view_line" />
 
     <View
         style="@style/style_view_line"
         android:layout_height="98pt"
-        android:background="@color/color_white"/>
+        android:background="@color/color_white" />
 
-    <View style="@style/style_view_divider"/>
+    <View style="@style/style_view_divider" />
 
     <com.sunny.classcome.widget.MineItemLayout
         android:id="@+id/txt_about_us"
         style="@style/style_item_text_icon"
-        app:mine_layout_text="@string/about_us"/>
+        android:paddingStart="20pt"
+        app:mine_layout_text="@string/about_us" />
 
-    <View style="@style/style_view_line"/>
+    <View style="@style/style_view_line" />
 
     <com.sunny.classcome.widget.MineItemLayout
         android:id="@+id/txt_invitation_points"
         style="@style/style_item_text_icon"
-        app:mine_layout_text="@string/invitation_points"/>
+        android:paddingStart="20pt"
+        app:mine_layout_text="@string/invitation_points" />
 
-    <View style="@style/style_view_divider"/>
+    <View style="@style/style_view_divider" />
 
 
     <com.sunny.classcome.widget.MineItemLayout
         android:id="@+id/txt_help"
         style="@style/style_item_text_icon"
-        app:mine_layout_text="@string/help"/>
+        android:paddingStart="20pt"
+        app:mine_layout_text="@string/help" />
 
 
     <TextView
         android:id="@+id/txt_logout"
         style="@style/style_button"
         android:layout_marginTop="69pt"
-        android:text="@string/logout"/>
+        android:paddingStart="20pt"
+        android:text="@string/logout" />
 
 </LinearLayout>

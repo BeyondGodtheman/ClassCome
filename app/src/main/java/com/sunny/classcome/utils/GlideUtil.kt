@@ -25,4 +25,8 @@ object GlideUtil {
     fun loadHead(context: Context, imageView: ImageView, url: String) {
         load(context, url).placeholder(R.mipmap.ic_default_head).centerCrop().into(imageView)
     }
+
+    fun loadPhone(context: Context, imageView: ImageView, url: String) {
+        load(context, url).placeholder(R.drawable.bg_default_photo).centerCrop().into(imageView)
+    }
 }

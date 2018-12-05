@@ -29,14 +29,18 @@ class LocationUtil(context: Context, var onLocation: (String) -> Unit) : AMapLoc
         mLocationClient.startLocation()
     }
 
-    fun stopLocation() {
+    private fun stopLocation() {
         mLocationClient.stopLocation()
     }
 
     override fun onLocationChanged(location: AMapLocation?) {
         location?.let {
-            MyApplication.getApp().setData(Constant.LOCATION_NAME,it.city)
-            onLocation(it.city)
+            if (location.city != null){
+                stopLocation()
+                MyApplication.getApp().setData(Constant.LOCATION_NAME, it.city)
+                onLocation(it.city)
+            }
+
         }
     }
 }

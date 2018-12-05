@@ -3,6 +3,7 @@
     xmlns:tool="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="330pt"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_marginBottom="10pt"
     android:background="@color/color_white">
@@ -90,14 +91,15 @@
             android:textSize="24pt"
             tool:text="拉丁舞" />
 
-        <ImageView
-            android:id="@+id/view_sex"
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/img_user_name"
             android:layout_width="46pt"
             android:layout_height="46pt"
             android:layout_marginStart="71pt"
             android:layout_toEndOf="@id/text_class_type"
             android:scaleType="centerCrop"
-            android:src="@mipmap/ic_default_head" />
+            android:src="@mipmap/ic_default_head"
+            app:riv_oval="true"/>
 
         <TextView
             android:id="@+id/text_class_author"
@@ -105,7 +107,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginStart="16pt"
-            android:layout_toEndOf="@id/view_sex"
+            android:layout_toEndOf="@id/img_user_name"
             android:textColor="@color/color_gray_font"
             android:textSize="24pt"
             tool:text="米斯特教育" />

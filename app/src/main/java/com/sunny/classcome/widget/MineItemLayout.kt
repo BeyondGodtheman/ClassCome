@@ -3,6 +3,7 @@ package com.sunny.classcome.widget
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.RelativeLayout
 import com.sunny.classcome.R
 import kotlinx.android.synthetic.main.item_mine.view.*
@@ -23,10 +24,17 @@ class MineItemLayout : RelativeLayout {
 
     fun initView(attrs: AttributeSet?) {
 
+        setBackgroundResource(R.color.color_white)
+
         LayoutInflater.from(context).inflate(R.layout.item_mine, this, true)
 
         val styleable = context.obtainStyledAttributes(attrs, R.styleable.MineItemLayout)
-        img_icon.setImageResource(styleable.getResourceId(R.styleable.MineItemLayout_mine_layout_icon, 0))
+        val resId = styleable.getResourceId(R.styleable.MineItemLayout_mine_layout_icon, 0)
+        if (resId == 0){
+            img_icon.visibility = View.GONE
+        }else{
+            img_icon.setImageResource(resId)
+        }
         txt_info.text = styleable.getString(R.styleable.MineItemLayout_mine_layout_text)
 
         styleable.recycle()

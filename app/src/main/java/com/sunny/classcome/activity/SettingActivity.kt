@@ -3,8 +3,13 @@ package com.sunny.classcome.activity
 import android.view.View
 import com.sunny.classcome.R
 import com.sunny.classcome.base.BaseActivity
+import com.sunny.classcome.bean.BaseBean
+import com.sunny.classcome.bean.HtmlBean
+import com.sunny.classcome.http.ApiManager
+import com.sunny.classcome.http.Constant
 import com.sunny.classcome.utils.IntentUtil
 import com.sunny.classcome.utils.ToastUtil
+import com.sunny.classcome.wxapi.WXEntryActivity
 import kotlinx.android.synthetic.main.activity_setting.*
 
 /**
@@ -30,9 +35,48 @@ class SettingActivity : BaseActivity() {
         when (v.id) {
             R.id.rl_login_password -> IntentUtil.start(this, MineActivity::class.java)
             R.id.txt_about_us -> IntentUtil.start(this, MineActivity::class.java)
-            R.id.txt_invitation_points -> IntentUtil.start(this, MineActivity::class.java)
-            R.id.txt_help -> IntentUtil.start(this, MineActivity::class.java)
+            R.id.txt_invitation_points -> share()
+            R.id.txt_help -> startWeb(Constant.PUB_HELP)
             R.id.txt_logout -> ToastUtil.show("退出登录")
         }
+    }
+
+
+    private fun startWeb(url: String) {
+        showLoading()
+        ApiManager.post(composites, null, url, object : ApiManager.OnResult<BaseBean<ArrayList<HtmlBean>>>() {
+            override fun onSuccess(data: BaseBean<ArrayList<HtmlBean>>) {
+                hideLoading()
+                data.content?.data?.let {
+                    if (it.size > 0) {
+                        WebActivity.start(this@SettingActivity, it[0].title, it[0].content)
+                    }
+                    return
+                }
+                ToastUtil.show(data.content?.info)
+            }
+
+            override fun onFailed(code: String, message: String) {
+                hideLoading()
+            }
+
+        })
+    }
+
+    private fun share() {
+        showLoading()
+        ApiManager.post(composites, null, Constant.PUB_GETSHOWURL, object : ApiManager.OnResult<BaseBean<String>>() {
+            override fun onSuccess(data: BaseBean<String>) {
+                hideLoading()
+                data.content?.data.let {
+                    WXEntryActivity.shareWeb(it ?: "")
+                }
+            }
+
+            override fun onFailed(code: String, message: String) {
+                hideLoading()
+            }
+        })
+
     }
 }
