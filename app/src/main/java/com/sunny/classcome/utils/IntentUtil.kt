@@ -1,9 +1,10 @@
 package com.sunny.classcome.utils
 
-import android.support.v4.content.ContextCompat.startActivity
-import android.content.Intent
 import android.app.Activity
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import com.sunny.classcome.activity.BindPayActivity
 
 
 /**
@@ -12,7 +13,10 @@ import android.os.Bundle
  * Mail：yongzuo_chen@dingyuegroup.cn
  * Date：2018/11/22 0022 18:05
  */
+
+
 object IntentUtil {
+
 
     /**
      * Intent跳转
@@ -20,6 +24,7 @@ object IntentUtil {
     fun start(activity: Activity, clazz: Class<*>, isFinish: Boolean = false) {
         val intent = Intent(activity, clazz)
         activity.startActivity(intent)
+        activity.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         if (isFinish) {
             activity.finish()
         }
@@ -32,6 +37,7 @@ object IntentUtil {
         val intent = Intent(activity, clazz)
         intent.putExtras(bundle)
         activity.startActivity(intent)
+        activity.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         if (isFinish) {
             activity.finish()
         }

@@ -10,6 +10,11 @@ import kotlinx.android.synthetic.main.item_mine.view.*
 
 /**
  * Desc 个人中心子条目自定义布局
+ * 支持以下布局样式：
+ *      1、img-txt-（img_more）
+ *      2、txt-（img_more）
+ *      3、txt-txt-（img_more）
+ *      4、txt-txt-txt-（img_more）
  * Author JoannChen
  * Mail Q8622268@gmail.com
  * Date 2018/11/30 23:02
@@ -29,13 +34,21 @@ class MineItemLayout : RelativeLayout {
         LayoutInflater.from(context).inflate(R.layout.item_mine, this, true)
 
         val styleable = context.obtainStyledAttributes(attrs, R.styleable.MineItemLayout)
+
+        // 设置icon
         val resId = styleable.getResourceId(R.styleable.MineItemLayout_mine_layout_icon, 0)
-        if (resId == 0){
+        if (resId == 0) {
             img_icon.visibility = View.GONE
-        }else{
+        } else {
             img_icon.setImageResource(resId)
         }
-        txt_info.text = styleable.getString(R.styleable.MineItemLayout_mine_layout_text)
+
+        txt_info_left.text = styleable.getString(R.styleable.MineItemLayout_mine_layout_text_left)
+        txt_info_right.text = styleable.getString(R.styleable.MineItemLayout_mine_layout_text_right)
+
+        // 是否显示默认按钮（选择支付方式显示）
+        val showDefault = styleable.getBoolean(R.styleable.MineItemLayout_mine_layout_text_show_default, false)
+        txt_default.visibility = if (showDefault) View.VISIBLE else View.GONE
 
         styleable.recycle()
     }

@@ -56,26 +56,26 @@
 
     <com.sunny.classcome.widget.MineItemLayout
         android:id="@+id/txt_about_us"
-        style="@style/style_item_text_icon"
+        style="@style/style_mine_layout_item"
         android:paddingStart="20pt"
-        app:mine_layout_text="@string/about_us" />
+        app:mine_layout_text_left="@string/about_us" />
 
     <View style="@style/style_view_line" />
 
     <com.sunny.classcome.widget.MineItemLayout
         android:id="@+id/txt_invitation_points"
-        style="@style/style_item_text_icon"
+        style="@style/style_mine_layout_item"
         android:paddingStart="20pt"
-        app:mine_layout_text="@string/invitation_points" />
+        app:mine_layout_text_left="@string/invitation_points" />
 
     <View style="@style/style_view_divider" />
 
 
     <com.sunny.classcome.widget.MineItemLayout
         android:id="@+id/txt_help"
-        style="@style/style_item_text_icon"
+        style="@style/style_mine_layout_item"
         android:paddingStart="20pt"
-        app:mine_layout_text="@string/help" />
+        app:mine_layout_text_left="@string/help" />
 
 
     <TextView

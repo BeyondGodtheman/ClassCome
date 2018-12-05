@@ -4,7 +4,9 @@
     <!--个人中心子条目-->
     <declare-styleable name="MineItemLayout">
         <attr name="mine_layout_icon" format="reference"/>
-        <attr name="mine_layout_text" format="string"/>
+        <attr name="mine_layout_text_left" format="string"/>
+        <attr name="mine_layout_text_right" format="string"/>
+        <attr name="mine_layout_text_show_default" format="boolean"/>
     </declare-styleable>
 
     <!--下拉刷新-->

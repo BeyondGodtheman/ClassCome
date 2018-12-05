@@ -24,6 +24,7 @@ class WebActivity : BaseActivity() {
         webView.settings.setAppCacheEnabled(true)
         webView.settings.setAppCachePath(application.cacheDir.absolutePath)
         webView.settings.databaseEnabled = true
+        webView.settings.textZoom = 50
         webView.webViewClient = object : WebViewClient() {}
         webView.webChromeClient = object : WebChromeClient() {}
 

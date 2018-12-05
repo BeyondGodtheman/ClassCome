@@ -8,6 +8,8 @@ import com.sunny.classcome.R
 import com.sunny.classcome.base.BaseRecycleAdapter
 import com.sunny.classcome.base.BaseRecycleViewHolder
 import com.sunny.classcome.base.PurchaserBean
+import com.sunny.classcome.utils.showBlueBtn
+import com.sunny.classcome.utils.showGrayBtn
 import kotlinx.android.synthetic.main.item_purchaser.view.*
 
 /**
@@ -30,22 +32,11 @@ class PurchaserAdapter(list: ArrayList<PurchaserBean>) : BaseRecycleAdapter<Purc
 
 
             // 核销按钮样式
-            val str: String
-            val bgColor: Int
-            val textColor: Int
             if (isFinish) {
-                str = "已核销"
-                textColor = R.color.color_gray_font
-                bgColor = R.drawable.draw_bg_fillet_gray_border
+                showGrayBtn(holder.itemView.txt_finish,"已核销")
             } else {
-                str = "核销"
-                textColor = R.color.color_nav_blue
-                bgColor = R.drawable.draw_bg_fillet_blue_border
-
+                showBlueBtn(holder.itemView.txt_finish,"核销")
             }
-            holder.itemView.txt_finish.text = str
-            holder.itemView.txt_finish.setTextColor(ContextCompat.getColor(context, textColor))
-            holder.itemView.txt_finish.setBackgroundResource(bgColor)
 
             // 已核销显示评价按钮
             holder.itemView.txt_evaluate.visibility = if (isFinish) View.VISIBLE else View.GONE

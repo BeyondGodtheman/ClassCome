@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <com.sunny.classcome.widget.MineItemLayout
+        android:id="@+id/txt_detailed"
+        style="@style/style_mine_layout_item"
+        android:layout_marginBottom="20pt"
+        app:mine_layout_text_left="@string/detailed"/>
+
+    <com.sunny.classcome.widget.MineItemLayout
+        android:id="@+id/txt_wechat"
+        style="@style/style_mine_layout_item"
+        app:mine_layout_text_left="@string/bind_wechat_cheques"
+        app:mine_layout_text_right="@string/binding"
+        app:mine_layout_text_show_default="true"/>
+
+    <View style="@style/style_view_line"/>
+
+    <com.sunny.classcome.widget.MineItemLayout
+        android:id="@+id/txt_alipay"
+        style="@style/style_mine_layout_item"
+        app:mine_layout_text_left="@string/bind_alipay_cheques"
+        app:mine_layout_text_right="@string/unbind"/>
+
+    <TextView
+        style="@style/style_font_default_28pt"
+        android:layout_marginStart="26pt"
+        android:layout_marginTop="10pt"
+        android:text="@string/prompt_cheques_bind"
+        android:textColor="@color/color_gray_font"/>
+</LinearLayout>

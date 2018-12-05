@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="130pt">
+
+    <TextView
+        android:id="@+id/txt_type"
+        style="@style/style_font_default_32pt"
+        android:layout_marginStart="46pt"
+        android:layout_marginTop="28pt"
+        android:textColor="@color/color_default_font"
+        tools:text="支付代课费"/>
+
+    <TextView
+        android:id="@+id/txt_balance"
+        style="@style/style_font_default_24pt"
+        android:layout_below="@id/txt_type"
+        android:layout_alignStart="@id/txt_type"
+        android:layout_marginTop="10pt"
+        tools:text="余额：1000.00"/>
+
+    <TextView
+        android:id="@+id/txt_date"
+        style="@style/style_font_gray_24pt"
+        android:layout_alignTop="@id/txt_type"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="46pt"
+        android:contentDescription="@string/app"
+        tools:text="2018-12-05 12:12"/>
+
+    <TextView
+        android:id="@+id/txt_money"
+        style="@style/style_font_default_32pt"
+        android:layout_below="@id/txt_date"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="46pt"
+        android:contentDescription="@string/app"
+        tools:text="-200"/>
+
+    <View
+        style="@style/style_view_line"
+        android:layout_alignParentBottom="true"/>
+
+</RelativeLayout>

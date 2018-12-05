@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/color_base_bg"
+              android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22pt"
+        android:layout_marginBottom="22pt"
+        android:background="@color/color_white">
+
+        <TextView
+            android:id="@+id/txt_user"
+            style="@style/style_font_default_32pt"
+            android:layout_marginStart="40pt"
+            android:layout_marginTop="34pt"
+            tools:text="支付宝账号："/>
+
+        <EditText
+            android:id="@+id/edit_user"
+            style="@style/style_font_default_32pt"
+            android:layout_width="match_parent"
+            android:layout_alignBaseline="@id/txt_user"
+            android:layout_marginStart="20pt"
+            android:layout_toEndOf="@id/txt_user"
+            tools:text="13126597878"/>
+
+        <TextView
+            android:id="@+id/txt_name"
+            style="@style/style_font_default_32pt"
+            android:layout_below="@id/txt_user"
+            android:layout_marginStart="40pt"
+            android:layout_marginTop="50pt"
+            android:text="@string/name_space"/>
+
+        <EditText
+            android:id="@+id/edit_name"
+            style="@style/style_font_default_32pt"
+            android:layout_width="match_parent"
+            android:layout_alignBaseline="@id/txt_name"
+            android:layout_alignStart="@id/edit_user"
+            android:layout_toEndOf="@id/txt_name"
+            tools:text="左郁"/>
+
+        <TextView
+            android:id="@+id/txt_default"
+            style="@style/style_font_default_32pt"
+            android:layout_below="@id/txt_name"
+            android:layout_marginStart="40pt"
+            android:layout_marginTop="50pt"
+            android:layout_marginBottom="22pt"
+            android:text="@string/default_account"/>
+
+        <Button
+            android:id="@+id/txt_choice"
+            style="@style/style_font_default_32pt"
+            android:layout_alignBaseline="@id/txt_default"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="62pt"
+            tools:text="左郁"/>
+    </RelativeLayout>
+
+    <TextView
+        style="@style/style_font_gray_24pt"
+        android:layout_marginStart="50pt"
+        android:text="@string/prompt_cheques_bind"/>
+</LinearLayout>

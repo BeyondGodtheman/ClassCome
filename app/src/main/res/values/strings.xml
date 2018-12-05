@@ -146,6 +146,7 @@
     <!--完善信息-->
     <string name="head">头像</string>
     <string name="name">姓名</string>
+    <string name="name_space">姓  名:</string>
     <string name="sex">性别</string>
     <string name="city">所在城市</string>
     <string name="bind_phone">绑定手机</string>
@@ -165,6 +166,7 @@
     <string name="bind_wechat_cheques">绑定微信收款</string>
     <string name="bind_alipay_cheques">绑定支付宝收款</string>
     <string name="default_way">默认</string>
+    <string name="default_account">默认收款账户</string>
     <string name="unbind">未绑定</string>
     <string name="binding">已绑定</string>
     <string name="prompt_cheques_bind">绑定账户后，订单结算完成后自动打入您的账户</string>

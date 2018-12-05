@@ -21,6 +21,7 @@ class TitleManager(var activity: Activity?) {
         } else {
             view.ll_back.setOnClickListener {
                 activity?.finish()
+                activity?.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
             }
         }
 

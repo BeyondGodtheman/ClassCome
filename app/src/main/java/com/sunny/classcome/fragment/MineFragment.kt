@@ -89,7 +89,7 @@ class MineFragment : BaseFragment() {
             R.id.rl_my_publish -> intent(MineActivity::class.java)
             R.id.rl_my_partake -> intent(MineActivity::class.java)
 
-            R.id.txt_my_cheques -> intent(MineActivity::class.java)
+            R.id.txt_my_cheques -> intent(MyChequesActivity::class.java)
             R.id.txt_invitation_record -> intent(MineActivity::class.java)
             R.id.txt_my_profile -> intent(MineActivity::class.java)
             R.id.txt_my_collection -> intent(MyCollectionActivity::class.java)

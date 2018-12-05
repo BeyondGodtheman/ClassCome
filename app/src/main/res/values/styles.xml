@@ -77,6 +77,16 @@
         <item name="android:textColor">@color/color_white</item>
     </style>
 
+    <style name="style_font_gray_24pt" parent="style_font">
+        <item name="android:textSize">24pt</item>
+        <item name="android:textColor">@color/color_gray_font</item>
+    </style>
+
+    <style name="style_font_gray_30pt" parent="style_font">
+        <item name="android:textSize">30pt</item>
+        <item name="android:textColor">@color/color_gray_font</item>
+    </style>
+
     <style name="style_font_default_22pt" parent="style_font">
         <item name="android:textSize">22pt</item>
     </style>
@@ -95,6 +105,10 @@
 
     <style name="style_font_default_32pt" parent="style_font">
         <item name="android:textSize">32pt</item>
+    </style>
+
+    <style name="style_font_default_36pt" parent="style_font">
+        <item name="android:textSize">36pt</item>
     </style>
 
     <!-- 分割块样式 -->
@@ -135,8 +149,8 @@
     </style>
 
 
-    <!-- 子条目-公用样式（左侧自定义图标，右侧更多按钮） -->
-    <style name="style_item_text_icon">
+    <!-- 子条目-公用样式 img-txt-txt-img -->
+    <style name="style_mine_layout_item">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">98pt</item>
     </style>
@@ -166,7 +180,7 @@
     <!--style_title-->
     <style name="style_title">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">84pt</item>
+        <item name="android:layout_height">98pt</item>
     </style>
 
 

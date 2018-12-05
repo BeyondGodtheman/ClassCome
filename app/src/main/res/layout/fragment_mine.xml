@@ -28,8 +28,8 @@
                 android:layout_centerVertical="true"
                 android:layout_marginStart="56pt"
                 android:layout_marginTop="42pt"
-                app:riv_oval="true"
-                android:src="@mipmap/ic_default_head"/>
+                android:src="@mipmap/ic_default_head"
+                app:riv_oval="true"/>
 
             <TextView
                 android:id="@+id/txt_user_name"
@@ -57,7 +57,6 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/txt_user_address"
                 android:layout_alignStart="@id/txt_user_name"
-                android:layout_marginStart="32pt"
                 android:layout_marginTop="36pt"
                 android:layout_toEndOf="@id/img_user_head">
 
@@ -92,13 +91,13 @@
 
                 <ImageView
                     android:id="@+id/img_icon2"
-                    android:layout_width="50pt"
+                    android:layout_width="46pt"
                     android:layout_height="36pt"
                     android:layout_centerVertical="true"
                     android:layout_marginBottom="0dp"
                     android:contentDescription="@string/app"
                     android:scaleType="centerCrop"
-                    android:src="@mipmap/ic_mine_member" />
+                    android:src="@mipmap/ic_mine_member"/>
 
                 <TextView
                     android:id="@+id/txt_member"
@@ -211,59 +210,59 @@
 
         <com.sunny.classcome.widget.MineItemLayout
             android:id="@+id/txt_my_cheques"
-            style="@style/style_item_text_icon"
+            style="@style/style_mine_layout_item"
             app:mine_layout_icon="@mipmap/ic_mine_my_cheques"
-            app:mine_layout_text="@string/my_cheques"/>
+            app:mine_layout_text_left="@string/my_cheques"/>
 
         <View style="@style/style_view_divider"/>
 
 
         <com.sunny.classcome.widget.MineItemLayout
             android:id="@+id/txt_invitation_record"
-            style="@style/style_item_text_icon"
+            style="@style/style_mine_layout_item"
             app:mine_layout_icon="@mipmap/ic_mine_invitation_record"
-            app:mine_layout_text="@string/invitation_record"/>
+            app:mine_layout_text_left="@string/invitation_record"/>
 
         <View style="@style/style_view_line"/>
 
         <com.sunny.classcome.widget.MineItemLayout
             android:id="@+id/txt_my_profile"
-            style="@style/style_item_text_icon"
+            style="@style/style_mine_layout_item"
             app:mine_layout_icon="@mipmap/ic_mine_my_profile"
-            app:mine_layout_text="@string/my_profile"/>
+            app:mine_layout_text_left="@string/my_profile"/>
 
         <View style="@style/style_view_line"/>
 
         <com.sunny.classcome.widget.MineItemLayout
             android:id="@+id/txt_my_collection"
-            style="@style/style_item_text_icon"
+            style="@style/style_mine_layout_item"
             app:mine_layout_icon="@mipmap/ic_mine_my_collection"
-            app:mine_layout_text="@string/my_collection"/>
+            app:mine_layout_text_left="@string/my_collection"/>
 
         <View style="@style/style_view_line"/>
 
         <com.sunny.classcome.widget.MineItemLayout
             android:id="@+id/txt_feedback"
-            style="@style/style_item_text_icon"
+            style="@style/style_mine_layout_item"
             app:mine_layout_icon="@mipmap/ic_mine_feedback"
-            app:mine_layout_text="@string/feedback"/>
+            app:mine_layout_text_left="@string/feedback"/>
 
         <View style="@style/style_view_divider"/>
 
 
         <com.sunny.classcome.widget.MineItemLayout
             android:id="@+id/txt_setting"
-            style="@style/style_item_text_icon"
+            style="@style/style_mine_layout_item"
             app:mine_layout_icon="@mipmap/ic_mine_setting"
-            app:mine_layout_text="@string/setting"/>
+            app:mine_layout_text_left="@string/setting"/>
 
         <View style="@style/style_view_line"/>
 
         <com.sunny.classcome.widget.MineItemLayout
             android:id="@+id/txt_business_cooperation"
-            style="@style/style_item_text_icon"
+            style="@style/style_mine_layout_item"
             app:mine_layout_icon="@mipmap/ic_mine_business_cooperation"
-            app:mine_layout_text="@string/business_cooperation"/>
+            app:mine_layout_text_left="@string/business_cooperation"/>
 
         <View
             style="@style/style_view_line"

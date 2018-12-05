@@ -1,10 +1,10 @@
 package com.sunny.classcome.activity
 
-import android.support.v4.content.ContextCompat
 import android.view.View
-import android.widget.TextView
 import com.sunny.classcome.R
 import com.sunny.classcome.base.BaseActivity
+import com.sunny.classcome.utils.showBlueBtn
+import com.sunny.classcome.utils.showGrayBtn
 import kotlinx.android.synthetic.main.activity_order_detail.*
 
 /**
@@ -200,21 +200,6 @@ class OrderDetailActivity : BaseActivity() {
     private fun showOrderToBeAudited() {
         txt_info.text = "发布信息待审核"
         showGrayBtn(txt_order_right, "取消发布")
-    }
-
-
-    private fun showBlueBtn(txt: TextView, str: String) {
-        txt.visibility = View.VISIBLE
-        txt.text = str
-        txt.setBackgroundResource(R.drawable.draw_bg_fillet_blue_border)
-        txt.setTextColor(ContextCompat.getColor(this, R.color.color_nav_blue))
-    }
-
-    private fun showGrayBtn(txt: TextView, str: String) {
-        txt.visibility = View.VISIBLE
-        txt.text = str
-        txt.setBackgroundResource(R.drawable.draw_bg_fillet_gray_border)
-        txt.setTextColor(ContextCompat.getColor(this, R.color.color_gray_font))
     }
 
     override fun onClick(v: View?) {
