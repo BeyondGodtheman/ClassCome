@@ -16,7 +16,7 @@
         style="@style/style_font"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="43pt"
-        android:text="@string/app_name"
+        android:text="@string/about_name"
         android:textSize="42pt"
         android:textStyle="bold" />
 
