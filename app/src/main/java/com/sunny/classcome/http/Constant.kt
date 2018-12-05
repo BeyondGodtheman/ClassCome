@@ -57,5 +57,9 @@ object Constant {
     const val PUB_GETCITYLIST = "pub/getCityList" //获取城市地区
 
     const val COURSE_GETCOURSELISTS = "course/getCourselists" //获取课程列表
+
+    const val USER_GETSCORERULE = "user/getScoreRule" //积分说明
+
+    const val USER_GETMYSCORE = "user/getMyScore" //我的积分
 }
 

@@ -6,6 +6,8 @@ import com.sunny.classcome.R
 import com.sunny.classcome.adapter.PointAdapter
 import com.sunny.classcome.base.BaseActivity
 import com.sunny.classcome.bean.PointBean
+import com.sunny.classcome.http.ApiManager
+import com.sunny.classcome.http.Constant
 import com.sunny.classcome.utils.IntentUtil
 import kotlinx.android.synthetic.main.activity_point.*
 
@@ -17,13 +19,10 @@ import kotlinx.android.synthetic.main.activity_point.*
  */
 class PointActivity : BaseActivity() {
 
-    private val list: ArrayList<PointBean> by lazy {
-        arrayListOf(
-                PointBean("第一次登陆", "+100", "2018.12.03"),
-                PointBean("身份验证", "+200", "2018.12.01"),
-                PointBean("第一次竞标成功", "+200"),
-                PointBean("第一次发布成功", "+200")
-        )
+    private val list =  ArrayList<PointBean.Bean.Data>()
+
+    private val noviceAdapter:PointAdapter by lazy {
+        PointAdapter(list)
     }
 
     override fun setLayout(): Int = R.layout.activity_point
@@ -31,12 +30,12 @@ class PointActivity : BaseActivity() {
     override fun initView() {
         goneTitle()
 
-        txt_point.text = "500"
+        txt_point.text = intent.getStringExtra("point")?:"0"
 
         ll_back.setOnClickListener(this)
         ll_prompt.setOnClickListener(this)
 
-        val noviceAdapter = PointAdapter(list)
+
         recl_point.layoutManager = LinearLayoutManager(this)
         recl_point.adapter = noviceAdapter
 
@@ -47,5 +46,24 @@ class PointActivity : BaseActivity() {
             R.id.ll_back -> finish()
             R.id.ll_prompt -> IntentUtil.start(this, PointDescActivity::class.java)
         }
+    }
+
+    override fun loadData() {
+        showLoading()
+        ApiManager.post(composites,null,Constant.USER_GETMYSCORE,object :ApiManager.OnResult<PointBean>(){
+            override fun onSuccess(data: PointBean) {
+                hideLoading()
+                list.clear()
+                data.content?.dataList?.let {
+                    list.addAll(it)
+                }
+                noviceAdapter.notifyDataSetChanged()
+            }
+
+            override fun onFailed(code: String, message: String) {
+                hideLoading()
+            }
+
+        })
     }
 }

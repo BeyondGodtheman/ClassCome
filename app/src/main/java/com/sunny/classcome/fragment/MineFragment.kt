@@ -1,5 +1,6 @@
 package com.sunny.classcome.fragment
 
+import android.content.Intent
 import android.view.View
 import com.sunny.classcome.R
 import com.sunny.classcome.activity.*
@@ -80,7 +81,8 @@ class MineFragment : BaseFragment() {
             R.id.img_more -> intent(MineActivity::class.java)
             R.id.img_message -> intent(MyMsgActivity::class.java)
 
-            R.id.rl_points -> intent(PointActivity::class.java)
+            R.id.rl_points -> startActivity(Intent(context,PointActivity::class.java)
+                    .putExtra("point",txt_points.text.toString()))
             R.id.rl_member -> intent(MineActivity::class.java)
 
             R.id.rl_my_trip -> intent(PurchaserActivity::class.java)

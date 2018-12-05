@@ -7,7 +7,23 @@ package com.sunny.classcome.bean
  * Date 2018/12/2 23:19
  */
 data class PointBean(
-        val desc: String,
-        val point: String,
-        val date: String = "1970.01.01"
-)
+        val code: String?,
+        val msg: String?,
+        val content: Bean?
+) {
+    data class Bean(
+            var pageSize: String?,
+            var pageIndex: String?,
+            var totalPage: String?,
+            var curPageRecords: String?,
+            var totalRecords: String?,
+            var dataList: ArrayList<Data>?) {
+
+        data class Data(
+                var id: String,
+                var userId: String,
+                var score: String,
+                var createTime: String,
+                var source: String)
+    }
+}

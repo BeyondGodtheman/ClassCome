@@ -5,7 +5,9 @@ import android.view.View
 import com.sunny.classcome.R
 import com.sunny.classcome.adapter.PointDescAdapter
 import com.sunny.classcome.base.BaseActivity
-import com.sunny.classcome.bean.PointBean
+import com.sunny.classcome.bean.ScoreRuleBean
+import com.sunny.classcome.http.ApiManager
+import com.sunny.classcome.http.Constant
 import kotlinx.android.synthetic.main.activity_point_desc.*
 
 /**
@@ -16,24 +18,16 @@ import kotlinx.android.synthetic.main.activity_point_desc.*
  */
 class PointDescActivity : BaseActivity() {
 
-    private val noviceList: ArrayList<PointBean> by lazy {
-        arrayListOf(
-                PointBean("第一次登陆(注册)","+100"),
-                PointBean("身份验证","+200"),
-                PointBean("第一次竞标成功","+200"),
-                PointBean("第一次发布成功","+200")
-        )
+    private val noviceList = ArrayList<ScoreRuleBean.Bean.Data>()
+
+    private val dailyList = ArrayList<ScoreRuleBean.Bean.Data>()
+
+    private val noviceAdapter:PointDescAdapter by lazy {
+        PointDescAdapter(noviceList)
     }
 
-    private val dailyList: ArrayList<PointBean> by lazy {
-        arrayListOf(
-                PointBean("每天登陆","+10"),
-                PointBean("每次竞标成功","+50"),
-                PointBean("每次订单完成","+50"),
-                PointBean("分享课程","+50 (单日领取上线100)"),
-                PointBean("取消课程 (2小时前)","-500"),
-                PointBean("取消课程 (2小时内)","-1000")
-        )
+    private val dailyAdapter:PointDescAdapter by lazy {
+        PointDescAdapter(dailyList)
     }
 
     override fun setLayout(): Int = R.layout.activity_point_desc
@@ -41,15 +35,44 @@ class PointDescActivity : BaseActivity() {
     override fun initView() {
         showTitle(titleManager.defaultTitle(getString(R.string.point_description)))
 
-        val noviceAdapter = PointDescAdapter(noviceList)
+
         recl_novice.layoutManager = LinearLayoutManager(this)
         recl_novice.adapter = noviceAdapter
 
-        val adapter = PointDescAdapter(dailyList)
+
         recl_daily.layoutManager = LinearLayoutManager(this)
-        recl_daily.adapter = adapter
+        recl_daily.adapter = dailyAdapter
     }
 
     override fun onClick(v: View?) {
+    }
+
+
+    override fun loadData() {
+        showLoading()
+        ApiManager.post(composites,null,Constant.USER_GETSCORERULE,object :ApiManager.OnResult<ScoreRuleBean>(){
+            override fun onSuccess(data: ScoreRuleBean) {
+                hideLoading()
+                noviceList.clear()
+                dailyList.clear()
+
+                data.content?.novice?.let {
+                    noviceList.addAll(it)
+                }
+
+                data.content?.daily?.let {
+                    dailyList.addAll(it)
+                }
+
+                noviceAdapter.notifyDataSetChanged()
+
+                dailyAdapter.notifyDataSetChanged()
+            }
+
+            override fun onFailed(code: String, message: String) {
+                hideLoading()
+            }
+
+        })
     }
 }
