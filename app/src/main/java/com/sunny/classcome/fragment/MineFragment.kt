@@ -5,11 +5,13 @@ import com.sunny.classcome.R
 import com.sunny.classcome.activity.*
 import com.sunny.classcome.base.BaseFragment
 import com.sunny.classcome.bean.BaseBean
+import com.sunny.classcome.bean.HtmlBean
 import com.sunny.classcome.bean.MineBean
 import com.sunny.classcome.http.ApiManager
 import com.sunny.classcome.http.Constant
 import com.sunny.classcome.utils.GlideUtil
 import com.sunny.classcome.utils.IntentUtil
+import com.sunny.classcome.utils.ToastUtil
 import com.sunny.classcome.utils.UserManger
 import kotlinx.android.synthetic.main.fragment_mine.*
 
@@ -68,7 +70,7 @@ class MineFragment : BaseFragment() {
             R.id.txt_my_collection -> intent(MyCollectionActivity::class.java)
             R.id.txt_feedback -> intent(FeedbackActivity::class.java)
             R.id.txt_setting -> intent(SettingActivity::class.java)
-            R.id.txt_business_cooperation -> intent(MineActivity::class.java)
+            R.id.txt_business_cooperation -> startWeb(Constant.PUB_COOPERATION) //商务合作
         }
     }
 
@@ -77,10 +79,8 @@ class MineFragment : BaseFragment() {
     }
 
     override fun loadData() {
-
         ApiManager.post(getBaseActivity().composites,null, Constant.USER_MYPAGE, object : ApiManager.OnResult<BaseBean<MineBean>>() {
             override fun onSuccess(data: BaseBean<MineBean>) {
-
                 data.content?.let {
                     if (it.statu == "1"){
                         GlideUtil.loadHead(requireContext(),img_user_head,it.data?.userPic?:"")
@@ -93,11 +93,31 @@ class MineFragment : BaseFragment() {
 
 
             }
-
             override fun onFailed(code: String, message: String) {
 
             }
         })
     }
 
+
+
+    private fun startWeb(url:String){
+        showLoading()
+        ApiManager.post(getBaseActivity().composites,null,url,object :ApiManager.OnResult<BaseBean<ArrayList<HtmlBean>>>(){
+            override fun onSuccess(data: BaseBean<ArrayList<HtmlBean>>) {
+                hideLoading()
+                data.content?.data?.let {
+                    if (it.size > 0){
+                        WebActivity.start(requireContext(),it[0].title,it[0].content)
+                    }
+                    return
+                }
+                ToastUtil.show(data.content?.info)
+            }
+            override fun onFailed(code: String, message: String) {
+                hideLoading()
+            }
+
+        })
+    }
 }

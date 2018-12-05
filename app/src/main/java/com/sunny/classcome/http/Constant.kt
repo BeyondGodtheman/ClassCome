@@ -48,5 +48,6 @@ object Constant {
     const val COURSE_GETIMAGEOFPAGE = "course/getImageOfPage" //首页轮播图
 
     const val USER_MYPAGE = "user/myPage" //我的
+    const val PUB_COOPERATION = "pub/cooperation" //商务合作
 }
 
