@@ -14,7 +14,6 @@ import com.sunny.classcome.widget.popup.LocationPopup
 import kotlinx.android.synthetic.main.fragment_class_list.*
 
 class ClassListFragment : BaseFragment() {
-    private var locationFlag = false
 
     private var sortIndex = 0
 
@@ -23,11 +22,11 @@ class ClassListFragment : BaseFragment() {
     val dataList = arrayListOf<ClassBean.Bean.Data>()
 
     private val topArrowList: ArrayList<ImageView> by lazy {
-        arrayListOf(img_hot_top, img_price_top, img_time_top)
+        arrayListOf(img_local_top, img_hot_top, img_price_top, img_time_top)
     }
 
     private val bottomArrowList: ArrayList<ImageView> by lazy {
-        arrayListOf(img_hot_bottom, img_price_bottom, img_time_bottom)
+        arrayListOf(img_local_bottom, img_hot_bottom, img_price_bottom, img_time_bottom)
     }
 
 
@@ -49,16 +48,16 @@ class ClassListFragment : BaseFragment() {
     override fun onClick(v: View) {
         when (v.id) {
             R.id.ll_location -> {
-                locationAction()
-            }
-            R.id.ll_hot -> {
                 sort(0)
             }
-            R.id.ll_price -> {
+            R.id.ll_hot -> {
                 sort(1)
             }
-            R.id.ll_time -> {
+            R.id.ll_price -> {
                 sort(2)
+            }
+            R.id.ll_time -> {
+                sort(3)
             }
         }
     }
@@ -71,35 +70,29 @@ class ClassListFragment : BaseFragment() {
         }
         sortIndex = mSortIndex
 
-        if (sortFlag) {
+        sortFlag = if (sortFlag) {
             topArrowList[sortIndex].setImageResource(R.mipmap.ic_arrow_top_blue)
-            sortFlag = false
+            false
         } else {
             bottomArrowList[sortIndex].setImageResource(R.mipmap.ic_arrow_bottom_blue)
-            sortFlag = true
+            true
         }
-    }
 
-
-    //地点事件
-    private fun locationAction() {
-        if (locationFlag) {
-            img_location.setImageResource(R.mipmap.ic_arrow_bottom_gray)
-        } else {
-            img_location.setImageResource(R.mipmap.ic_arrow_top_blue)
-            val locationPopup = LocationPopup(requireContext())
-            locationPopup.setOnDismissListener {
-                locationAction()
-            }
-            locationPopup.showAsDropDown(ll_location)
-        }
-        locationFlag = !locationFlag
+        loadClass()
     }
 
 
     fun loadClass() {
+        val sortStr = when (sortIndex) {
+            0 -> "sortAdress"
+            1 -> "sortPopularity"
+            2 -> "sortPrice"
+            else -> "sortTime"
+        }
         val params = HashMap<String, String>()
-        params["cityId"] =  UserManger.getAddress().split(",")[0]
+        params["cityId"] = UserManger.getAddress().split(",")[0]
+        params[sortStr] = if (sortFlag) "1" else "0"
+
         ApiManager.post(getBaseActivity().composites, params, Constant.COURSE_GETCOURSELISTS, object : ApiManager.OnResult<ClassBean>() {
             override fun onSuccess(data: ClassBean) {
                 dataList.clear()
