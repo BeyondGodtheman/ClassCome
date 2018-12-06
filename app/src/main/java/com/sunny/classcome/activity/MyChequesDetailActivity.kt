@@ -30,7 +30,7 @@ class MyChequesDetailActivity : BaseActivity() {
     override fun initView() {
         showTitle(titleManager.defaultTitle(getString(R.string.detailed)))
 
-        krl.setBackgroundResource(R.color.color_white)
+//        krl.setBackgroundResource(R.color.color_white)
 
         recl.layoutManager = LinearLayoutManager(this)
         recl.adapter = MyChequesDetailAdapter(list)

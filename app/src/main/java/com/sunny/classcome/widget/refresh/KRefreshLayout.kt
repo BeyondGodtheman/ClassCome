@@ -202,7 +202,7 @@ class KRefreshLayout(context: Context, attrs: AttributeSet?, defStyleAttr: Int) 
 
 
     override fun requestDisallowInterceptTouchEvent(disallowIntercept: Boolean) {
-        if ( mContentView is AbsListView || (mContentView!=null&&!ViewCompat.isNestedScrollingEnabled(mContentView!!))) {
+        if (mContentView is AbsListView || (mContentView != null && !ViewCompat.isNestedScrollingEnabled(mContentView!!))) {
 
         } else {
             super.requestDisallowInterceptTouchEvent(disallowIntercept)
@@ -230,7 +230,8 @@ class KRefreshLayout(context: Context, attrs: AttributeSet?, defStyleAttr: Int) 
     private inner class RefreshGestureListener : GestureDetector.SimpleOnGestureListener() {
         override fun onScroll(e1: MotionEvent, e2: MotionEvent, distanceX: Float, distanceY: Float): Boolean {
             mGestureExecute = true
-            val maxOffset = mHeader?.maxOffsetHeight() ?: if (defaultMaxOffset == -1) height else defaultMaxOffset
+            val maxOffset = mHeader?.maxOffsetHeight()
+                    ?: if (defaultMaxOffset == -1) height else defaultMaxOffset
             if ((mCurrentOffset == 0 && distanceY > 0) || (mCurrentOffset == maxOffset && distanceY < 0))
                 return super.onScroll(e1, e2, distanceX, distanceY)
             var offset = -calculateOffset(distanceY.toInt())
@@ -258,7 +259,7 @@ class KRefreshLayout(context: Context, attrs: AttributeSet?, defStyleAttr: Int) 
         }
     }
 
-    private fun canChildScrollUp(): Boolean = mContentView?.canScrollVertically( -1)?:false
+    private fun canChildScrollUp(): Boolean = mContentView?.canScrollVertically(-1) ?: false
 
     override fun onStartNestedScroll(child: View, target: View, nestedScrollAxes: Int): Boolean {
         return isEnabled && refreshEnable && !(mRefreshing && pinContent && keepHeaderWhenRefresh)
@@ -281,7 +282,8 @@ class KRefreshLayout(context: Context, attrs: AttributeSet?, defStyleAttr: Int) 
 
     override fun onNestedScroll(target: View, dxConsumed: Int, dyConsumed: Int, dxUnconsumed: Int, dyUnconsumed: Int) {
         var mUnconsumed: Int = dyUnconsumed
-        val maxOffset = mHeader?.maxOffsetHeight() ?: if (defaultMaxOffset == -1) height else defaultMaxOffset
+        val maxOffset = mHeader?.maxOffsetHeight()
+                ?: if (defaultMaxOffset == -1) height else defaultMaxOffset
         if (dyUnconsumed < 0 && !canChildScrollUp() && mCurrentOffset < maxOffset) {
             if (mCurrentOffset - dyUnconsumed > maxOffset) {
                 mUnconsumed = mCurrentOffset - maxOffset
@@ -333,7 +335,8 @@ class KRefreshLayout(context: Context, attrs: AttributeSet?, defStyleAttr: Int) 
             //本次Fling移动距离(<0向下滚动、>0向上滚动)
             var offset = mLastFlingY - mScroller.currY
             val refreshHeight = mHeader?.refreshHeight() ?: defaultRefreshHeight
-            val maxOffset = mHeader?.maxOffsetHeight() ?: if (defaultMaxOffset == -1) height else defaultMaxOffset
+            val maxOffset = mHeader?.maxOffsetHeight()
+                    ?: if (defaultMaxOffset == -1) height else defaultMaxOffset
             val mFlingMaxHeight = if (offset > 0) refreshHeight else maxOffset
             //记录上次Fling的Y值
             mLastFlingY = mScroller.currY
@@ -363,7 +366,8 @@ class KRefreshLayout(context: Context, attrs: AttributeSet?, defStyleAttr: Int) 
      * 计算实际偏移量
      */
     private fun calculateOffset(offset: Int): Int {
-        val maxOffset = mHeader?.maxOffsetHeight() ?: if (defaultMaxOffset == -1) height else defaultMaxOffset
+        val maxOffset = mHeader?.maxOffsetHeight()
+                ?: if (defaultMaxOffset == -1) height else defaultMaxOffset
         val mOffset: Int
         val downResistance: Float
         downResistance = if (offset > 0) {
@@ -461,7 +465,7 @@ class KRefreshLayout(context: Context, attrs: AttributeSet?, defStyleAttr: Int) 
         mOffsetAnimator.start()
     }
 
-    fun setKRefreshListener(refreshListener: (refreshLayout: KRefreshLayout) -> Unit){
+    fun setKRefreshListener(refreshListener: (refreshLayout: KRefreshLayout) -> Unit) {
         mRefreshListener = refreshListener
     }
 
@@ -471,7 +475,7 @@ class KRefreshLayout(context: Context, attrs: AttributeSet?, defStyleAttr: Int) 
      * percent(偏移比率)
      * refreshing(是否在刷新)
      */
-    fun setKScrollListener(scrollListener: (offset: Int, distance: Int, percent: Float, refreshing: Boolean) -> Unit){
+    fun setKScrollListener(scrollListener: (offset: Int, distance: Int, percent: Float, refreshing: Boolean) -> Unit) {
         mScrollListener = scrollListener
     }
 
@@ -529,11 +533,14 @@ class KRefreshLayout(context: Context, attrs: AttributeSet?, defStyleAttr: Int) 
                 mHeader?.onReset(this)
             } else {
                 //停滞时间
-                val retention = if (isSuccess) mHeader?.succeedRetention() ?: 0 else mHeader?.failingRetention() ?: 0
+                val retention = if (isSuccess) mHeader?.succeedRetention()
+                        ?: 0 else mHeader?.failingRetention() ?: 0
                 postDelayed({
                     animTo(0)
                 }, retention)
             }
         }
     }
+
+    fun getRefreshing() = mRefreshing
 }

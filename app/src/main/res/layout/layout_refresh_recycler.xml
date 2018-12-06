@@ -4,8 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v7.widget.RecyclerView
+    <com.sunny.classcome.widget.refresh.KRecyclerView
         android:id="@+id/recl"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
 </com.sunny.classcome.widget.refresh.KRefreshLayout>

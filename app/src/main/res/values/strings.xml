@@ -191,7 +191,11 @@
     <string name="qqNo">2142353454</string>
     <string name="wxNo">2142353454</string>
     <string name="copyright">上海万宾文化传媒有限公司\n版权所有</string>
-    
+
+    <!--邀请-->
+    <string name="share_invite">邀请得积分</string>
+    <string name="share_invite_desc">邀请一起来参与代课平台</string>
+
     <!--积分-->
     <string name="point">积分</string>
     <string name="my_point">我的积分</string>

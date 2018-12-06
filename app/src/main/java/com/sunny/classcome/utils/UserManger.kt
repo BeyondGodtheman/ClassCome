@@ -1,6 +1,7 @@
 package com.sunny.classcome.utils
 
 import com.sunny.classcome.bean.LoginBean
+import com.sunny.classcome.bean.MineBean
 import com.sunny.classcome.http.ApiManager
 
 /**
@@ -11,9 +12,10 @@ import com.sunny.classcome.http.ApiManager
  */
 object UserManger {
     private const val LOGIN = "login"
+    private const val MINE = "mine"
     private const val CITY = "city"
 
-    fun isLogin():Boolean{
+    fun isLogin(): Boolean {
         return getLogin() != null
     }
 
@@ -29,12 +31,31 @@ object UserManger {
         return ApiManager.gSon.fromJson<LoginBean>(json, LoginBean::class.java)
     }
 
+    fun setMine(mineBean: MineBean) {
+        SharedUtil.setString(MINE, ApiManager.gSon.toJson(mineBean))
+    }
+
+    fun getMine(): MineBean? {
+        val json = SharedUtil.getString(LOGIN)
+        if (json.isEmpty()) {
+            return null
+        }
+        return ApiManager.gSon.fromJson<MineBean>(json, MineBean::class.java)
+    }
+
 
     //保存选择地址
-    fun setAddress(id:String,name:String){
+    fun setAddress(id: String, name: String) {
         SharedUtil.setString(CITY, "$id,$name")
     }
 
     //获取选择地址
-    fun getAddress():String = SharedUtil.getString(CITY)
+    fun getAddress(): String = SharedUtil.getString(CITY)
+
+
+    fun clear(){
+        SharedUtil.remove(LOGIN)
+        SharedUtil.remove(CITY)
+        SharedUtil.remove(MINE)
+    }
 }

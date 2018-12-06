@@ -31,7 +31,6 @@ class WebActivity : BaseActivity() {
         intent.getStringExtra("data")?.let {
             val html = "<html><head><meta name=\"viewport\" content=\"width=device-width,initial-scale=1, minimum-scale=1, maximum-scale=1,user-scalable=no\">" +
                     "<meta http-equiv=Content-Type content=\"text/html; charset=gb2312\"></head><body style=\"margin:0;padding:0\">" + it + "</body></html>"
-
             webView.loadDataWithBaseURL(null,html, "text/html", "gb2312",null)
         }
     }

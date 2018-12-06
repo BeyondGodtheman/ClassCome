@@ -58,8 +58,11 @@ class MineFragment : BaseFragment() {
         if (UserManger.isLogin()){
             ApiManager.post(getBaseActivity().composites,null, Constant.USER_MYPAGE, object : ApiManager.OnResult<BaseBean<MineBean>>() {
                 override fun onSuccess(data: BaseBean<MineBean>) {
-                    data.content?.let {
+                    data.content?.let { it ->
                         if (it.statu == "1"){
+                            it.data?.let {
+                                UserManger.setMine(it)
+                            }
                             GlideUtil.loadHead(requireContext(),img_user_head,it.data?.userPic?:"")
                             txt_user_name.text = it.data?.userName
                             txt_user_address.text = it.data?.address

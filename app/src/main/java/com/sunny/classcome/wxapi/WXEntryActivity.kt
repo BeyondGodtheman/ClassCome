@@ -50,7 +50,7 @@ class WXEntryActivity : Activity(), IWXAPIEventHandler {
         }
 
 
-        fun shareWeb(url:String){
+        fun shareWeb(url: String) {
             // 判断是否安装了微信客户端
             if (!MyApplication.getApp().wxApi.isWXAppInstalled) {
                 ToastUtil.show("您还未安装微信客户端！")
@@ -60,8 +60,8 @@ class WXEntryActivity : Activity(), IWXAPIEventHandler {
             wxWebPageObject.webpageUrl = url
 
             val msg = WXMediaMessage(wxWebPageObject)
-            msg.title = MyApplication.getApp().getString(R.string.app_name)
-            msg.description = ""
+            msg.title = MyApplication.getApp().getString(R.string.share_invite)
+            msg.description = (UserManger.getMine()?.userName + MyApplication.getApp().getString(R.string.share_invite_desc))
             val req = SendMessageToWX.Req()
             req.message = msg
             MyApplication.getApp().wxApi.sendReq(req)
