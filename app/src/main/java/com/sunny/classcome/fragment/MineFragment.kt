@@ -81,12 +81,13 @@ class MineFragment : BaseFragment() {
     override fun onClick(v: View) {
         when (v.id) {
             R.id.img_user_head,
-            R.id.img_more -> intent(MineActivity::class.java)
+            R.id.img_more -> {}
             R.id.img_message -> intent(MyMsgActivity::class.java)
 
             R.id.rl_points -> startActivity(Intent(context,PointActivity::class.java)
                     .putExtra("point",txt_points.text.toString()))
-            R.id.rl_member -> intent(MineActivity::class.java)
+            R.id.rl_member -> startActivity(Intent(context,LevelActivity::class.java)
+                    .putExtra("level",txt_member.text.toString()))
 
             R.id.rl_my_trip -> intent(PurchaserActivity::class.java)
             R.id.rl_my_publish -> intent(MineActivity::class.java)

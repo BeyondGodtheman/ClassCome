@@ -14,7 +14,7 @@ class TitleManager(var activity: Activity?) {
 
     fun defaultTitle(title: String, isShowIcon: Boolean, rightText: String, rightOnClickListener: View.OnClickListener?): View {
         val view = View.inflate(activity, R.layout.layout_default_title, null)
-        view.txt_title.text = title
+        view.txt_base_title.text = title
 
         if (!isShowIcon) {
             view.ll_back.visibility = View.GONE
@@ -25,10 +25,10 @@ class TitleManager(var activity: Activity?) {
             }
         }
 
-        view.txt_right.text = rightText
+        view.txt_base_right.text = rightText
 
         rightOnClickListener?.let {
-            view.txt_right.setOnClickListener(rightOnClickListener)
+            view.txt_base_right.setOnClickListener(rightOnClickListener)
         }
 
         return view

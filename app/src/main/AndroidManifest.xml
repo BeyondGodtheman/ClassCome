@@ -126,5 +126,13 @@
         <activity
             android:name=".activity.AboutActivity"
             android:launchMode="singleTop"/>
+
+        <!--等级-->
+        <activity android:name=".activity.LevelActivity"
+            android:launchMode="singleTop"/>
+
+        <!--等级说明-->
+        <activity android:name=".activity.LevelDescActivity"
+            android:launchMode="singleTop"/>
     </application>
 </manifest>

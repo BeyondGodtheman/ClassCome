@@ -61,5 +61,9 @@ object Constant {
     const val USER_GETSCORERULE = "user/getScoreRule" //积分说明
 
     const val USER_GETMYSCORE = "user/getMyScore" //我的积分
+
+    const val USER_GETMYGRADE = "user/getMyGrade" //我的等级
+
+    const val USER_GETGRADERULE = "user/getGradeRule" //等级说明
 }
 

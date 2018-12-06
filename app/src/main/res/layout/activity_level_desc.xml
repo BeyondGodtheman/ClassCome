@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:overScrollMode="never"/>
+
+    <TextView
+        android:id="@+id/txt_desc"
+        style="@style/style_font_default_24pt"
+        android:layout_width="match_parent"
+        android:background="@color/color_white"
+        android:paddingStart="67pt"
+        android:paddingTop="52pt"
+        android:paddingEnd="67pt"
+        android:paddingBottom="30pt"
+        tools:text="等级越高，您将获得更高的收益！" />
+</LinearLayout>

@@ -28,6 +28,7 @@
 
 
         <TextView
+            android:id="@+id/txt_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
@@ -72,6 +73,7 @@
             tools:text="500"/>
 
         <TextView
+            android:id="@+id/txt_desc"
             style="@style/style_font_white_24pt"
             android:layout_alignBaseline="@id/txt_point"
             android:layout_marginEnd="40pt"

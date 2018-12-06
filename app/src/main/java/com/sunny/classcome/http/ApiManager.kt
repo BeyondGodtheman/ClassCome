@@ -62,7 +62,7 @@ object ApiManager {
     const val OTHER = 0x2
 
 
-    private fun getHost(): String = "http://www.coursecoming.com/api/"
+    private fun getHost(): String = if (Constant.isDebug()) "http://47.105.193.86:8081/course/api/" else "http://www.coursecoming.com/api/"
 
     /**
      * 发起一个网络请求并解析成实体类
@@ -137,17 +137,17 @@ object ApiManager {
     fun <T> post(composites: CompositeDisposable?, params: Map<String, String>?, url: String, onResult: OnResult<T>) {
         val jsonObj = JSONObject()
         params?.forEach {
-            jsonObj.put(it.key,it.value)
+            jsonObj.put(it.key, it.value)
         }
         jsonObj.put("deviceId", Build.SERIAL)
-        jsonObj.put("os_version",Build.VERSION.RELEASE)
-        jsonObj.put("platform","Android")
+        jsonObj.put("os_version", Build.VERSION.RELEASE)
+        jsonObj.put("platform", "Android")
         jsonObj.put("version", BuildConfig.VERSION_NAME)
         UserManger.getLogin()?.let {
-            jsonObj.put("token",it.content.token)
+            jsonObj.put("token", it.content.token)
         }
 
-        postJson(composites,jsonObj.toString(),url,onResult)
+        postJson(composites, jsonObj.toString(), url, onResult)
     }
 
 
@@ -195,7 +195,6 @@ object ApiManager {
         abstract fun onSuccess(data: T)
         abstract fun onFailed(code: String, message: String)
     }
-
 
 
     @Suppress("UNCHECKED_CAST")

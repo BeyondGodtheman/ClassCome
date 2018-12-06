@@ -33,7 +33,7 @@ class LoginActivity : BaseActivity() {
     private val passLoginFragment: PassLoginFragment by lazy {
         PassLoginFragment().apply {
             onChangeLogin = {
-                titleView.txt_title.text = getString(R.string.fast_login)
+                titleView.txt_base_title.text = getString(R.string.fast_login)
                 fastLoginFragment.initPhone()
                 supportFragmentManager.beginTransaction().show(fastLoginFragment).hide(passLoginFragment).commit()
             }
@@ -43,7 +43,7 @@ class LoginActivity : BaseActivity() {
     private val fastLoginFragment: FastLoginFragment by lazy {
         FastLoginFragment().apply {
             onChangeLogin = {
-                titleView.txt_title.text = getString(R.string.login_pass_title)
+                titleView.txt_base_title.text = getString(R.string.login_pass_title)
                 passLoginFragment.initPhone()
                 supportFragmentManager.beginTransaction().show(passLoginFragment).hide(fastLoginFragment).commit()
             }
