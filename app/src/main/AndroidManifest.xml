@@ -134,5 +134,9 @@
         <!--等级说明-->
         <activity android:name=".activity.LevelDescActivity"
             android:launchMode="singleTop"/>
+
+        <!--通用list页面-->
+        <activity android:name=".activity.ListActivity"
+            android:launchMode="singleTop"/>
     </application>
 </manifest>

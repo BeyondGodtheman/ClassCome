@@ -55,15 +55,16 @@ class MineFragment : BaseFragment() {
 
     override fun update() {
         super.update()
-        if (UserManger.isLogin()){
-            ApiManager.post(getBaseActivity().composites,null, Constant.USER_MYPAGE, object : ApiManager.OnResult<BaseBean<MineBean>>() {
+        if (UserManger.isLogin()) {
+            ApiManager.post(getBaseActivity().composites, null, Constant.USER_MYPAGE, object : ApiManager.OnResult<BaseBean<MineBean>>() {
                 override fun onSuccess(data: BaseBean<MineBean>) {
                     data.content?.let { it ->
-                        if (it.statu == "1"){
+                        if (it.statu == "1") {
                             it.data?.let {
                                 UserManger.setMine(it)
                             }
-                            GlideUtil.loadHead(requireContext(),img_user_head,it.data?.userPic?:"")
+                            GlideUtil.loadHead(requireContext(), img_user_head, it.data?.userPic
+                                    ?: "")
                             txt_user_name.text = it.data?.userName
                             txt_user_address.text = it.data?.address
                             txt_points.text = it.data?.source
@@ -71,23 +72,32 @@ class MineFragment : BaseFragment() {
                         }
                     }
                 }
+
                 override fun onFailed(code: String, message: String) {
 
                 }
             })
+        } else {
+            (getBaseActivity() as HomeActivity).let {
+                if (it.getCurrentIndext() != 0){
+                    it.initTabView(0) //切换到首页
+                    intent(LoginActivity::class.java)
+                }
+            }
         }
     }
 
     override fun onClick(v: View) {
         when (v.id) {
             R.id.img_user_head,
-            R.id.img_more -> {}
+            R.id.img_more -> {
+            }
             R.id.img_message -> intent(MyMsgActivity::class.java)
 
-            R.id.rl_points -> startActivity(Intent(context,PointActivity::class.java)
-                    .putExtra("point",txt_points.text.toString()))
-            R.id.rl_member -> startActivity(Intent(context,LevelActivity::class.java)
-                    .putExtra("level",txt_member.text.toString()))
+            R.id.rl_points -> startActivity(Intent(context, PointActivity::class.java)
+                    .putExtra("point", txt_points.text.toString()))
+            R.id.rl_member -> startActivity(Intent(context, LevelActivity::class.java)
+                    .putExtra("level", txt_member.text.toString()))
 
             R.id.rl_my_trip -> intent(PurchaserActivity::class.java)
             R.id.rl_my_publish -> intent(MineActivity::class.java)
@@ -108,19 +118,20 @@ class MineFragment : BaseFragment() {
     }
 
 
-    private fun startWeb(url:String){
+    private fun startWeb(url: String) {
         showLoading()
-        ApiManager.post(getBaseActivity().composites,null,url,object :ApiManager.OnResult<BaseBean<ArrayList<HtmlBean>>>(){
+        ApiManager.post(getBaseActivity().composites, null, url, object : ApiManager.OnResult<BaseBean<ArrayList<HtmlBean>>>() {
             override fun onSuccess(data: BaseBean<ArrayList<HtmlBean>>) {
                 hideLoading()
                 data.content?.data?.let {
-                    if (it.size > 0){
-                        WebActivity.start(requireContext(),it[0].title,it[0].content)
+                    if (it.size > 0) {
+                        WebActivity.start(requireContext(), it[0].title, it[0].content)
                     }
                     return
                 }
                 ToastUtil.show(data.content?.info)
             }
+
             override fun onFailed(code: String, message: String) {
                 hideLoading()
             }

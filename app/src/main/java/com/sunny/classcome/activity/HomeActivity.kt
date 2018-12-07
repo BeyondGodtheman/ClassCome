@@ -125,8 +125,6 @@ class HomeActivity : BaseActivity() {
     }
 
 
-
-
     /**
      * ViewPager的Adapter
      */
@@ -146,9 +144,9 @@ class HomeActivity : BaseActivity() {
     }
 
 
-    private fun initTabView(index: Int) {
-        if (index != 0 && !UserManger.isLogin()){
-            startActivity(Intent(this,LoginActivity::class.java))
+    fun initTabView(index: Int) {
+        if (index != 0 && !UserManger.isLogin()) {
+            startActivity(Intent(this, LoginActivity::class.java))
             initTabView(0)
             return
         }
@@ -176,4 +174,6 @@ class HomeActivity : BaseActivity() {
 
         view_pager.currentItem = index
     }
+
+    fun getCurrentIndext() = currentPosition
 }
