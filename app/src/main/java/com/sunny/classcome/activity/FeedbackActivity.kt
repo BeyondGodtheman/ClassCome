@@ -3,6 +3,9 @@ package com.sunny.classcome.activity
 import android.view.View
 import com.sunny.classcome.R
 import com.sunny.classcome.base.BaseActivity
+import com.sunny.classcome.bean.BaseBean
+import com.sunny.classcome.http.ApiManager
+import com.sunny.classcome.http.Constant
 import com.sunny.classcome.utils.ToastUtil
 import kotlinx.android.synthetic.main.activity_feedback.*
 
@@ -24,9 +27,31 @@ class FeedbackActivity : BaseActivity() {
     override fun onClick(v: View) {
         when (v.id) {
             R.id.txt_commit -> {
-                ToastUtil.show("提交成功")
-                edit_feedback.setText("")
+                commit()
             }
         }
+    }
+
+    //提交意见
+    fun commit() {
+        if (edit_feedback.text.isEmpty()){
+            ToastUtil.show("请填写意见或建议")
+            return
+        }
+
+        val params = hashMapOf<String, String>()
+        params["content"] = edit_feedback.text.toString()
+        ApiManager.post(composites, params, Constant.PUB_SAVEUSERIDEA, object : ApiManager.OnResult<BaseBean<String>>() {
+            override fun onSuccess(data: BaseBean<String>) {
+                ToastUtil.show(data.content?.info ?: "")
+                if (data.content?.statu == "1") {
+                    finish()
+                }
+            }
+
+            override fun onFailed(code: String, message: String) {
+            }
+
+        })
     }
 }

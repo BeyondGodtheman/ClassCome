@@ -48,9 +48,12 @@ object Constant {
     const val COURSE_GETIMAGEOFPAGE = "course/getImageOfPage" //首页轮播图
 
     const val USER_MYPAGE = "user/myPage" //我的
+
     const val PUB_COOPERATION = "pub/cooperation" //商务合作
 
     const val PUB_HELP = "pub/help" //帮助
+
+    const val PUB_SAVEUSERIDEA = "pub/saveUserIdea" //意见反馈
 
     const val PUB_GETSHOWURL = "pub/getShowUrl" //分享获取积分
 
@@ -65,5 +68,8 @@ object Constant {
     const val USER_GETMYGRADE = "user/getMyGrade" //我的等级
 
     const val USER_GETGRADERULE = "user/getGradeRule" //等级说明
+
+    const val USER_GETPAYINFO = "user/getPayInfo" //查询支付信息
+
 }
 

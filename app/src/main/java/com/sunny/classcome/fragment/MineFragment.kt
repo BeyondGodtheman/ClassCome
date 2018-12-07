@@ -79,7 +79,7 @@ class MineFragment : BaseFragment() {
             })
         } else {
             (getBaseActivity() as HomeActivity).let {
-                if (it.getCurrentIndext() != 0){
+                if (it.getCurrentIndext() != 0) {
                     it.initTabView(0) //切换到首页
                     intent(LoginActivity::class.java)
                 }

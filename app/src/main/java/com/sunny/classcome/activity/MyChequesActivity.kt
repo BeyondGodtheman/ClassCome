@@ -3,6 +3,10 @@ package com.sunny.classcome.activity
 import android.view.View
 import com.sunny.classcome.R
 import com.sunny.classcome.base.BaseActivity
+import com.sunny.classcome.bean.BaseBean
+import com.sunny.classcome.bean.PayInfoBean
+import com.sunny.classcome.http.ApiManager
+import com.sunny.classcome.http.Constant
 import com.sunny.classcome.utils.IntentUtil
 import kotlinx.android.synthetic.main.activity_cheques.*
 
@@ -33,5 +37,17 @@ class MyChequesActivity : BaseActivity() {
         }
     }
 
+    override fun loadData() {
+        val params = HashMap<String,String>()
+        ApiManager.post(composites,params,Constant.USER_GETPAYINFO,object :ApiManager.OnResult<BaseBean<PayInfoBean>>(){
+            override fun onSuccess(data: BaseBean<PayInfoBean>) {
+            }
+
+            override fun onFailed(code: String, message: String) {
+            }
+
+        })
+
+    }
 
 }
