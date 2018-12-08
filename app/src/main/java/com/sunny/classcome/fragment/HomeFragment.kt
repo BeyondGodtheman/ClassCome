@@ -99,7 +99,6 @@ class HomeFragment : BaseFragment() {
         titleView.rlLocation.setOnClickListener(this)
         titleView.ivMessage.setOnClickListener(this)
 
-
         refresh.setRefreshHeader(ClassicsHeader(context)
                 .setPrimaryColor(ContextCompat.getColor(requireContext(), R.color.colorPrimary))
                 .setAccentColor(ContextCompat.getColor(requireContext(), R.color.color_white)))

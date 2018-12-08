@@ -75,5 +75,9 @@ object Constant {
 
     const val USER_SETPAYINFO = "user/setPayInfo" //设置支付信息
 
+    const val ORDER_GETMYSTREAM = "order/getMyStream" //我的收支明细列表
+
+    const val COURSE_GETMESSAGELIST = "course/getMessageList" //消息列表
+
 }
 

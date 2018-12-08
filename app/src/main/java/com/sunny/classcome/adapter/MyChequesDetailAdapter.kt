@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.item_cheque_detail.view.*
  * Mail Q8622268@gmail.com
  * Date 2018/12/5 23:28
  */
-class MyChequesDetailAdapter(list: ArrayList<ChequesDetailBean>) : BaseRecycleAdapter<ChequesDetailBean>(list) {
+class MyChequesDetailAdapter(list: ArrayList<ChequesDetailBean.Bean.Data>) : BaseRecycleAdapter<ChequesDetailBean.Bean.Data>(list) {
 
     override fun setLayout(parent: ViewGroup, viewType: Int): View =
             LayoutInflater.from(context).inflate(R.layout.item_cheque_detail, parent, false)
@@ -24,9 +24,9 @@ class MyChequesDetailAdapter(list: ArrayList<ChequesDetailBean>) : BaseRecycleAd
     override fun onBindViewHolder(holder: BaseRecycleViewHolder, position: Int) {
         list[position].apply {
             holder.itemView.txt_type.text = type
-            holder.itemView.txt_date.text = date
-            holder.itemView.txt_balance.text = balance
-            holder.itemView.txt_money.text = money
+            holder.itemView.txt_date.text = createTime
+            holder.itemView.txt_balance.text = paymentMoney
+            holder.itemView.txt_money.text = sumMoney
         }
     }
 

@@ -43,11 +43,6 @@ abstract class BaseActivity : AppCompatActivity(), IBaseView, View.OnClickListen
 
         loadingView.setOnClickListener { }
         errorView.setOnClickListener { }
-        errorView.btnNext.setOnClickListener {
-            hideError()
-            loadData()
-            update()
-        }
 
         initView()
         loadData()
@@ -113,7 +108,7 @@ abstract class BaseActivity : AppCompatActivity(), IBaseView, View.OnClickListen
         hideError()
         frameBody.addView(errorView)
         errorView.setOnClickListener { }
-        errorView.tvDesc.text = errorType.errorMessage
+        errorView.txt_error_desc.text = errorType.errorMessage
     }
 
     override fun hideError() {

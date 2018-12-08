@@ -44,11 +44,14 @@ class MyChequesActivity : BaseActivity() {
     }
 
     override fun update() {
+        showLoading()
         val params = HashMap<String, String>()
         ApiManager.post(composites, params, Constant.USER_GETPAYINFO, object : ApiManager.OnResult<BaseBean<PayInfoBean>>() {
             override fun onSuccess(data: BaseBean<PayInfoBean>) {
-                payInfoBean = data.content?.data
 
+                hideLoading()
+
+                payInfoBean = data.content?.data
 
                 if (data.content?.data?.openId?.isNotEmpty() == true) {
                     txt_wechat.setRightText(getString(R.string.binding))
@@ -86,6 +89,7 @@ class MyChequesActivity : BaseActivity() {
             }
 
             override fun onFailed(code: String, message: String) {
+                hideLoading()
             }
 
         })
