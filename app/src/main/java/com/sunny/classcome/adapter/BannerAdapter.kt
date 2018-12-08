@@ -10,6 +10,8 @@ import com.sunny.classcome.bean.BannerBean
 import com.sunny.classcome.utils.GlideUtil
 import kotlinx.android.synthetic.main.layout_banner_imageview.view.*
 
+
+
 class BannerAdapter(var context: Context, var list: ArrayList<BannerBean.Bean>) : PagerAdapter() {
 
     init {
@@ -34,5 +36,10 @@ class BannerAdapter(var context: Context, var list: ArrayList<BannerBean.Bean>) 
         }
 
         return view
+    }
+
+
+    override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
+        container.removeView(`object` as View)
     }
 }

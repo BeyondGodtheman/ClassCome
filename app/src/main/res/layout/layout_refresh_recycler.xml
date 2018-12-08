@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.sunny.classcome.widget.refresh.KRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@id/krl"
+<com.scwang.smartrefresh.layout.SmartRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/refresh"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.sunny.classcome.widget.refresh.KRecyclerView
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/recl"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-</com.sunny.classcome.widget.refresh.KRefreshLayout>
+</com.scwang.smartrefresh.layout.SmartRefreshLayout>

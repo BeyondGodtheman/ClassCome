@@ -5,7 +5,7 @@ data class ClassBean(
 
         var code: String,
         var msg: String,
-        var content: Bean) {
+        var content: Bean?) {
 
     data class Bean(
             var pageSize: String,
@@ -84,9 +84,9 @@ data class ClassBean(
             )
 
             data class User(
-                    var userName: String,
-                    var telephone: String,
-                    var userPic: String)
+                    var userName: String?,
+                    var telephone: String?,
+                    var userPic: String?)
         }
 
     }

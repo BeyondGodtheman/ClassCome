@@ -11,6 +11,7 @@
         android:background="@mipmap/ic_thumbtack_blue" />
 
     <TextView
+        android:id="@+id/txt_type"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="9pt"

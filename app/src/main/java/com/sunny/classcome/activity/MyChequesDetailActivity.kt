@@ -6,7 +6,6 @@ import com.sunny.classcome.R
 import com.sunny.classcome.adapter.MyChequesDetailAdapter
 import com.sunny.classcome.base.BaseActivity
 import com.sunny.classcome.bean.ChequesDetailBean
-import com.sunny.classcome.utils.IntentUtil
 import kotlinx.android.synthetic.main.layout_refresh_recycler.*
 
 /**

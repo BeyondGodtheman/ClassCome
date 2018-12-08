@@ -8,12 +8,7 @@ import com.sunny.classcome.R
 import com.sunny.classcome.adapter.MyMsgAdapter
 import com.sunny.classcome.base.BaseActivity
 import com.sunny.classcome.bean.MsgBean
-import com.sunny.classcome.widget.refresh.ClassicalFooter
-import com.sunny.classcome.widget.refresh.ClassicalHeader
 import kotlinx.android.synthetic.main.layout_refresh_recycler.*
-import kotlinx.coroutines.experimental.android.UI
-import kotlinx.coroutines.experimental.delay
-import kotlinx.coroutines.experimental.launch
 
 /**
  * Desc
@@ -40,7 +35,6 @@ class MyMsgActivity : BaseActivity() {
         msgList.add(MsgBean("系统提示","[米斯特教育]邀请您来参加课程竞标，快来看看","2018/02/02  13:12:33","初中英语班课教研员-要求有专业教学资质"))
         msgList.add(MsgBean("系统提示","[米斯特教育]邀请您来参加课程竞标，快来看看","2018/02/02  13:12:33","初中英语班课教研员-要求有专业教学资质"))
 
-//        recl.addHeaderView(ClassicalHeader(this))
 
         recl.layoutManager = LinearLayoutManager(this)
         recl.addItemDecoration(object :RecyclerView.ItemDecoration(){
@@ -54,24 +48,6 @@ class MyMsgActivity : BaseActivity() {
 
         recl.adapter = myMsgAdapter
 
-        recl.setLoadMoreView(ClassicalFooter(this))
-
-        recl.hasMore = true
-
-        recl.setLoadMoreListener {
-
-        }
-
-
-
-//        krl.setKRefreshListener {
-//
-//            launch(UI){
-//                delay(3000)
-//                krl.refreshComplete(false)
-//            }
-//
-//        }
     }
 
     override fun onClick(v: View?) {

@@ -1,22 +1,29 @@
 package com.sunny.classcome.fragment
 
 import android.content.Intent
+import android.support.v4.content.ContextCompat
+import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.ImageView
+import com.scwang.smartrefresh.layout.api.RefreshLayout
+import com.scwang.smartrefresh.layout.footer.ClassicsFooter
+import com.scwang.smartrefresh.layout.header.ClassicsHeader
+import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener
 import com.sunny.classcome.R
 import com.sunny.classcome.activity.LocationActivity
 import com.sunny.classcome.activity.LoginActivity
 import com.sunny.classcome.activity.MyMsgActivity
+import com.sunny.classcome.adapter.ClassListAdapter
 import com.sunny.classcome.base.BaseFragment
 import com.sunny.classcome.bean.BannerBean
-import com.sunny.classcome.bean.BaseBean
 import com.sunny.classcome.bean.ClassBean
 import com.sunny.classcome.bean.LocalCityBean
 import com.sunny.classcome.http.ApiManager
 import com.sunny.classcome.http.Constant
 import com.sunny.classcome.utils.LocationUtil
-import com.sunny.classcome.utils.SharedUtil
 import com.sunny.classcome.utils.UserManger
+import kotlinx.android.synthetic.main.fragment_class_list.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.layout_home_recommend_text.view.*
 import kotlinx.android.synthetic.main.layout_home_title.view.*
@@ -29,8 +36,21 @@ class HomeFragment : BaseFragment() {
     private var isShowLocal = false
     private var localStr = listOf<String>()
 
-    private val classListFragment: ClassListFragment by lazy {
-        ClassListFragment()
+    private var sortIndex = 0
+
+    private var sortFlag = false
+
+    private var pageIndex = 1
+
+    private val dataList = arrayListOf<ClassBean.Bean.Data>()
+
+
+    private val topArrowList: ArrayList<ImageView> by lazy {
+        arrayListOf(img_local_top, img_hot_top, img_price_top, img_time_top)
+    }
+
+    private val bottomArrowList: ArrayList<ImageView> by lazy {
+        arrayListOf(img_local_bottom, img_hot_bottom, img_price_bottom, img_time_bottom)
     }
 
     private val locationUtil: LocationUtil by lazy {
@@ -38,8 +58,10 @@ class HomeFragment : BaseFragment() {
             if (isShowLocal) {
                 titleView.text_home_Location.text = localStr[1]
             } else {
-                titleView.text_home_Location.text = it
-                loadAddress()
+                if (it.isNotEmpty()) {
+                    titleView.text_home_Location.text = it
+                    loadAddress()
+                }
             }
         }
     }
@@ -55,21 +77,51 @@ class HomeFragment : BaseFragment() {
         localStr = UserManger.getAddress().apply {
             if (isNotEmpty()) {
                 isShowLocal = true
-                launch(UI){
+                launch(UI) {
                     delay(100)
-                    classListFragment.loadClass()
+                    pageIndex = 1
+                    loadClass(true)
                 }
             }
         }.split(",")
 
+
+        ll_location.setOnClickListener(this)
+        ll_hot.setOnClickListener(this)
+        ll_price.setOnClickListener(this)
+        ll_time.setOnClickListener(this)
+
+        recl.layoutManager = LinearLayoutManager(context)
+        recl.isNestedScrollingEnabled = false
+        recl.adapter = ClassListAdapter(dataList)
+
+
         titleView.rlLocation.setOnClickListener(this)
         titleView.ivMessage.setOnClickListener(this)
 
-        loadBanner()
-        initRecommend()
-        childFragmentManager.beginTransaction().add(R.id.flContent, classListFragment).commit()
+
+        refresh.setRefreshHeader(ClassicsHeader(context)
+                .setPrimaryColor(ContextCompat.getColor(requireContext(), R.color.colorPrimary))
+                .setAccentColor(ContextCompat.getColor(requireContext(), R.color.color_white)))
+        refresh.setRefreshFooter(ClassicsFooter(context))
+
+        refresh.setOnRefreshLoadMoreListener(object : OnRefreshLoadMoreListener {
+
+            override fun onRefresh(refreshLayout: RefreshLayout) {
+                loadBanner()
+                pageIndex = 1
+                loadClass(true)
+            }
+
+            override fun onLoadMore(refreshLayout: RefreshLayout) {
+                pageIndex++
+                loadClass(false)
+            }
+        })
+
 
         locationUtil.startLocation()
+        loadBanner()
     }
 
     override fun onClick(v: View) {
@@ -83,25 +135,32 @@ class HomeFragment : BaseFragment() {
                     startActivity(Intent(context, LoginActivity::class.java))
                 }
             }
+            R.id.ll_location -> {
+                sort(0)
+            }
+            R.id.ll_hot -> {
+                sort(1)
+            }
+            R.id.ll_price -> {
+                sort(2)
+            }
+            R.id.ll_time -> {
+                sort(3)
+            }
 
         }
 
     }
 
     //初始化推荐数据
-    private fun initRecommend() {
-        val recommendList = arrayListOf(
-                "广告主向广告受众，所传达的内容，即广告信源通过广告媒介，向广告信宿传达的内容，该内容形式多样",
-                "生活片断。例如，高博特盐水瓶的广告表现一家人在日常生活中正在使用本产品",
-                "音乐。例如，可口可乐广告，它的广告歌曲歌词反复强调产品和品牌名称。",
-                "幻想。例如，蔓登琳冷饮广告，设计出一种幻想境界。",
-                "气氛和形象。例如，\"蔓陀思\"果汁糖，引起人们联想某种轻松气氛和形象，给人以暗示，但不对产品性能做任何直接宣传。"
-        )
+    private fun initRecommend(arrayList: ArrayList<ClassBean.Bean.Data>) {
+        vf_home_commend.removeAllViews()
 
-        recommendList.forEach {
+        arrayList.forEach {
             val layoutView = LayoutInflater.from(context)
                     .inflate(R.layout.layout_home_recommend_text, vf_home_commend, false)
-            layoutView.txt_title.text = it
+            layoutView.txt_type.text = it.categoryList[0].name
+            layoutView.txt_title.text = it.course.title
             vf_home_commend.addView(layoutView)
         }
         vf_home_commend.startFlipping()
@@ -125,7 +184,8 @@ class HomeFragment : BaseFragment() {
             override fun onSuccess(data: LocalCityBean) {
                 data.content.first { it.cityVoName == titleView.text_home_Location.text.toString() }.let {
                     UserManger.setAddress(it.cityVoId, it.cityVoName)
-                    classListFragment.loadClass()
+                    pageIndex = 1
+                    loadClass(true)
                 }
             }
 
@@ -142,8 +202,67 @@ class HomeFragment : BaseFragment() {
                 localStr = split(",")
                 isShowLocal = true
                 titleView.text_home_Location.text = localStr[1]
-                classListFragment.loadClass()
+                pageIndex = 1
+                loadClass(true)
             }
         }
+    }
+
+
+    private fun sort(mSortIndex: Int) {
+        bottomArrowList[sortIndex].setImageResource(R.mipmap.ic_arrow_bottom_gray)
+        topArrowList[sortIndex].setImageResource(R.mipmap.ic_arrow_top_gray)
+        if (mSortIndex != sortIndex) {
+            sortFlag = false
+        }
+        sortIndex = mSortIndex
+
+        sortFlag = if (sortFlag) {
+            topArrowList[sortIndex].setImageResource(R.mipmap.ic_arrow_top_blue)
+            false
+        } else {
+            bottomArrowList[sortIndex].setImageResource(R.mipmap.ic_arrow_bottom_blue)
+            true
+        }
+        pageIndex = 1
+        loadClass(true)
+    }
+
+
+    private fun loadClass(isFlag: Boolean) {
+        val sortStr = when (sortIndex) {
+            0 -> "sortAdress"
+            1 -> "sortPopularity"
+            2 -> "sortPrice"
+            else -> "sortTime"
+        }
+        val params = HashMap<String, String>()
+        params["cityId"] = UserManger.getAddress().split(",")[0]
+        params["pageIndex"] = pageIndex.toString()
+        params[sortStr] = if (sortFlag) "1" else "0"
+
+        ApiManager.post(getBaseActivity().composites, params, Constant.COURSE_GETCOURSELISTS, object : ApiManager.OnResult<ClassBean>() {
+            override fun onSuccess(data: ClassBean) {
+                if (isFlag) {
+                    dataList.clear()
+                    refresh.finishRefresh()
+                }else{
+                    refresh.finishLoadMore()
+                }
+
+                data.content?.dataList?.let {
+                    if (isFlag){
+                        initRecommend(it)
+                    }
+                    dataList.addAll(it)
+                    recl.adapter?.notifyDataSetChanged()
+                    return
+                }
+            }
+
+            override fun onFailed(code: String, message: String) {
+            }
+
+        })
     }
 }

@@ -1,6 +1,11 @@
 package com.sunny.classcome
 
 import android.app.Application
+import android.content.Context
+import com.scwang.smartrefresh.layout.SmartRefreshLayout
+import com.scwang.smartrefresh.layout.api.RefreshLayout
+import com.scwang.smartrefresh.layout.footer.ClassicsFooter
+import com.scwang.smartrefresh.layout.header.ClassicsHeader
 import com.sunny.classcome.http.Constant
 import com.tencent.mm.opensdk.openapi.IWXAPI
 import com.tencent.mm.opensdk.openapi.WXAPIFactory
@@ -17,6 +22,7 @@ class MyApplication : Application() {
     companion object {
         private lateinit var instance: MyApplication
         fun getApp(): MyApplication = instance
+
     }
 
     private val storeMap = HashMap<String, Any>() //内存数据存储
@@ -32,6 +38,7 @@ class MyApplication : Application() {
                 .setSupportDP(false)
                 .setSupportSP(false).supportSubunits = Subunits.PT
     }
+
 
 
 

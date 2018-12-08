@@ -39,7 +39,12 @@ class LocationActivity : BaseActivity() {
     override fun initView() {
         showTitle(titleManager.defaultTitle(""))
         MyApplication.getApp().getData<String>(Constant.LOCATION_NAME, false).let {
-            txt_location_name.text = it ?: getString(R.string.defaultLocation)
+            if (it.isNullOrEmpty()){
+                txt_location_name.text = getString(R.string.defaultLocation)
+            }else{
+                txt_location_name.text = it
+            }
+
         }
         recl_city.layoutManager = LinearLayoutManager(this)
         recl_city.adapter = locationCityAdapter

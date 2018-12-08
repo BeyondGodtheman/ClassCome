@@ -25,7 +25,7 @@ class ClassListAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleAdapte
         holder.itemView.text_class_address.text = getData(position).course.classAddress
         holder.itemView.text_class_type.text = getData(position).categoryList[0].name
 
-        GlideUtil.loadHead(context, holder.itemView.img_user_name, getData(position).user.userPic)
+        GlideUtil.loadHead(context, holder.itemView.img_user_name, getData(position).user.userPic?:"")
         GlideUtil.loadPhone(context, holder.itemView.img_class_photo, getData(position).materialList[0].url)
     }
 }

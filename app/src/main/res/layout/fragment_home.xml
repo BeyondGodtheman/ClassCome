@@ -1,49 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.scwang.smartrefresh.layout.SmartRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/refresh"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:focusableInTouchMode="true"
-        android:focusable="true"
-        >
-
-        <com.sunny.classcome.widget.banner.BannerView
-            android:id="@+id/rl_banner"
-            android:layout_width="match_parent"
-            android:layout_height="374pt" />
-
-        <include layout="@layout/layout_home_type" />
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="92pt"
-            android:background="@color/color_white"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical">
 
-            <View
-                android:layout_width="128pt"
-                android:layout_height="32pt"
-                android:layout_marginStart="40pt"
-                android:background="@mipmap/text_home_recommend" />
+            <com.sunny.classcome.widget.banner.BannerView
+                android:id="@+id/rl_banner"
+                android:layout_width="match_parent"
+                android:layout_height="374pt" />
 
-            <ViewFlipper
-                android:id="@+id/vf_home_commend"
+            <include layout="@layout/layout_home_type" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="92pt"
+                android:background="@color/color_white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <View
+                    android:layout_width="128pt"
+                    android:layout_height="32pt"
+                    android:layout_marginStart="40pt"
+                    android:background="@mipmap/text_home_recommend" />
+
+                <ViewFlipper
+                    android:id="@+id/vf_home_commend"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="32pt"
+                    android:inAnimation="@anim/anim_translate_in"
+                    android:outAnimation="@anim/anim_translate_out" />
+            </LinearLayout>
+
+            <include
+                layout="@layout/fragment_class_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginStart="32pt"
-                android:inAnimation="@anim/anim_translate_in"
-                android:outAnimation="@anim/anim_translate_out"/>
+                android:layout_marginTop="10pt" />
         </LinearLayout>
-
-        <FrameLayout
-            android:id="@id/flContent"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="10pt" />
-    </LinearLayout>
-</android.support.v4.widget.NestedScrollView>
+    </android.support.v4.widget.NestedScrollView>
+</com.scwang.smartrefresh.layout.SmartRefreshLayout>

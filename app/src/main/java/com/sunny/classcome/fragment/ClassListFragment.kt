@@ -95,7 +95,7 @@ class ClassListFragment : BaseFragment() {
         ApiManager.post(getBaseActivity().composites, params, Constant.COURSE_GETCOURSELISTS, object : ApiManager.OnResult<ClassBean>() {
             override fun onSuccess(data: ClassBean) {
                 dataList.clear()
-                data.content.dataList?.let {
+                data.content?.dataList?.let {
                     dataList.addAll(it)
                     recl.adapter?.notifyDataSetChanged()
                 }
