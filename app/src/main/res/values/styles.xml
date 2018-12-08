@@ -5,7 +5,7 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">90pt</item>
         <item name="android:background">@color/color_white</item>
-        <item name="android:gravity">center</item>
+        <item name="android:gravity">center_vertical</item>
         <item name="android:paddingStart">40pt</item>
         <item name="android:paddingEnd">40pt</item>
     </style>

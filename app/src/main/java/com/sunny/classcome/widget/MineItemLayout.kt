@@ -54,4 +54,12 @@ class MineItemLayout : RelativeLayout {
     }
 
 
+    fun setRightText(text: String) {
+        txt_info_right.text = text
+    }
+
+
+    fun setDeafult(visibility:Int){
+        txt_default.visibility = visibility
+    }
 }

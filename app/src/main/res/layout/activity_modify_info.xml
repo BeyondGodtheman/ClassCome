@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <RelativeLayout
         android:id="@+id/rl_head"
@@ -16,9 +17,9 @@
         <TextView
             style="@style/style_font_default_28pt"
             android:layout_centerVertical="true"
-            android:text="@string/head"/>
+            android:text="@string/head" />
 
-        <ImageView
+        <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/img_head"
             android:layout_width="80pt"
             android:layout_height="80pt"
@@ -26,7 +27,9 @@
             android:layout_marginEnd="10pt"
             android:layout_toStartOf="@id/img_more"
             android:contentDescription="@string/head"
-            android:src="@mipmap/ic_default_head"/>
+            android:scaleType="centerCrop"
+            android:src="@mipmap/ic_default_head"
+            app:riv_oval="true" />
 
         <ImageView
             android:id="@+id/img_more"
@@ -35,10 +38,10 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:contentDescription="@string/app"
-            android:src="@mipmap/ic_more"/>
+            android:src="@mipmap/ic_more" />
     </RelativeLayout>
 
-    <View style="@style/style_view_line"/>
+    <View style="@style/style_view_line" />
 
     <RelativeLayout
         android:id="@+id/rl_name"
@@ -46,52 +49,59 @@
 
         <TextView
             style="@style/style_font_default_28pt"
-            android:text="@string/name"/>
+            android:text="@string/name" />
 
-        <TextView
-            android:id="@+id/txt_name"
+        <EditText
+            android:id="@+id/edit_name"
             style="@style/style_font_default_28pt"
-            android:layout_marginEnd="10pt"
-            android:layout_toStartOf="@id/img_more2"
-            tools:text="左郁"/>
-
-        <ImageView
-            android:id="@+id/img_more2"
-            android:layout_width="21pt"
-            android:layout_height="35pt"
             android:layout_alignParentEnd="true"
-            android:contentDescription="@string/app"
-            android:src="@mipmap/ic_more"/>
+            android:layout_marginEnd="10pt"
+            android:background="@color/color_transparent"
+            android:gravity="right"
+            android:hint="@string/hint_name" />
     </RelativeLayout>
 
-    <View style="@style/style_view_line"/>
+    <View style="@style/style_view_line" />
 
     <RelativeLayout
-        android:id="@+id/rl_sex"
-        style="@style/style_item_layout_txt_txt_img">
+        style="@style/style_item_layout_txt_txt_img"
+        android:orientation="horizontal">
 
         <TextView
             style="@style/style_font_default_28pt"
-            android:text="@string/sex"/>
+            android:layout_centerVertical="true"
+            android:text="@string/sex" />
 
-        <TextView
-            android:id="@+id/txt_sex"
-            style="@style/style_font_default_28pt"
-            android:layout_marginEnd="10pt"
-            android:layout_toStartOf="@id/img_more3"
-            tools:text="男"/>
-
-        <ImageView
-            android:id="@+id/img_more3"
-            android:layout_width="21pt"
-            android:layout_height="35pt"
+        <RadioGroup
+            android:id="@+id/rg_sex"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
-            android:contentDescription="@string/app"
-            android:src="@mipmap/ic_more"/>
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rbtn_man"
+                style="@style/style_font_default_28pt"
+                android:button="@drawable/bg_radio_button"
+                android:checked="true"
+                android:paddingStart="22pt"
+                android:paddingEnd="22pt"
+                android:text="@string/man" />
+
+            <RadioButton
+                android:id="@+id/rbtn_woman"
+                style="@style/style_font_default_28pt"
+                android:layout_marginStart="92pt"
+                android:button="@drawable/bg_radio_button"
+                android:paddingStart="22pt"
+                android:paddingEnd="22pt"
+                android:text="@string/woman" />
+
+        </RadioGroup>
     </RelativeLayout>
 
-
-    <View style="@style/style_view_line"/>
+    <View style="@style/style_view_line" />
 
     <RelativeLayout
         android:id="@+id/rl_city"
@@ -99,14 +109,14 @@
 
         <TextView
             style="@style/style_font_default_28pt"
-            android:text="@string/city"/>
+            android:text="@string/city" />
 
         <TextView
             android:id="@+id/txt_city"
             style="@style/style_font_default_28pt"
             android:layout_marginEnd="10pt"
             android:layout_toStartOf="@id/img_more4"
-            tools:text="上海"/>
+            android:text="@string/defaultLocation" />
 
         <ImageView
             android:id="@+id/img_more4"
@@ -114,7 +124,7 @@
             android:layout_height="35pt"
             android:layout_alignParentEnd="true"
             android:contentDescription="@string/app"
-            android:src="@mipmap/ic_more"/>
+            android:src="@mipmap/ic_more" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -124,14 +134,14 @@
 
         <TextView
             style="@style/style_font_default_28pt"
-            android:text="@string/bind_phone"/>
+            android:text="@string/bind_phone" />
 
         <TextView
             android:id="@+id/txt_phone"
             style="@style/style_font_default_28pt"
             android:layout_marginEnd="10pt"
             android:layout_toStartOf="@id/img_more5"
-            tools:text="13126597878"/>
+            tools:text="13126597878" />
 
         <ImageView
             android:id="@+id/img_more5"
@@ -139,7 +149,7 @@
             android:layout_height="35pt"
             android:layout_alignParentEnd="true"
             android:contentDescription="@string/app"
-            android:src="@mipmap/ic_more"/>
+            android:src="@mipmap/ic_more" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -149,14 +159,14 @@
 
         <TextView
             style="@style/style_font_default_28pt"
-            android:text="@string/identity_verification"/>
+            android:text="@string/identity_verification" />
 
         <TextView
             android:id="@+id/txt_identity"
             style="@style/style_font_default_28pt"
             android:layout_marginEnd="10pt"
             android:layout_toStartOf="@id/img_more6"
-            tools:text="未验证"/>
+            android:text="@string/unverified" />
 
         <ImageView
             android:id="@+id/img_more6"
@@ -164,14 +174,14 @@
             android:layout_height="35pt"
             android:layout_alignParentEnd="true"
             android:contentDescription="@string/app"
-            android:src="@mipmap/ic_more"/>
+            android:src="@mipmap/ic_more" />
     </RelativeLayout>
 
     <TextView
-        android:id="@+id/img_commit"
+        android:id="@+id/txt_commit"
         style="@style/style_button"
         android:layout_marginTop="124pt"
-        android:text="@string/commit"/>
+        android:text="@string/commit" />
 
 
 </LinearLayout>

@@ -36,7 +36,7 @@ object UserManger {
     }
 
     fun getMine(): MineBean? {
-        val json = SharedUtil.getString(LOGIN)
+        val json = SharedUtil.getString(MINE)
         if (json.isEmpty()) {
             return null
         }

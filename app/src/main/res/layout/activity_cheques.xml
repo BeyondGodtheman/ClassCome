@@ -16,7 +16,7 @@
         style="@style/style_mine_layout_item"
         app:mine_layout_text_left="@string/bind_wechat_cheques"
         app:mine_layout_text_right="@string/binding"
-        app:mine_layout_text_show_default="true"/>
+        android:visibility="gone"/>
 
     <View style="@style/style_view_line"/>
 

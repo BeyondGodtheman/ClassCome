@@ -1,9 +1,11 @@
 package com.sunny.classcome.activity
 
+import android.content.Intent
 import android.view.View
 import com.sunny.classcome.R
 import com.sunny.classcome.base.BaseActivity
-import kotlinx.android.synthetic.main.activity_feedback.*
+import com.sunny.classcome.utils.GlideUtil
+import com.sunny.classcome.utils.UserManger
 import kotlinx.android.synthetic.main.activity_modify_info.*
 
 /**
@@ -21,16 +23,38 @@ class ModifyInfoActivity : BaseActivity() {
 
         rl_head.setOnClickListener(this)
         rl_name.setOnClickListener(this)
-        rl_sex.setOnClickListener(this)
         rl_city.setOnClickListener(this)
         rl_phone.setOnClickListener(this)
         rl_identity.setOnClickListener(this)
         txt_commit.setOnClickListener(this)
+
+        UserManger.getMine()?.let {
+            GlideUtil.loadHead(this, img_head, it.userPic ?: "")
+            edit_name.setText(it.userName)
+            txt_phone.text = it.telephone
+
+        }
+
     }
 
     override fun onClick(v: View) {
         when (v.id) {
+            R.id.rl_city -> {
+                startActivity(Intent(this, LocationActivity::class.java))
+            }
+            R.id.rl_identity -> {
+                //身份验证
+                startActivity(Intent(this, PersonAuthActivity::class.java))
+            }
+        }
+    }
 
+    override fun update() {
+        super.update()
+        UserManger.getAddress().let {
+            if (it.isNotEmpty()) {
+                txt_city.text = it.split(",")[1]
+            }
         }
     }
 }

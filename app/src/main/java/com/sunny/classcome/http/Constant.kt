@@ -2,7 +2,7 @@ package com.sunny.classcome.http
 
 object Constant {
 
-    fun isDebug(): Boolean = true
+    fun isDebug(): Boolean = false
 
     var isLog = true //是否打印LOG
 
@@ -14,6 +14,8 @@ object Constant {
     const val LOCATION_NAME = "locationName"
 
     const val LOGIN_PHONE = "loginPhone" //手机帐号
+
+    const val REQUEST_CODE_CHOOSE = 0x100 //选择图片请求CODE
 
     /**
      * 权限CODE
@@ -70,6 +72,8 @@ object Constant {
     const val USER_GETGRADERULE = "user/getGradeRule" //等级说明
 
     const val USER_GETPAYINFO = "user/getPayInfo" //查询支付信息
+
+    const val USER_SETPAYINFO = "user/setPayInfo" //设置支付信息
 
 }
 

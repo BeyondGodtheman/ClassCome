@@ -84,4 +84,7 @@ dependencies {
     implementation 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
     //智能下拉刷新框架
     implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-16'
+    //图片选择lib
+    implementation 'com.zhihu.android:matisse:0.5.2-beta3'
+
 }

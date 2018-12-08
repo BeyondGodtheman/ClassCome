@@ -146,12 +146,23 @@
     <!--完善信息-->
     <string name="head">头像</string>
     <string name="name">姓名</string>
-    <string name="name_space">姓  名:</string>
+    <string name="name_space">姓\u00A0\u00A0\u00A0\u00A0名:</string>
+    <string name="hint_name">输入姓名</string>
     <string name="sex">性别</string>
+    <string name="man">男</string>
+    <string name="woman">女</string>
     <string name="city">所在城市</string>
     <string name="bind_phone">绑定手机</string>
     <string name="identity_verification">身份验证</string>
-
+    <string name="unverified">未验证</string>
+    <string name="verified_desc">注意事项：\n1、系统会对您每次提交的信息进行审核，审核通过后可\n在我的简介中查看。\n2、您的个人信息将在课多多得到严格保密。</string>
+    <string name="commit_verified">提交验证</string>
+    <string name="personal_documents">个人证件</string>
+    <string name="id_card_front">身份证正面</string>
+    <string name="id_card_front_desc">（国徽面）</string>
+    <string name="id_card_back">身份证反面</string>
+    <string name="id_card_front_back">（个人信息面）</string>
+    <string name="select_file">选择文件</string>
     <!--我的发布-->
 
     <string name="list_train">培训列表</string>

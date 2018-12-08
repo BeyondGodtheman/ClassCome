@@ -29,8 +29,8 @@ class MineFragment : BaseFragment() {
 
     override fun initView() {
 
-        img_user_head.setImageResource(R.mipmap.ic_default_head)
-
+        txt_user_name.setOnClickListener(this)
+        txt_user_address.setOnClickListener(this)
         rl_points.setOnClickListener(this)
         rl_member.setOnClickListener(this)
 
@@ -90,8 +90,9 @@ class MineFragment : BaseFragment() {
     override fun onClick(v: View) {
         when (v.id) {
             R.id.img_user_head,
-            R.id.img_more -> {
-            }
+            R.id.txt_user_name,
+            R.id.txt_user_address,
+            R.id.img_more -> intent(ModifyInfoActivity::class.java)
             R.id.img_message -> intent(MyMsgActivity::class.java)
 
             R.id.rl_points -> startActivity(Intent(context, PointActivity::class.java)
