@@ -21,8 +21,8 @@ data class ClassBean(
 
         data class Data(
                 var course: Course,
-                var materialList: ArrayList<Material>,
-                var categoryList: ArrayList<Category>,
+                var materialList: ArrayList<Material>?,
+                var categoryList: ArrayList<Category>?,
                 var user: User,
                 var order: Order,
                 var isAppraise: String
@@ -43,8 +43,8 @@ data class ClassBean(
                     var classTime: String,
                     var classAddress: String,
                     var classDetailAdress: String,
-                    var startTime: String,
-                    var endTime: String,
+                    var startTime: String?,
+                    var endTime: String?,
                     var audit: String,
                     var category: String,
                     var description: String,

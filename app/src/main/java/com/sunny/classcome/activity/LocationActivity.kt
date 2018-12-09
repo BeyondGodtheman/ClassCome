@@ -1,5 +1,6 @@
 package com.sunny.classcome.activity
 
+import android.content.Intent
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import com.sunny.classcome.MyApplication
@@ -20,15 +21,20 @@ import kotlinx.android.synthetic.main.activity_location.*
  * Date 2018/12/1 17:45
  */
 class LocationActivity : BaseActivity() {
-
+    var type = 0
 
     private val cityList = arrayListOf<LocalCityBean.City>()
 
     private val locationCityAdapter by lazy {
         LocationCityAdapter(cityList).apply {
             setOnItemClickListener { _, index ->
-                UserManger.setAddress(cityList[index].cityVoId, cityList[index].cityVoName)
-                setResult(1)
+                if (type == 0){
+                    UserManger.setAddress(cityList[index].cityVoId, cityList[index].cityVoName)
+                    setResult(type)
+
+                }else{
+                    setResult(type,Intent().putExtra("cityName",cityList[index].cityVoName))
+                }
                 finish()
             }
         }
@@ -38,6 +44,9 @@ class LocationActivity : BaseActivity() {
 
     override fun initView() {
         showTitle(titleManager.defaultTitle(""))
+
+        type = intent.getIntExtra("type",0)
+
         MyApplication.getApp().getData<String>(Constant.LOCATION_NAME, false).let {
             if (it.isNullOrEmpty()){
                 txt_location_name.text = getString(R.string.defaultLocation)

@@ -14,6 +14,7 @@ import com.sunny.classcome.utils.GlideUtil
 import com.sunny.classcome.utils.showBlueBtn
 import com.sunny.classcome.utils.showGrayBtn
 import kotlinx.android.synthetic.main.item_my_class.view.*
+import java.lang.StringBuilder
 
 class MyParticipatedAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleAdapter<ClassBean.Bean.Data>(list) {
     override fun setLayout(parent: ViewGroup, viewType: Int): View = LayoutInflater.from(context).inflate(R.layout.item_my_class, parent, false)
@@ -51,11 +52,28 @@ class MyParticipatedAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleA
         }
 
         holder.itemView.txt_status.text = type
+        getData(position).materialList?.let {
+            if (it.isNotEmpty()){
+                GlideUtil.loadPhone(context, holder.itemView.img_class_photo, it[0].url)
+            }
+        }
 
-        GlideUtil.loadPhone(context, holder.itemView.img_class_photo, getData(position).materialList[0].url)
         holder.itemView.txt_title.text = getData(position).course.title
         holder.itemView.txt_money.text = ("¥" + getData(position).course.sumPrice)
-        holder.itemView.txt_date.text = (getData(position).course.startTime.split(" ")[0] + "至" + getData(position).course.endTime.split(" ")[0])
+        val timeSb = StringBuilder()
+
+        getData(position).course.startTime?.let {
+            timeSb.append(it.split(" ")[0])
+
+        }
+        timeSb.append("至")
+
+        getData(position).course.endTime?.let {
+            timeSb.append(it.split(" ")[0])
+
+        }
+
+        holder.itemView.txt_date.text = timeSb
 
     }
 

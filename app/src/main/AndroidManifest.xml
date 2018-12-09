@@ -106,8 +106,7 @@
 
         <!--位置页面-->
         <activity
-            android:name=".activity.LocationActivity"
-            android:launchMode="singleTop" />
+            android:name=".activity.LocationActivity"/>
 
         <!--找回密码-->
         <activity

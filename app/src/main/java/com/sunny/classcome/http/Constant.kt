@@ -2,7 +2,7 @@ package com.sunny.classcome.http
 
 object Constant {
 
-    fun isDebug(): Boolean = false
+    fun isDebug(): Boolean = true
 
     var isLog = true //是否打印LOG
 
@@ -50,6 +50,10 @@ object Constant {
     const val COURSE_GETIMAGEOFPAGE = "course/getImageOfPage" //首页轮播图
 
     const val USER_MYPAGE = "user/myPage" //我的
+
+    const val USER_GETMYINFO = "user/getMyInfo" //我的简历
+
+    const val USER_EDITMYINFO ="user/editMyInfo" //编辑简历
 
     const val PUB_COOPERATION = "pub/cooperation" //商务合作
 

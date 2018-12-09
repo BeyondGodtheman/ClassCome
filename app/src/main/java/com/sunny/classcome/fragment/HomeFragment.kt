@@ -126,7 +126,7 @@ class HomeFragment : BaseFragment() {
     override fun onClick(v: View) {
         when (v.id) {
 
-            R.id.rlLocation -> startActivityForResult(Intent(context, LocationActivity::class.java), 1)
+            R.id.rlLocation -> startActivityForResult(Intent(context, LocationActivity::class.java).putExtra("type",0), 0)
             R.id.ivMessage -> {
                 if (UserManger.isLogin()) {
                     startActivity(Intent(context, MyMsgActivity::class.java))
@@ -155,11 +155,16 @@ class HomeFragment : BaseFragment() {
     private fun initRecommend(arrayList: ArrayList<ClassBean.Bean.Data>) {
         vf_home_commend.removeAllViews()
 
-        arrayList.forEach {
+        arrayList.forEach { data ->
             val layoutView = LayoutInflater.from(context)
                     .inflate(R.layout.layout_home_recommend_text, vf_home_commend, false)
-            layoutView.txt_type.text = it.categoryList[0].name
-            layoutView.txt_title.text = it.course.title
+            data.categoryList?.let {
+                if (it.isNotEmpty()){
+                    layoutView.txt_type.text = it[0].name
+                }
+            }
+
+            layoutView.txt_title.text = data.course.title
             vf_home_commend.addView(layoutView)
         }
         vf_home_commend.startFlipping()
@@ -196,7 +201,7 @@ class HomeFragment : BaseFragment() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == 1 && resultCode == 1) {
+        if (requestCode == 0 && resultCode == 0) {
             UserManger.getAddress().apply {
                 localStr = split(",")
                 isShowLocal = true
