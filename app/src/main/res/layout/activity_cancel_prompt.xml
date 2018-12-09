@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_white"
+    android:orientation="vertical">
 
     <TextView
         style="@style/style_font_default_28pt"
         android:layout_marginStart="40pt"
         android:layout_marginTop="58pt"
         android:layout_marginEnd="48pt"
-        android:text="@string/cancel_prompt"/>
+        android:text="@string/cancel_prompt" />
 
     <TextView
         android:id="@+id/txt_prompt"
         style="@style/style_button"
         android:layout_marginTop="230pt"
-        android:text="@string/confirm_cancel_order"/>
+        android:text="@string/confirm_cancel_order" />
 
 </LinearLayout>

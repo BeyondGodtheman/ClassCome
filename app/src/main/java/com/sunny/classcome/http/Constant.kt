@@ -79,5 +79,9 @@ object Constant {
 
     const val COURSE_GETMESSAGELIST = "course/getMessageList" //消息列表
 
+    const val ORDER_QUERYMYRELATIONCOURSE = "order/queryMyRelationCourse" //我的发布/参与
+
+    const val ORDER_GETORDERDETAILNEW = "order/getOrderDetailNew" //订单详情
+
 }
 
