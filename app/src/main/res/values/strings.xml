@@ -59,6 +59,8 @@
     <string name="close">关闭</string>
     <string name="sure">确定</string>
 
+    <string name="system_hint">系统提示</string>
+
     <string name="go_publish">去发布</string>
     <string name="publish">发布</string>
     <string name="train">培训</string>

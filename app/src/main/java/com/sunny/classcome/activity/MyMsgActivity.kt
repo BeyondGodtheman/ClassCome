@@ -11,10 +11,10 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener
 import com.sunny.classcome.R
 import com.sunny.classcome.adapter.MyMsgAdapter
 import com.sunny.classcome.base.BaseActivity
-import com.sunny.classcome.bean.BaseBean
 import com.sunny.classcome.bean.MsgBean
 import com.sunny.classcome.http.ApiManager
 import com.sunny.classcome.http.Constant
+import com.sunny.classcome.utils.ErrorViewType
 import kotlinx.android.synthetic.main.layout_refresh_recycler.*
 
 /**
@@ -25,24 +25,18 @@ import kotlinx.android.synthetic.main.layout_refresh_recycler.*
  */
 class MyMsgActivity : BaseActivity() {
 
-    private val msgList = arrayListOf<MsgBean>()
+    private val list = arrayListOf<MsgBean.Content.Bean.Data>()
 
     private var pageIndex = 1
 
     private val myMsgAdapter: MyMsgAdapter by lazy {
-        MyMsgAdapter(msgList)
+        MyMsgAdapter(list)
     }
 
     override fun setLayout(): Int = R.layout.layout_refresh_recycler
 
     override fun initView() {
         showTitle(titleManager.defaultTitle(getString(R.string.myMsg)))
-
-        msgList.add(MsgBean("系统提示", "[米斯特教育]邀请您来参加课程竞标，快来看看", "2018/02/02  13:12:33", "初中英语班课教研员-要求有专业教学资质"))
-        msgList.add(MsgBean("系统提示", "[米斯特教育]邀请您来参加课程竞标，快来看看", "2018/02/02  13:12:33", "初中英语班课教研员-要求有专业教学资质"))
-        msgList.add(MsgBean("系统提示", "[米斯特教育]邀请您来参加课程竞标，快来看看", "2018/02/02  13:12:33", "初中英语班课教研员-要求有专业教学资质"))
-        msgList.add(MsgBean("系统提示", "[米斯特教育]邀请您来参加课程竞标，快来看看", "2018/02/02  13:12:33", "初中英语班课教研员-要求有专业教学资质"))
-        msgList.add(MsgBean("系统提示", "[米斯特教育]邀请您来参加课程竞标，快来看看", "2018/02/02  13:12:33", "初中英语班课教研员-要求有专业教学资质"))
 
         refresh.setRefreshHeader(ClassicsHeader(this))
         refresh.setRefreshFooter(ClassicsFooter(this))
@@ -80,18 +74,31 @@ class MyMsgActivity : BaseActivity() {
     }
 
     override fun loadData() {
-
         val params = HashMap<String, String>()
         params["pageIndex"] = pageIndex.toString()
+        ApiManager.post(composites, params, Constant.COURSE_GETMESSAGELIST, object : ApiManager.OnResult<MsgBean>() {
+            override fun onSuccess(data: MsgBean) {
+                if (pageIndex == 1) {
+                    list.clear()
+                    refresh.finishRefresh()
+                    if (data.content?.data?.dataList == null) {
+                        showError(ErrorViewType("200", getString(R.string.empty_data)))
+                    }
 
-
-        ApiManager.post(composites, params, Constant.COURSE_GETMESSAGELIST, object : ApiManager.OnResult<BaseBean<String>>() {
-            override fun onSuccess(data: BaseBean<String>) {
+                } else {
+                    refresh.finishLoadMore()
+                }
+                list.addAll(data.content?.data?.dataList ?: arrayListOf())
+                recl.adapter?.notifyDataSetChanged()
 
             }
 
             override fun onFailed(code: String, message: String) {
-
+                if (pageIndex == 1) {
+                    refresh.finishRefresh()
+                }else{
+                    refresh.finishLoadMore()
+                }
             }
         })
 
