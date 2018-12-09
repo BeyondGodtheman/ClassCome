@@ -162,5 +162,9 @@
         <activity
             android:name=".activity.PersonAuthActivity"
             android:launchMode="singleTop" />
+
+        <!--我的发布/参与-->
+        <activity android:name=".activity.MyClassActivity"
+            android:launchMode="singleTop"/>
     </application>
 </manifest>

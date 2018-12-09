@@ -88,6 +88,7 @@ abstract class BaseFragment : Fragment(), IBaseView, View.OnClickListener {
         iframeBody.addView(getBaseActivity().errorView)
     }
 
+
     override fun hideError() {
         iframeBody.removeView(getBaseActivity().errorView)
     }

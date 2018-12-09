@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="@color/color_base_bg"
-              android:orientation="vertical">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_base_bg"
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -25,7 +25,7 @@
             <TextView
                 android:id="@+id/txt_info"
                 style="@style/style_font_white_30pt"
-                tools:text="@string/already_cancel"/>
+                tools:text="@string/already_cancel" />
 
             <!--下架 提示文字-->
 
@@ -33,12 +33,12 @@
                 android:id="@+id/txt_prompt"
                 style="@style/style_font_white_26pt"
                 android:layout_marginTop="10pt"
-                android:text="@string/app"/>
+                tools:text="@string/app" />
 
             <TextView
                 android:id="@+id/txt_date"
                 style="@style/style_font_white_26pt"
-                tools:text="2018年12月4日 13：08"/>
+                tools:text="2018年12月4日 13:08" />
 
         </LinearLayout>
 
@@ -50,7 +50,7 @@
             android:layout_marginStart="20pt"
             android:layout_marginTop="54pt"
             android:contentDescription="@string/app"
-            android:src="@drawable/bg_default_photo"/>
+            android:src="@drawable/bg_default_photo" />
 
         <TextView
             android:id="@+id/txt_class"
@@ -59,24 +59,27 @@
             android:layout_marginStart="20pt"
             android:layout_toStartOf="@id/img_more"
             android:layout_toEndOf="@id/img_class"
-            tools:text="初中英语班课教研员-要求有专业教学资质"/>
+            android:ellipsize="end"
+            android:lines="2"
+            tools:text="初中英语班课教研员-要求有专业教学资质" />
 
         <TextView
             android:id="@+id/txt_order_number"
             style="@style/style_font_default_24pt"
-            android:layout_below="@id/txt_class"
+            android:layout_above="@id/txt_order_remark"
             android:layout_alignStart="@id/txt_class"
             android:layout_marginTop="16pt"
             android:textColor="@color/color_gray_font"
-            tools:text="订单编号：1234567890"/>
+            tools:text="订单编号：1234567890" />
 
         <TextView
             android:id="@+id/txt_order_remark"
             style="@style/style_font_default_24pt"
-            android:layout_below="@id/txt_order_number"
             android:layout_alignStart="@id/txt_class"
+            android:layout_alignBottom="@id/img_class"
+            android:layout_marginTop="10pt"
             android:textColor="@color/color_gray_font"
-            tools:text="验证码：2344 3455 3545"/>
+            tools:text="验证码：2344 3455 3545" />
 
         <ImageView
             android:id="@+id/img_more"
@@ -88,7 +91,7 @@
             android:layout_marginTop="120pt"
             android:layout_marginEnd="40pt"
             android:contentDescription="@string/app"
-            android:src="@mipmap/ic_more"/>
+            android:src="@mipmap/ic_more" />
 
         <TextView
             android:id="@+id/txt_order_right"
@@ -99,16 +102,25 @@
             android:layout_marginEnd="48pt"
             android:layout_marginBottom="36pt"
             android:visibility="invisible"
-            tools:text="@string/republish"/>
+            tools:text="@string/republish" />
+
+        <TextView
+            android:id="@+id/txt_order_mid"
+            style="@style/style_small_btn_border_gray"
+            android:layout_alignTop="@id/txt_order_right"
+            android:layout_marginEnd="26pt"
+            android:layout_toStartOf="@id/txt_order_right"
+            android:text="@string/delete"
+            android:visibility="invisible" />
 
         <TextView
             android:id="@+id/txt_order_left"
             style="@style/style_small_btn_border_gray"
             android:layout_alignTop="@id/txt_order_right"
             android:layout_marginEnd="26pt"
-            android:layout_toStartOf="@id/txt_order_right"
+            android:layout_toStartOf="@id/txt_order_mid"
             android:text="@string/delete"
-            android:visibility="invisible"/>
+            android:visibility="invisible" />
 
         <!--审核未通过，重新提交提示-->
 
@@ -121,7 +133,7 @@
             android:layout_marginBottom="34pt"
             android:text="@string/publish_prompt_recommit"
             android:textColor="@color/color_price_red"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
     </RelativeLayout>
 
@@ -134,13 +146,13 @@
         <TextView
             android:id="@+id/txt_money_desc"
             style="@style/style_font_default_28pt"
-            tools:text="支付金额"/>
+            tools:text="支付金额" />
 
         <TextView
             android:id="@+id/txt_money_count"
             style="@style/style_font_default_28pt"
             android:layout_alignParentEnd="true"
-            tools:text="4000元"/>
+            tools:text="4000元" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -152,13 +164,13 @@
         <TextView
             android:id="@+id/txt_contact_desc"
             style="@style/style_font_default_28pt"
-            tools:text="联系方式"/>
+            tools:text="联系方式" />
 
         <TextView
             android:id="@+id/txt_contact_phone"
             style="@style/style_font_default_28pt"
             android:layout_alignParentEnd="true"
-            tools:text="13126596191"/>
+            tools:text="13126596191" />
 
     </RelativeLayout>
 
@@ -171,14 +183,14 @@
         <TextView
             android:id="@+id/txt_info_desc"
             style="@style/style_font_default_28pt"
-            tools:text="购买者信息"/>
+            tools:text="购买者信息" />
 
         <ImageView
             android:layout_width="21pt"
             android:layout_height="35pt"
             android:layout_alignParentEnd="true"
             android:contentDescription="@string/app"
-            android:src="@mipmap/ic_more"/>
+            android:src="@mipmap/ic_more" />
 
     </RelativeLayout>
 

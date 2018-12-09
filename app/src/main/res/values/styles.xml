@@ -253,4 +253,11 @@
         <item name="android:background">@color/color_transparent</item>
         <item name="android:textCursorDrawable">@drawable/edit_cursor</item>
     </style>
+
+
+    <style name="TextAppearance.Tab" parent="TextAppearance.AppCompat.Button">
+        <item name="android:textSize">32pt</item>
+        <item name="android:textColor">@color/color_gray_font</item>
+        <item name="textAllCaps">true</item>
+    </style>
 </resources>

@@ -60,6 +60,9 @@
     <string name="sure">确定</string>
 
     <string name="system_hint">系统提示</string>
+    <string name="pending_review">待审核</string>
+    <string name="invite_users">邀请用户</string>
+    <string name="applicants">应聘者</string>
 
     <string name="go_publish">去发布</string>
     <string name="publish">发布</string>
@@ -238,8 +241,9 @@
     <string name="already_cancel">已取消</string>
     <string name="republish">再次发布</string>
     <string name="cancel_publish">取消发布</string>
+    <string name="goPay">去支付</string>
 
-
+    <string name="cancel_order">取消订单</string>
     <string name="confirm_cancel_order">确定取消订单</string>
     <string name="cancel_prompt">
     代课取消风险：\n

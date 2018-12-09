@@ -24,7 +24,7 @@ data class ClassBean(
                 var materialList: ArrayList<Material>,
                 var categoryList: ArrayList<Category>,
                 var user: User,
-                var order: String,
+                var order: Order,
                 var isAppraise: String
         ) {
             data class Course(
@@ -87,6 +87,19 @@ data class ClassBean(
                     var userName: String?,
                     var telephone: String?,
                     var userPic: String?)
+
+            data class Order(
+                    var id: String?,
+                    var orderNum: String?,
+                    var state: String?,
+                    var modeOfPayment: String?,
+                    var paymentMoney: String?,
+                    var createTime: String?,
+                    var createBy: String?,
+                    var courseId: String?,
+                    var modifyOrderTime: String?,
+                    var effectTime: String?,
+                    var payFail: String?)
         }
 
     }
