@@ -107,6 +107,7 @@
     <string name="detail_address">详细地址</string>
     <string name="street_building_number">街道、楼牌号等</string>
     <string name="training_cost">培训费用(次)</string>
+    <string name="field_cost">场地费用(次)</string>
     <string name="single_cost">单次费用</string>
     <string name="rmb">￥</string>
     <string name="group_purchase">团购（非必填，入无团购可不填写）</string>
@@ -115,12 +116,14 @@
     <string name="people_limit">成团人数限制</string>
     <string name="time_limit">团购时间限制</string>
     <string name="train_long">单次培训时长</string>
+    <string name="field_long">单次可用时长</string>
     <string name="hour">小时</string>
     <string name="accommodating_population">容纳人数</string>
     <string name="people">人</string>
     <string name="field_square">场地空间</string>
     <string name="per_square_metre">m2</string>
     <string name="train_time">培训时间</string>
+    <string name="field_time">营业时间</string>
     <string name="site_facility">场地设施</string>
     <string name="common_facility">通用设施</string>
     <string name="wifi">WIFI</string>
@@ -128,11 +131,21 @@
     <string name="air_conditioner">空调</string>
     <string name="television">电视</string>
     <string name="conference_facility">会议设施</string>
-    <string name="ptecial_facility">特殊设施</string>
+    <string name="special_facility">特殊设施</string>
     <string name="training_brief">培训简介</string>
+    <string name="class_brief">课程简介</string>
+    <string name="field_server">场地服务</string>
     <string name="site_server">请描述一下您的场地服务情况</string>
     <string name="photo_video">照片/视频</string>
 
+    <string name="class_classify">课程分类</string>
+    <string name="class_time2">课程时间</string>
+    <string name="class_time3">上课时段</string>
+    <string name="class_address">上课地点</string>
+    <string name="art">美术</string>
+    <string name="sketch">素描</string>
+    <string name="adult">成人</string>
+    <string name="child">儿童</string>
 
     <!--我的-->
 

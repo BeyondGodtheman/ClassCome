@@ -79,8 +79,6 @@
             style="@style/style_view_divider"
             android:layout_marginTop="48pt" />
 
-        <View style="@style/style_view_divider" />
-
         <TextView
             style="@style/style_font_default_32pt_40pt"
             android:layout_marginTop="48pt"
@@ -94,7 +92,7 @@
             <TextView
                 style="@style/style_font_gray_28pt"
                 android:layout_marginStart="60pt"
-                android:text="@string/training_cost" />
+                android:text="@string/field_cost" />
 
             <EditText
                 android:id="@+id/edit_cost"
@@ -109,103 +107,11 @@
             style="@style/style_view_divider"
             android:layout_marginTop="40pt" />
 
-        <TextView
-            style="@style/style_font_default_32pt_40pt"
-            android:layout_marginTop="55pt"
-            android:text="@string/group_purchase" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="36pt">
-
-            <TextView
-                style="@style/style_font_gray_28pt_60pt"
-                android:layout_marginTop="0pt"
-                android:text="@string/separate_purchase_cost" />
-
-            <EditText
-                android:id="@+id/edit_separate_cost"
-                style="@style/style_edit_publish"
-                android:hint="@string/rmb" />
-        </LinearLayout>
-
-        <View style="@style/style_view_line_publish" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="80pt">
-
-            <TextView
-                style="@style/style_font_gray_28pt_60pt"
-                android:layout_marginTop="0pt"
-                android:text="@string/group_purchase_cost" />
-
-            <EditText
-                android:id="@+id/edit_group_cost"
-                style="@style/style_edit_publish"
-                android:hint="@string/rmb" />
-        </LinearLayout>
-
-        <View style="@style/style_view_line_publish" />
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="90pt">
-
-            <TextView
-                android:id="@+id/test_people_limit"
-                style="@style/style_font_gray_28pt_60pt"
-                android:layout_marginTop="0pt"
-                android:text="@string/people_limit" />
-
-            <EditText
-                android:id="@+id/edit_people_limit"
-                style="@style/style_edit_publish"
-                android:layout_toEndOf="@id/test_people_limit"
-                android:hint="1-100人" />
-
-            <ImageView
-                style="@style/style_more_btn"
-                android:contentDescription="@string/app" />
-        </RelativeLayout>
-
-        <View style="@style/style_view_line_publish" />
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="90pt">
-
-            <TextView
-                android:id="@+id/test_time_limit"
-                style="@style/style_font_gray_28pt_60pt"
-                android:layout_marginTop="0pt"
-                android:text="@string/time_limit" />
-
-            <EditText
-                android:id="@+id/edit_time_limit"
-                style="@style/style_edit_publish"
-                android:layout_toEndOf="@id/test_time_limit"
-                android:hint="30天" />
-
-            <ImageView
-                style="@style/style_more_btn"
-                android:contentDescription="@string/app" />
-        </RelativeLayout>
-
-        <View style="@style/style_view_line_publish" />
-
-        <View
-            style="@style/style_view_divider"
-            android:layout_marginTop="40pt" />
 
         <TextView
             style="@style/style_font_default_32pt_40pt"
             android:layout_marginTop="50pt"
-            android:text="@string/train_long" />
+            android:text="@string/field_long" />
 
         <EditText
             android:id="@+id/edit_hour"
@@ -244,7 +150,7 @@
         <TextView
             style="@style/style_font_default_32pt_40pt"
             android:layout_marginTop="50pt"
-            android:text="@string/train_time" />
+            android:text="@string/field_time" />
 
         <EditText
             android:id="@+id/edit_train_time"
@@ -296,7 +202,7 @@
         <TextView
             style="@style/style_font_default_32pt_40pt"
             android:layout_marginTop="50pt"
-            android:text="@string/training_brief" />
+            android:text="@string/field_server" />
 
         <RelativeLayout
             android:layout_width="match_parent"

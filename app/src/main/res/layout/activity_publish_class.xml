@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_white"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/style_font_default_32pt_40pt"
+            android:layout_marginTop="30pt"
+            android:text="@string/class_classify" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35pt"
+            android:layout_marginBottom="40pt">
+
+            <TextView
+                android:id="@+id/test_class"
+                style="@style/style_font_default_28pt"
+                android:layout_marginStart="60pt"
+                android:text="@string/art" />
+
+            <EditText
+                android:id="@+id/edit_class"
+                style="@style/style_edit_publish"
+                android:layout_toEndOf="@id/test_class"
+                android:hint="@string/sketch" />
+
+            <ImageView
+                style="@style/style_more_btn"
+                android:contentDescription="@string/app" />
+        </RelativeLayout>
+
+        <View style="@style/style_view_divider" />
+
+
+        <TextView
+            style="@style/style_font_default_32pt_40pt"
+            android:layout_marginTop="30pt"
+            android:text="@string/filed_location" />
+
+
+        <RadioGroup
+            android:id="@+id/rg_sex"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="60pt"
+            android:layout_marginTop="40pt"
+            android:layout_marginBottom="40pt"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rbtn_adult"
+                style="@style/style_font_default_28pt"
+                android:button="@drawable/bg_radio_button"
+                android:checked="true"
+                android:paddingStart="22pt"
+                android:paddingEnd="22pt"
+                android:text="@string/adult" />
+
+            <RadioButton
+                android:id="@+id/rbtn_child"
+                style="@style/style_font_default_28pt"
+                android:layout_marginStart="92pt"
+                android:button="@drawable/bg_radio_button"
+                android:paddingStart="22pt"
+                android:paddingEnd="22pt"
+                android:text="@string/child" />
+
+        </RadioGroup>
+
+
+        <View style="@style/style_view_divider" />
+
+
+        <TextView
+            style="@style/style_font_default_32pt_40pt"
+            android:layout_marginTop="30pt"
+            android:text="@string/publish_title" />
+
+        <EditText
+            android:id="@+id/edit_title"
+            style="@style/style_edit_publish"
+            android:layout_marginTop="35pt"
+            android:hint="@string/please_input_title" />
+
+        <View style="@style/style_view_line_publish" />
+
+        <View
+            style="@style/style_view_divider"
+            android:layout_marginTop="42pt" />
+
+        <TextView
+            style="@style/style_font_default_32pt_40pt"
+            android:layout_marginTop="48pt"
+            android:text="@string/class_time2" />
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35pt">
+
+            <EditText
+                android:id="@+id/edit_class_time"
+                style="@style/style_edit_publish"
+                android:hint="请选择课程时间" />
+
+            <ImageView
+                style="@style/style_more_btn"
+                android:contentDescription="@string/app" />
+        </RelativeLayout>
+
+        <View style="@style/style_view_line_publish" />
+
+        <TextView
+            style="@style/style_font_default_32pt_40pt"
+            android:layout_marginTop="40pt"
+            android:text="@string/class_time3" />
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35pt">
+
+            <EditText
+                android:id="@+id/edit_course_time"
+                style="@style/style_edit_publish"
+                android:hint="请选择上课时段" />
+
+            <ImageView
+                style="@style/style_more_btn"
+                android:contentDescription="@string/app" />
+        </RelativeLayout>
+
+        <View style="@style/style_view_line_publish" />
+
+        <View
+            style="@style/style_view_divider"
+            android:layout_marginTop="40pt" />
+
+        <TextView
+            style="@style/style_font_default_32pt_40pt"
+            android:layout_marginTop="30pt"
+            android:text="@string/class_address" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35pt">
+
+            <TextView
+                android:id="@+id/test_location"
+                style="@style/style_font_default_28pt"
+                android:layout_marginStart="60pt"
+                android:text="@string/current_location" />
+
+            <EditText
+                android:id="@+id/edit_location"
+                style="@style/style_edit_publish"
+                android:layout_alignBaseline="@id/test_location"
+                android:layout_toEndOf="@id/test_location"
+                android:background="@color/color_transparent"
+                android:hint="选择地区" />
+
+            <ImageView
+                style="@style/style_more_btn"
+                android:contentDescription="@string/app" />
+        </RelativeLayout>
+
+        <View style="@style/style_view_line_publish" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20pt">
+
+            <TextView
+                style="@style/style_font_default_28pt"
+                android:layout_marginStart="60pt"
+                android:text="@string/detail_address" />
+
+            <EditText
+                android:id="@+id/edit_street"
+                style="@style/style_edit_publish"
+                android:background="@color/color_transparent"
+                android:hint="@string/street_building_number" />
+        </LinearLayout>
+
+        <View style="@style/style_view_line_publish" />
+
+        <View
+            style="@style/style_view_divider"
+            android:layout_marginTop="48pt" />
+
+        <TextView
+            style="@style/style_font_default_32pt_40pt"
+            android:layout_marginTop="55pt"
+            android:text="招聘需求及酬劳" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <TextView
+                android:id="@+id/text1"
+                style="@style/style_font_gray_28pt_60pt"
+                android:layout_marginTop="36pt"
+                android:text="课程总节数" />
+
+            <EditText
+                android:id="@+id/edit_total_class"
+                style="@style/style_edit_publish"
+                android:layout_alignBaseline="@id/text1"
+                android:layout_marginStart="60pt"
+                android:layout_toEndOf="@id/text1"
+                android:hint="节" />
+
+            <View
+                android:id="@+id/line1"
+                style="@style/style_view_line_publish"
+                android:layout_below="@id/edit_total_class" />
+
+            <TextView
+                android:id="@+id/text2"
+                style="@style/style_font_gray_28pt_60pt"
+                android:layout_below="@id/line1"
+                android:text="招聘总人数" />
+
+            <EditText
+                android:id="@+id/edit_recruit_people"
+                style="@style/style_edit_publish"
+                android:layout_alignBaseline="@id/text2"
+                android:layout_alignStart="@id/edit_total_class"
+                android:layout_marginStart="0pt"
+                android:hint="人" />
+
+            <View
+                android:id="@+id/line2"
+                style="@style/style_view_line_publish"
+                android:layout_below="@id/edit_recruit_people" />
+
+            <TextView
+                android:id="@+id/text3"
+                style="@style/style_font_gray_28pt_60pt"
+                android:layout_below="@id/line2"
+                android:layout_marginTop="40pt"
+                android:text="单节酬劳" />
+
+            <EditText
+                android:id="@+id/edit_single_cost"
+                style="@style/style_edit_publish"
+                android:layout_alignBaseline="@id/text3"
+                android:layout_alignStart="@id/edit_total_class"
+                android:layout_marginStart="0pt"
+                android:hint="@string/rmb" />
+
+            <View
+                android:id="@+id/line3"
+                style="@style/style_view_line_publish"
+                android:layout_below="@id/edit_single_cost" />
+
+            <TextView
+                android:id="@+id/text4"
+                style="@style/style_font_gray_28pt_60pt"
+                android:layout_below="@id/line3"
+                android:layout_marginTop="40pt"
+                android:text="总酬劳" />
+
+            <EditText
+                android:id="@+id/edit_total_cost"
+                style="@style/style_edit_publish"
+                android:layout_alignBaseline="@id/text4"
+                android:layout_alignStart="@id/edit_total_class"
+                android:layout_marginStart="0pt"
+                android:hint="@string/rmb" />
+
+            <View
+                style="@style/style_view_line_publish"
+                android:layout_below="@id/edit_total_cost" />
+
+        </RelativeLayout>
+
+        <View
+            style="@style/style_view_divider"
+            android:layout_marginTop="50pt" />
+
+
+        <TextView
+            style="@style/style_font_default_32pt_40pt"
+            android:layout_marginTop="50pt"
+            android:text="@string/class_brief" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30pt"
+            android:layout_marginTop="35pt"
+            android:layout_marginEnd="30pt"
+            android:background="@drawable/draw_bg_gray_border">
+
+            <EditText
+                android:id="@+id/edit_filed"
+                style="@style/style_edit_publish"
+                android:layout_width="match_parent"
+                android:layout_marginTop="15pt"
+                android:hint="@string/site_server" />
+
+            <ImageView
+                android:id="@+id/img_add_photo"
+                android:layout_width="130pt"
+                android:layout_height="130pt"
+                android:layout_below="@id/edit_filed"
+                android:layout_marginStart="40pt"
+                android:layout_marginTop="125pt"
+                android:layout_marginBottom="35pt"
+                android:contentDescription="@string/app"
+                android:src="@drawable/bg_default_photo" />
+
+        </RelativeLayout>
+
+
+        <TextView
+            style="@style/style_button_no_margin"
+            android:layout_width="match_parent"
+            android:layout_height="98pt"
+            android:layout_marginTop="88pt"
+            android:text="@string/publish" />
+    </LinearLayout>
+
+</ScrollView>

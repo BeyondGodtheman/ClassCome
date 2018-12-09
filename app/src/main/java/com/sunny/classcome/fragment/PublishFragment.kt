@@ -3,9 +3,7 @@ package com.sunny.classcome.fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import com.sunny.classcome.R
-import com.sunny.classcome.activity.HomeActivity
-import com.sunny.classcome.activity.MineActivity
-import com.sunny.classcome.activity.PublishTrainActivity
+import com.sunny.classcome.activity.*
 import com.sunny.classcome.adapter.PublishAdapter
 import com.sunny.classcome.base.BaseFragment
 import com.sunny.classcome.bean.PublishBean
@@ -32,10 +30,10 @@ class PublishFragment : BaseFragment() {
 
     private val activityList = arrayListOf(
             PublishTrainActivity::class.java,
-            HomeActivity::class.java,
-            MineActivity::class.java,
-            HomeActivity::class.java,
-            HomeActivity::class.java
+            PublishFieldActivity::class.java,
+            PublishClassActivity::class.java,
+            PublishTutorActivity::class.java,
+            PublishActiveActivity::class.java
     )
 
 
