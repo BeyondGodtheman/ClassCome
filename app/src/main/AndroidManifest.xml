@@ -96,7 +96,23 @@
             android:name=".activity.PurchaserActivity"
             android:hardwareAccelerated="false" />
 
-        <activity android:name=".activity.PublishTrainActivity" />
+        <activity
+            android:name=".activity.PublishTrainActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".activity.PublishFieldActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".activity.PublishClassActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".activity.PublishTutorActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".activity.PublishActiveActivity"
+            android:windowSoftInputMode="adjustPan" />
+
+
         <activity android:name=".activity.OrderDetailActivity" />
         <activity android:name=".activity.CancelPromptActivity" />
         <activity android:name=".activity.ModifyInfoActivity" />

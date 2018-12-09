@@ -5,17 +5,17 @@ import com.sunny.classcome.R
 import com.sunny.classcome.base.BaseActivity
 
 /**
- * Desc 发布培训
+ * Desc 发布活动
  * Author JoannChen
  * Mail Q8622268@gmail.com
- * Date 2018/12/1 00:12
+ * Date 2018/12/9 23:35
  */
-class PublishTrainActivity : BaseActivity() {
+class PublishActiveActivity : BaseActivity() {
 
-    override fun setLayout(): Int = R.layout.activity_publish_train
+    override fun setLayout(): Int = R.layout.activity_publish_active
 
     override fun initView() {
-        showTitle(titleManager.defaultTitle("发布培训"))
+        showTitle(titleManager.defaultTitle("发布活动"))
     }
 
     override fun onClick(v: View?) {

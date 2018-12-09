@@ -23,6 +23,16 @@
         <item name="android:textColor">@color/color_white</item>
     </style>
 
+    <!--公用按钮样式-蓝底白字-无边距-->
+    <style name="style_button_no_margin">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">90pt</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@color/color_primary</item>
+        <item name="android:textSize">36pt</item>
+        <item name="android:textColor">@color/color_white</item>
+    </style>
+
     <!--白底蓝字蓝框-->
     <style name="style_btn_border_blue" parent="style_button">
         <item name="android:background">@drawable/draw_bg_fillet_blue_border</item>
@@ -82,6 +92,18 @@
         <item name="android:textColor">@color/color_gray_font</item>
     </style>
 
+    <style name="style_font_gray_28pt" parent="style_font">
+        <item name="android:textSize">28pt</item>
+        <item name="android:textColor">@color/color_gray_font</item>
+    </style>
+
+    <style name="style_font_gray_28pt_60pt" parent="style_font">
+        <item name="android:textSize">28pt</item>
+        <item name="android:textColor">@color/color_gray_font</item>
+        <item name="android:layout_marginStart">60pt</item>
+        <item name="android:layout_marginTop">40pt</item>
+    </style>
+
     <style name="style_font_gray_30pt" parent="style_font">
         <item name="android:textSize">30pt</item>
         <item name="android:textColor">@color/color_gray_font</item>
@@ -107,8 +129,23 @@
         <item name="android:textSize">32pt</item>
     </style>
 
+    <style name="style_font_default_32pt_40pt" parent="style_font">
+        <item name="android:textSize">32pt</item>
+        <item name="android:layout_marginStart">40pt</item>
+    </style>
+
     <style name="style_font_default_36pt" parent="style_font">
         <item name="android:textSize">36pt</item>
+    </style>
+
+
+    <!-- 分割块样式 -->
+    <style name="style_more_btn">
+        <item name="android:layout_width">21pt</item>
+        <item name="android:layout_height">35pt</item>
+        <item name="android:src">@mipmap/ic_more</item>
+        <item name="android:layout_marginEnd">32pt</item>
+        <item name="android:layout_alignParentEnd">true</item>
     </style>
 
     <!-- 分割块样式 -->
@@ -132,6 +169,23 @@
         <item name="android:background">@color/color_divider</item>
     </style>
 
+
+    <!-- 发布-分割横线-top-start -->
+    <style name="style_view_line_publish">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">2pt</item>
+        <item name="android:layout_marginTop">20pt</item>
+        <item name="android:layout_marginStart">60pt</item>
+        <item name="android:background">@color/color_divider</item>
+    </style>
+
+    <!--发布-输入框字体样式-->
+    <style name="style_edit_publish" parent="style_font">
+        <item name="android:textSize">28pt</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_marginStart">60pt</item>
+        <item name="android:background">@color/color_transparent</item>
+    </style>
 
     <!-- 个人中心-子条目-上侧自定义图标 -->
     <style name="style_item_text_top_icon">
