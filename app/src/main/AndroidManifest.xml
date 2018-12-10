@@ -88,6 +88,9 @@
         <activity android:name=".activity.HomeActivity" />
         <activity android:name=".activity.MineActivity" />
         <activity android:name=".activity.MyCollectionActivity" />
+        <activity android:name=".activity.MyChequesActivity" />
+        <activity android:name=".activity.MyProfileActivity" />
+        <activity android:name=".activity.MyChequesDetailActivity" />
         <activity android:name=".activity.FeedbackActivity" />
         <activity android:name=".activity.SettingActivity" />
         <activity android:name=".activity.PointActivity" />
@@ -116,13 +119,10 @@
         <activity android:name=".activity.OrderDetailActivity" />
         <activity android:name=".activity.CancelPromptActivity" />
         <activity android:name=".activity.ModifyInfoActivity" />
-        <activity android:name=".activity.MyChequesActivity" />
-        <activity android:name=".activity.MyChequesDetailActivity" />
         <activity android:name=".activity.BindPayActivity" />
 
         <!--位置页面-->
-        <activity
-            android:name=".activity.LocationActivity"/>
+        <activity android:name=".activity.LocationActivity" />
 
         <!--找回密码-->
         <activity
@@ -163,7 +163,8 @@
             android:launchMode="singleTop" />
 
         <!--我的发布/参与-->
-        <activity android:name=".activity.MyClassActivity"
-            android:launchMode="singleTop"/>
+        <activity
+            android:name=".activity.MyClassActivity"
+            android:launchMode="singleTop" />
     </application>
 </manifest>
