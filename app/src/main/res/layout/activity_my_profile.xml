@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_white"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/img_user_head"
+                android:layout_width="182pt"
+                android:layout_height="182pt"
+                android:layout_marginStart="48pt"
+                android:layout_marginTop="40pt"
+                android:layout_marginBottom="20pt"
+                android:src="@mipmap/ic_default_head"
+                app:riv_oval="true" />
+
+            <TextView
+                android:id="@+id/txt_name"
+                style="@style/style_font_default_34pt"
+                android:layout_marginStart="45pt"
+                android:layout_marginTop="60pt"
+                android:layout_toEndOf="@id/img_user_head"
+                tools:ignore="RelativeOverlap"
+                tools:text="课多多" />
+
+
+            <ImageView
+                android:id="@+id/img_vip"
+                android:layout_width="46pt"
+                android:layout_height="46pt"
+                android:layout_alignTop="@id/txt_name"
+                android:layout_marginStart="12pt"
+                android:layout_toEndOf="@id/txt_name"
+                android:contentDescription="@string/app"
+                android:src="@mipmap/ic_vip" />
+
+            <ImageView
+                android:id="@+id/img_icon"
+                android:layout_width="38pt"
+                android:layout_height="40pt"
+                android:layout_below="@id/txt_name"
+                android:layout_alignStart="@id/txt_name"
+                android:layout_marginTop="60pt"
+                android:layout_toEndOf="@id/img_user_head"
+                android:contentDescription="@string/app"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/ic_profile_points" />
+
+            <TextView
+                android:id="@+id/txt_points"
+                style="@style/style_font_default_24pt"
+                android:layout_alignTop="@id/img_icon"
+                android:layout_marginStart="14pt"
+                android:layout_toEndOf="@id/img_icon"
+                tools:text="2000积分" />
+
+
+            <ImageView
+                android:id="@+id/img_icon2"
+                android:layout_width="40pt"
+                android:layout_height="36pt"
+                android:layout_alignTop="@id/img_icon"
+                android:layout_marginStart="60pt"
+                android:layout_toEndOf="@id/txt_points"
+                android:contentDescription="@string/app"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/ic_profile_member" />
+
+            <TextView
+                android:id="@+id/txt_member"
+                style="@style/style_font_default_24pt"
+                android:layout_alignTop="@id/img_icon"
+                android:layout_marginStart="14pt"
+                android:layout_toEndOf="@id/img_icon2"
+                tools:text="@string/ordinary_member" />
+        </RelativeLayout>
+
+        <View style="@style/style_view_divider" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40pt"
+            android:layout_marginTop="30pt"
+            android:layout_marginBottom="20pt">
+
+            <TextView
+                android:id="@+id/text1"
+                style="@style/style_font_default_28pt"
+                android:text="发布数量" />
+
+            <TextView
+                android:id="@+id/txt_publish_count"
+                style="@style/style_font_default_28pt"
+                android:layout_marginStart="50pt"
+                android:layout_toEndOf="@id/text1"
+                tools:text="30" />
+
+            <TextView
+                android:id="@+id/text2"
+                style="@style/style_font_default_28pt"
+                android:layout_below="@id/text1"
+                android:layout_marginTop="20pt"
+                android:text="参与数量" />
+
+            <TextView
+                android:id="@+id/txt_partake_count"
+                style="@style/style_font_default_28pt"
+                android:layout_alignStart="@id/txt_publish_count"
+                android:layout_alignTop="@id/text2"
+                android:layout_toEndOf="@id/text2"
+                tools:text="20" />
+
+            <TextView
+                android:id="@+id/text3"
+                style="@style/style_font_default_28pt"
+                android:layout_below="@id/text2"
+                android:layout_marginTop="20pt"
+                android:text="违约次数" />
+
+            <TextView
+                android:id="@+id/txt_default_count"
+                style="@style/style_font_default_28pt"
+                android:layout_alignStart="@id/txt_publish_count"
+                android:layout_alignTop="@id/text3"
+                android:layout_toEndOf="@id/text3"
+                tools:text="20" />
+        </RelativeLayout>
+
+        <View style="@style/style_view_divider" />
+
+        <TextView
+            style="@style/style_font_default_34pt"
+            android:layout_marginStart="40pt"
+            android:layout_marginTop="40pt"
+            android:text="基本信息" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40pt"
+            android:layout_marginTop="35pt"
+            android:layout_marginBottom="28pt">
+
+            <TextView
+                android:id="@+id/text11"
+                style="@style/style_font_gray_28pt"
+                android:text="性别" />
+
+            <TextView
+                android:id="@+id/txt_sex"
+                style="@style/style_font_default_28pt"
+                android:layout_marginStart="120pt"
+                android:layout_toEndOf="@id/text11"
+                tools:text="男" />
+
+            <TextView
+                android:id="@+id/text22"
+                style="@style/style_font_gray_28pt"
+                android:layout_below="@id/text11"
+                android:layout_marginTop="20pt"
+                android:text="年龄" />
+
+            <TextView
+                android:id="@+id/txt_age"
+                style="@style/style_font_default_28pt"
+                android:layout_alignStart="@id/txt_sex"
+                android:layout_alignTop="@id/text22"
+                android:layout_toEndOf="@id/text22"
+                tools:text="20" />
+
+            <TextView
+                android:id="@+id/text33"
+                style="@style/style_font_gray_28pt"
+                android:layout_below="@id/text22"
+                android:layout_marginTop="20pt"
+                android:text="专业" />
+
+            <TextView
+                android:id="@+id/txt_specialty"
+                style="@style/style_font_default_28pt"
+                android:layout_alignStart="@id/txt_sex"
+                android:layout_alignTop="@id/text33"
+                android:layout_toEndOf="@id/text33"
+                tools:text="美术" />
+
+            <TextView
+                android:id="@+id/text44"
+                style="@style/style_font_gray_28pt"
+                android:layout_below="@id/text33"
+                android:layout_marginTop="20pt"
+                android:text="工作年限" />
+
+            <TextView
+                android:id="@+id/txt_work"
+                style="@style/style_font_default_28pt"
+                android:layout_alignStart="@id/txt_sex"
+                android:layout_alignTop="@id/text44"
+                android:layout_toEndOf="@id/text44"
+                tools:text="3年" />
+
+            <TextView
+                android:id="@+id/text55"
+                style="@style/style_font_gray_28pt"
+                android:layout_below="@id/text44"
+                android:layout_marginTop="20pt"
+                android:text="身份验证" />
+
+            <TextView
+                android:id="@+id/txt_identity"
+                style="@style/style_font_gray_28pt"
+                android:layout_alignStart="@id/txt_sex"
+                android:layout_alignTop="@id/text55"
+                android:layout_toEndOf="@id/text55"
+                tools:text="未验证" />
+        </RelativeLayout>
+
+        <View style="@style/style_view_divider" />
+
+        <TextView
+            style="@style/style_font_default_34pt"
+            android:layout_marginStart="40pt"
+            android:layout_marginTop="40pt"
+            android:text="个人简介" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="320pt"
+            android:layout_marginStart="32pt"
+            android:layout_marginTop="20pt"
+            android:layout_marginEnd="32pt"
+            android:background="@color/color_nav_gray">
+
+        </LinearLayout>
+
+        <TextView
+            style="@style/style_font_default_34pt"
+            android:layout_marginStart="40pt"
+            android:layout_marginTop="32pt"
+            android:layout_marginEnd="40pt"
+            tools:text="舞蹈是一种表演艺术，使用身体来完成各种优雅或高难度的动作，一般有音乐伴奏，以有节奏的动作为主要表现手段的艺术形式。它一般借助音乐，也借助其他的道具。舞蹈本身有多元的社会意义及作用，包括运动、社交/求偶、祭祀、礼仪等。在人类文明起源前，舞蹈在仪式，礼仪，庆典和娱乐方面都十分重要。中国在五千年以前就已经出现了舞蹈，它产生于奴隶社会，发展到秦汉之际已形成一定特色。
+            " />
+
+        <View style="@style/style_view_divider" />
+
+    </LinearLayout>
+</ScrollView>
