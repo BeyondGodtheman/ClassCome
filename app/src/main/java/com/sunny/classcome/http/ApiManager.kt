@@ -62,7 +62,7 @@ object ApiManager {
     const val OTHER = 0x2
 
 
-    private fun getHost(): String = if (Constant.isDebug()) "http://47.105.193.86:8081/course/api/" else "http://www.coursecoming.com/api/"
+    fun getHost(): String = if (Constant.isDebug()) "http://47.105.193.86:8081/course/api/" else "http://www.coursecoming.com/api/"
 
     /**
      * 发起一个网络请求并解析成实体类

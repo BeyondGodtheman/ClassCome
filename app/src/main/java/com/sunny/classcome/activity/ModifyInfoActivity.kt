@@ -141,7 +141,7 @@ class ModifyInfoActivity : BaseActivity() {
                 runOnUiThread {
                     headFile?.let {
                         GlideUtil.loadPhone(this@ModifyInfoActivity, img_head, it)
-
+                        OSSUtil.updateFile(headFile?.absolutePath?:"",OSSUtil.IMAGE)
                     }
                 }
             }

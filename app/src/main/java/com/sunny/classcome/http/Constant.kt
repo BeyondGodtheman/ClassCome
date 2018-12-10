@@ -2,12 +2,20 @@ package com.sunny.classcome.http
 
 object Constant {
 
-    fun isDebug(): Boolean = true
+    fun isDebug(): Boolean = false
 
     var isLog = true //是否打印LOG
 
     const val WX_APP_ID = "wx91082899601368ba"
     const val WX_APP_SECRET = "50b644b0398c1940bb831182f91606f1"
+
+
+    //阿里云OSS
+    const val endpoint ="http://oss-cn-shanghai.aliyuncs.com"
+    const val BUCKET_NAME = "course-sh"
+    const val ACCESSKEYID = "LTAIlpR2IwK220Xm"
+    const val AccessKeySecret = "kVnSOMe44LCau8sBg1mgUAXMChoZq9"
+
 
     const val COMMON_UPLOADS = ""
 
@@ -86,6 +94,8 @@ object Constant {
     const val ORDER_QUERYMYRELATIONCOURSE = "order/queryMyRelationCourse" //我的发布/参与
 
     const val ORDER_GETORDERDETAILNEW = "order/getOrderDetailNew" //订单详情
+
+    val MESSAGE_GETOSSSIGNATUREPOLICY = ApiManager.getHost()+"message/getOSSSignaturePolicy" //获取OSStoken
 
 }
 
