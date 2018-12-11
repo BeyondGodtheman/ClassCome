@@ -8,8 +8,10 @@ import com.sunny.classcome.base.BaseActivity
 import com.sunny.classcome.bean.BaseBean
 import com.sunny.classcome.http.ApiManager
 import com.sunny.classcome.http.Constant
+import com.sunny.classcome.utils.Posted
 import com.sunny.classcome.utils.ToastUtil
 import kotlinx.android.synthetic.main.activity_cancel_prompt.*
+import org.greenrobot.eventbus.EventBus
 
 /**
  * Desc 订单取消提示
@@ -62,6 +64,9 @@ class CancelPromptActivity : BaseActivity() {
         ApiManager.post(composites, params, url, object : ApiManager.OnResult<BaseBean<String>>() {
             override fun onSuccess(data: BaseBean<String>) {
                 if (data.content?.statu == "1") {
+                    if (type ==1){
+                        EventBus.getDefault().post(Posted())
+                    }
                     finish()
                 }
                 ToastUtil.show(data.content?.info)

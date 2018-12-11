@@ -203,6 +203,9 @@ class HomeFragment : BaseFragment() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 0 && resultCode == 0) {
             UserManger.getAddress().apply {
+                if(isEmpty() || !this.contains(",")){
+                    return
+                }
                 localStr = split(",")
                 isShowLocal = true
                 titleView.text_home_Location.text = localStr[1]

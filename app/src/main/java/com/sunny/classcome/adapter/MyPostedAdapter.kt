@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.sunny.classcome.R
+import com.sunny.classcome.activity.ApplicantsActivity
 import com.sunny.classcome.activity.CancelPromptActivity
 import com.sunny.classcome.activity.InviteActivity
 import com.sunny.classcome.activity.OrderDetailActivity
@@ -38,7 +39,7 @@ class MyPostedAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleAdapter
             "1" -> "待审核"
             "2" -> {
                 invite(holder.itemView.txt_left,getData(position).course.id)
-                applicants(holder.itemView.txt_mid)
+                applicants(holder.itemView.txt_mid,getData(position).course.id)
                 cancel(holder.itemView.txt_right,getData(position).course.id)
                 orderDetailsType = OrderDetailActivity.order_audited
                 "审核通过,未中标"
@@ -106,7 +107,6 @@ class MyPostedAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleAdapter
             showGrayBtn(this, "取消订单")
             setOnClickListener {
                 CancelPromptActivity.start(context,1,id)
-
             }
         }
     }
@@ -137,7 +137,6 @@ class MyPostedAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleAdapter
             showGrayBtn(this, "删除")
             setOnClickListener {
                 context.startActivity(Intent(context, CancelPromptActivity::class.java))
-
             }
         }
     }
@@ -145,7 +144,7 @@ class MyPostedAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleAdapter
     //再次发布
     private fun publishAgain(textView: TextView) {
         textView.apply {
-            showGrayBtn(this, "再次发布")
+            showBlueBtn(this, "再次发布")
             setOnClickListener {
 
             }
@@ -161,11 +160,11 @@ class MyPostedAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleAdapter
         }
     }
 
-    private fun applicants(textView: TextView) {
+    private fun applicants(textView: TextView,courseId:String) {
         textView.apply {
             showBlueBtn(this, "应聘者")
             setOnClickListener {
-
+                ApplicantsActivity.start(context,courseId)
             }
         }
     }

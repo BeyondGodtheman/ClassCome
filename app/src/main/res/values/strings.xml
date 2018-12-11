@@ -190,7 +190,8 @@
     <string name="list_substitute">代课列表</string>
     <string name="list_tutor">家教列表</string>
     <string name="list_activity">活动列表</string>
-
+    <string name="candidate">候选</string>
+    <string name="winning_bid">中标</string>
     <!--我的收款-->
 
     <string name="detailed">明细</string>

@@ -170,5 +170,9 @@
         <!--邀请页面-->
         <activity android:name=".activity.InviteActivity"
             android:launchMode="singleTop"/>
+
+        <!--邀请者-->
+        <activity android:name=".activity.ApplicantsActivity"
+            android:launchMode="singleTop"/>
     </application>
 </manifest>

@@ -1,11 +1,14 @@
 package com.sunny.classcome.http
 
+import android.content.Intent
 import android.os.Build
 import android.provider.Settings
 import com.google.gson.Gson
+import com.google.gson.JsonObject
 import com.sunny.classcome.BuildConfig
 import com.sunny.classcome.MyApplication
 import com.sunny.classcome.R
+import com.sunny.classcome.activity.LoginActivity
 import com.sunny.classcome.bean.BaseBean
 import com.sunny.classcome.utils.LogUtil
 import com.sunny.classcome.utils.ToastUtil
@@ -202,6 +205,15 @@ object ApiManager {
         if (onResult.tag == STRING) {
             onResult.onSuccess(json as T)
         } else {
+
+            val jsonObject =JSONObject(json)
+            val code = jsonObject.opt("code")
+            if (code == 100){
+                MyApplication.getApp().let {
+                    UserManger.clear()
+                }
+            }
+
             if (onResult.typeToken.toString().contains(BaseBean::class.java.name)) {
                 val baseModel = gSon.fromJson<T>(json, onResult.typeToken)
                 onResult.onSuccess(baseModel)

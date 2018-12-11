@@ -9,27 +9,26 @@ import com.scwang.smartrefresh.layout.footer.ClassicsFooter
 import com.scwang.smartrefresh.layout.header.ClassicsHeader
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener
 import com.sunny.classcome.R
-import com.sunny.classcome.adapter.InviteAdapter
+import com.sunny.classcome.adapter.ApplicantsAdapter
 import com.sunny.classcome.base.BaseActivity
+import com.sunny.classcome.bean.ApplicantsBean
 import com.sunny.classcome.bean.BaseBean
-import com.sunny.classcome.bean.InviteBean
 import com.sunny.classcome.http.ApiManager
 import com.sunny.classcome.http.Constant
+import com.sunny.classcome.utils.Posted
 import com.sunny.classcome.utils.ToastUtil
 import kotlinx.android.synthetic.main.layout_refresh_recycler.*
+import org.greenrobot.eventbus.EventBus
 
-class InviteActivity : BaseActivity() {
+class ApplicantsActivity : BaseActivity() {
     private var courseId = ""
     private var pageIndex = 1
-
-    private val list = arrayListOf<InviteBean.Bean.Data>()
+    private val list = arrayListOf<ApplicantsBean.Bean.Data>()
 
     override fun setLayout(): Int = R.layout.layout_refresh_recycler
 
     override fun initView() {
-
-        showTitle(titleManager.defaultTitle("邀请"))
-
+        showTitle(titleManager.defaultTitle("应聘者"))
         courseId = intent.getStringExtra("courseId")
 
         refresh.setRefreshHeader(ClassicsHeader(this))
@@ -49,28 +48,32 @@ class InviteActivity : BaseActivity() {
         })
 
         recl.layoutManager = LinearLayoutManager(this)
-        recl.adapter = InviteAdapter(list) {
-            invite(it)
-        }
+        recl.adapter = ApplicantsAdapter(list, object : ApplicantsAdapter.ApplicantsOption {
+            override fun candidate(position: Int) {
+                option("2", "1", position)
+            }
+
+            override fun cancelCandidate(position: Int) {
+                option("1", "1", position)
+            }
+
+            override fun winningBid(position: Int) {
+                option("", "2", position)
+            }
+        })
+
     }
 
     override fun onClick(v: View?) {
+
     }
 
-    companion object {
-        fun start(context: Context, courseId: String) {
-            context.startActivity(Intent(context, InviteActivity::class.java)
-                    .putExtra("courseId", courseId))
-        }
-    }
-
-    //加载邀请列表
     override fun loadData() {
         val params = hashMapOf<String, String>()
         params["pageIndex"] = pageIndex.toString()
         params["courseId"] = courseId
-        ApiManager.post(composites, params, Constant.ORDER_MATCHAPPLICANTLIST, object : ApiManager.OnResult<InviteBean>() {
-            override fun onSuccess(data: InviteBean) {
+        ApiManager.post(composites, params, Constant.ORDER_GETAPPLICANTLIST, object : ApiManager.OnResult<ApplicantsBean>() {
+            override fun onSuccess(data: ApplicantsBean) {
                 if (pageIndex == 1) {
                     list.clear()
                     refresh.finishRefresh()
@@ -97,26 +100,40 @@ class InviteActivity : BaseActivity() {
             }
 
         })
-
     }
 
-    //邀请用户
-    private fun invite(position:Int){
+
+    //操作方法
+    fun option(state: String, type: String, position: Int) {
         val params = hashMapOf<String, String>()
-        params["userId"] = list[position].userId
         params["courseId"] = courseId
-        ApiManager.post(composites, params, Constant.ORDER_INVITETEACHER, object : ApiManager.OnResult<BaseBean<String>>() {
+        params["state"] = state
+        params["type"] = type
+        params["userId"] = list[position].userId
+        ApiManager.post(composites, params, Constant.ORDER_APPLYCOURSE, object : ApiManager.OnResult<BaseBean<String>>() {
             override fun onSuccess(data: BaseBean<String>) {
-                if (data.content?.statu =="1"){
-                    list[position].isWelcome = "2"
-                    recl.adapter?.notifyDataSetChanged()
+                if (data.content?.statu == "1") {
+                    list[position].state = state
+
+                }else{
+                    list[position].state = type
                 }
+                recl.adapter?.notifyDataSetChanged()
+                EventBus.getDefault().post(Posted())
                 ToastUtil.show(data.content?.info)
             }
 
             override fun onFailed(code: String, message: String) {
+
             }
 
         })
+    }
+
+    companion object {
+        fun start(context: Context, courseId: String) {
+            context.startActivity(Intent(context, ApplicantsActivity::class.java)
+                    .putExtra("courseId", courseId))
+        }
     }
 }

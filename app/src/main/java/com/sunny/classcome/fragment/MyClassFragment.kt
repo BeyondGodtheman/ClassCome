@@ -15,6 +15,7 @@ import com.sunny.classcome.http.ApiManager
 import com.sunny.classcome.http.Constant
 import com.sunny.classcome.utils.Posted
 import kotlinx.android.synthetic.main.layout_refresh_recycler.*
+import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 
@@ -30,6 +31,9 @@ class MyClassFragment : BaseFragment() {
     override fun setLayout(): Int = R.layout.layout_refresh_recycler
 
     override fun initView() {
+
+        EventBus.getDefault().register(this)
+
         refresh.setRefreshHeader(ClassicsHeader(context))
         refresh.setRefreshFooter(ClassicsFooter(context))
 
@@ -108,4 +112,8 @@ class MyClassFragment : BaseFragment() {
         loadData()
     }
 
+    
+    override fun close() {
+        EventBus.getDefault().unregister(this)
+    }
 }
