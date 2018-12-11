@@ -129,6 +129,10 @@
         <item name="android:textSize">32pt</item>
     </style>
 
+    <style name="style_font_default_34pt" parent="style_font">
+        <item name="android:textSize">34pt</item>
+    </style>
+
     <style name="style_font_default_32pt_40pt" parent="style_font">
         <item name="android:textSize">32pt</item>
         <item name="android:layout_marginStart">40pt</item>
