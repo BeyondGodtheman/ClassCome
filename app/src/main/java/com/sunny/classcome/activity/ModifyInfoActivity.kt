@@ -25,6 +25,7 @@ import java.io.File
  */
 class ModifyInfoActivity : BaseActivity() {
     private var headFile:File? = null
+    private var headPic =""
 
     override fun setLayout(): Int = R.layout.activity_modify_info
 
@@ -75,6 +76,7 @@ class ModifyInfoActivity : BaseActivity() {
             override fun onSuccess(data: BaseBean<UserBean>) {
                 hideLoading()
                 data.content?.data?.user?.let {
+                    headPic = it.userPic
                     GlideUtil.loadHead(this@ModifyInfoActivity, img_head, it.userPic)
                     edit_name.setText(it.userName)
                     txt_phone.text = it.telephone
@@ -113,11 +115,12 @@ class ModifyInfoActivity : BaseActivity() {
         }
 
         val params = hashMapOf<String,String>()
+        params["userPic"] = headPic
         params["userName"] = edit_name.text.toString()
         params["address"] = txt_city.text.toString()
         params["sex"] = if(rbtn_man.isChecked) "1" else "2"
 
-        ApiManager.post(composites,params, Constant.USER_EDITMYINFO,object : ApiManager.OnResult<BaseBean<String>>(){
+        ApiManager.post(composites,params, Constant.USER_EDITPERSONINFO,object : ApiManager.OnResult<BaseBean<String>>(){
             override fun onSuccess(data: BaseBean<String>) {
                 if (data.content?.statu == "1"){
                     finish()

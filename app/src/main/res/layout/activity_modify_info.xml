@@ -45,7 +45,9 @@
 
     <RelativeLayout
         android:id="@+id/rl_name"
-        style="@style/style_item_layout_txt_txt_img">
+        style="@style/style_item_layout_txt_txt_img"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
 
         <TextView
             style="@style/style_font_default_28pt"
