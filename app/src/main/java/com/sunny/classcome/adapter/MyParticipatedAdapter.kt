@@ -38,7 +38,7 @@ class MyParticipatedAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleA
                 "已取消"
             }
             "4" -> {
-                cancel(holder.itemView.txt_right)
+                cancel(holder.itemView.txt_right,getData(position).course.id)
                 "已中标"
             }
             "5" -> "待结算"
@@ -79,9 +79,18 @@ class MyParticipatedAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleA
 
 
     //取消
-    private fun cancel(textView: TextView) {
+    private fun cancel(textView: TextView,id:String) {
         textView.apply {
             showGrayBtn(this, "取消订单")
+            setOnClickListener {
+                CancelPromptActivity.start(context,2,id)
+            }
+        }
+    }
+
+    private fun publish(textView: TextView){
+        textView.apply {
+            showBlueBtn(this, "再次发布")
             setOnClickListener {
                 context.startActivity(Intent(context,CancelPromptActivity::class.java))
 

@@ -166,5 +166,9 @@
         <activity
             android:name=".activity.MyClassActivity"
             android:launchMode="singleTop" />
+
+        <!--邀请页面-->
+        <activity android:name=".activity.InviteTeacherActivity"
+            android:launchMode="singleTop"/>
     </application>
 </manifest>

@@ -99,5 +99,13 @@ object Constant {
 
     val MESSAGE_GETOSSSIGNATUREPOLICY = ApiManager.getHost()+"message/getOSSSignaturePolicy" //获取OSStoken
 
+    const val ORDER_CACELORDER = "order/cacelOrder" //取消我发布的订单
+
+    const val ORDER_CACELORDEROFTEACHER = "order/cacelOrderOfTeacher" //取消我参与的订单
+
+    const val ORDER_MATCHAPPLICANTLIST = "order/matchApplicantList" //邀请代课者列表
+
+    const val ORDER_INVITETEACHER = "order/inviteTeacher" //邀请代课者
+
 }
 

@@ -86,6 +86,8 @@ dependencies {
     implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-16'
     //图片选择lib
     implementation 'com.zhihu.android:matisse:0.5.2-beta3'
+    //eventbus
+    implementation 'org.greenrobot:eventbus:3.1.1'
     //阿里云OSS
     implementation 'com.aliyun.dpa:oss-android-sdk:+'
 }

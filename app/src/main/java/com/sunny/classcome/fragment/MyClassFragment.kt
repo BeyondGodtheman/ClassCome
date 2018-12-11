@@ -13,7 +13,10 @@ import com.sunny.classcome.base.BaseFragment
 import com.sunny.classcome.bean.ClassBean
 import com.sunny.classcome.http.ApiManager
 import com.sunny.classcome.http.Constant
+import com.sunny.classcome.utils.Posted
 import kotlinx.android.synthetic.main.layout_refresh_recycler.*
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 
 
 class MyClassFragment : BaseFragment() {
@@ -97,4 +100,12 @@ class MyClassFragment : BaseFragment() {
 
         return this
     }
+
+
+    //更新列表数据
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onUpdateEvent(posted: Posted){
+        loadData()
+    }
+
 }

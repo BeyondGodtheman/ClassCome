@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.sunny.classcome.R
 import com.sunny.classcome.activity.CancelPromptActivity
+import com.sunny.classcome.activity.InviteTeacherActivity
 import com.sunny.classcome.activity.OrderDetailActivity
 import com.sunny.classcome.base.BaseRecycleAdapter
 import com.sunny.classcome.base.BaseRecycleViewHolder
@@ -36,26 +37,26 @@ class MyPostedAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleAdapter
             }
             "1" -> "待审核"
             "2" -> {
-                cancel(holder.itemView.txt_left)
-                invite(holder.itemView.txt_mid)
-                applicants(holder.itemView.txt_right)
+                invite(holder.itemView.txt_left,getData(position).course.id)
+                applicants(holder.itemView.txt_mid)
+                cancel(holder.itemView.txt_right,getData(position).course.id)
                 orderDetailsType = OrderDetailActivity.order_audited
                 "审核通过,未中标"
             }
             "3" -> {
-                delete(holder.itemView.txt_mid)
+//                delete(holder.itemView.txt_mid)
                 publishAgain(holder.itemView.txt_right)
                 orderDetailsType = OrderDetailActivity.order_off_shelf
                 "已取消"
             }
             "4" -> {
-                cancel(holder.itemView.txt_mid)
+                cancel(holder.itemView.txt_mid,getData(position).course.id)
                 goPay(holder.itemView.txt_right)
                 orderDetailsType = OrderDetailActivity.order_pay_wait
                 "未付款"
             }
             "5" -> {
-                cancel(holder.itemView.txt_mid)
+                cancel(holder.itemView.txt_mid,getData(position).course.id)
                 account(holder.itemView.txt_right)
                 orderDetailsType = OrderDetailActivity.order_class_ing
 
@@ -100,11 +101,11 @@ class MyPostedAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleAdapter
 
 
     //取消
-    private fun cancel(textView: TextView) {
+    private fun cancel(textView: TextView,id:String) {
         textView.apply {
             showGrayBtn(this, "取消订单")
             setOnClickListener {
-                context.startActivity(Intent(context, CancelPromptActivity::class.java))
+                CancelPromptActivity.start(context,1,id)
 
             }
         }
@@ -151,11 +152,11 @@ class MyPostedAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleAdapter
         }
     }
 
-    private fun invite(textView: TextView) {
+    private fun invite(textView: TextView,courseId:String) {
         textView.apply {
             showBlueBtn(this, "邀请用户")
             setOnClickListener {
-
+                    InviteTeacherActivity.start(context,courseId)
             }
         }
     }
