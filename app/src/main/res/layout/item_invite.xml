@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="220pt"
+    android:orientation="vertical"
+    android:background="@color/color_white"
+    android:layout_marginBottom="15pt">
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/img_user_head"
+        android:layout_width="169pt"
+        android:layout_height="169pt"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="48pt"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/ic_default_head"
+        app:riv_oval="true" />
+
+    <TextView
+        android:id="@+id/txt_user_name"
+        style="@style/style_font_default_30pt"
+        android:layout_marginStart="26pt"
+        android:layout_marginTop="35pt"
+        android:layout_marginEnd="26pt"
+        android:layout_toStartOf="@id/view_more"
+        android:layout_toEndOf="@id/img_user_head"
+        android:ellipsize="end"
+        android:lines="1"
+        tools:text="阿尔伯特.爱因斯坦" />
+
+    <TextView
+        android:id="@+id/txt_specialty"
+        style="@style/style_font_default_24pt"
+        android:layout_below="@+id/txt_user_name"
+        android:layout_marginStart="26pt"
+        android:layout_marginTop="16pt"
+        android:layout_marginEnd="26pt"
+        android:layout_toEndOf="@id/img_user_head"
+        android:ellipsize="end"
+        android:lines="1"
+        tools:text="专业：体育" />
+
+    <TextView
+        android:id="@+id/txt_user_address"
+        style="@style/style_font_default_24pt"
+        android:layout_below="@+id/txt_specialty"
+        android:layout_marginStart="26pt"
+        android:layout_marginTop="6pt"
+        android:layout_marginEnd="26pt"
+        android:layout_toEndOf="@id/img_user_head"
+        android:ellipsize="end"
+        android:lines="1"
+        tools:text="所在地：上海" />
+
+    <View
+        android:id="@+id/view_more"
+        android:layout_width="21pt"
+        android:layout_height="35pt"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="41pt"
+        android:layout_marginEnd="48pt"
+        android:background="@mipmap/ic_more"
+        android:visibility="gone"/>
+
+    <Button
+        android:id="@+id/btn_invite"
+        style="@style/style_font_default_28pt"
+        android:layout_width="164pt"
+        android:layout_height="58pt"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="47pt"
+        android:layout_marginBottom="31pt"
+        android:background="@drawable/draw_bg_fillet_blue_border"
+        android:text="@string/invite"
+        android:textColor="@color/color_nav_blue" />
+</RelativeLayout>

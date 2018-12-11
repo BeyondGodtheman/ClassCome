@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.sunny.classcome.R
 import com.sunny.classcome.activity.CancelPromptActivity
-import com.sunny.classcome.activity.InviteTeacherActivity
+import com.sunny.classcome.activity.InviteActivity
 import com.sunny.classcome.activity.OrderDetailActivity
 import com.sunny.classcome.base.BaseRecycleAdapter
 import com.sunny.classcome.base.BaseRecycleViewHolder
@@ -156,7 +156,7 @@ class MyPostedAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleAdapter
         textView.apply {
             showBlueBtn(this, "邀请用户")
             setOnClickListener {
-                    InviteTeacherActivity.start(context,courseId)
+                    InviteActivity.start(context,courseId)
             }
         }
     }

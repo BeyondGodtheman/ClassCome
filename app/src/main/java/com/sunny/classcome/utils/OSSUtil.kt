@@ -7,6 +7,7 @@ import com.alibaba.sdk.android.oss.ServiceException
 import com.alibaba.sdk.android.oss.callback.OSSCompletedCallback
 import com.alibaba.sdk.android.oss.callback.OSSProgressCallback
 import com.alibaba.sdk.android.oss.common.auth.OSSAuthCredentialsProvider
+import com.alibaba.sdk.android.oss.common.auth.OSSStsTokenCredentialProvider
 import com.alibaba.sdk.android.oss.internal.OSSAsyncTask
 import com.alibaba.sdk.android.oss.model.PutObjectRequest
 import com.alibaba.sdk.android.oss.model.PutObjectResult
@@ -20,7 +21,8 @@ object OSSUtil {
     var VIDEO = "app/video/"
 
     private val oss:OSSClient by lazy {
-        val credentialProvider = OSSAuthCredentialsProvider(Constant.MESSAGE_GETOSSSIGNATUREPOLICY)
+        val credentialProvider = OSSStsTokenCredentialProvider(Constant.ACCESSKEYID,Constant.AccessKeySecret,Constant.TOKEN)
+
         val conf = ClientConfiguration()
         conf.connectionTimeout = 15 * 1000 // 连接超时，默认15秒
         conf.socketTimeout = 15 * 1000 // socket超时，默认15秒
@@ -29,9 +31,9 @@ object OSSUtil {
         OSSClient(MyApplication.getApp(), Constant.endpoint, credentialProvider)
     }
 
-    var task: OSSAsyncTask<PutObjectResult>? = null
+    private var task: OSSAsyncTask<PutObjectResult>? = null
 
-    fun updateFile(filePath:String,type:String){
+    fun updateFile(filePath:String,type:String,onResult:(url:String)->Unit){
         if (filePath.isEmpty()){
             return
         }
@@ -46,9 +48,7 @@ object OSSUtil {
         task = oss.asyncPutObject(put, object : OSSCompletedCallback<PutObjectRequest, PutObjectResult> {
             override fun onSuccess(request: PutObjectRequest, result: PutObjectResult) {
                 LogUtil.d("上传成功")
-
-                LogUtil.d("ETag:"+result.eTag)
-                LogUtil.d("RequestId:"+result.requestId)
+                onResult(Constant.UPDATEHOST + request.objectKey)
             }
 
             override fun onFailure(request: PutObjectRequest, clientExcepion: ClientException?, serviceException: ServiceException?) {

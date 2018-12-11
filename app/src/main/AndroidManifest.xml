@@ -168,7 +168,7 @@
             android:launchMode="singleTop" />
 
         <!--邀请页面-->
-        <activity android:name=".activity.InviteTeacherActivity"
+        <activity android:name=".activity.InviteActivity"
             android:launchMode="singleTop"/>
     </application>
 </manifest>

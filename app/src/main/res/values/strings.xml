@@ -61,6 +61,7 @@
 
     <string name="system_hint">系统提示</string>
     <string name="pending_review">待审核</string>
+    <string name="invite">邀请</string>
     <string name="invite_users">邀请用户</string>
     <string name="applicants">应聘者</string>
 

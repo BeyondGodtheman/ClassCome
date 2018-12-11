@@ -1,6 +1,5 @@
 package com.sunny.classcome.utils
 
-import android.content.Context
 import android.support.v4.content.ContextCompat
 import android.view.View
 import android.widget.TextView
@@ -16,14 +15,18 @@ import com.sunny.classcome.R
 
 fun showBlueBtn(txt: TextView, str: String) {
     txt.visibility = View.VISIBLE
-    txt.text = str
+    if (str.isNotEmpty()){
+        txt.text = str
+    }
     txt.setBackgroundResource(R.drawable.draw_bg_fillet_blue_border)
     txt.setTextColor(ContextCompat.getColor(MyApplication.getApp().applicationContext, R.color.color_nav_blue))
 }
 
 fun showGrayBtn(txt: TextView, str: String) {
     txt.visibility = View.VISIBLE
-    txt.text = str
+    if (str.isNotEmpty()){
+        txt.text = str
+    }
     txt.setBackgroundResource(R.drawable.draw_bg_fillet_gray_border)
     txt.setTextColor(ContextCompat.getColor(MyApplication.getApp().applicationContext, R.color.color_gray_font))
 }

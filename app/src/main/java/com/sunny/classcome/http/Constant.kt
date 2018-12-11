@@ -11,11 +11,12 @@ object Constant {
 
 
     //阿里云OSS
-    const val endpoint ="http://oss-cn-shanghai.aliyuncs.com"
+    const val endpoint ="oss-cn-shanghai.aliyuncs.com"
     const val BUCKET_NAME = "course-sh"
-    const val ACCESSKEYID = "LTAIlpR2IwK220Xm"
-    const val AccessKeySecret = "kVnSOMe44LCau8sBg1mgUAXMChoZq9"
-
+    const val ACCESSKEYID = "LTAIhlWs79fb3maU"
+    const val AccessKeySecret = "BA2gwJWLmcbeCZMtHxm2D0MdpXNsmo"
+    const val TOKEN =""
+    const val UPDATEHOST = "https://course-sh.oss-cn-shanghai.aliyuncs.com/"
 
     const val COMMON_UPLOADS = ""
 
