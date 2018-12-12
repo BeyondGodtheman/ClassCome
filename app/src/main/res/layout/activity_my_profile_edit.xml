@@ -26,7 +26,6 @@
             style="@style/style_font_gray_28pt"
             android:text="性别" />
 
-
         <RadioGroup
             android:id="@+id/rg_sex"
             android:layout_width="wrap_content"
@@ -69,9 +68,9 @@
             android:layout_marginTop="20pt"
             android:text="年龄" />
 
-        <TextView
+        <EditText
             android:id="@+id/txt_age"
-            style="@style/style_font_default_28pt"
+            style="@style/style_edit_modify"
             android:layout_alignStart="@id/rg_sex"
             android:layout_alignTop="@id/text22"
             android:layout_toEndOf="@id/text22"
@@ -90,21 +89,19 @@
             android:layout_marginTop="20pt"
             android:text="专业" />
 
-        <TextView
+        <EditText
             android:id="@+id/txt_specialty"
-            style="@style/style_font_default_28pt"
+            style="@style/style_edit_modify"
             android:layout_alignStart="@id/rg_sex"
             android:layout_alignTop="@id/text33"
             android:layout_toEndOf="@id/text33"
             tools:text="美术" />
-
 
         <View
             android:id="@+id/line33"
             style="@style/style_view_line_top"
             android:layout_below="@id/txt_specialty"
             android:layout_alignStart="@id/rg_sex" />
-
 
         <TextView
             android:id="@+id/text44"
@@ -113,21 +110,19 @@
             android:layout_marginTop="20pt"
             android:text="工作年限" />
 
-        <TextView
+        <EditText
             android:id="@+id/txt_work"
-            style="@style/style_font_default_28pt"
+            style="@style/style_edit_modify"
             android:layout_alignStart="@id/rg_sex"
             android:layout_alignTop="@id/text44"
             android:layout_toEndOf="@id/text44"
             tools:text="3年" />
-
 
         <View
             android:id="@+id/line44"
             style="@style/style_view_line_top"
             android:layout_below="@id/txt_work"
             android:layout_alignStart="@id/rg_sex" />
-
 
         <TextView
             android:id="@+id/text55"
@@ -136,9 +131,9 @@
             android:layout_marginTop="20pt"
             android:text="身份验证" />
 
-        <TextView
+        <EditText
             android:id="@+id/txt_identity"
-            style="@style/style_font_gray_28pt"
+            style="@style/style_edit_modify"
             android:layout_alignStart="@id/rg_sex"
             android:layout_alignTop="@id/text55"
             android:layout_toEndOf="@id/text55"
@@ -157,8 +152,8 @@
             android:layout_alignTop="@id/text55"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="35pt"
-            android:textColor="@color/color_primary"
-            tools:text="去验证 >" />
+            android:text="去验证 >"
+            android:textColor="@color/color_primary" />
 
     </RelativeLayout>
 

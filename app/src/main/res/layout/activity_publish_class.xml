@@ -166,7 +166,7 @@
             <EditText
                 android:id="@+id/edit_location"
                 style="@style/style_edit_publish"
-                android:layout_alignBaseline="@id/test_location"
+                android:layout_alignBottom="@id/test_location"
                 android:layout_toEndOf="@id/test_location"
                 android:background="@color/color_transparent"
                 android:hint="选择地区" />
@@ -210,9 +210,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-
             <TextView
-                android:id="@+id/text1"
+                android:id="@+id/text11"
                 style="@style/style_font_gray_28pt_60pt"
                 android:layout_marginTop="36pt"
                 android:text="课程总节数" />
@@ -220,66 +219,66 @@
             <EditText
                 android:id="@+id/edit_total_class"
                 style="@style/style_edit_publish"
-                android:layout_alignBaseline="@id/text1"
+                android:layout_alignBottom="@id/text11"
                 android:layout_marginStart="60pt"
-                android:layout_toEndOf="@id/text1"
+                android:layout_toEndOf="@id/text11"
                 android:hint="节" />
 
             <View
-                android:id="@+id/line1"
+                android:id="@+id/line11"
                 style="@style/style_view_line_publish"
                 android:layout_below="@id/edit_total_class" />
 
             <TextView
-                android:id="@+id/text2"
+                android:id="@+id/text22"
                 style="@style/style_font_gray_28pt_60pt"
-                android:layout_below="@id/line1"
+                android:layout_below="@id/line11"
                 android:text="招聘总人数" />
 
             <EditText
                 android:id="@+id/edit_recruit_people"
                 style="@style/style_edit_publish"
-                android:layout_alignBaseline="@id/text2"
+                android:layout_alignBottom="@id/text22"
                 android:layout_alignStart="@id/edit_total_class"
                 android:layout_marginStart="0pt"
                 android:hint="人" />
 
             <View
-                android:id="@+id/line2"
+                android:id="@+id/line22"
                 style="@style/style_view_line_publish"
                 android:layout_below="@id/edit_recruit_people" />
 
             <TextView
-                android:id="@+id/text3"
+                android:id="@+id/text33"
                 style="@style/style_font_gray_28pt_60pt"
-                android:layout_below="@id/line2"
+                android:layout_below="@id/line22"
                 android:layout_marginTop="40pt"
                 android:text="单节酬劳" />
 
             <EditText
                 android:id="@+id/edit_single_cost"
                 style="@style/style_edit_publish"
-                android:layout_alignBaseline="@id/text3"
+                android:layout_alignBottom="@id/text33"
                 android:layout_alignStart="@id/edit_total_class"
                 android:layout_marginStart="0pt"
                 android:hint="@string/rmb" />
 
             <View
-                android:id="@+id/line3"
+                android:id="@+id/line33"
                 style="@style/style_view_line_publish"
                 android:layout_below="@id/edit_single_cost" />
 
             <TextView
-                android:id="@+id/text4"
+                android:id="@+id/text44"
                 style="@style/style_font_gray_28pt_60pt"
-                android:layout_below="@id/line3"
+                android:layout_below="@id/line33"
                 android:layout_marginTop="40pt"
                 android:text="总酬劳" />
 
             <EditText
                 android:id="@+id/edit_total_cost"
                 style="@style/style_edit_publish"
-                android:layout_alignBaseline="@id/text4"
+                android:layout_alignBottom="@id/text44"
                 android:layout_alignStart="@id/edit_total_class"
                 android:layout_marginStart="0pt"
                 android:hint="@string/rmb" />

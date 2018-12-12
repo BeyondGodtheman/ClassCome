@@ -199,6 +199,12 @@
         <item name="android:background">@color/color_transparent</item>
     </style>
 
+    <style name="style_edit_modify" parent="style_font">
+        <item name="android:textSize">28pt</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:background">@color/color_transparent</item>
+    </style>
+
     <!-- 个人中心-子条目-上侧自定义图标 -->
     <style name="style_item_text_top_icon">
         <item name="android:layout_width">wrap_content</item>
