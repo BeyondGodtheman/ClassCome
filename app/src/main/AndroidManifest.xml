@@ -174,5 +174,9 @@
         <!--邀请者-->
         <activity android:name=".activity.ApplicantsActivity"
             android:launchMode="singleTop"/>
+
+        <!--邀约记录-->
+        <activity android:name=".activity.InvitationRecordActivity"
+            android:launchMode="singleTop"/>
     </application>
 </manifest>

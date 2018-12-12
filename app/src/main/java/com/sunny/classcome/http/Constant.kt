@@ -112,5 +112,7 @@ object Constant {
 
     const val USER_SAVEIDENTITYCARD = "user/saveIdentityCard" //保存身份证URL
 
+    const val COURSE_GETUSERINVITECOURSE = "course/getUserInviteCourse" //邀约记录
+
 }
 

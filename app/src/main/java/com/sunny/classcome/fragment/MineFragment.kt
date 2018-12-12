@@ -105,7 +105,7 @@ class MineFragment : BaseFragment() {
             R.id.rl_my_partake -> MyClassActivity.start(requireContext(),2)
 
             R.id.txt_my_cheques -> intent(MyChequesActivity::class.java)
-            R.id.txt_invitation_record -> intent(LoginActivity::class.java)
+            R.id.txt_invitation_record -> intent(InvitationRecordActivity::class.java)
             R.id.txt_my_profile -> intent(MyProfileActivity::class.java)
             R.id.txt_my_collection -> intent(MyCollectionActivity::class.java)
             R.id.txt_feedback -> intent(FeedbackActivity::class.java)
