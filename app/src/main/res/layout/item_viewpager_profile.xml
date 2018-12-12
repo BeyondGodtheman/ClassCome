@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ImageView
+        android:id="@+id/img_profile_photo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@color/color_divider"/>
+
+    <View
+        android:id="@+id/view_play"
+        android:layout_width="71pt"
+        android:layout_height="68pt"
+        android:background="@mipmap/ic_media_play"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone"/>
+</RelativeLayout>

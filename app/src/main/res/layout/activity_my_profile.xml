@@ -37,9 +37,9 @@
 
             <ImageView
                 android:id="@+id/img_vip"
-                android:layout_width="46pt"
-                android:layout_height="46pt"
-                android:layout_alignTop="@id/txt_name"
+                android:layout_width="34pt"
+                android:layout_height="30pt"
+                android:layout_marginTop="67pt"
                 android:layout_marginStart="12pt"
                 android:layout_toEndOf="@id/txt_name"
                 android:contentDescription="@string/app"
@@ -62,18 +62,20 @@
                 style="@style/style_font_default_24pt"
                 android:layout_alignTop="@id/img_icon"
                 android:layout_marginStart="14pt"
+                android:layout_marginTop="5pt"
                 android:layout_toEndOf="@id/img_icon"
                 tools:text="2000积分" />
 
 
             <ImageView
                 android:id="@+id/img_icon2"
-                android:layout_width="40pt"
-                android:layout_height="36pt"
+                android:layout_width="50pt"
+                android:layout_height="35pt"
                 android:layout_alignTop="@id/img_icon"
                 android:layout_marginStart="60pt"
                 android:layout_toEndOf="@id/txt_points"
                 android:contentDescription="@string/app"
+                android:layout_marginTop="4pt"
                 android:scaleType="centerCrop"
                 android:src="@mipmap/ic_profile_member" />
 
@@ -82,6 +84,7 @@
                 style="@style/style_font_default_24pt"
                 android:layout_alignTop="@id/img_icon"
                 android:layout_marginStart="14pt"
+                android:layout_marginTop="5pt"
                 android:layout_toEndOf="@id/img_icon2"
                 tools:text="@string/ordinary_member" />
         </RelativeLayout>
@@ -234,23 +237,25 @@
             android:layout_marginTop="40pt"
             android:text="个人简介" />
 
-        <LinearLayout
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewPager"
             android:layout_width="match_parent"
             android:layout_height="320pt"
             android:layout_marginStart="32pt"
             android:layout_marginTop="20pt"
             android:layout_marginEnd="32pt"
-            android:background="@color/color_nav_gray">
+            android:background="@color/color_divider">
 
-        </LinearLayout>
+        </android.support.v4.view.ViewPager>
 
         <TextView
-            style="@style/style_font_default_34pt"
+            android:id="@+id/txt_brief"
+            style="@style/style_font_default_28pt"
             android:layout_marginStart="40pt"
             android:layout_marginTop="32pt"
             android:layout_marginEnd="40pt"
-            tools:text="舞蹈是一种表演艺术，使用身体来完成各种优雅或高难度的动作，一般有音乐伴奏，以有节奏的动作为主要表现手段的艺术形式。它一般借助音乐，也借助其他的道具。舞蹈本身有多元的社会意义及作用，包括运动、社交/求偶、祭祀、礼仪等。在人类文明起源前，舞蹈在仪式，礼仪，庆典和娱乐方面都十分重要。中国在五千年以前就已经出现了舞蹈，它产生于奴隶社会，发展到秦汉之际已形成一定特色。
-            " />
+            tools:text="舞蹈是一种表演艺术，使用身体来完成各种优雅或高难度的动作"
+            android:layout_marginBottom="20pt"/>
 
         <View style="@style/style_view_divider" />
 
