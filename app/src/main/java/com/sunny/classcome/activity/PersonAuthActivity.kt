@@ -2,14 +2,15 @@ package com.sunny.classcome.activity
 
 import android.content.Intent
 import android.content.pm.ActivityInfo
-import android.net.Uri
+import android.os.Handler
+import android.os.Message
 import android.view.View
 import com.sunny.classcome.R
 import com.sunny.classcome.base.BaseActivity
+import com.sunny.classcome.bean.BaseBean
+import com.sunny.classcome.http.ApiManager
 import com.sunny.classcome.http.Constant
-import com.sunny.classcome.utils.GlideApp
-import com.sunny.classcome.utils.GlideUtil
-import com.sunny.classcome.utils.MyGlideEngine
+import com.sunny.classcome.utils.*
 import com.zhihu.matisse.Matisse
 import com.zhihu.matisse.MimeType
 import kotlinx.android.synthetic.main.activity_person_auth.*
@@ -22,11 +23,48 @@ class PersonAuthActivity : BaseActivity() {
 
     private var position = 1
 
-    private val mSelected = ArrayList<Uri>()
-
     private var frontFile: File? = null
 
     private var backFile: File? = null
+
+    private var frontOk = false
+
+    private var backOk = false
+
+    private var frontUrl = ""
+
+    private var backUrl = ""
+
+
+    private var handler = Handler {
+
+        if (it.what == 1) {
+            (it.obj as String).apply {
+                if (isNotEmpty()) {
+                    frontOk = true
+                    frontUrl = this
+                    LogUtil.i("正面URL：$frontUrl")
+                }
+            }
+
+        }
+
+        if (it.what == 2) {
+            (it.obj as String).apply {
+                if (isNotEmpty()) {
+                    backOk = true
+                    backUrl = this
+                    LogUtil.i("反面URL：$backUrl")
+                }
+            }
+
+        }
+
+        if (frontOk && backOk) {
+            commit()
+        }
+        return@Handler false
+    }
 
     override fun setLayout(): Int = R.layout.activity_person_auth
 
@@ -35,6 +73,7 @@ class PersonAuthActivity : BaseActivity() {
 
         btn_front_select.setOnClickListener(this)
         btn_back_select.setOnClickListener(this)
+        btn_complete.setOnClickListener(this)
     }
 
     override fun onClick(v: View) {
@@ -59,6 +98,10 @@ class PersonAuthActivity : BaseActivity() {
                     startPhoto()
                 }
                 updateState()
+            }
+
+            R.id.btn_complete -> {
+                updatePhoto()
             }
         }
     }
@@ -115,6 +158,7 @@ class PersonAuthActivity : BaseActivity() {
         } else {
             btn_front_select.text = "选择文件"
             txt_front_name.text = ""
+            frontOk = false
         }
 
         if (backFile != null) {
@@ -123,7 +167,64 @@ class PersonAuthActivity : BaseActivity() {
         } else {
             btn_back_select.text = "选择文件"
             txt_back_name.text = ""
+            backOk = false
         }
     }
 
+
+    //上传图片
+    private fun updatePhoto() {
+        if (frontFile == null) {
+            ToastUtil.show("请选择身份证正面（国徽面）")
+            return
+        }
+
+        if (backFile == null) {
+            ToastUtil.show("请选择身份证反面（个人信息面）")
+            return
+        }
+
+        if (frontOk && backOk) {
+            commit()
+        } else {
+            showLoading()
+            OSSUtil.updateFile(frontFile?.absolutePath ?: "", OSSUtil.IMAGE) { it ->
+                val frontMsg = Message()
+                frontMsg.what = 1
+                frontMsg.obj = it
+                handler.sendMessage(frontMsg)
+
+                OSSUtil.updateFile(backFile?.absolutePath ?: "", OSSUtil.IMAGE) {
+                    val backMsg = Message()
+                    backMsg.what = 2
+                    backMsg.obj = it
+                    handler.sendMessage(backMsg)
+                    hideLoading()
+                }
+            }
+        }
+    }
+
+
+    //提交url
+    fun commit() {
+        showLoading()
+        val params = hashMapOf<String, String>()
+        params["cardFront"] = frontUrl
+        params["cardBack"] = backUrl
+        ApiManager.post(composites, params, Constant.USER_SAVEIDENTITYCARD, object : ApiManager.OnResult<BaseBean<String>>() {
+            override fun onSuccess(data: BaseBean<String>) {
+                hideLoading()
+                if (data.content?.statu == "1") {
+                    finish()
+                }
+                ToastUtil.show(data.content?.info)
+            }
+
+            override fun onFailed(code: String, message: String) {
+                hideLoading()
+            }
+        })
+
+    }
 }

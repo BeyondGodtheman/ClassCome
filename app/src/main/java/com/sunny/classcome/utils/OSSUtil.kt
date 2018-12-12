@@ -6,13 +6,15 @@ import com.alibaba.sdk.android.oss.OSSClient
 import com.alibaba.sdk.android.oss.ServiceException
 import com.alibaba.sdk.android.oss.callback.OSSCompletedCallback
 import com.alibaba.sdk.android.oss.callback.OSSProgressCallback
-import com.alibaba.sdk.android.oss.common.auth.OSSAuthCredentialsProvider
 import com.alibaba.sdk.android.oss.common.auth.OSSStsTokenCredentialProvider
 import com.alibaba.sdk.android.oss.internal.OSSAsyncTask
 import com.alibaba.sdk.android.oss.model.PutObjectRequest
 import com.alibaba.sdk.android.oss.model.PutObjectResult
 import com.sunny.classcome.MyApplication
 import com.sunny.classcome.http.Constant
+import kotlinx.coroutines.experimental.CommonPool
+import kotlinx.coroutines.experimental.android.UI
+import kotlinx.coroutines.experimental.launch
 
 
 object OSSUtil {
@@ -40,29 +42,40 @@ object OSSUtil {
         // 构造上传请求
         val fileName = type+(System.currentTimeMillis()/1000).toString() +  if (type == IMAGE)".jpg" else ".mp4"
 
+        LogUtil.i("上传文件名：$fileName")
+        LogUtil.i("上传文件路径：$filePath")
+
         val put = PutObjectRequest(Constant.BUCKET_NAME, fileName,filePath)
-        put.progressCallback = OSSProgressCallback<PutObjectRequest> { request, currentSize, totalSize ->
+        put.progressCallback = OSSProgressCallback<PutObjectRequest> { _, currentSize, _ ->
             LogUtil.i("上传进度：$currentSize")
         }
 
-        task = oss.asyncPutObject(put, object : OSSCompletedCallback<PutObjectRequest, PutObjectResult> {
-            override fun onSuccess(request: PutObjectRequest, result: PutObjectResult) {
-                LogUtil.d("上传成功")
-                onResult(Constant.UPDATEHOST + request.objectKey)
-            }
-
-            override fun onFailure(request: PutObjectRequest, clientExcepion: ClientException?, serviceException: ServiceException?) {
-                // 请求异常
-                clientExcepion?.printStackTrace()
-                if (serviceException != null) {
-                    // 服务异常
-                    LogUtil.e("ErrorCode:"+serviceException.errorCode)
-                    LogUtil.e("RequestId:"+serviceException.requestId)
-                    LogUtil.e("HostId:"+serviceException.hostId)
-                    LogUtil.e("RawMessage:"+ serviceException.rawMessage)
+        launch(CommonPool){
+            task = oss.asyncPutObject(put, object : OSSCompletedCallback<PutObjectRequest, PutObjectResult> {
+                override fun onSuccess(request: PutObjectRequest, result: PutObjectResult) {
+                    LogUtil.d("上传成功："+request.objectKey)
+                    launch(UI){
+                        onResult(Constant.UPDATEHOST + request.objectKey)
+                    }
                 }
-            }
-        })
+
+                override fun onFailure(request: PutObjectRequest, clientExcepion: ClientException?, serviceException: ServiceException?) {
+                    // 请求异常
+                    clientExcepion?.printStackTrace()
+                    if (serviceException != null) {
+                        // 服务异常
+                        LogUtil.e("ErrorCode:"+serviceException.errorCode)
+                        LogUtil.e("RequestId:"+serviceException.requestId)
+                        LogUtil.e("HostId:"+serviceException.hostId)
+                        LogUtil.e("RawMessage:"+ serviceException.rawMessage)
+                    }
+                    launch(UI){
+                        onResult("")
+                    }
+
+                }
+            })
+        }
     }
 
     fun closeUpdate(){

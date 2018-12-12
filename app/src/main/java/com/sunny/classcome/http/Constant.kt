@@ -110,5 +110,7 @@ object Constant {
 
     const val ORDER_APPLYCOURSE ="order/applyCourse" //选择候选人或中标人
 
+    const val USER_SAVEIDENTITYCARD = "user/saveIdentityCard" //保存身份证URL
+
 }
 

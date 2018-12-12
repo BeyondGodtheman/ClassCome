@@ -37,7 +37,6 @@ class ModifyInfoActivity : BaseActivity() {
         rl_name.setOnClickListener(this)
         rl_city.setOnClickListener(this)
         rl_phone.setOnClickListener(this)
-        rl_identity.setOnClickListener(this)
         txt_commit.setOnClickListener(this)
 
     }
@@ -91,6 +90,7 @@ class ModifyInfoActivity : BaseActivity() {
                         txt_identity.text = "已认证"
                     } else {
                         txt_identity.text = "未认证"
+                        rl_identity.setOnClickListener(this@ModifyInfoActivity)
                     }
 
                     txt_city.text = it.address
@@ -113,17 +113,16 @@ class ModifyInfoActivity : BaseActivity() {
         }
         if (isModifyHead) {
             showLoading()
-            launch(CommonPool) {
-                OSSUtil.updateFile(headFile?.absolutePath ?: "", OSSUtil.IMAGE) {
-                    isModifyHead = false
-                    headPic = it
-                    runOnUiThread {
-                        hideLoading()
-                        commit()
-                    }
-                }
+
+            OSSUtil.updateFile(headFile?.absolutePath ?: "", OSSUtil.IMAGE) {
+                isModifyHead = false
+                headPic = it
+                hideLoading()
+                commit()
+
             }
-        }else{
+
+        } else {
             commit()
         }
     }
