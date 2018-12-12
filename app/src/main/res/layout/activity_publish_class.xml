@@ -294,40 +294,15 @@
             style="@style/style_view_divider"
             android:layout_marginTop="50pt" />
 
-
         <TextView
             style="@style/style_font_default_32pt_40pt"
             android:layout_marginTop="50pt"
             android:text="@string/class_brief" />
 
-        <RelativeLayout
+        <include
+            layout="@layout/layout_photo_video"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30pt"
-            android:layout_marginTop="35pt"
-            android:layout_marginEnd="30pt"
-            android:background="@drawable/draw_bg_gray_border">
-
-            <EditText
-                android:id="@+id/edit_filed"
-                style="@style/style_edit_publish"
-                android:layout_width="match_parent"
-                android:layout_marginTop="15pt"
-                android:hint="@string/site_server" />
-
-            <ImageView
-                android:id="@+id/img_add_photo"
-                android:layout_width="130pt"
-                android:layout_height="130pt"
-                android:layout_below="@id/edit_filed"
-                android:layout_marginStart="40pt"
-                android:layout_marginTop="125pt"
-                android:layout_marginBottom="35pt"
-                android:contentDescription="@string/app"
-                android:src="@drawable/bg_default_photo" />
-
-        </RelativeLayout>
-
+            android:layout_height="wrap_content" />
 
         <TextView
             style="@style/style_button_no_margin"

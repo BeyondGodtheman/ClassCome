@@ -137,6 +137,7 @@
     <string name="class_brief">课程简介</string>
     <string name="field_server">场地服务</string>
     <string name="site_server">请描述一下您的场地服务情况</string>
+    <string name="work_experience">请描述一下您的特长和工作经历</string>
     <string name="photo_video">照片/视频</string>
 
     <string name="class_classify">课程分类</string>
@@ -206,6 +207,7 @@
     <!--意见反馈-->
 
     <string name="commit">提交</string>
+    <string name="save">保存</string>
     <string name="prompt_feedback">亲爱的用户您好，如果您对我们有任何建议，请在此留言，我们将不断改进。</string>
 
     <!--设置-->

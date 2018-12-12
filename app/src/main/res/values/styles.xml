@@ -183,6 +183,14 @@
         <item name="android:background">@color/color_divider</item>
     </style>
 
+    <!-- 分割横线-top-->
+    <style name="style_view_line_top">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">2pt</item>
+        <item name="android:layout_marginTop">20pt</item>
+        <item name="android:background">@color/color_divider</item>
+    </style>
+
     <!--发布-输入框字体样式-->
     <style name="style_edit_publish" parent="style_font">
         <item name="android:textSize">28pt</item>

@@ -14,6 +14,7 @@ import com.sunny.classcome.bean.UserBean
 import com.sunny.classcome.http.ApiManager
 import com.sunny.classcome.http.Constant
 import com.sunny.classcome.utils.GlideUtil
+import com.sunny.classcome.utils.IntentUtil
 import com.sunny.classcome.utils.UserManger
 import kotlinx.android.synthetic.main.activity_my_profile.*
 import kotlinx.android.synthetic.main.item_viewpager_profile.view.*
@@ -30,7 +31,7 @@ class MyProfileActivity : BaseActivity() {
 
     override fun initView() {
         showTitle(titleManager.defaultTitle("我的简介", "编辑", View.OnClickListener {
-
+            IntentUtil.start(this, MyProfileEditActivity::class.java)
         }))
     }
 
