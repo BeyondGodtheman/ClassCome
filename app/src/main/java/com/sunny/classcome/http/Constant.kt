@@ -24,6 +24,8 @@ object Constant {
 
     const val LOGIN_PHONE = "loginPhone" //手机帐号
 
+    const val USER_BEAN = "userBean" //我的简历
+
     const val REQUEST_CODE_CHOOSE = 0x100 //选择图片请求CODE
 
     /**

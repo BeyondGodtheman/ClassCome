@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.MimeTypeMap
+import com.sunny.classcome.MyApplication
 import com.sunny.classcome.R
 import com.sunny.classcome.adapter.PastReleaseAdapter
 import com.sunny.classcome.base.BaseActivity
@@ -31,11 +32,13 @@ import kotlinx.android.synthetic.main.item_viewpager_profile.view.*
 class MyProfileActivity : BaseActivity() {
 
     private val pastReleasList = arrayListOf<ClassBean.Bean.Data>()
+    private var userBean:UserBean? = null
 
     override fun setLayout(): Int = R.layout.activity_my_profile
 
     override fun initView() {
         showTitle(titleManager.defaultTitle("我的简介", "编辑", View.OnClickListener {
+            MyApplication.getApp().setData(Constant.USER_BEAN,userBean)
             IntentUtil.start(this, MyProfileEditActivity::class.java)
         }))
 
@@ -56,13 +59,14 @@ class MyProfileActivity : BaseActivity() {
     }
 
 
-    override fun loadData() {
-
+    override fun update() {
         showLoading()
         val params = HashMap<String, String>()
         params["id"] = UserManger.getLogin()?.content?.userId ?: ""
         ApiManager.post(composites, params, Constant.USER_GETMYINFO, object : ApiManager.OnResult<BaseBean<UserBean>>() {
             override fun onSuccess(data: BaseBean<UserBean>) {
+                userBean = data.content?.data
+
                 hideLoading()
                 data.content?.data?.user?.let { bean ->
                     GlideUtil.loadHead(this@MyProfileActivity, img_user_head, bean.userPic)

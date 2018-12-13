@@ -1,35 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:layout_marginStart="30pt"
+    android:layout_marginTop="35pt"
+    android:layout_marginEnd="30pt"
+    android:background="@drawable/draw_bg_gray_border"
+    android:orientation="vertical">
 
-    <RelativeLayout
+    <EditText
+        android:id="@+id/edit_description"
+        style="@style/style_edit_publish"
+        android:layout_marginStart="20pt"
+        android:layout_marginTop="15pt"
+        android:layout_marginBottom="15pt"
+        android:hint="@string/work_experience"
+        android:paddingBottom="100pt"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recl_photo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30pt"
-        android:layout_marginTop="35pt"
-        android:layout_marginEnd="30pt"
-        android:background="@drawable/draw_bg_gray_border">
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/bg_default_photo" />
 
-        <EditText
-            android:id="@+id/edit_description"
-            style="@style/style_edit_publish"
-            android:layout_marginStart="20pt"
-            android:layout_marginTop="15pt"
-            tools:hint="@string/work_experience" />
-
-        <ImageView
-            android:id="@+id/img_add_photo"
-            android:layout_width="130pt"
-            android:layout_height="130pt"
-            android:layout_below="@id/edit_description"
-            android:layout_marginStart="40pt"
-            android:layout_marginTop="125pt"
-            android:layout_marginBottom="35pt"
-            android:contentDescription="@string/app"
-            android:src="@drawable/bg_default_photo" />
-
-    </RelativeLayout>
-
-</RelativeLayout>
+</LinearLayout>
