@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:focusableInTouchMode="true">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -39,8 +40,8 @@
                 android:id="@+id/img_vip"
                 android:layout_width="34pt"
                 android:layout_height="30pt"
-                android:layout_marginTop="67pt"
                 android:layout_marginStart="12pt"
+                android:layout_marginTop="67pt"
                 android:layout_toEndOf="@id/txt_name"
                 android:contentDescription="@string/app"
                 android:src="@mipmap/ic_vip" />
@@ -73,9 +74,9 @@
                 android:layout_height="35pt"
                 android:layout_alignTop="@id/img_icon"
                 android:layout_marginStart="60pt"
+                android:layout_marginTop="4pt"
                 android:layout_toEndOf="@id/txt_points"
                 android:contentDescription="@string/app"
-                android:layout_marginTop="4pt"
                 android:scaleType="centerCrop"
                 android:src="@mipmap/ic_profile_member" />
 
@@ -211,7 +212,7 @@
                 android:layout_alignStart="@id/txt_sex"
                 android:layout_alignTop="@id/text44"
                 android:layout_toEndOf="@id/text44"
-                tools:text="3年" />
+                tools:text="3" />
 
             <TextView
                 android:id="@+id/text55"
@@ -244,7 +245,8 @@
             android:layout_marginStart="32pt"
             android:layout_marginTop="20pt"
             android:layout_marginEnd="32pt"
-            android:background="@color/color_divider">
+            android:background="@color/color_divider"
+            android:visibility="gone">
 
         </android.support.v4.view.ViewPager>
 
@@ -254,10 +256,60 @@
             android:layout_marginStart="40pt"
             android:layout_marginTop="32pt"
             android:layout_marginEnd="40pt"
-            tools:text="舞蹈是一种表演艺术，使用身体来完成各种优雅或高难度的动作"
-            android:layout_marginBottom="20pt"/>
+            android:layout_marginBottom="20pt"
+            tools:text="舞蹈是一种表演艺术，使用身体来完成各种优雅或高难度的动作" />
 
         <View style="@style/style_view_divider" />
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="98pt">
+
+            <TextView
+                style="@style/style_font_default_32pt"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="40pt"
+                android:text="过往发布信息" />
+
+            <TextView
+                android:id="@+id/txt_more"
+                style="@style/style_font_default_28pt"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
+                android:gravity="center_vertical"
+                android:paddingStart="38pt"
+                android:paddingEnd="38pt"
+                android:text="更多" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="417pt"
+            android:background="@color/color_base_bg">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recl"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_horizontal"
+                android:paddingStart="40pt"
+                android:paddingEnd="25pt" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/style_font_default_34pt"
+                android:layout_marginStart="45pt"
+                android:layout_marginTop="56pt"
+                android:layout_marginBottom="20pt"
+                android:text="用户评价" />
+
+        </LinearLayout>
     </LinearLayout>
-</ScrollView>
+</android.support.v4.widget.NestedScrollView>

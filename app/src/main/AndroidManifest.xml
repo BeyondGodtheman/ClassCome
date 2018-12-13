@@ -179,5 +179,8 @@
         <!--邀约记录-->
         <activity android:name=".activity.InvitationRecordActivity"
             android:launchMode="singleTop"/>
+
+        <activity android:name=".activity.PastReleaseActivity"
+            android:launchMode="singleTop"/>
     </application>
 </manifest>

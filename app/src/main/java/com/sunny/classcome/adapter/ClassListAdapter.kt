@@ -22,13 +22,11 @@ class ClassListAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleAdapte
 
         getData(position).course.startTime?.let {
             timeSb.append(it.split(" ")[0])
-
         }
         timeSb.append("至")
 
         getData(position).course.endTime?.let {
             timeSb.append(it.split(" ")[0])
-
         }
 
         holder.itemView.text_class_time.text = timeSb.toString()

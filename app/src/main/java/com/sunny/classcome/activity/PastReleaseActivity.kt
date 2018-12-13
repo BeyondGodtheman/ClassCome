@@ -12,15 +12,10 @@ import com.sunny.classcome.base.BaseActivity
 import com.sunny.classcome.bean.ClassBean
 import com.sunny.classcome.http.ApiManager
 import com.sunny.classcome.http.Constant
+import com.sunny.classcome.utils.UserManger
 import kotlinx.android.synthetic.main.layout_refresh_recycler.*
 
-/**
- * Desc 我的收藏
- * Author JoannChen
- * Mail Q8622268@gmail.com
- * Date 2018/12/2 22:21
- */
-class MyCollectionActivity : BaseActivity() {
+class PastReleaseActivity: BaseActivity() {
 
     private var pageIndex = 1
 
@@ -29,7 +24,7 @@ class MyCollectionActivity : BaseActivity() {
     override fun setLayout(): Int = R.layout.layout_refresh_recycler
 
     override fun initView() {
-        showTitle(titleManager.defaultTitle(getString(R.string.my_collection)))
+        showTitle(titleManager.defaultTitle("过往发布信息"))
 
         refresh.setRefreshHeader(ClassicsHeader(this))
         refresh.setRefreshFooter(ClassicsFooter(this))
@@ -49,7 +44,6 @@ class MyCollectionActivity : BaseActivity() {
 
         recl.layoutManager = LinearLayoutManager(this)
         recl.adapter = ClassListAdapter(list)
-
     }
 
     override fun onClick(v: View?) {
@@ -58,8 +52,9 @@ class MyCollectionActivity : BaseActivity() {
 
     override fun loadData() {
         val params = hashMapOf<String, String>()
+        params["userId"] = UserManger.getLogin()?.content?.userId ?: ""
         params["pageIndex"] = pageIndex.toString()
-        ApiManager.post(composites, params, Constant.COURSE_GETMYFAVORITELIST, object : ApiManager.OnResult<ClassBean>() {
+        ApiManager.post(composites, params, Constant.CURSE_GETUSERPUBLISHCOURSE, object : ApiManager.OnResult<ClassBean>() {
             override fun onSuccess(data: ClassBean) {
                 if (pageIndex == 1) {
                     refresh.finishRefresh()

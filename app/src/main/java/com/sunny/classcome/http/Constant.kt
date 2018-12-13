@@ -114,5 +114,9 @@ object Constant {
 
     const val COURSE_GETUSERINVITECOURSE = "course/getUserInviteCourse" //邀约记录
 
+    const val CURSE_GETUSERPUBLISHCOURSE = "course/getUserPublishCourse" //获取发布的课程
+
+    const val COURSE_GETMYFAVORITELIST = "course/getMyFavoriteList" //我收藏的课程列表
+
 }
 

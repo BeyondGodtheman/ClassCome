@@ -3,13 +3,16 @@ package com.sunny.classcome.activity
 import android.content.Intent
 import android.net.Uri
 import android.support.v4.view.PagerAdapter
+import android.support.v7.widget.GridLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.MimeTypeMap
 import com.sunny.classcome.R
+import com.sunny.classcome.adapter.PastReleaseAdapter
 import com.sunny.classcome.base.BaseActivity
 import com.sunny.classcome.bean.BaseBean
+import com.sunny.classcome.bean.ClassBean
 import com.sunny.classcome.bean.UserBean
 import com.sunny.classcome.http.ApiManager
 import com.sunny.classcome.http.Constant
@@ -27,15 +30,29 @@ import kotlinx.android.synthetic.main.item_viewpager_profile.view.*
  */
 class MyProfileActivity : BaseActivity() {
 
+    private val pastReleasList = arrayListOf<ClassBean.Bean.Data>()
+
     override fun setLayout(): Int = R.layout.activity_my_profile
 
     override fun initView() {
         showTitle(titleManager.defaultTitle("我的简介", "编辑", View.OnClickListener {
             IntentUtil.start(this, MyProfileEditActivity::class.java)
         }))
+
+        recl.setHasFixedSize(true)
+        recl.isNestedScrollingEnabled = false
+        recl.layoutManager = GridLayoutManager(this,2)
+        recl.adapter = PastReleaseAdapter(pastReleasList)
+        txt_more.setOnClickListener(this)
     }
 
-    override fun onClick(v: View?) {
+    override fun onClick(v: View) {
+        when(v.id){
+            R.id.txt_more -> {
+                startActivity(Intent(this,PastReleaseActivity::class.java))
+            }
+
+        }
     }
 
 
@@ -51,7 +68,7 @@ class MyProfileActivity : BaseActivity() {
                     GlideUtil.loadHead(this@MyProfileActivity, img_user_head, bean.userPic)
                     txt_name.text = bean.userName
 
-                    txt_points.text =  (bean.source +"积分")
+                    txt_points.text =  ("${bean.source}积分")
                     txt_member.text = bean.gradeName
 
                     txt_publish_count.text = bean.publishNum
@@ -66,15 +83,17 @@ class MyProfileActivity : BaseActivity() {
                     } else {
                         txt_identity.text = "未认证"
                     }
-                    txt_age.text = bean.age
+                    txt_age.text = bean.age.toString()
                     txt_specialty.text = bean.speciality
                     txt_brief.text = bean.userInfo
                     txt_specialty.text = bean.profession
-                    txt_work.text = (bean.workAge +"年")
+                    txt_work.text = ("${bean.workAge}年")
                 }
 
                 data.content?.data?.materialList?.let {
                     initViewPager(it)
+                        viewPager.visibility = View.VISIBLE
+
                 }
             }
 
@@ -83,6 +102,9 @@ class MyProfileActivity : BaseActivity() {
             }
 
         })
+
+        //加载发布的课程
+        loadPastRelease()
     }
 
 
@@ -117,6 +139,22 @@ class MyProfileActivity : BaseActivity() {
                 container.removeView(`object` as View?)
             }
         }
+    }
 
+    private fun loadPastRelease(){
+        val params = HashMap<String, String>()
+        params["userId"] = UserManger.getLogin()?.content?.userId ?: ""
+        params["pageSize"] = "2"
+        ApiManager.post(composites,params,Constant.CURSE_GETUSERPUBLISHCOURSE,object : ApiManager.OnResult<ClassBean>(){
+            override fun onSuccess(data: ClassBean) {
+                pastReleasList.clear()
+                pastReleasList.addAll(data.content?.dataList?: arrayListOf())
+                recl.adapter?.notifyDataSetChanged()
+            }
+
+            override fun onFailed(code: String, message: String) {
+            }
+
+        })
     }
 }
