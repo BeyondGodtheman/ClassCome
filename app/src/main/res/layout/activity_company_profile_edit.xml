@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/txt_save">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/color_white"
+            android:focusableInTouchMode="true">
+
+            <TextView
+                android:id="@+id/txt_info"
+                style="@style/style_font_default_34pt"
+                android:layout_marginStart="40pt"
+                android:layout_marginTop="40pt"
+                android:text="企业信息" />
+
+            <RelativeLayout
+                android:id="@+id/rl_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txt_info"
+                android:layout_marginStart="40pt"
+                android:layout_marginTop="35pt"
+                android:layout_marginBottom="28pt">
+
+
+                <TextView
+                    android:id="@+id/text22"
+                    style="@style/style_font_gray_28pt"
+                    android:layout_below="@id/line11"
+                    android:layout_marginTop="20pt"
+                    android:text="企业名称" />
+
+                <EditText
+                    android:id="@+id/txt_company_name"
+                    style="@style/style_edit_modify"
+                    android:layout_marginStart="60pt"
+                    android:layout_alignTop="@id/text22"
+                    android:layout_toEndOf="@id/text22"
+                    android:inputType="number"
+                    tools:text="20" />
+
+                <View
+                    android:id="@+id/line22"
+                    style="@style/style_view_line_top"
+                    android:layout_below="@id/txt_company_name"
+                    android:layout_alignStart="@id/txt_company_name" />
+
+                <TextView
+                    android:id="@+id/text33"
+                    style="@style/style_font_gray_28pt"
+                    android:layout_below="@id/line22"
+                    android:layout_marginTop="20pt"
+                    android:text="所在地" />
+
+                <EditText
+                    android:id="@+id/txt_address"
+                    style="@style/style_edit_modify"
+                    android:layout_alignStart="@id/txt_company_name"
+                    android:layout_alignTop="@id/text33"
+                    android:layout_toEndOf="@id/text33"
+                    tools:text="上海" />
+
+                <View
+                    android:id="@+id/line33"
+                    style="@style/style_view_line_top"
+                    android:layout_below="@id/txt_address"
+                    android:layout_alignStart="@id/txt_company_name" />
+
+
+
+                <TextView
+                    android:id="@+id/text55"
+                    style="@style/style_font_gray_28pt"
+                    android:layout_below="@id/line33"
+                    android:layout_marginTop="20pt"
+                    android:text="企业认证" />
+
+                <TextView
+                    android:id="@+id/txt_identity"
+                    style="@style/style_edit_modify"
+                    android:layout_alignStart="@id/txt_company_name"
+                    android:layout_alignTop="@id/text55"
+                    android:layout_toEndOf="@id/text55"
+                    android:textColor="@color/color_gray_font"
+                    tools:text="未通过" />
+
+
+                <View
+                    style="@style/style_view_line_top"
+                    android:layout_below="@id/txt_identity"
+                    android:layout_alignStart="@id/txt_company_name" />
+
+
+                <TextView
+                    android:id="@+id/txt_go_identity"
+                    style="@style/style_font_gray_28pt"
+                    android:layout_alignTop="@id/text55"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="35pt"
+                    android:text="去验证 >"
+                    android:textColor="@color/color_primary"
+                    android:visibility="gone" />
+
+            </RelativeLayout>
+
+            <View
+                android:id="@+id/line1"
+                style="@style/style_view_divider"
+                android:layout_below="@id/rl_info" />
+
+            <TextView
+                android:id="@+id/text2"
+                style="@style/style_font_default_32pt_40pt"
+                android:layout_below="@id/line1"
+                android:layout_marginTop="50pt"
+                android:text="个人简介" />
+
+            <com.sunny.classcome.widget.UpPhotoVideoView
+                android:id="@+id/view_up"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/text2"
+                android:layout_marginBottom="20pt" />
+        </RelativeLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+    <TextView
+        android:id="@+id/txt_save"
+        style="@style/style_button_no_margin"
+        android:layout_alignParentBottom="true"
+        android:text="@string/save" />
+</RelativeLayout>

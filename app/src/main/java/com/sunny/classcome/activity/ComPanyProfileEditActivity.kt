@@ -11,43 +11,34 @@ import com.sunny.classcome.http.ApiManager
 import com.sunny.classcome.http.Constant
 import com.sunny.classcome.utils.IntentUtil
 import com.sunny.classcome.utils.ToastUtil
-import kotlinx.android.synthetic.main.activity_my_profile_edit.*
+import kotlinx.android.synthetic.main.activity_company_profile_edit.*
 
-/**
- * Desc  我的简介：编辑信息
- * Author JoannChen
- * Mail Q8622268@gmail.com
- * Date 2018/12/10 22:44
- */
-class MyProfileEditActivity : BaseActivity() {
-
-    override fun setLayout(): Int = R.layout.activity_my_profile_edit
+class ComPanyProfileEditActivity : BaseActivity() {
+    override fun setLayout(): Int = R.layout.activity_company_profile_edit
 
     override fun initView() {
         showTitle(titleManager.defaultTitle("编辑信息"))
 
         MyApplication.getApp().getData<UserBean>(Constant.USER_BEAN, true)?.let { bean ->
-            if (bean.user?.sex == "1") {
-                rbtn_man.isChecked = true
+
+
+            txt_company_name.setText(bean.user?.organization)
+            txt_address.setText(bean.user?.address)
+
+            view_up.setText(bean.user?.userInfo ?: "")
+
+
+            if (bean.user?.relationimgId != null) {
+                txt_identity.text = "已通过"
             } else {
-                rbtn_woman.isChecked = true
-            }
-
-            txt_age.setText(bean.user?.age.toString())
-            txt_specialty.setText(bean.user?.profession)
-            txt_work.setText(bean.user?.workAge.toString())
-
-            if (bean.user?.isAuth == "1"){
-                txt_identity.text = "已认证"
-            }else{
-                txt_identity.text = "未认证"
+                txt_identity.text = "未通过"
             }
 
             bean.materialList?.let {
                 view_up.setData(it)
             }
 
-            view_up.setText(bean.user?.userInfo?:"")
+            view_up.setText(bean.user?.userInfo ?: "")
         }
 
         txt_go_identity.setOnClickListener(this)
@@ -65,12 +56,9 @@ class MyProfileEditActivity : BaseActivity() {
         }
     }
 
-    private fun commit(){
+    private fun commit() {
         val params = hashMapOf<String, String>()
-        params["sex"] = if (rbtn_man.isChecked) "1" else "2"
-        params["age"] = txt_age.text.toString()
-        params["profession"] = txt_specialty.text.toString()
-        params["workAge"] = txt_work.text.toString()
+
         params["userInfo"] = view_up.getText()
 
 //        val jsonArray = JSONArray()
@@ -95,7 +83,7 @@ class MyProfileEditActivity : BaseActivity() {
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        view_up.onActivityResult(requestCode,resultCode,data)
+        view_up.onActivityResult(requestCode, resultCode, data)
         super.onActivityResult(requestCode, resultCode, data)
     }
 }
