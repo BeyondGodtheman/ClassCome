@@ -12,6 +12,7 @@ import com.sunny.classcome.http.Constant
 import com.sunny.classcome.utils.IntentUtil
 import com.sunny.classcome.utils.ToastUtil
 import kotlinx.android.synthetic.main.activity_my_profile_edit.*
+import org.json.JSONArray
 
 /**
  * Desc  我的简介：编辑信息
@@ -66,18 +67,19 @@ class MyProfileEditActivity : BaseActivity() {
     }
 
     private fun commit(){
-        val params = hashMapOf<String, String>()
+        val params = hashMapOf<String, Any>()
         params["sex"] = if (rbtn_man.isChecked) "1" else "2"
         params["age"] = txt_age.text.toString()
         params["profession"] = txt_specialty.text.toString()
         params["workAge"] = txt_work.text.toString()
         params["userInfo"] = view_up.getText()
 
-//        val jsonArray = JSONArray()
-//        view_up.list.forEach {
-//            jsonArray.put(it.url)
-//        }
-//        params["materialUrls"] =jsonArray.toString()
+        val jsonArray =  JSONArray()
+        view_up.list.forEach {
+            jsonArray.put(it.url)
+        }
+
+        params["materialUrls"] = jsonArray
 
         ApiManager.post(composites, params, Constant.USER_EDITMYINFO, object : ApiManager.OnResult<BaseBean<String>>() {
             override fun onSuccess(data: BaseBean<String>) {

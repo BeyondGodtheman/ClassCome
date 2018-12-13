@@ -2,6 +2,8 @@ package com.sunny.classcome.widget
 
 import android.content.Context
 import android.content.Intent
+import android.media.MediaFormat
+import android.provider.MediaStore
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.GridLayoutManager
 import android.util.AttributeSet
@@ -17,6 +19,7 @@ import com.sunny.classcome.utils.ToastUtil
 import com.zhihu.matisse.Matisse
 import kotlinx.android.synthetic.main.layout_photo_video.view.*
 import kotlinx.coroutines.experimental.CommonPool
+import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.launch
 
 class UpPhotoVideoView : FrameLayout {
@@ -57,12 +60,12 @@ class UpPhotoVideoView : FrameLayout {
             launch(CommonPool) {
                 val file = GlideApp.with(getContext()).asFile().load(uri).submit().get()
                 file?.let { it ->
-                    if (it.absolutePath.contains(".mp4")) {
-                        if (list.any { it.type == "mp4" }) {
-                            ToastUtil.show("只能上传一个视频文件！")
+                        if (list.find { (it.url?:"").contains(".mp4")} != null) {
+                            launch(UI){
+                                ToastUtil.show("只能上传一个视频文件！")
+                            }
                             return@launch
                         }
-                    }
 
                     OSSUtil.updateFile(file.absolutePath, if (it.absolutePath.contains(".mp4")) OSSUtil.VIDEO else OSSUtil.IMAGE) {
                         if (it.contains(".mp4")) {

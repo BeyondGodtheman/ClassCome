@@ -1,14 +1,10 @@
 package com.sunny.classcome.http
 
-import android.content.Intent
 import android.os.Build
-import android.provider.Settings
 import com.google.gson.Gson
-import com.google.gson.JsonObject
 import com.sunny.classcome.BuildConfig
 import com.sunny.classcome.MyApplication
 import com.sunny.classcome.R
-import com.sunny.classcome.activity.LoginActivity
 import com.sunny.classcome.bean.BaseBean
 import com.sunny.classcome.utils.LogUtil
 import com.sunny.classcome.utils.ToastUtil
@@ -137,7 +133,7 @@ object ApiManager {
     /**
      *  Post请求
      */
-    fun <T> post(composites: CompositeDisposable?, params: Map<String, String>?, url: String, onResult: OnResult<T>) {
+    fun <T> post(composites: CompositeDisposable?, params: Map<String, Any>?, url: String, onResult: OnResult<T>) {
         val jsonObj = JSONObject()
         params?.forEach {
             jsonObj.put(it.key, it.value)
@@ -206,9 +202,9 @@ object ApiManager {
             onResult.onSuccess(json as T)
         } else {
 
-            val jsonObject =JSONObject(json)
+            val jsonObject = JSONObject(json)
             val code = jsonObject.opt("code")
-            if (code == 100){
+            if (code == 100) {
                 MyApplication.getApp().let {
                     UserManger.clear()
                 }
