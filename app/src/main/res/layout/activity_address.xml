@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="186pt"
+        android:background="@color/color_white"
+        android:orientation="vertical">
+        
+        <TextView
+            style="@style/style_font_default_24pt"
+            android:layout_marginTop="35pt"
+            android:layout_marginStart="70pt"
+             android:text="我的位置"/>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24pt">
+
+            <TextView
+                android:id="@+id/txt_city"
+                style="@style/style_font_default_28pt"
+                android:layout_width="wrap_content"
+                android:layout_height="70pt"
+                android:background="@drawable/draw_bg_fillet_blue_border"
+                android:text="@string/defaultLocation"
+                android:textColor="@color/color_nav_blue"
+                android:paddingStart="31pt"
+                android:paddingEnd="31pt"
+                android:gravity="center"
+                android:layout_marginStart="89pt"/>
+
+            <TextView
+                style="@style/style_font_gray_24pt"
+                android:layout_marginStart="19pt"
+                android:layout_toEndOf="@id/txt_city"
+                android:layout_alignBottom="@id/txt_city"
+                android:text="GPS定位"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="15pt">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recl_city"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recl_area"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+    </LinearLayout>
+</LinearLayout>

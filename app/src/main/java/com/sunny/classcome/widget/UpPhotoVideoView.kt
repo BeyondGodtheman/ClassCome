@@ -52,6 +52,11 @@ class UpPhotoVideoView : FrameLayout {
     }
 
 
+    fun setHint(text: String){
+        edit_description.hint = text
+    }
+
+
     fun getText() = edit_description.text.toString()
 
     fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

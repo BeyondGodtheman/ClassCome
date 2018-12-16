@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,24 +16,37 @@
             android:text="@string/class_classify" />
 
         <RelativeLayout
+            android:id="@+id/rl_class_type"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="35pt"
             android:layout_marginBottom="40pt">
 
             <TextView
-                android:id="@+id/test_class"
+                android:id="@+id/txt_class_name"
                 style="@style/style_font_default_28pt"
                 android:layout_marginStart="60pt"
-                android:text="@string/art" />
-
-            <EditText
-                android:id="@+id/edit_class"
-                style="@style/style_edit_publish"
-                android:layout_toEndOf="@id/test_class"
-                android:hint="@string/sketch" />
+                tools:text="@string/art" />
+            
+            <View
+                android:id="@+id/view_triangle"
+                android:layout_width="35pt"
+                android:layout_height="35pt"
+                android:background="@drawable/ic_triangle_right"
+                android:layout_toEndOf="@id/txt_class_name"
+                android:layout_marginStart="20pt"
+                android:layout_marginTop="3pt"
+                android:layout_marginEnd="20pt"/>
+            
+            <TextView
+                android:id="@+id/txt_class_value"
+                style="@style/style_font_default_28pt"
+                android:layout_toEndOf="@id/view_triangle"
+                android:layout_toStartOf="@id/img_more"
+                tools:text="@string/sketch" />
 
             <ImageView
+                android:id="@+id/img_more"
                 style="@style/style_more_btn"
                 android:contentDescription="@string/app" />
         </RelativeLayout>
@@ -43,10 +57,10 @@
         <TextView
             style="@style/style_font_default_32pt_40pt"
             android:layout_marginTop="30pt"
-            android:text="@string/filed_location" />
+            android:text="适应人群（可多选）" />
 
 
-        <RadioGroup
+        <LinearLayout
             android:id="@+id/rg_sex"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -56,8 +70,8 @@
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
-            <RadioButton
-                android:id="@+id/rbtn_adult"
+            <CheckBox
+                android:id="@+id/cbox_adult"
                 style="@style/style_font_default_28pt"
                 android:button="@drawable/bg_radio_button"
                 android:checked="true"
@@ -65,8 +79,8 @@
                 android:paddingEnd="22pt"
                 android:text="@string/adult" />
 
-            <RadioButton
-                android:id="@+id/rbtn_child"
+            <CheckBox
+                android:id="@+id/cbox_child"
                 style="@style/style_font_default_28pt"
                 android:layout_marginStart="92pt"
                 android:button="@drawable/bg_radio_button"
@@ -74,7 +88,7 @@
                 android:paddingEnd="22pt"
                 android:text="@string/child" />
 
-        </RadioGroup>
+        </LinearLayout>
 
 
         <View style="@style/style_view_divider" />
@@ -108,8 +122,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="35pt">
 
-            <EditText
-                android:id="@+id/edit_class_time"
+            <TextView
+                android:id="@+id/txt_class_date"
                 style="@style/style_edit_publish"
                 android:hint="请选择课程时间" />
 
@@ -131,8 +145,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="35pt">
 
-            <EditText
-                android:id="@+id/edit_course_time"
+            <TextView
+                android:id="@+id/txt_course_time"
                 style="@style/style_edit_publish"
                 android:hint="请选择上课时段" />
 
@@ -163,13 +177,13 @@
                 android:layout_marginStart="60pt"
                 android:text="@string/current_location" />
 
-            <EditText
-                android:id="@+id/edit_location"
+            <TextView
+                android:id="@+id/txt_location"
                 style="@style/style_edit_publish"
                 android:layout_alignBottom="@id/test_location"
                 android:layout_toEndOf="@id/test_location"
                 android:background="@color/color_transparent"
-                android:hint="选择地区" />
+                android:text="选择地区" />
 
             <ImageView
                 style="@style/style_more_btn"
@@ -298,12 +312,13 @@
             android:layout_marginTop="50pt"
             android:text="@string/class_brief" />
 
-        <include
-            layout="@layout/layout_photo_video"
+        <com.sunny.classcome.widget.UpPhotoVideoView
+            android:id="@+id/view_up"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <TextView
+            android:id="@+id/txt_publish"
             style="@style/style_button_no_margin"
             android:layout_width="match_parent"
             android:layout_height="98pt"

@@ -26,6 +26,8 @@ object Constant {
 
     const val USER_BEAN = "userBean" //我的简历
 
+    const val CLASS_TYPE = "classType" //课程分类
+
     const val REQUEST_CODE_CHOOSE = 0x100 //选择图片请求CODE
 
     /**
@@ -120,5 +122,8 @@ object Constant {
 
     const val COURSE_GETMYFAVORITELIST = "course/getMyFavoriteList" //我收藏的课程列表
 
+    const val COURSE_GETCATEGORYALL = "course/getCategoryAll" //查询课程类别（查询所有）
+
+    const val COURSE_PUBLISHCOURSE = "course/publishCourse" //发布课程
 }
 

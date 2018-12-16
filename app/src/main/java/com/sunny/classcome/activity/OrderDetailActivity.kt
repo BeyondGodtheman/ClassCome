@@ -6,7 +6,7 @@ import android.view.View
 import com.sunny.classcome.R
 import com.sunny.classcome.base.BaseActivity
 import com.sunny.classcome.bean.ClassBean
-import com.sunny.classcome.bean.ClassDetailBean
+import com.sunny.classcome.bean.OrderDetailBean
 import com.sunny.classcome.http.ApiManager
 import com.sunny.classcome.http.Constant
 import com.sunny.classcome.utils.DateUtil
@@ -224,8 +224,8 @@ class OrderDetailActivity : BaseActivity() {
         showLoading()
         val params = HashMap<String, String>()
         params["id"] = intent.getStringExtra("id") ?: ""
-        ApiManager.post(composites, params, Constant.ORDER_GETORDERDETAILNEW, object : ApiManager.OnResult<ClassDetailBean>() {
-            override fun onSuccess(data: ClassDetailBean) {
+        ApiManager.post(composites, params, Constant.ORDER_GETORDERDETAILNEW, object : ApiManager.OnResult<OrderDetailBean>() {
+            override fun onSuccess(data: OrderDetailBean) {
                 hideLoading()
                 classBean = data.content
 
