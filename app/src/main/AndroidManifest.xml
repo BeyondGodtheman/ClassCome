@@ -58,7 +58,7 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
 
         <!--首页-->
-        <activity android:name=".fragment.CourseDetailsFragment">
+        <activity android:name=".activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

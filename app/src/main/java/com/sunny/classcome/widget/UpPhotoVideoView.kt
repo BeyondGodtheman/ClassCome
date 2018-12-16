@@ -75,7 +75,7 @@ class UpPhotoVideoView : FrameLayout {
 
                     OSSUtil.updateFile(file.absolutePath, if (it.absolutePath.contains(".mp4")) OSSUtil.VIDEO else OSSUtil.IMAGE) {
                         if (it.contains(".mp4")) {
-                            list.add(ClassBean.Bean.Data.Material("4", it))
+                            list.add(0,ClassBean.Bean.Data.Material("4", it))
                         } else {
                             list.add(ClassBean.Bean.Data.Material("3", it))
                         }

@@ -3,6 +3,8 @@ package com.sunny.classcome.activity
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Intent
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import com.sunny.classcome.MyApplication
 import com.sunny.classcome.R
@@ -45,6 +47,37 @@ class PublishClassActivity : BaseActivity() {
         txt_class_date.setOnClickListener(this)
         txt_course_time.setOnClickListener(this)
         txt_location.setOnClickListener(this)
+        txt_publish.setOnClickListener(this)
+
+        edit_single_cost.addTextChangedListener(object :TextWatcher{
+            override fun afterTextChanged(s: Editable?) {
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                var price = 0f
+                 edit_single_cost.text.toString().apply {
+                     price = if (isEmpty()){
+                         0f
+                     }else{
+                         toFloat()
+                     }
+                }
+
+                var total = 0
+                edit_total_class.text.toString().apply {
+                    total = if (isEmpty()){
+                        0
+                    }else{
+                        toInt()
+                    }
+                }
+                edit_total_cost.setText((total * price).toString())
+            }
+
+        })
 
         view_up.setHint("请描述一下您的课程")
     }
@@ -135,6 +168,7 @@ class PublishClassActivity : BaseActivity() {
             txt_location.text = (data?.getStringExtra("countyName") + " " + data?.getStringExtra("townName"))
             countyId = data?.getStringExtra("countyId") ?: ""
             townId = data?.getStringExtra("townId") ?: ""
+            cityId = data?.getStringExtra("cityId")?:""
         }
 
         if (requestCode == 0 && resultCode == 1) {
@@ -163,22 +197,109 @@ class PublishClassActivity : BaseActivity() {
     //发布
     private fun publish() {
         if (subCategoryList.isEmpty()){
-            ToastUtil.show("请选择课程分类")
+            ToastUtil.show("请选择课程分类！")
+            return
+        }
+
+        if (!cbox_adult.isChecked && !cbox_child.isChecked){
+            ToastUtil.show("请选择适应人群！")
+            return
+        }
+
+        if (edit_title.text.isEmpty()){
+            ToastUtil.show("请输入课程标题！")
+            return
+        }
+
+        if (startData.isEmpty() || endData.isEmpty()){
+            ToastUtil.show("请选择课程时间！")
+            return
+        }
+
+        if (startTime.isEmpty() || endTime.isEmpty()){
+            ToastUtil.show("请选择上课时段！")
             return
         }
 
 
+        if (countyId.isEmpty() || townId.isEmpty()){
+            ToastUtil.show("请选择所在地区！")
+            return
+        }
+
+        if (edit_street.text.isEmpty()){
+            ToastUtil.show("请输入详细地址！")
+            return
+        }
+
+        if (edit_total_class.text.isEmpty()){
+            ToastUtil.show("请输入课程总节数！")
+            return
+        }
+
+        if (edit_recruit_people.text.isEmpty()){
+            ToastUtil.show("请输入招聘总人数")
+            return
+        }
+
+        if (edit_single_cost.text.isEmpty()){
+            ToastUtil.show("请输入单节酬劳")
+            return
+        }
+
+        if(view_up.list.isEmpty()){
+            ToastUtil.show("请上传图片或视屏")
+            return
+        }
+
         val params = hashMapOf<String,Any>()
         val categoryIdArray = JSONArray()
         subCategoryList.forEach {
-            categoryIdArray.put(it.id)
+            categoryIdArray.put(it.id.toInt())
+        }
+        params["coursetype"] = "2" //2:代课
+        params["categoryIdList"] = categoryIdArray //类型ID
+
+        if (cbox_child.isChecked && cbox_adult.isChecked){
+            params["personType"] = "3"
+        }else {
+            if (cbox_child.isChecked){
+                params["personType"] = "2"
+            }
+
+            if (cbox_adult.isChecked){
+                params["personType"] = "1"
+            }
         }
 
-        params["categoryIdList"] = categoryIdArray //类型ID
+        params["title"] = edit_title.text.toString()
+        params["startTime"] = startData
+        params["endTime"] = endData
+        params["classTime"] = "$startTime-$endTime"
+        params["cityId"] = cityId
+        params["countyId"] = countyId
+        params["townId"] = townId
+        params["classAddress"] = txt_location.text.toString()
+        params["classDetailAdress"] = edit_street.text.toString()
+        params["courseNum"] = edit_total_class.text.toString()
+        params["price"] = edit_single_cost.text.toString()
+        params["sumPrice"] = edit_total_cost.text.toString()
+        params["publishTotal"] = edit_recruit_people.text.toString() //招聘人数
+        params["description"]  = view_up.getText() //描述
+
+        val materialUrlArray = JSONArray()
+        view_up.list.forEach {
+            materialUrlArray.put(it.url)
+        }
+        params["materialUrlList"] = materialUrlArray
+
 
         ApiManager.post(composites,params,Constant.COURSE_PUBLISHCOURSE,object : ApiManager.OnResult<BaseBean<String>>(){
             override fun onSuccess(data: BaseBean<String>) {
-
+                if (data.content?.statu == "1"){
+                    ToastUtil.show("发布成功")
+                    finish()
+                }
             }
 
             override fun onFailed(code: String, message: String) {

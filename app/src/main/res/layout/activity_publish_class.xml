@@ -236,6 +236,7 @@
                 android:layout_alignBottom="@id/text11"
                 android:layout_marginStart="60pt"
                 android:layout_toEndOf="@id/text11"
+                android:inputType="number"
                 android:hint="节" />
 
             <View
@@ -275,6 +276,7 @@
                 android:layout_alignBottom="@id/text33"
                 android:layout_alignStart="@id/edit_total_class"
                 android:layout_marginStart="0pt"
+                android:inputType="numberDecimal"
                 android:hint="@string/rmb" />
 
             <View
