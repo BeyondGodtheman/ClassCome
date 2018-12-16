@@ -20,12 +20,12 @@ data class ClassDetailBean(
                 var sumPrice: String,//酬劳总价
                 var courseNum: String,// 课程总节数
                 var personType: String,//人员类型
-                var classTime: ArrayList<String>,//上课时段
+                var classTime: ArrayList<String>?,//上课时段
                 var classAddress: String,//上课地点
                 var classDetailAdress: String,
-                var startTime: String,//课程日期开始时间
-                var endTime: String,//课程日期结束时间
-                var category: ArrayList<String>,//课程类别
+                var startTime: String?,//课程日期开始时间
+                var endTime: String?,//课程日期结束时间
+                var category: ArrayList<String>?,//课程类别
                 var description: String,//课程简介
 
                 /**

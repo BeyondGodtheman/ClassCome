@@ -13,7 +13,7 @@ import com.sunny.classcome.utils.IntentUtil
 import com.sunny.classcome.utils.ToastUtil
 import kotlinx.android.synthetic.main.activity_company_profile_edit.*
 
-class ComPanyProfileEditActivity : BaseActivity() {
+class CompanyProfileEditActivity : BaseActivity() {
     override fun setLayout(): Int = R.layout.activity_company_profile_edit
 
     override fun initView() {

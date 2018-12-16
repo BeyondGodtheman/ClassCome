@@ -1,11 +1,10 @@
 package com.sunny.classcome.adapter
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.sunny.classcome.R
-import com.sunny.classcome.fragment.CourseDetailsFragment
+import com.sunny.classcome.activity.PublishDetailsActivity
 import com.sunny.classcome.base.BaseRecycleAdapter
 import com.sunny.classcome.base.BaseRecycleViewHolder
 import com.sunny.classcome.bean.ClassBean
@@ -47,12 +46,12 @@ class ClassListAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleAdapte
 
         getData(position).materialList?.let {
             if (it.isNotEmpty()) {
-                GlideUtil.loadPhoto(context, holder.itemView.img_class_photo, it[0].url?:"")
+                GlideUtil.loadPhoto(context, holder.itemView.img_class_photo, it[0].url ?: "")
             }
         }
 
         holder.itemView.setOnClickListener {
-            context.startActivity(Intent(context, CourseDetailsFragment::class.java).putExtra("id",getData(position).course.id))
+            PublishDetailsActivity.startPublishDetail(context, PublishDetailsActivity.courseDetail, getData(position).course.id)
         }
 
 

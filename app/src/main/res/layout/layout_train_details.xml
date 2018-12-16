@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rl_history_more"
+        android:layout_width="match_parent"
+        android:layout_height="88pt">
+
+        <TextView
+            android:id="@+id/txt_pin"
+            style="@style/style_font_default_28pt"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="40pt"
+            android:text="36人在拼单" />
+
+        <TextView
+            android:id="@+id/txt_more"
+            style="@style/style_font_gray_28pt"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_toStartOf="@id/img_more"
+            android:gravity="center_vertical"
+            android:paddingStart="38pt"
+            android:paddingEnd="15pt"
+            android:text="查看更多" />
+
+        <ImageView
+            android:id="@+id/img_more"
+            style="@style/style_more_btn"
+            android:layout_centerVertical="true"
+            android:contentDescription="@string/app" />
+    </RelativeLayout>
+
+    <View style="@style/style_view_line" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recl_pin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40pt" />
+
+    <View style="@style/style_view_divider" />
+
+</LinearLayout>

@@ -1,15 +1,11 @@
 package com.sunny.classcome.fragment
 
-import android.content.Intent
 import android.view.View
+import com.sunny.classcome.MyApplication
 import com.sunny.classcome.R
 import com.sunny.classcome.activity.MapActivity
-import com.sunny.classcome.activity.MyProfileActivity
-import com.sunny.classcome.activity.PastReleaseActivity
-import com.sunny.classcome.base.BaseActivity
 import com.sunny.classcome.base.BaseFragment
 import com.sunny.classcome.bean.ClassDetailBean
-import com.sunny.classcome.http.ApiManager
 import com.sunny.classcome.http.Constant
 import com.sunny.classcome.utils.DateUtil
 import com.sunny.classcome.utils.IntentUtil
@@ -23,14 +19,39 @@ import kotlinx.android.synthetic.main.fragment_course_details.*
  */
 class CourseDetailsFragment : BaseFragment() {
 
-    var id = "175073"
-    var uid = ""
-    var courseId = ""
-
     override fun setLayout(): Int = R.layout.fragment_course_details
 
     override fun initView() {
-//        id = intent.getStringExtra("id")
+
+        MyApplication.getApp().getData<ClassDetailBean>(Constant.CLASS_DETAIL, true)?.content?.resCourseVO?.let { bean ->
+            // 课程总节数/招聘人数
+            txt_class_total.text = ("${bean.courseNum}节")
+            txt_recruit.text = ("接口未定义字段")
+
+            // 单节酬劳/酬劳总价
+            txt_price.text = ("￥${bean.price}")
+            txt_sum.text = ("￥${bean.sumPrice}")
+
+            // 课程类别
+            if (bean.category?.isNotEmpty() == true) {
+                txt_class_type.text = bean.category!![0]
+            }
+
+            // 人员类型/课程日期
+            txt_person_type.text = bean.personType
+            txt_class_date.text = ("${DateUtil.dateFormatYYMMdd(bean.startTime
+                    ?: "")}至${DateUtil.dateFormatYYMMdd(bean.endTime ?: "")}")
+
+            // 上课时段
+            if (bean.classTime?.isNotEmpty() == true) {
+                txt_time.text = bean.classTime!![0]
+            }
+
+            // 截至日期/上课地点
+            txt_by_date.text = DateUtil.dateFormatYYMMdd(bean.course.expirationTime)
+            txt_address.text = bean.classAddress
+        }
+
 
         ll_map.setOnClickListener(this)
     }
@@ -38,55 +59,8 @@ class CourseDetailsFragment : BaseFragment() {
     override fun onClick(v: View) {
         when (v.id) {
             R.id.ll_map -> IntentUtil.start(requireActivity(), MapActivity::class.java)
-            R.id.rl_user_more -> startActivity(Intent(requireActivity(), MyProfileActivity::class.java).putExtra("uid", uid))
-            R.id.rl_history_more -> IntentUtil.start(requireActivity(), PastReleaseActivity::class.java)
         }
     }
 
 
-    override fun update() {
-        showLoading()
-        val map = HashMap<String, String>()
-        map["id"] = id
-//        map["pintuan"] = id
-        ApiManager.post(getBaseActivity().composites, map, Constant.COURSE_GETCOURSEDETAIL, object : ApiManager.OnResult<ClassDetailBean>() {
-            override fun onSuccess(data: ClassDetailBean) {
-                hideLoading()
-                initData(data.content)
-
-                uid = data.content.user.id
-                courseId = data.content.resCourseVO.course.id
-
-            }
-
-            override fun onFailed(code: String, message: String) {
-                hideLoading()
-            }
-
-        })
-
-    }
-
-
-    private fun initData(bean: ClassDetailBean.Content) {
-
-        // 课程总节数/招聘人数
-        txt_class_total.text = ("${bean.resCourseVO.courseNum}节")
-        txt_recruit.text = ("接口未定义字段")
-
-        // 单节酬劳/酬劳总价
-        txt_price.text = ("￥${bean.resCourseVO.price}")
-        txt_sum.text = ("￥${bean.resCourseVO.sumPrice}")
-
-        // 课程类别/人员类型/课程日期
-        txt_class_type.text = bean.resCourseVO.category[0]
-        txt_person_type.text = bean.resCourseVO.personType
-        txt_class_date.text = ("${DateUtil.dateFormatYYMMdd(bean.resCourseVO.startTime)}至${DateUtil.dateFormatYYMMdd(bean.resCourseVO.endTime)}")
-
-        // 上课时段/截至日期/上课地点
-        txt_time.text = bean.resCourseVO.classTime[0]
-        txt_by_date.text = DateUtil.dateFormatYYMMdd(bean.resCourseVO.course.expirationTime)
-        txt_address.text = bean.resCourseVO.classAddress
-
-    }
 }

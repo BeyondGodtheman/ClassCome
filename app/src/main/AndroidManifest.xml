@@ -201,7 +201,7 @@
             android:launchMode="singleTop"/>
 
         <!--公司简历编辑-->
-        <activity android:name=".activity.ComPanyProfileEditActivity"
+        <activity android:name=".activity.CompanyProfileEditActivity"
             android:launchMode="singleTop"/>
 
         <!--地址选择-->

@@ -1,14 +1,20 @@
 package com.sunny.classcome.activity
 
+import android.content.Context
 import android.content.Intent
+import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
 import android.view.View
+import com.sunny.classcome.MyApplication
 import com.sunny.classcome.R
 import com.sunny.classcome.adapter.PastReleaseAdapter
 import com.sunny.classcome.base.BaseActivity
 import com.sunny.classcome.bean.BaseBean
 import com.sunny.classcome.bean.ClassBean
 import com.sunny.classcome.bean.ClassDetailBean
+import com.sunny.classcome.fragment.CourseDetailsFragment
+import com.sunny.classcome.fragment.FieldDetailsFragment
+import com.sunny.classcome.fragment.TrainDetailsFragment
 import com.sunny.classcome.http.ApiManager
 import com.sunny.classcome.http.Constant
 import com.sunny.classcome.utils.*
@@ -22,9 +28,22 @@ import kotlinx.android.synthetic.main.activity_publish_details.*
  */
 class PublishDetailsActivity : BaseActivity() {
 
-    var id = "175073"
+    companion object {
+        const val courseDetail = 1
+        const val filedDetail = 2
+        const val trainDetail = 3
+
+        fun startPublishDetail(context: Context, type: Int, id: String) {
+            val intent = Intent(context, PublishDetailsActivity::class.java)
+            intent.putExtra("type", type)
+            intent.putExtra("id", id)
+            context.startActivity(intent)
+        }
+    }
+
     var uid = ""
     var courseId = ""
+    var title = ""
 
     /**
      * 是否已收藏：
@@ -45,12 +64,47 @@ class PublishDetailsActivity : BaseActivity() {
 
     private val pastReleaseList = arrayListOf<ClassBean.Bean.Data>()
 
+    lateinit var fragment: Fragment
+
+    private val courseDetailFragment: CourseDetailsFragment by lazy {
+        CourseDetailsFragment()
+    }
+
+    private val fieldDetailsFragment: FieldDetailsFragment by lazy {
+        FieldDetailsFragment()
+    }
+
+    private val trainDetailsFragment: TrainDetailsFragment by lazy {
+        TrainDetailsFragment()
+    }
+
+
     override fun setLayout(): Int = R.layout.activity_publish_details
 
     override fun initView() {
-//        id = intent.getStringExtra("id")
 
-        showTitle(titleManager.defaultTitle("课程详情"))
+        courseId = intent.getStringExtra("id")
+
+        fragment = when (intent.getIntExtra("type", 0)) {
+            courseDetail -> {
+                title = "课程详情"
+                txt_brief_desc.text = "课程简介"
+                courseDetailFragment
+            }
+            filedDetail -> {
+                title = "场地详情"
+                txt_brief_desc.text = "场地简介"
+                fieldDetailsFragment
+            }
+            trainDetail -> {
+                title = "培训详情"
+                txt_brief_desc.text = "培训简介"
+                trainDetailsFragment
+            }
+            else -> courseDetailFragment
+        }
+
+        showTitle(titleManager.defaultTitle(title))
 
         rl_user_more.setOnClickListener(this)
         rl_history_more.setOnClickListener(this)
@@ -73,17 +127,21 @@ class PublishDetailsActivity : BaseActivity() {
     override fun update() {
         showLoading()
         val map = HashMap<String, String>()
-        map["id"] = id
+        map["id"] = courseId
 //        map["pintuan"] = id
         ApiManager.post(composites, map, Constant.COURSE_GETCOURSEDETAIL, object : ApiManager.OnResult<ClassDetailBean>() {
             override fun onSuccess(data: ClassDetailBean) {
+
+                MyApplication.getApp().setData(Constant.CLASS_DETAIL, data)
+                supportFragmentManager.beginTransaction().replace(R.id.fl_container, fragment).commit()
+
                 hideLoading()
                 initData(data.content)
                 initPhotoVideo(this@PublishDetailsActivity, viewPager, data.content.resCourseVO.materialList)
 
                 uid = data.content.user.id
                 courseId = data.content.resCourseVO.course.id
-                
+
                 isCollection = data.content.resCourseVO.isFavorite
                 txt_collection.text = if (isCollection == "1") "已收藏" else "收藏"
 
@@ -182,25 +240,6 @@ class PublishDetailsActivity : BaseActivity() {
         txt_class_name.text = bean.resCourseVO.title
         txt_class_price.text = ("￥${bean.resCourseVO.sumPrice}")
         txt_class_time.text = DateUtil.dateFormatYYMMdd(bean.resCourseVO.createTime)
-
-//
-//        // 课程总节数/招聘人数
-//        txt_class_total.text = ("${bean.resCourseVO.courseNum}节")
-//        txt_recruit.text = ("接口未定义字段")
-//
-//        // 单节酬劳/酬劳总价
-//        txt_price.text = ("￥${bean.resCourseVO.price}")
-//        txt_sum.text = ("￥${bean.resCourseVO.sumPrice}")
-//
-//        // 课程类别/人员类型/课程日期
-//        txt_class_type.text = bean.resCourseVO.category[0]
-//        txt_person_type.text = bean.resCourseVO.personType
-//        txt_class_date.text = ("${DateUtil.dateFormatYYMMdd(bean.resCourseVO.startTime)}至${DateUtil.dateFormatYYMMdd(bean.resCourseVO.endTime)}")
-//
-//        // 上课时段/截至日期/上课地点
-//        txt_time.text = bean.resCourseVO.classTime[0]
-//        txt_by_date.text = DateUtil.dateFormatYYMMdd(bean.resCourseVO.course.expirationTime)
-//        txt_address.text = bean.resCourseVO.classAddress
 
         // 课程简介
         txt_brief.text = bean.resCourseVO.description
