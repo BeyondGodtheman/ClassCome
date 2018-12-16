@@ -57,23 +57,32 @@ data class ClassBean(
                     var stateInfo: String,
                     var fatherCategoryName: String,
                     var pushPay: String,
-                    var expirationTime: String,
+                    var expirationTime: String,//截至日期
                     var cityId: String,
                     var countyId: String,
-                    var townId: String)
+                    var townId: String,
+
+                    var onetime: String,//单次使用时长
+                    var captynum: String,//容纳人数
+                    var workspace: String,//场地空间
+                    var worktime: String//营业时间
+
+            )
 
             data class Material(
-                    var createTime: String,
-                    var modifyTime: String,
-                    var createUser: String,
-                    var modifyUser: String,
-                    var token: String,
-                    var url: String,
-                    var type: String,
-                    var md5: String,
-                    var userId: String,
-                    var id: String,
-                    var content: String)
+                    var type: String?, //1头像 2轮播图 3素材图 4素材视频
+                    var url: String?
+            ) {
+                var createTime: String? = null
+                var modifyTime: String? = null
+                var createUser: String? = null
+                var modifyUser: String? = null
+                var token: String? = null
+                var md5: String? = null
+                var userId: String? = null
+                var id: String? = null
+                var content: String? = null
+            }
 
             data class Category(
                     var id: String,

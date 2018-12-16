@@ -40,15 +40,15 @@ object GlideUtil {
         load(context, url).placeholder(R.mipmap.ic_default_head).centerCrop().into(imageView)
     }
 
-    fun loadPhone(context: Context, imageView: ImageView, url: String) {
+    fun loadPhoto(context: Context, imageView: ImageView, url: String) {
         load(context, url).placeholder(R.drawable.bg_default_photo).centerCrop().into(imageView)
     }
 
-    fun loadPhone(context: Context, imageView: ImageView, uri: Uri) {
+    fun loadPhoto(context: Context, imageView: ImageView, uri: Uri) {
         load(context, uri).placeholder(R.drawable.bg_default_photo).centerCrop().into(imageView)
     }
 
-    fun loadPhone(context: Context, imageView: ImageView, file: File) {
+    fun loadPhoto(context: Context, imageView: ImageView, file: File) {
         load(context, file).placeholder(R.drawable.bg_default_photo).centerCrop().into(imageView)
     }
 }

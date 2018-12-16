@@ -1,15 +1,16 @@
 package com.sunny.classcome.adapter
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.sunny.classcome.R
+import com.sunny.classcome.fragment.CourseDetailsFragment
 import com.sunny.classcome.base.BaseRecycleAdapter
 import com.sunny.classcome.base.BaseRecycleViewHolder
 import com.sunny.classcome.bean.ClassBean
 import com.sunny.classcome.utils.GlideUtil
 import kotlinx.android.synthetic.main.item_class.view.*
-import java.lang.StringBuilder
 
 class ClassListAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleAdapter<ClassBean.Bean.Data>(list) {
     override fun setLayout(parent: ViewGroup, viewType: Int):
@@ -31,22 +32,27 @@ class ClassListAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleAdapte
 
         holder.itemView.text_class_time.text = timeSb.toString()
 
-        holder.itemView.text_class_price.text = ("¥"+getData(position).course.sumPrice)
+        holder.itemView.text_class_price.text = ("¥" + getData(position).course.sumPrice)
         holder.itemView.text_class_author.text = getData(position).course.createUser
         holder.itemView.text_class_address.text = getData(position).course.classAddress
         getData(position).categoryList?.let {
-            if (it.isNotEmpty()){
+            if (it.isNotEmpty()) {
                 holder.itemView.text_class_type.text = it[0].name
             }
         }
 
 
-        GlideUtil.loadHead(context, holder.itemView.img_user_name, getData(position).user.userPic?:"")
+        GlideUtil.loadHead(context, holder.itemView.img_user_name, getData(position).user.userPic
+                ?: "")
 
         getData(position).materialList?.let {
-            if (it.isNotEmpty()){
-                GlideUtil.loadPhone(context, holder.itemView.img_class_photo, it[0].url)
+            if (it.isNotEmpty()) {
+                GlideUtil.loadPhoto(context, holder.itemView.img_class_photo, it[0].url?:"")
             }
+        }
+
+        holder.itemView.setOnClickListener {
+            context.startActivity(Intent(context, CourseDetailsFragment::class.java).putExtra("id",getData(position).course.id))
         }
 
 

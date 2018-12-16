@@ -73,7 +73,7 @@ class MyPostedAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleAdapter
         holder.itemView.txt_status.text = type
         getData(position).materialList?.let {
             if (it.isNotEmpty()){
-                GlideUtil.loadPhone(context, holder.itemView.img_class_photo, it[0].url)
+                GlideUtil.loadPhoto(context, holder.itemView.img_class_photo, it[0].url?:"")
             }
         }
 

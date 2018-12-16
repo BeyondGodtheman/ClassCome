@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_white"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/img_class_photo"
+                android:layout_width="230pt"
+                android:layout_height="206pt"
+                android:layout_marginStart="23pt"
+                android:layout_marginTop="28pt"
+                android:layout_marginEnd="23pt"
+                android:layout_marginBottom="21pt"
+                android:contentDescription="@string/app"
+                android:scaleType="fitXY"
+                android:src="@drawable/bg_default_photo" />
+
+            <TextView
+                android:id="@+id/txt_class_name"
+                android:layout_width="308pt"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="33pt"
+                android:layout_marginEnd="13pt"
+                android:layout_toEndOf="@id/img_class_photo"
+                android:ellipsize="end"
+                android:lines="3"
+                android:textColor="@color/color_default_font"
+                android:textSize="32pt"
+                tools:text="初中英语班课教研员-要求有专业教学资质" />
+
+            <TextView
+                android:id="@+id/txt_class_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/img_class_photo"
+                android:layout_toEndOf="@id/img_class_photo"
+                android:textColor="@color/color_gray_font"
+                android:textSize="24pt"
+                tools:text="1天前发布" />
+
+
+            <TextView
+                android:id="@+id/txt_class_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="32pt"
+                android:textColor="@color/color_price_red"
+                android:textSize="36pt"
+                tools:text="¥4000" />
+        </RelativeLayout>
+
+        <View style="@style/style_view_divider" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="367pt"
+            android:background="@color/color_white">
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="32pt"
+                android:layout_marginTop="25pt"
+                android:layout_marginEnd="32pt"
+                android:layout_marginBottom="25pt" />
+        </RelativeLayout>
+
+        <View style="@style/style_view_divider" />
+
+        <FrameLayout
+            android:id="@+id/fl_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/txt_desc"
+            style="@style/style_font_default_34pt"
+            android:layout_marginStart="40pt"
+            android:layout_marginTop="40pt"
+            android:text="课程简介" />
+
+        <TextView
+            android:id="@+id/txt_brief"
+            style="@style/style_font_default_28pt"
+            android:layout_marginStart="40pt"
+            android:layout_marginTop="32pt"
+            android:layout_marginEnd="40pt"
+            android:layout_marginBottom="60pt"
+            tools:text="舞蹈是一种表演艺术，使用身体来完成各种优雅或高难度的动作" />
+
+        <View style="@style/style_view_divider" />
+
+        <TextView
+            style="@style/style_font_default_32pt"
+            android:layout_marginStart="40pt"
+            android:layout_marginTop="20pt"
+            android:text="发布人信息"
+            android:textColor="@color/color_orange_font" />
+
+
+        <RelativeLayout
+            android:id="@+id/rl_user_more"
+            android:layout_width="match_parent"
+            android:layout_height="140pt">
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/img_user_head"
+                android:layout_width="80pt"
+                android:layout_height="80pt"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="48pt"
+                android:src="@mipmap/ic_default_head"
+                app:riv_oval="true" />
+
+            <TextView
+                android:id="@+id/txt_user_name"
+                style="@style/style_font_default_30pt"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="16pt"
+                android:layout_toEndOf="@id/img_user_head"
+                tools:ignore="RelativeOverlap"
+                tools:text="课多多" />
+
+
+            <ImageView
+                android:id="@+id/img_vip"
+                android:layout_width="34pt"
+                android:layout_height="30pt"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="12pt"
+                android:layout_toEndOf="@id/txt_user_name"
+                android:contentDescription="@string/app"
+                android:src="@mipmap/ic_vip" />
+
+            <ImageView
+                style="@style/style_more_btn"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/app" />
+
+        </RelativeLayout>
+
+        <View style="@style/style_view_divider" />
+
+        <RelativeLayout
+            android:id="@+id/rl_history_more"
+            android:layout_width="match_parent"
+            android:layout_height="98pt">
+
+            <TextView
+                style="@style/style_font_default_32pt"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="40pt"
+                android:text="过往发布信息" />
+
+            <TextView
+                android:id="@+id/txt_more"
+                style="@style/style_font_default_28pt"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_toStartOf="@id/img_more"
+                android:gravity="center_vertical"
+                android:paddingStart="38pt"
+                android:text="更多" />
+
+            <ImageView
+                android:id="@+id/img_more"
+                style="@style/style_more_btn"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="10pt"
+                android:contentDescription="@string/app" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="417pt"
+            android:background="@color/color_base_bg">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recl"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_horizontal"
+                android:paddingStart="40pt"
+                android:paddingEnd="25pt" />
+        </RelativeLayout>
+
+        <View
+            style="@style/style_view_line"
+            android:layout_marginTop="62pt" />
+
+        <LinearLayout
+            android:id="@+id/ll_bottom_btn"
+            android:layout_width="match_parent"
+            android:layout_height="110pt"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="30pt"
+                android:layout_height="30pt"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="48pt"
+                android:contentDescription="@string/app"
+                android:src="@mipmap/ic_mine_my_collection" />
+
+            <TextView
+                android:id="@+id/txt_collection"
+                style="@style/style_font_default_32pt"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:paddingStart="10pt"
+                android:paddingEnd="72pt"
+                android:text="@string/collection"
+                android:textColor="@color/color_primary" />
+
+            <TextView
+                android:id="@+id/txt_accept"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/color_primary"
+                android:gravity="center"
+                android:text="应 聘"
+                android:textColor="@color/color_white"
+                android:textSize="36pt" />
+
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

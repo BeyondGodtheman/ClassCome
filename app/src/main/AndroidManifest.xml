@@ -58,7 +58,7 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
 
         <!--首页-->
-        <activity android:name=".activity.SplashActivity">
+        <activity android:name=".fragment.CourseDetailsFragment">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -97,22 +97,33 @@
         <activity android:name=".activity.SettingActivity" />
         <activity android:name=".activity.PointActivity" />
         <activity android:name=".activity.PointDescActivity" />
+
+        <!--发布详情：课程详情、场地详情、培训详情-->
+        <activity android:name=".activity.PublishDetailsActivity" />
+
+        <activity android:name=".activity.MapActivity" />
+
         <activity
             android:name=".activity.PurchaserActivity"
             android:hardwareAccelerated="false" />
 
+        <!--发布培训-->
         <activity
             android:name=".activity.PublishTrainActivity"
             android:windowSoftInputMode="adjustPan" />
+        <!--发布场地-->
         <activity
             android:name=".activity.PublishFieldActivity"
             android:windowSoftInputMode="adjustPan" />
+        <!--发布课程-->
         <activity
             android:name=".activity.PublishClassActivity"
             android:windowSoftInputMode="adjustPan" />
+        <!--发布代课-->
         <activity
             android:name=".activity.PublishTutorActivity"
             android:windowSoftInputMode="adjustPan" />
+        <!--发布活动-->
         <activity
             android:name=".activity.PublishActiveActivity"
             android:windowSoftInputMode="adjustPan" />
@@ -181,6 +192,7 @@
         <activity android:name=".activity.InvitationRecordActivity"
             android:launchMode="singleTop"/>
 
+        <!--过往发布信息-->
         <activity android:name=".activity.PastReleaseActivity"
             android:launchMode="singleTop"/>
 

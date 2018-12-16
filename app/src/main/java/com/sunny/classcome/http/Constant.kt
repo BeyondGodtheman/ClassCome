@@ -2,7 +2,7 @@ package com.sunny.classcome.http
 
 object Constant {
 
-    fun isDebug(): Boolean = false
+    fun isDebug(): Boolean = true
 
     var isLog = true //是否打印LOG
 
@@ -11,11 +11,11 @@ object Constant {
 
 
     //阿里云OSS
-    const val endpoint ="oss-cn-shanghai.aliyuncs.com"
+    const val endpoint = "oss-cn-shanghai.aliyuncs.com"
     const val BUCKET_NAME = "course-sh"
     const val ACCESSKEYID = "LTAIhlWs79fb3maU"
     const val AccessKeySecret = "BA2gwJWLmcbeCZMtHxm2D0MdpXNsmo"
-    const val TOKEN =""
+    const val TOKEN = ""
     const val UPDATEHOST = "https://course-sh.oss-cn-shanghai.aliyuncs.com/"
 
     const val COMMON_UPLOADS = ""
@@ -68,7 +68,7 @@ object Constant {
 
     const val USER_GETMYINFO = "user/getMyInfo" //我的简历
 
-    const val USER_EDITMYINFO ="user/editMyInfo" //编辑简历
+    const val USER_EDITMYINFO = "user/editMyInfo" //编辑简历
 
     const val PUB_COOPERATION = "pub/cooperation" //商务合作
 
@@ -112,7 +112,7 @@ object Constant {
 
     const val ORDER_GETAPPLICANTLIST = "order/getApplicantList" //应聘者列表
 
-    const val ORDER_APPLYCOURSE ="order/applyCourse" //选择候选人或中标人
+    const val ORDER_APPLYCOURSE = "order/applyCourse" //选择候选人或中标人
 
     const val USER_SAVEIDENTITYCARD = "user/saveIdentityCard" //保存身份证URL
 
@@ -125,5 +125,9 @@ object Constant {
     const val COURSE_GETCATEGORYALL = "course/getCategoryAll" //查询课程类别（查询所有）
 
     const val COURSE_PUBLISHCOURSE = "course/publishCourse" //发布课程
+
+    const val COURSE_GETCOURSEDETAIL = "course/getCourseDetail" //课程详情
+
+    const val COURSE_OPERATIONCOURSE = "course/operationCourse" //操作课程
 }
 

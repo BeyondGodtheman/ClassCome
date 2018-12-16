@@ -15,6 +15,9 @@ import com.sunny.classcome.http.Constant
 import com.sunny.classcome.utils.UserManger
 import kotlinx.android.synthetic.main.layout_refresh_recycler.*
 
+/**
+ * 过往发布信息
+ */
 class PastReleaseActivity: BaseActivity() {
 
     private var pageIndex = 1

@@ -2,7 +2,7 @@ package com.sunny.classcome.bean
 
 data class UserBean(
         var user: Bean?,
-        var materialList: ArrayList<Material>?) {
+        var materialList: ArrayList<ClassBean.Bean.Data.Material>?) {
     data class Bean(
             var createTime: String,
             var modifyTime: String,
@@ -52,19 +52,4 @@ data class UserBean(
             var realName: String,
             var payId: String,
             var weChatUser: String)
-
-    data class Material(
-            var type: String?, //1头像 2轮播图 3素材图 4素材视频
-            var url: String?
-    ){
-        var createTime: String? = null
-        var modifyTime: String? = null
-        var createUser: String? = null
-        var modifyUser: String? = null
-        var token: String? = null
-        var md5: String? = null
-        var userId: String? = null
-        var id: String? = null
-        var content: String? = null
-    }
 }

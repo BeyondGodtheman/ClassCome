@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="130pt">
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/img_user_head"
+        android:layout_width="80pt"
+        android:layout_height="80pt"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="48pt"
+        android:src="@mipmap/ic_default_head"
+        app:riv_oval="true" />
+
+    <TextView
+        android:id="@+id/txt_user_name"
+        style="@style/style_font_default_28pt"
+        android:layout_width="150pt"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="16pt"
+        android:layout_toEndOf="@id/img_user_head"
+        android:ellipsize="end"
+        android:maxLines="1"
+        tools:ignore="RelativeOverlap"
+        tools:text="课多怂怂的订单多" />
+
+    <TextView
+        android:id="@+id/txt_pin_count"
+        style="@style/style_font_default_24pt"
+        android:layout_width="wrap_content"
+        android:layout_alignTop="@id/txt_pin"
+        android:layout_marginStart="16pt"
+        android:layout_toStartOf="@id/txt_pin"
+        tools:text="还差2人拼成" />
+
+    <TextView
+        android:id="@+id/txt_day_count"
+        style="@style/style_font_default_24pt"
+        android:layout_width="wrap_content"
+        android:layout_below="@id/txt_pin_count"
+        android:layout_marginStart="16pt"
+        android:layout_toStartOf="@id/txt_pin"
+        tools:text="剩余29天 20:30:18" />
+
+
+    <TextView
+        android:id="@+id/txt_pin"
+        android:layout_width="150pt"
+        android:layout_height="60pt"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="12pt"
+        android:layout_marginEnd="36pt"
+        android:background="@drawable/draw_bg_fillet_blue"
+        android:gravity="center"
+        android:text="去拼单"
+        android:textColor="@color/color_white"
+        android:textSize="28pt" />
+
+
+</RelativeLayout>

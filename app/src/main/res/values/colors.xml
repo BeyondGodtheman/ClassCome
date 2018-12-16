@@ -17,6 +17,8 @@
 
     <color name="color_default_font">#4A4A4A</color>
     <color name="color_gray_font">#9B9B9B</color>
+    <color name="color_orange_font">#F5A623</color>
+
     <color name="color_price_red">#F74543</color>
     <color name="color_orange">#FF7B01</color>
 </resources>

@@ -130,7 +130,7 @@ class PersonAuthActivity : BaseActivity() {
                     frontFile = GlideApp.with(this@PersonAuthActivity).asFile().load(uri).submit().get()
                     runOnUiThread {
                         frontFile?.let {
-                            GlideUtil.loadPhone(this@PersonAuthActivity, img_card_front, it)
+                            GlideUtil.loadPhoto(this@PersonAuthActivity, img_card_front, it)
                             updateState()
                         }
                     }
@@ -141,7 +141,7 @@ class PersonAuthActivity : BaseActivity() {
                     backFile = GlideApp.with(this@PersonAuthActivity).asFile().load(uri).submit().get()
                     runOnUiThread {
                         backFile?.let {
-                            GlideUtil.loadPhone(this@PersonAuthActivity, img_card_back, it)
+                            GlideUtil.loadPhoto(this@PersonAuthActivity, img_card_back, it)
                             updateState()
                         }
                     }

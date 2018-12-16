@@ -11,6 +11,7 @@ import android.view.LayoutInflater
 import android.widget.FrameLayout
 import com.sunny.classcome.R
 import com.sunny.classcome.adapter.UpPhotoVideoAdapter
+import com.sunny.classcome.bean.ClassBean
 import com.sunny.classcome.bean.UserBean
 import com.sunny.classcome.http.Constant
 import com.sunny.classcome.utils.GlideApp
@@ -27,7 +28,7 @@ class UpPhotoVideoView : FrameLayout {
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
 
-    val list = arrayListOf<UserBean.Material>()
+    val list = arrayListOf<ClassBean.Bean.Data.Material>()
     private val upPhotoVideoAdapter: UpPhotoVideoAdapter by lazy {
         UpPhotoVideoAdapter(list)
     }
@@ -41,7 +42,7 @@ class UpPhotoVideoView : FrameLayout {
     }
 
 
-    fun setData(mList: ArrayList<UserBean.Material>) {
+    fun setData(mList: ArrayList<ClassBean.Bean.Data.Material>) {
         list.clear()
         list.addAll(mList)
         upPhotoVideoAdapter.notifyDataSetChanged()
@@ -74,9 +75,9 @@ class UpPhotoVideoView : FrameLayout {
 
                     OSSUtil.updateFile(file.absolutePath, if (it.absolutePath.contains(".mp4")) OSSUtil.VIDEO else OSSUtil.IMAGE) {
                         if (it.contains(".mp4")) {
-                            list.add(UserBean.Material("4", it))
+                            list.add(ClassBean.Bean.Data.Material("4", it))
                         } else {
-                            list.add(UserBean.Material("3", it))
+                            list.add(ClassBean.Bean.Data.Material("3", it))
                         }
                         upPhotoVideoAdapter.notifyItemChanged(list.size - 1)
                     }

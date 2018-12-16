@@ -160,7 +160,7 @@ class ModifyInfoActivity : BaseActivity() {
                 runOnUiThread {
                     headFile?.let {
                         isModifyHead = true
-                        GlideUtil.loadPhone(this@ModifyInfoActivity, img_head, it)
+                        GlideUtil.loadPhoto(this@ModifyInfoActivity, img_head, it)
                     }
                 }
             }

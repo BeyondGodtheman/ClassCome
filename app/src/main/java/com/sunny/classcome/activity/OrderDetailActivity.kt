@@ -255,7 +255,7 @@ class OrderDetailActivity : BaseActivity() {
                 txt_class.text = classBean?.course?.title
                 classBean?.materialList?.let {
                     if (it.isNotEmpty()) {
-                        GlideUtil.loadPhone(this@OrderDetailActivity, img_class, it[0].url)
+                        GlideUtil.loadPhoto(this@OrderDetailActivity, img_class, it[0].url?:"")
                     }
                 }
 

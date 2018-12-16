@@ -117,6 +117,10 @@
         <item name="android:textSize">24pt</item>
     </style>
 
+    <style name="style_font_default_26pt" parent="style_font">
+        <item name="android:textSize">26pt</item>
+    </style>
+
     <style name="style_font_default_28pt" parent="style_font">
         <item name="android:textSize">28pt</item>
     </style>
@@ -145,8 +149,8 @@
 
     <!-- 分割块样式 -->
     <style name="style_more_btn">
-        <item name="android:layout_width">21pt</item>
-        <item name="android:layout_height">35pt</item>
+        <item name="android:layout_width">20pt</item>
+        <item name="android:layout_height">25pt</item>
         <item name="android:src">@mipmap/ic_more</item>
         <item name="android:layout_marginEnd">32pt</item>
         <item name="android:layout_alignParentEnd">true</item>

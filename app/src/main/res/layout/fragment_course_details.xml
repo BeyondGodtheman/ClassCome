@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/color_white"
+    android:paddingStart="40pt"
+    android:paddingTop="32pt"
+    android:paddingEnd="40pt">
+
+    <TextView
+        android:id="@+id/text1"
+        style="@style/style_font_gray_28pt"
+        android:text="课程总节数" />
+
+    <TextView
+        android:id="@+id/txt_class_total"
+        style="@style/style_font_default_28pt"
+        android:layout_marginStart="60pt"
+        android:layout_toEndOf="@id/text1"
+        tools:text="20节" />
+
+    <TextView
+        android:id="@+id/text2"
+        style="@style/style_font_gray_28pt"
+        android:layout_below="@id/text1"
+        android:layout_marginTop="20pt"
+        android:text="招聘人数"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/txt_recruit"
+        style="@style/style_font_default_28pt"
+        android:layout_alignStart="@id/txt_class_total"
+        android:layout_alignTop="@id/text2"
+        android:layout_toEndOf="@id/text2"
+        android:visibility="gone"
+        tools:text="2人" />
+
+    <TextView
+        android:id="@+id/text3"
+        style="@style/style_font_gray_28pt"
+        android:layout_below="@id/text2"
+        android:layout_marginTop="20pt"
+        android:text="单节酬劳" />
+
+    <TextView
+        android:id="@+id/txt_price"
+        style="@style/style_font_default_28pt"
+        android:layout_alignStart="@id/txt_class_total"
+        android:layout_alignTop="@id/text3"
+        android:layout_toEndOf="@id/text3"
+        tools:text="¥200" />
+
+    <TextView
+        android:id="@+id/text4"
+        style="@style/style_font_gray_28pt"
+        android:layout_below="@id/text3"
+        android:layout_marginTop="20pt"
+        android:text="酬劳总价" />
+
+    <TextView
+        android:id="@+id/txt_sum"
+        style="@style/style_font_default_28pt"
+        android:layout_alignStart="@id/txt_class_total"
+        android:layout_alignTop="@id/text4"
+        android:layout_toEndOf="@id/text4"
+        tools:text="¥4000" />
+
+
+    <View
+        android:id="@+id/line1"
+        style="@style/style_view_line"
+        android:layout_below="@id/text4"
+        android:layout_marginTop="30pt"
+        android:layout_marginBottom="30pt" />
+
+
+    <TextView
+        android:id="@+id/text11"
+        style="@style/style_font_gray_28pt"
+        android:layout_below="@id/line1"
+        android:text="课程类别" />
+
+    <TextView
+        android:id="@+id/txt_class_type"
+        style="@style/style_font_default_28pt"
+        android:layout_below="@id/line1"
+        android:layout_alignStart="@id/txt_class_total"
+        android:layout_toEndOf="@id/text11"
+        tools:text="20节" />
+
+    <TextView
+        android:id="@+id/text22"
+        style="@style/style_font_gray_28pt"
+        android:layout_below="@id/text11"
+        android:layout_marginTop="20pt"
+        android:text="人员类型" />
+
+    <TextView
+        android:id="@+id/txt_person_type"
+        style="@style/style_font_default_28pt"
+        android:layout_alignStart="@id/txt_class_total"
+        android:layout_alignTop="@id/text22"
+        android:layout_toEndOf="@id/text22"
+        tools:text="2人" />
+
+    <TextView
+        android:id="@+id/text33"
+        style="@style/style_font_gray_28pt"
+        android:layout_below="@id/text22"
+        android:layout_marginTop="20pt"
+        android:text="课程日期" />
+
+    <TextView
+        android:id="@+id/txt_class_date"
+        style="@style/style_font_default_28pt"
+        android:layout_alignStart="@id/txt_class_total"
+        android:layout_alignTop="@id/text33"
+        android:layout_toEndOf="@id/text33"
+        tools:text="¥200" />
+
+    <TextView
+        android:id="@+id/text44"
+        style="@style/style_font_gray_28pt"
+        android:layout_below="@id/text33"
+        android:layout_marginTop="20pt"
+        android:text="上课时段" />
+
+    <TextView
+        android:id="@+id/txt_time"
+        style="@style/style_font_default_28pt"
+        android:layout_alignStart="@id/txt_class_total"
+        android:layout_alignTop="@id/text44"
+        android:layout_toEndOf="@id/text44"
+        tools:text="¥4000" />
+
+    <TextView
+        android:id="@+id/text55"
+        style="@style/style_font_gray_28pt"
+        android:layout_below="@id/text44"
+        android:layout_marginTop="20pt"
+        android:text="截至日期" />
+
+    <TextView
+        android:id="@+id/txt_by_date"
+        style="@style/style_font_default_28pt"
+        android:layout_alignStart="@id/txt_class_total"
+        android:layout_alignTop="@id/text55"
+        android:layout_toEndOf="@id/text55"
+        tools:text="¥4000" />
+
+    <TextView
+        android:id="@+id/text66"
+        style="@style/style_font_gray_28pt"
+        android:layout_below="@id/text55"
+        android:layout_marginTop="20pt"
+        android:text="上课地点" />
+
+    <TextView
+        android:id="@+id/txt_address"
+        style="@style/style_font_default_28pt"
+        android:layout_alignStart="@id/txt_class_total"
+        android:layout_alignTop="@id/text66"
+        android:layout_toEndOf="@id/text66"
+        tools:text="¥4000" />
+
+    <LinearLayout
+        android:id="@+id/ll_map"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/text66"
+        android:layout_alignParentEnd="true"
+        android:paddingBottom="32pt">
+
+        <ImageView
+            android:layout_width="30pt"
+            android:layout_height="30pt"
+            android:contentDescription="@string/app"
+            android:src="@mipmap/ic_location_blue" />
+
+        <TextView
+            style="@style/style_font_gray_24pt"
+            android:layout_marginStart="10pt"
+            android:text="查看地图" />
+    </LinearLayout>
+
+</RelativeLayout>

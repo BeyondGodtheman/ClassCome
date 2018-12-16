@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingStart="40pt"
+    android:paddingTop="40pt"
+    android:paddingEnd="50pt"
+    android:paddingBottom="50pt">
+
+    <TextView
+        style="@style/style_font_default_34pt"
+        android:text="场地设施" />
+
+    <TextView
+        style="@style/style_font_gray_28pt"
+        android:layout_marginTop="20pt"
+        android:text="通用设施" />
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20pt" />
+
+    <TextView
+        style="@style/style_font_gray_28pt"
+        android:layout_marginTop="48pt"
+        android:text="会议设施" />
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20pt" />
+
+    <TextView
+        style="@style/style_font_gray_28pt"
+        android:layout_marginTop="48pt"
+        android:text="特殊设施" />
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20pt" />
+
+
+</LinearLayout>

@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import com.sunny.classcome.R
 import com.sunny.classcome.base.BaseRecycleAdapter
 import com.sunny.classcome.base.BaseRecycleViewHolder
+import com.sunny.classcome.bean.ClassBean
 import com.sunny.classcome.bean.UserBean
 import com.sunny.classcome.http.Constant
 import com.sunny.classcome.utils.GlideUtil
@@ -16,7 +17,7 @@ import com.zhihu.matisse.Matisse
 import com.zhihu.matisse.MimeType
 import kotlinx.android.synthetic.main.item_update_img_video.view.*
 
-class UpPhotoVideoAdapter(list: ArrayList<UserBean.Material>): BaseRecycleAdapter<UserBean.Material>(list) {
+class UpPhotoVideoAdapter(list: ArrayList<ClassBean.Bean.Data.Material>): BaseRecycleAdapter<ClassBean.Bean.Data.Material>(list) {
 
     override fun getItemCount(): Int {
         if (list.size < 9){
@@ -45,7 +46,7 @@ class UpPhotoVideoAdapter(list: ArrayList<UserBean.Material>): BaseRecycleAdapte
         }else{
             holder.itemView.view_delete.visibility = View.VISIBLE
             holder.itemView.setOnClickListener(null)
-            GlideUtil.loadPhone(context,holder.itemView.img_photo,getData(position).url?:"")
+            GlideUtil.loadPhoto(context,holder.itemView.img_photo,getData(position).url?:"")
             holder.itemView.view_delete.setOnClickListener {
                 list.removeAt(position)
                 notifyDataSetChanged()
