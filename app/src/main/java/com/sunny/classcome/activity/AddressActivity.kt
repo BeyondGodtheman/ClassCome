@@ -7,6 +7,7 @@ import com.sunny.classcome.R
 import com.sunny.classcome.adapter.AddressCountyAdapter
 import com.sunny.classcome.adapter.AddressTownAdapter
 import com.sunny.classcome.base.BaseActivity
+import com.sunny.classcome.bean.GeocodeBean
 import com.sunny.classcome.bean.LocalCityBean
 import com.sunny.classcome.http.ApiManager
 import com.sunny.classcome.http.Constant
@@ -14,6 +15,8 @@ import com.sunny.classcome.utils.UserManger
 import kotlinx.android.synthetic.main.activity_address.*
 
 class AddressActivity: BaseActivity() {
+
+    private var countyName = ""
 
     override fun setLayout(): Int = R.layout.activity_address
 
@@ -28,6 +31,8 @@ class AddressActivity: BaseActivity() {
 
     }
 
+
+    val resultIntent = Intent()
     override fun loadData() {
         showLoading()
         val address = UserManger.getAddress().split(",")
@@ -37,22 +42,19 @@ class AddressActivity: BaseActivity() {
             override fun onSuccess(data: LocalCityBean) {
                 hideLoading()
 
-                val intent = Intent()
-                intent.putExtra("cityId",address[0])
+                resultIntent.putExtra("cityId",address[0])
 
                 recl_city.adapter = AddressCountyAdapter(data.content.find { it.cityVoId == address[0]}?.countyList?: arrayListOf()).apply {
                     setOnItemClickListener { _, index ->
                         lastIndex = index
-                        intent.putExtra("countyId",getData(index).countyId)
-                        intent.putExtra("countyName",getData(index).countyName)
+                        countyName = getData(index).countyName
+                        resultIntent.putExtra("countyId",getData(index).countyId)
+                        resultIntent.putExtra("countyName",countyName)
 
                         notifyDataSetChanged()
                         recl_area.adapter = AddressTownAdapter(getData(index).townlist).apply {
                             setOnItemClickListener { _, index ->
-                                intent.putExtra("townId",getData(index).townId)
-                                intent.putExtra("townName",getData(index).townName)
-                                setResult(1, intent)
-                                finish()
+                                getLatLon(address[1],countyName + getData(index).townName,getData(index).townId,getData(index).townName)
                             }
                         }
                     }
@@ -65,6 +67,29 @@ class AddressActivity: BaseActivity() {
             }
 
         })
+    }
 
+
+    fun getLatLon(city:String,address:String,townId:String,townName:String){
+        val params = hashMapOf<String,String>()
+        params["key"] = "8325164e247e15eea68b59e89200988b"
+        params["city"] = city
+        params["address"] = address
+        ApiManager.get(composites,params,"https://restapi.amap.com/v3/geocode/geo",object :ApiManager.OnResult<GeocodeBean>(){
+            override fun onSuccess(data: GeocodeBean) {
+                 val location =  data.geocodes[0].location.split(",")
+                resultIntent.putExtra("townId",townId)
+                resultIntent.putExtra("townName",townName)
+                resultIntent.putExtra("latitude",location[1])
+                resultIntent.putExtra("longitude",location[0])
+                setResult(1, resultIntent)
+                finish()
+            }
+
+            override fun onFailed(code: String, message: String) {
+
+            }
+
+        })
     }
 }

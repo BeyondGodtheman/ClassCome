@@ -37,6 +37,8 @@ class PublishClassActivity : BaseActivity() {
     private var countyId = ""
     private var townId = ""
     private var classPid = ""
+    private var latitude = ""
+    private var longitude = ""
     private var subCategoryList = ArrayList<ClassTypeBean.SubCategory>()
     override fun setLayout(): Int = R.layout.activity_publish_class
 
@@ -169,6 +171,8 @@ class PublishClassActivity : BaseActivity() {
             countyId = data?.getStringExtra("countyId") ?: ""
             townId = data?.getStringExtra("townId") ?: ""
             cityId = data?.getStringExtra("cityId")?:""
+            latitude = data?.getStringExtra("latitude")?:""
+            longitude = data?.getStringExtra("longitude")?:""
         }
 
         if (requestCode == 0 && resultCode == 1) {
@@ -275,7 +279,10 @@ class PublishClassActivity : BaseActivity() {
         params["title"] = edit_title.text.toString()
         params["startTime"] = startData
         params["endTime"] = endData
-        params["classTime"] = "$startTime-$endTime"
+
+        val classTimeArray = JSONArray()
+        classTimeArray.put("$startTime-$endTime")
+        params["classTime"] = classTimeArray
         params["cityId"] = cityId
         params["countyId"] = countyId
         params["townId"] = townId
@@ -286,6 +293,9 @@ class PublishClassActivity : BaseActivity() {
         params["sumPrice"] = edit_total_cost.text.toString()
         params["publishTotal"] = edit_recruit_people.text.toString() //招聘人数
         params["description"]  = view_up.getText() //描述
+        params["latitude"] = latitude
+        params["longitude"] = longitude
+
 
         val materialUrlArray = JSONArray()
         view_up.list.forEach {
@@ -297,8 +307,10 @@ class PublishClassActivity : BaseActivity() {
         ApiManager.post(composites,params,Constant.COURSE_PUBLISHCOURSE,object : ApiManager.OnResult<BaseBean<String>>(){
             override fun onSuccess(data: BaseBean<String>) {
                 if (data.content?.statu == "1"){
-                    ToastUtil.show("发布成功")
+                    startActivity(Intent(this@PublishClassActivity,PublishSuccessActivity::class.java))
                     finish()
+                }else{
+                    ToastUtil.show(data.content?.info)
                 }
             }
 

@@ -23,7 +23,7 @@ data class ClassBean(
                 var course: Course,
                 var materialList: ArrayList<Material>?,
                 var categoryList: ArrayList<Category>?,
-                var user: User,
+                var user: User?,
                 var order: Order,
                 var isAppraise: String
         ) {

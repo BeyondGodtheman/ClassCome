@@ -41,7 +41,7 @@ class ClassListAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleAdapte
         }
 
 
-        GlideUtil.loadHead(context, holder.itemView.img_user_name, getData(position).user.userPic
+        GlideUtil.loadHead(context, holder.itemView.img_user_name, getData(position).user?.userPic
                 ?: "")
 
         getData(position).materialList?.let {

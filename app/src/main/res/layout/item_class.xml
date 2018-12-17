@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tool="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="330pt"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_marginBottom="10pt"
-    android:background="@color/color_white">
+    android:background="@color/color_white"
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -68,69 +68,84 @@
             android:background="@color/color_divider" />
     </RelativeLayout>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25pt">
+        android:orientation="horizontal"
+        android:layout_marginTop="10pt">
 
-        <View
-            android:layout_width="32pt"
-            android:layout_height="32pt"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="78pt"
-            android:layout_marginTop="7pt"
-            android:background="@mipmap/ic_thumbtack_blue" />
+        <LinearLayout
+            android:layout_width="262pt"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20pt"
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/text_class_type"
-            android:layout_width="wrap_content"
+            <View
+                android:layout_width="32pt"
+                android:layout_height="32pt"
+                android:layout_marginStart="51pt"
+                android:background="@mipmap/ic_thumbtack_blue" />
+
+            <TextView
+                android:id="@+id/text_class_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="9pt"
+                android:ellipsize="end"
+                android:lines="1"
+                android:textColor="@color/color_default_font"
+                android:textSize="24pt"
+                tool:text="拉丁舞" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="304pt"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="119pt"
-            android:textColor="@color/color_default_font"
-            android:textSize="24pt"
-            tool:text="拉丁舞" />
+            android:layout_marginTop="12pt">
 
-        <com.makeramen.roundedimageview.RoundedImageView
-            android:id="@+id/img_user_name"
-            android:layout_width="46pt"
-            android:layout_height="46pt"
-            android:layout_marginStart="71pt"
-            android:layout_toEndOf="@id/text_class_type"
-            android:scaleType="centerCrop"
-            android:src="@mipmap/ic_default_head"
-            app:riv_oval="true"/>
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/img_user_name"
+                android:layout_width="46pt"
+                android:layout_height="46pt"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/ic_default_head"
+                app:riv_oval="true" />
 
-        <TextView
-            android:id="@+id/text_class_author"
-            android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/text_class_author"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16pt"
+                android:layout_marginTop="8pt"
+                android:ellipsize="end"
+                android:lines="1"
+                android:textColor="@color/color_gray_font"
+                android:textSize="24pt"
+                tool:text="米斯特教育" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="16pt"
-            android:layout_toEndOf="@id/img_user_name"
-            android:textColor="@color/color_gray_font"
-            android:textSize="24pt"
-            tool:text="米斯特教育" />
+            android:layout_marginTop="20pt">
 
-        <TextView
-            android:id="@+id/text_class_address"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:textColor="@color/color_gray_font"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="23pt"
-            android:layout_marginStart="14pt"
-            android:textSize="24pt"
-            tool:text="静安寺" />
+            <View
+                android:layout_width="22pt"
+                android:layout_height="28pt"
+                android:background="@mipmap/ic_home_location" />
 
-        <View
-            android:layout_width="22pt"
-            android:layout_height="28pt"
-            android:layout_marginStart="71pt"
-            android:layout_toStartOf="@id/text_class_address"
-            android:layout_centerVertical="true"
-            android:background="@mipmap/ic_home_location" />
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/text_class_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="14pt"
+                android:layout_marginEnd="23pt"
+                android:textColor="@color/color_gray_font"
+                android:lines="1"
+                android:ellipsize="end"
+                android:textSize="24pt"
+                tool:text="静安寺" />
+        </LinearLayout>
+    </LinearLayout>
 
 </LinearLayout>

@@ -85,7 +85,9 @@
             android:name=".activity.MyMsgActivity"
             android:launchMode="singleTop" />
 
-        <activity android:name=".activity.HomeActivity" />
+        <activity android:name=".activity.HomeActivity"
+            android:launchMode="singleTask"/>
+
         <activity android:name=".activity.MineActivity" />
         <activity android:name=".activity.MyCollectionActivity" />
         <activity android:name=".activity.MyChequesActivity" />
@@ -209,6 +211,9 @@
 
         <!--课程分类-->
         <activity android:name=".activity.ClassTypeActivity"/>
+
+        <!--课程发布成功结果-->
+        <activity android:name=".activity.PublishSuccessActivity"/>
 
     </application>
 </manifest>
