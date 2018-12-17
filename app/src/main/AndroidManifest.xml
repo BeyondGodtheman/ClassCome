@@ -215,5 +215,7 @@
         <!--课程发布成功结果-->
         <activity android:name=".activity.PublishSuccessActivity"/>
 
+        <!--支付页面-->
+        <activity android:name=".activity.PayActivity"/>
     </application>
 </manifest>

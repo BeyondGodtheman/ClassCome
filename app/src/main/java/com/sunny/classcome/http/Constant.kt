@@ -1,7 +1,5 @@
 package com.sunny.classcome.http
 
-import com.sunny.classcome.bean.ClassDetailBean
-
 object Constant {
 
     fun isDebug(): Boolean = true
@@ -133,5 +131,8 @@ object Constant {
     const val COURSE_GETCOURSEDETAIL = "course/getCourseDetail" //课程详情
 
     const val COURSE_OPERATIONCOURSE = "course/operationCourse" //操作课程
+
+    const val ORDER_CREATEVCHARORDERSTR = "order/createVCharOrderStr" //微信支付下单
+
 }
 

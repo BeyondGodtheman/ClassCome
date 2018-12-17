@@ -180,7 +180,7 @@ class OrderDetailActivity : BaseActivity() {
     private fun showPayWait() {
         txt_info.text = "订单已生成，付款后订单生效"
         txt_order_number.text = ("订单编号：${classBean?.order?.orderNum}")
-        showGrayBtn(txt_order_left, "取消订单")
+        showGrayBtn(txt_order_mid, "取消订单")
         showBlueBtn(txt_order_right, "去支付")
 
         rl_money.visibility = View.VISIBLE

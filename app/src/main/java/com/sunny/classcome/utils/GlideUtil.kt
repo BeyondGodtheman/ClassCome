@@ -51,4 +51,12 @@ object GlideUtil {
     fun loadPhoto(context: Context, imageView: ImageView, file: File) {
         load(context, file).placeholder(R.drawable.bg_default_photo).centerCrop().into(imageView)
     }
+
+    fun loadRes(context: Context, imageView: ImageView, url: String,res: Int) {
+        load(context, url).placeholder(res).centerCrop().into(imageView)
+    }
+
+    fun loadDrawable(context: Context, imageView: ImageView, url: String,res: Drawable) {
+        load(context, url).placeholder(res).centerCrop().into(imageView)
+    }
 }

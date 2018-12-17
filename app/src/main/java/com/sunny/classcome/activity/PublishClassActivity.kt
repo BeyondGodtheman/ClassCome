@@ -82,6 +82,14 @@ class PublishClassActivity : BaseActivity() {
         })
 
         view_up.setHint("请描述一下您的课程")
+
+        view_up.showLoading = {
+            showLoading()
+        }
+
+        view_up.hideLoading = {
+            hideLoading()
+        }
     }
 
     override fun onClick(v: View) {

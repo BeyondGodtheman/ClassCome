@@ -55,6 +55,13 @@ class MyProfileEditActivity : BaseActivity() {
         txt_save.setOnClickListener(this)
 
 
+        view_up.showLoading = {
+            showLoading()
+        }
+
+        view_up.hideLoading = {
+            hideLoading()
+        }
     }
 
     override fun onClick(v: View) {

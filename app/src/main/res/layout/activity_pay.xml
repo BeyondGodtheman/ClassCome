@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_above="@id/ll_bottom">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="265pt"
+            android:background="@color/color_white">
+
+            <ImageView
+                android:id="@+id/img_class_photo"
+                android:layout_width="190pt"
+                android:layout_height="173pt"
+                android:layout_marginStart="24pt"
+                android:layout_marginTop="47pt"
+                android:src="@drawable/bg_default_photo" />
+
+            <TextView
+                android:id="@+id/txt_class_name"
+                style="@style/style_font_default_30pt"
+                android:layout_width="391pt"
+                android:layout_marginStart="31pt"
+                android:layout_marginTop="65pt"
+                android:ellipsize="end"
+                android:maxLines="3"
+                tools:text="初中英语班课教研员-要求有专业教学资质" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2pt"
+            android:background="@color/color_divider" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="149pt"
+            android:background="@color/color_white"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txt_order_number"
+                style="@style/style_font_default_30pt"
+                android:layout_marginStart="40pt"
+                android:layout_marginTop="21pt"
+                tools:text="订单编号：12334567890" />
+
+            <TextView
+                android:id="@+id/txt_order_time"
+                style="@style/style_font_default_30pt"
+                android:layout_marginStart="40pt"
+                android:layout_marginTop="21pt"
+                android:text="2018-07-01至2018-08-26" />
+        </LinearLayout>
+
+        <TextView
+            style="@style/style_font_gray_28pt"
+            android:layout_width="match_parent"
+            android:layout_height="80pt"
+            android:gravity="center_vertical"
+            android:paddingLeft="40pt"
+            android:text="支付方式：" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="311pt"
+            android:background="@color/color_white"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <View
+                    android:layout_width="76pt"
+                    android:layout_height="76pt"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="44pt"
+                    android:background="@mipmap/ic_wechat" />
+
+                <TextView
+                    style="@style/style_font_default_30pt"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="159pt"
+                    android:text="微信支付" />
+
+                <CheckBox
+                    android:id="@+id/cbox_wx"
+                    android:layout_width="46pt"
+                    android:layout_height="46pt"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="43pt"
+                    android:background="@drawable/bg_select_pay"
+                    android:checked="true"
+                    android:button="@null" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <View
+                    android:layout_width="76pt"
+                    android:layout_height="76pt"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="44pt"
+                    android:background="@mipmap/ic_alipay" />
+
+                <TextView
+                    style="@style/style_font_default_30pt"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="159pt"
+                    android:text="支付宝" />
+
+                <CheckBox
+                    android:id="@+id/cbox_al"
+                    android:layout_width="46pt"
+                    android:layout_height="46pt"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="43pt"
+                    android:background="@drawable/bg_select_pay"
+                    android:button="@null" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="10pt"
+            android:background="@color/color_white"
+            android:layout_weight="1"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2pt"
+            android:background="@color/color_divider"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="109pt"
+        android:layout_alignParentBottom="true">
+
+        <TextView
+            android:id="@+id/txt_money"
+            style="@style/style_font_default_32pt"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:background="@color/color_white"
+            android:textColor="@color/color_price_red"
+            android:gravity="center"
+            android:text="实付：0元"/>
+
+        <TextView
+            android:id="@+id/txt_commit"
+            style="@style/style_font_default_32pt"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:background="@color/color_nav_blue"
+            android:textColor="@color/color_white"
+            android:gravity="center"
+            android:text="确定"/>
+    </LinearLayout>
+</RelativeLayout>

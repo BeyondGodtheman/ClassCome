@@ -6,10 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.sunny.classcome.R
-import com.sunny.classcome.activity.ApplicantsActivity
-import com.sunny.classcome.activity.CancelPromptActivity
-import com.sunny.classcome.activity.InviteActivity
-import com.sunny.classcome.activity.OrderDetailActivity
+import com.sunny.classcome.activity.*
 import com.sunny.classcome.base.BaseRecycleAdapter
 import com.sunny.classcome.base.BaseRecycleViewHolder
 import com.sunny.classcome.bean.ClassBean
@@ -52,7 +49,7 @@ class MyPostedAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleAdapter
             }
             "4" -> {
                 cancel(holder.itemView.txt_mid,getData(position).course.id)
-                goPay(holder.itemView.txt_right)
+                goPay(holder.itemView.txt_right,getData(position).course.id)
                 orderDetailsType = OrderDetailActivity.order_pay_wait
                 "未付款"
             }
@@ -112,11 +109,11 @@ class MyPostedAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleAdapter
     }
 
     //去支付
-    private fun goPay(textView: TextView) {
+    private fun goPay(textView: TextView,id:String) {
         textView.apply {
             showBlueBtn(this, "去支付")
             setOnClickListener {
-
+                PayActivity.start(context,id)
             }
         }
     }

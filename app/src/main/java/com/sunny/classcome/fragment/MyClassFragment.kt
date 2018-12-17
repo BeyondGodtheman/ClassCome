@@ -40,12 +40,12 @@ class MyClassFragment : BaseFragment() {
         refresh.setOnRefreshLoadMoreListener(object : OnRefreshLoadMoreListener {
             override fun onRefresh(refreshLayout: RefreshLayout) {
                 pageIndex = 1
-                loadData()
+                load()
             }
 
             override fun onLoadMore(refreshLayout: RefreshLayout) {
                 pageIndex++
-                loadData()
+                load()
             }
 
         })
@@ -58,13 +58,14 @@ class MyClassFragment : BaseFragment() {
             recl.adapter = MyParticipatedAdapter(list)
         }
 
+        refresh.autoRefresh()
     }
 
     override fun onClick(v: View) {
 
     }
 
-    override fun loadData() {
+     fun load() {
         val params = hashMapOf<String, String>()
         params["pageIndex"] = pageIndex.toString()
         params["relationType"] = type
@@ -109,7 +110,7 @@ class MyClassFragment : BaseFragment() {
     //更新列表数据
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onUpdateEvent(posted: Posted){
-        loadData()
+        load()
     }
 
     

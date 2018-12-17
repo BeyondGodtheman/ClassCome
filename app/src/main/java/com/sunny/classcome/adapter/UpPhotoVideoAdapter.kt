@@ -2,6 +2,8 @@ package com.sunny.classcome.adapter
 
 import android.app.Activity
 import android.content.pm.ActivityInfo
+import android.graphics.drawable.ColorDrawable
+import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -46,7 +48,7 @@ class UpPhotoVideoAdapter(list: ArrayList<ClassBean.Bean.Data.Material>): BaseRe
         }else{
             holder.itemView.view_delete.visibility = View.VISIBLE
             holder.itemView.setOnClickListener(null)
-            GlideUtil.loadPhoto(context,holder.itemView.img_photo,getData(position).url?:"")
+            GlideUtil.loadDrawable(context,holder.itemView.img_photo,getData(position).url?:"",ColorDrawable(ContextCompat.getColor(context,R.color.color_divider)))
             holder.itemView.view_delete.setOnClickListener {
                 list.removeAt(position)
                 notifyDataSetChanged()
