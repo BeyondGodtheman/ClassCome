@@ -2,22 +2,57 @@ package com.sunny.classcome.activity
 
 import android.content.Context
 import android.content.Intent
+import android.os.Handler
+import android.os.Message
+import android.text.TextUtils
 import android.view.View
+import com.alipay.sdk.app.PayTask
 import com.sunny.classcome.MyApplication
 import com.sunny.classcome.R
 import com.sunny.classcome.base.BaseActivity
 import com.sunny.classcome.bean.BaseBean
 import com.sunny.classcome.bean.OrderDetailBean
+import com.sunny.classcome.bean.PayResult
 import com.sunny.classcome.bean.WXPayBean
 import com.sunny.classcome.http.ApiManager
 import com.sunny.classcome.http.Constant
-import com.sunny.classcome.utils.DateUtil
-import com.sunny.classcome.utils.GlideUtil
-import com.sunny.classcome.utils.ToastUtil
+import com.sunny.classcome.utils.*
 import com.tencent.mm.opensdk.modelpay.PayReq
 import kotlinx.android.synthetic.main.activity_pay.*
+import org.greenrobot.eventbus.EventBus
 
+
+@Suppress("UNCHECKED_CAST")
 class PayActivity: BaseActivity() {
+
+    private val SDK_PAY_FLAG = 1
+
+    private val handler = Handler{
+
+        when(it.what){
+            SDK_PAY_FLAG -> {
+                val payResult = PayResult(it.obj as Map<String, String>)
+                /**
+                 * 对于支付结果，请商户依赖服务端的异步通知结果。同步通知结果，仅作为支付结束的通知。
+                 */
+                val resultInfo = payResult.getResult()// 同步返回需要验证的信息
+                val resultStatus = payResult.getResultStatus()
+                // 判断resultStatus 为9000则代表支付成功
+                if (TextUtils.equals(resultStatus, "9000")) {
+                    // 该笔订单是否真实支付成功，需要依赖服务端的异步通知。
+                    ToastUtil.show("支付成功！")
+                    EventBus.getDefault().post(Pay())
+                } else {
+                    // 该笔订单真实的支付结果，需要依赖服务端的异步通知。
+                    ToastUtil.show("支付失败！")
+                }
+            }
+
+        }
+
+        return@Handler false
+    }
+
     override fun setLayout(): Int = R.layout.activity_pay
 
     override fun initView() {
@@ -43,6 +78,10 @@ class PayActivity: BaseActivity() {
                 if (cbox_wx.isChecked){
                     createWxOrder()
                 }
+
+                if (cbox_al.isChecked){
+                    createAliOrder()
+                }
             }
         }
     }
@@ -66,7 +105,7 @@ class PayActivity: BaseActivity() {
                 data.content?.course?.let {
                     txt_class_name.text = it.title
                     txt_order_time.text = (DateUtil.dateFormatYYMMdd(it.createTime) +"至"+DateUtil.dateFormatYYMMdd(it.expirationTime))
-                    txt_money.text = ("实付："+it.sumPrice)
+                    txt_money.text = ("实付：¥"+StringUtil.formatMoney(it.sumPrice.toFloat()))
                 }
             }
 
@@ -110,6 +149,32 @@ class PayActivity: BaseActivity() {
     }
 
 
+    private fun createAliOrder(){
+        showLoading()
+        val params = HashMap<String, String>()
+        params["id"] = intent.getStringExtra("id") ?: ""
+//        params["pintuan"] = ""
+        ApiManager.post(composites,params,Constant.ORDER_CREATEORDERSTR,object :ApiManager.OnResult<BaseBean<String>>(){
+            override fun onSuccess(data: BaseBean<String>) {
+                hideLoading()
+                if (data.content?.statu == "1"){
+                    data.content?.data?.let {
+                        aliPay(it)
+                    }
+                }else{
+                    ToastUtil.show(data.content?.info)
+                }
+            }
+
+            override fun onFailed(code: String, message: String) {
+                hideLoading()
+            }
+
+        })
+    }
+
+
+
     //调用微信支付
     fun wxPay(wxPayBean: WXPayBean){
         val payReq = PayReq()
@@ -121,5 +186,19 @@ class PayActivity: BaseActivity() {
         payReq.timeStamp = wxPayBean.timestamp
         payReq.sign = wxPayBean.sign
         MyApplication.getApp().wxApi.sendReq(payReq)
+    }
+
+
+    fun aliPay(authInfo:String){
+        val authRunnable = Runnable{
+            // 构造AuthTask 对象
+            val payTask = PayTask(this)
+            val result = payTask.payV2(authInfo, true)
+            val message = Message()
+            message.what = SDK_PAY_FLAG
+            message.obj = result
+            handler.sendMessage(message)
+        }
+        Thread(authRunnable).start()
     }
 }

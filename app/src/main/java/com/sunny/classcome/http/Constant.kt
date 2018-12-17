@@ -134,5 +134,7 @@ object Constant {
 
     const val ORDER_CREATEVCHARORDERSTR = "order/createVCharOrderStr" //微信支付下单
 
+    const val ORDER_CREATEORDERSTR = "order/createOrderStr" //支付宝支付下单
+
 }
 
