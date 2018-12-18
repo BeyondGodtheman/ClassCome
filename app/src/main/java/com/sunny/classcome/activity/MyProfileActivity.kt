@@ -32,6 +32,7 @@ class MyProfileActivity : BaseActivity() {
     private val taUid by lazy {
         intent.getStringExtra("uid") ?: "" //他人
     }
+    private val myUid = UserManger.getLogin()?.content?.userId ?: "" // 自己
 
     override fun setLayout(): Int = R.layout.activity_my_profile
 
@@ -58,7 +59,7 @@ class MyProfileActivity : BaseActivity() {
     override fun onClick(v: View) {
         when (v.id) {
             R.id.txt_more -> {
-                startActivity(Intent(this, PastReleaseActivity::class.java))
+                PastReleaseActivity.start(this,if (taUid.isEmpty()) myUid else taUid)
             }
 
         }
@@ -67,8 +68,6 @@ class MyProfileActivity : BaseActivity() {
 
     override fun update() {
         showLoading()
-
-        val myUid = UserManger.getLogin()?.content?.userId ?: "" // 自己
         val params = HashMap<String, String>()
         params["id"] = if (taUid.isEmpty()) myUid else taUid
         ApiManager.post(composites, params, Constant.USER_GETMYINFO, object : ApiManager.OnResult<BaseBean<UserBean>>() {
@@ -121,7 +120,7 @@ class MyProfileActivity : BaseActivity() {
 
     private fun loadPastRelease() {
         val params = HashMap<String, String>()
-        params["userId"] = UserManger.getLogin()?.content?.userId ?: ""
+        params["userId"] = if (taUid.isEmpty()) myUid else taUid
         params["pageSize"] = "2"
         ApiManager.post(composites, params, Constant.CURSE_GETUSERPUBLISHCOURSE, object : ApiManager.OnResult<ClassBean>() {
             override fun onSuccess(data: ClassBean) {

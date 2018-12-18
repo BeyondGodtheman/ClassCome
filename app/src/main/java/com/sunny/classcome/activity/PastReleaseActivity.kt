@@ -1,5 +1,7 @@
 package com.sunny.classcome.activity
 
+import android.content.Context
+import android.content.Intent
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import com.scwang.smartrefresh.layout.api.RefreshLayout
@@ -22,12 +24,16 @@ class PastReleaseActivity: BaseActivity() {
 
     private var pageIndex = 1
 
+    private var uid = ""
+
     private val list = arrayListOf<ClassBean.Bean.Data>()
 
     override fun setLayout(): Int = R.layout.layout_refresh_recycler
 
     override fun initView() {
         showTitle(titleManager.defaultTitle("过往发布信息"))
+
+        uid = intent.getStringExtra("uid")?:""
 
         refresh.setRefreshHeader(ClassicsHeader(this))
         refresh.setRefreshFooter(ClassicsFooter(this))
@@ -55,7 +61,7 @@ class PastReleaseActivity: BaseActivity() {
 
     override fun loadData() {
         val params = hashMapOf<String, String>()
-        params["userId"] = UserManger.getLogin()?.content?.userId ?: ""
+        params["userId"] = uid
         params["pageIndex"] = pageIndex.toString()
         ApiManager.post(composites, params, Constant.CURSE_GETUSERPUBLISHCOURSE, object : ApiManager.OnResult<ClassBean>() {
             override fun onSuccess(data: ClassBean) {
@@ -82,5 +88,12 @@ class PastReleaseActivity: BaseActivity() {
                 }
             }
         })
+    }
+
+    companion object {
+        fun start(context: Context,uid:String){
+            context.startActivity(Intent(context,PastReleaseActivity::class.java)
+                    .putExtra("uid",uid))
+        }
     }
 }

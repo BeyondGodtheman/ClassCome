@@ -111,6 +111,8 @@ class PublishDetailsActivity : BaseActivity() {
 
         rl_user_more.setOnClickListener(this)
         rl_history_more.setOnClickListener(this)
+        txt_more.setOnClickListener(this)
+        img_more.setOnClickListener(this)
         txt_collection.setOnClickListener(this)
         txt_accept.setOnClickListener(this)
 
@@ -120,7 +122,7 @@ class PublishDetailsActivity : BaseActivity() {
     override fun onClick(v: View) {
         when (v.id) {
             R.id.rl_user_more -> startActivity(Intent(this, MyProfileActivity::class.java).putExtra("uid", uid))
-            R.id.rl_history_more -> IntentUtil.start(this, PastReleaseActivity::class.java)
+            R.id.rl_history_more,R.id.txt_more,R.id.img_more -> PastReleaseActivity.start(this,uid)
             R.id.txt_collection -> loadOption(if (isCollection == "1") -1 else 1)// 若为已收藏，点击后为取消收藏状态
             R.id.txt_accept -> loadOption(2)
         }
@@ -159,6 +161,9 @@ class PublishDetailsActivity : BaseActivity() {
                     View.VISIBLE
                 }
 
+                //加载发布的课程
+                loadPastRelease()
+
             }
 
             override fun onFailed(code: String, message: String) {
@@ -166,10 +171,6 @@ class PublishDetailsActivity : BaseActivity() {
             }
 
         })
-
-        //加载发布的课程
-        loadPastRelease()
-
     }
 
     /**
@@ -213,7 +214,7 @@ class PublishDetailsActivity : BaseActivity() {
 
     private fun loadPastRelease() {
         val params = HashMap<String, String>()
-        params["userId"] = UserManger.getLogin()?.content?.userId ?: ""
+        params["userId"] = uid
         params["pageSize"] = "2"
         ApiManager.post(composites, params, Constant.CURSE_GETUSERPUBLISHCOURSE, object : ApiManager.OnResult<ClassBean>() {
             override fun onSuccess(data: ClassBean) {
