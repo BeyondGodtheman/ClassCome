@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="460pt"
+        android:background="@mipmap/bg_top_search">
+
+        <RelativeLayout
+            android:id="@+id/rl_title"
+            style="@style/style_title">
+
+            <LinearLayout
+                android:id="@+id/ll_icon_back"
+                android:layout_width="74pt"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="16pt"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="44pt"
+                    android:layout_height="44pt"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="30pt"
+                    android:contentDescription="@string/back"
+                    android:src="@drawable/draw_ic_title_back_white" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/txt_icon_title"
+                android:layout_width="match_parent"
+                android:layout_height="64pt"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_toStartOf="@id/txt_search"
+                android:layout_toEndOf="@id/ll_icon_back"
+                android:background="@drawable/draw_bg_fillet_search">
+
+                <View
+                    android:layout_width="36pt"
+                    android:layout_height="36pt"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="26pt"
+                    android:background="@drawable/ic_search_white" />
+
+                <TextView
+                    android:id="@+id/edit_keyword"
+                    style="@style/style_font_default_28pt"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="17pt"
+                    android:text="输入您想找的关键词"
+                    android:textColor="@color/color_white" />
+
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/txt_search"
+                style="@style/style_font_default_32pt"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="17pt"
+                android:layout_marginEnd="30pt"
+                android:text="搜索"
+                android:textColor="@color/color_white" />
+        </RelativeLayout>
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="90pt"
+            android:layout_below="@id/rl_title"
+            android:layout_marginTop="22pt"
+            app:tabIndicatorColor="@color/color_white"
+            app:tabMode="scrollable"
+            app:tabSelectedTextColor="@color/color_white"
+            app:tabTextAppearance="@style/style_font_gray_28pt"
+            app:tabTextColor="@color/color_white" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="103pt"
+        android:background="@color/color_white">
+
+        <TextView
+            style="@style/style_font_default_32pt"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="38pt"
+            android:text="设置价格" />
+
+        <TextView
+            style="@style/style_font_default_30pt"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="30pt"
+            android:layout_toStartOf="@id/view_1"
+            android:gravity="center_vertical|right"
+            android:text="无限制"
+            tools:ignore="RtlHardcoded" />
+
+        <View
+            android:id="@+id/view_1"
+            android:layout_width="22pt"
+            android:layout_height="12pt"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="30pt"
+            android:background="@mipmap/ic_arrow_bottom_blue" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="103pt"
+        android:layout_marginTop="15pt"
+        android:background="@color/color_white">
+
+        <TextView
+            style="@style/style_font_default_32pt"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="38pt"
+            android:text="设置地点" />
+
+        <TextView
+            style="@style/style_font_default_30pt"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="30pt"
+            android:layout_toStartOf="@id/view_2"
+            android:gravity="center_vertical|right"
+            android:text="无限制"
+            tools:ignore="RtlHardcoded" />
+
+        <View
+            android:id="@+id/view_2"
+            android:layout_width="22pt"
+            android:layout_height="12pt"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="30pt"
+            android:background="@mipmap/ic_arrow_bottom_blue" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="103pt"
+        android:layout_marginTop="15pt"
+        android:background="@color/color_white">
+
+        <TextView
+            android:id="@+id/txt_date"
+            style="@style/style_font_default_32pt"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="38pt"
+            android:text="设置日期" />
+
+
+        <View
+            android:id="@+id/view_3"
+            android:layout_width="46pt"
+            android:layout_height="46pt"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="30pt"
+            android:background="@mipmap/ic_date" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="103pt"
+        android:layout_marginTop="15pt"
+        android:background="@color/color_white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/cbox_adult"
+            style="@style/style_font_default_28pt"
+            android:layout_width="150pt"
+            android:layout_height="64pt"
+            android:layout_marginStart="40pt"
+            android:background="@drawable/draw_bg_select_border"
+            android:button="@null"
+            android:gravity="center"
+            android:text="成人"
+            android:textColor="@drawable/color_text_blue_gray" />
+
+        <CheckBox
+            android:id="@+id/cbox_child"
+            style="@style/style_font_default_28pt"
+            android:layout_width="150pt"
+            android:layout_height="64pt"
+            android:layout_marginStart="20pt"
+            android:background="@drawable/draw_bg_select_border"
+            android:button="@null"
+            android:gravity="center"
+            android:text="儿童"
+            android:textColor="@drawable/color_text_blue_gray" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_search"
+        style="@style/style_button"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="58pt"
+        android:text="检 索" />
+</LinearLayout>

@@ -85,15 +85,17 @@
             android:name=".activity.MyMsgActivity"
             android:launchMode="singleTop" />
 
-        <activity android:name=".activity.HomeActivity"
-            android:launchMode="singleTask"/>
+        <activity
+            android:name=".activity.HomeActivity"
+            android:launchMode="singleTask" />
 
         <activity android:name=".activity.MineActivity" />
         <activity android:name=".activity.MyCollectionActivity" />
         <activity android:name=".activity.MyChequesActivity" />
         <activity android:name=".activity.MyProfileActivity" />
-        <activity android:name=".activity.MyProfileEditActivity"
-            android:windowSoftInputMode="adjustPan"/>
+        <activity
+            android:name=".activity.MyProfileEditActivity"
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".activity.MyChequesDetailActivity" />
         <activity android:name=".activity.FeedbackActivity" />
         <activity android:name=".activity.SettingActivity" />
@@ -183,45 +185,56 @@
             android:launchMode="singleTop" />
 
         <!--邀请页面-->
-        <activity android:name=".activity.InviteActivity"
-            android:launchMode="singleTop"/>
+        <activity
+            android:name=".activity.InviteActivity"
+            android:launchMode="singleTop" />
 
         <!--邀请者-->
-        <activity android:name=".activity.ApplicantsActivity"
-            android:launchMode="singleTop"/>
+        <activity
+            android:name=".activity.ApplicantsActivity"
+            android:launchMode="singleTop" />
 
         <!--邀约记录-->
-        <activity android:name=".activity.InvitationRecordActivity"
-            android:launchMode="singleTop"/>
+        <activity
+            android:name=".activity.InvitationRecordActivity"
+            android:launchMode="singleTop" />
 
         <!--过往发布信息-->
-        <activity android:name=".activity.PastReleaseActivity"
-            android:launchMode="singleTop"/>
+        <activity
+            android:name=".activity.PastReleaseActivity"
+            android:launchMode="singleTop" />
 
         <!--公司简介-->
-        <activity android:name=".activity.CompanyProfileActivity"
-            android:launchMode="singleTop"/>
+        <activity
+            android:name=".activity.CompanyProfileActivity"
+            android:launchMode="singleTop" />
 
         <!--公司简历编辑-->
-        <activity android:name=".activity.CompanyProfileEditActivity"
-            android:launchMode="singleTop"/>
+        <activity
+            android:name=".activity.CompanyProfileEditActivity"
+            android:launchMode="singleTop" />
 
         <!--地址选择-->
         <activity android:name=".activity.AddressActivity" />
 
         <!--课程分类-->
-        <activity android:name=".activity.ClassTypeActivity"/>
+        <activity android:name=".activity.ClassTypeActivity" />
 
         <!--课程发布成功结果-->
-        <activity android:name=".activity.PublishSuccessActivity"/>
+        <activity android:name=".activity.PublishSuccessActivity" />
 
         <!--支付页面-->
-        <activity android:name=".activity.PayActivity"/>
+        <activity android:name=".activity.PayActivity" />
 
         <!--微信支付回调页面-->
-        <activity android:name=".wxapi.WXPayEntryActivity" android:exported="true"/>
+        <activity
+            android:name=".wxapi.WXPayEntryActivity"
+            android:exported="true" />
 
         <!--课程列表-->
-        <activity android:name=".activity.ClassListActivity"/>
+        <activity android:name=".activity.ClassListActivity" />
+
+        <!--搜索课程列表-->
+        <activity android:name=".activity.SearchActivity" />
     </application>
 </manifest>

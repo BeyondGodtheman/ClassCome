@@ -74,8 +74,7 @@ class ClassListActivity : BaseActivity() {
         }
 
         showTitle(titleManager.iconTitle(title, View.OnClickListener {
-
-
+            SearchActivity.start(this,pId)
         }))
 
         tabLayout.visibility = View.VISIBLE
