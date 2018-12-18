@@ -61,7 +61,7 @@ data class ClassBean(
                     var cityId: String,
                     var countyId: String,
                     var townId: String,
-
+                    var coursetype:String,
                     var onetime: String,//单次使用时长
                     var captynum: String,//容纳人数
                     var workspace: String,//场地空间

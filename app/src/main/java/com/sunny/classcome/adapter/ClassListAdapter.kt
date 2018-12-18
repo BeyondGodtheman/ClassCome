@@ -51,7 +51,7 @@ class ClassListAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleAdapte
         }
 
         holder.itemView.setOnClickListener {
-            PublishDetailsActivity.startPublishDetail(context, PublishDetailsActivity.courseDetail, getData(position).course.id)
+            PublishDetailsActivity.startPublishDetail(context, getData(position).course.coursetype, getData(position).course.id)
         }
 
 

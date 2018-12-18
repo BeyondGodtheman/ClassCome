@@ -29,11 +29,11 @@ import kotlinx.android.synthetic.main.activity_publish_details.*
 class PublishDetailsActivity : BaseActivity() {
 
     companion object {
-        const val courseDetail = 1
-        const val filedDetail = 2
-        const val trainDetail = 3
+        const val courseDetail = "2"
+        const val filedDetail = "4"
+        const val trainDetail = "5"
 
-        fun startPublishDetail(context: Context, type: Int, id: String) {
+        fun startPublishDetail(context: Context, type: String, id: String) {
             val intent = Intent(context, PublishDetailsActivity::class.java)
             intent.putExtra("type", type)
             intent.putExtra("id", id)
@@ -43,6 +43,7 @@ class PublishDetailsActivity : BaseActivity() {
 
     var uid = ""
     var courseId = ""
+    var coursetype = ""
     var title = ""
 
     /**
@@ -85,7 +86,9 @@ class PublishDetailsActivity : BaseActivity() {
 
         courseId = intent.getStringExtra("id")
 
-        fragment = when (intent.getIntExtra("type", 0)) {
+        coursetype = intent.getStringExtra("type")
+
+        fragment = when (coursetype) {
             courseDetail -> {
                 title = "课程详情"
                 txt_brief_desc.text = "课程简介"

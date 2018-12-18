@@ -62,8 +62,7 @@ class OrderDetailActivity : BaseActivity() {
     override fun initView() {
         showTitle(titleManager.defaultTitle(getString(R.string.order_detail)))
 
-
-
+        view_detail.setOnClickListener(this)
 
     }
 
@@ -192,7 +191,7 @@ class OrderDetailActivity : BaseActivity() {
     private fun showOffShelf() {
         txt_info.text = "已取消"
         txt_prompt.text = "您的信息已下架"
-        showGrayBtn(txt_order_left, "删除")
+//        showGrayBtn(txt_order_mid, "删除")
         showBlueBtn(txt_order_right, "再次发布")
     }
 
@@ -216,7 +215,12 @@ class OrderDetailActivity : BaseActivity() {
         return "$startTime 至 $endTime"
     }
 
-    override fun onClick(v: View?) {
+    override fun onClick(v: View) {
+        when(v.id){
+            R.id.view_detail -> {
+                PublishDetailsActivity.startPublishDetail(this,classBean?.course?.coursetype?:"",classBean?.course?.id?:"")
+            }
+        }
     }
 
 
