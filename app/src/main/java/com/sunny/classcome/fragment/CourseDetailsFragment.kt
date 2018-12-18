@@ -8,7 +8,6 @@ import com.sunny.classcome.base.BaseFragment
 import com.sunny.classcome.bean.ClassDetailBean
 import com.sunny.classcome.http.Constant
 import com.sunny.classcome.utils.DateUtil
-import com.sunny.classcome.utils.IntentUtil
 import kotlinx.android.synthetic.main.fragment_course_details.*
 
 /**
@@ -19,11 +18,22 @@ import kotlinx.android.synthetic.main.fragment_course_details.*
  */
 class CourseDetailsFragment : BaseFragment() {
 
+    private var lan = "0"
+    private var lon = "0"
+    private var name = ""
+
     override fun setLayout(): Int = R.layout.fragment_course_details
 
     override fun initView() {
 
         MyApplication.getApp().getData<ClassDetailBean>(Constant.CLASS_DETAIL, true)?.content?.resCourseVO?.let { bean ->
+
+            lan = bean.course.latitude
+
+            lon = bean.course.longitude
+
+            name = bean.classAddress
+
             // 课程总节数/招聘人数
             txt_class_total.text = ("${bean.courseNum}节")
             txt_recruit.text = ("接口未定义字段")
@@ -58,7 +68,7 @@ class CourseDetailsFragment : BaseFragment() {
 
     override fun onClick(v: View) {
         when (v.id) {
-            R.id.ll_map -> IntentUtil.start(requireActivity(), MapActivity::class.java)
+            R.id.ll_map -> MapActivity.start(requireContext(), lan, lon, name)
         }
     }
 

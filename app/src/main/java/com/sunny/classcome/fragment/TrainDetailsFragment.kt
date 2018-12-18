@@ -3,6 +3,7 @@ package com.sunny.classcome.fragment
 import android.view.View
 import com.sunny.classcome.MyApplication
 import com.sunny.classcome.R
+import com.sunny.classcome.activity.MapActivity
 import com.sunny.classcome.activity.SplashActivity
 import com.sunny.classcome.bean.ClassDetailBean
 import com.sunny.classcome.http.Constant
@@ -19,6 +20,10 @@ import kotlinx.android.synthetic.main.layout_train_details.*
  */
 class TrainDetailsFragment : FieldDetailsFragment() {
 
+    private var lan = "0"
+    private var lon = "0"
+    private var name = ""
+
     override fun initView() {
         super.initView()
 
@@ -27,6 +32,12 @@ class TrainDetailsFragment : FieldDetailsFragment() {
         txt_time_desc.text = "培训时间"
 
         MyApplication.getApp().getData<ClassDetailBean>(Constant.CLASS_DETAIL, true).let { bean ->
+
+            lan = bean?.content?.resCourseVO?.latitude?:"0"
+
+            lon = bean?.content?.resCourseVO?.longitude?:"0"
+
+            name = bean?.content?.resCourseVO?.classAddress?:""
 
             txt_pin.text = "36人在拼单"
         }
@@ -37,7 +48,7 @@ class TrainDetailsFragment : FieldDetailsFragment() {
     override fun onClick(v: View) {
         super.onClick(v)
         when (v.id) {
-            R.id.txt_more -> IntentUtil.start(requireActivity(), SplashActivity::class.java)
+            R.id.txt_more -> MapActivity.start(requireContext(), lan, lon, name)
         }
     }
 

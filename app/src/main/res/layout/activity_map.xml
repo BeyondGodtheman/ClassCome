@@ -1,17 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-    <FrameLayout
-        android:id="@id/frameTitle"
-        style="@style/style_title"
-        android:background="@color/color_white"/>
-
-    <FrameLayout
-        android:id="@id/frameBody"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/frameTitle"
-        android:background="@color/color_base_bg"/>
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+   <com.amap.api.maps2d.MapView
+       android:id="@+id/mapView"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"/>
 </RelativeLayout>

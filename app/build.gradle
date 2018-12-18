@@ -88,6 +88,8 @@ dependencies {
     implementation 'me.jessyan:autosize:1.1.0'
     //高德定位
     implementation 'com.amap.api:location:latest.integration'
+    //高德地图
+    implementation 'com.amap.api:map2d:latest.integration'
     //微信SDK
     implementation 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
     //智能下拉刷新框架
