@@ -8,17 +8,20 @@ import android.view.View
 import com.sunny.classcome.R
 import com.sunny.classcome.base.BaseActivity
 import com.sunny.classcome.fragment.MyClassFragment
+import com.sunny.classcome.widget.dialog.SelectDialog
 import kotlinx.android.synthetic.main.activity_my_class.*
 
 class MyClassActivity : BaseActivity() {
 
     private var type = 1
 
+    //发布类型 1: 家教,2:代课,3:活动,4:场地,5:培训
+    var courseType = "1"
 
     //课程状态(《待支付|已中标4》《进行中|待结算5》《完成6》《全部7》 )
     private val tabTitles = arrayListOf<String>()
 
-    private val fragments = arrayListOf<Fragment>()
+    private val fragments = arrayListOf<MyClassFragment>()
 
     override fun setLayout(): Int = R.layout.activity_my_class
 
@@ -40,7 +43,16 @@ class MyClassActivity : BaseActivity() {
         }
         tabTitles.add("评价/售后")
 
-        showTitle(titleManager.defaultTitle(title))
+
+        showTitle(titleManager.arrowTitle(title, View.OnClickListener { _ ->
+            SelectDialog(this) { type ->
+                courseType = type
+                fragments.forEach {
+                    it.autoLoad()
+                }
+
+            }.show()
+        }))
 
 
         fragments.add(MyClassFragment().setStatus(type.toString(), "7"))
@@ -61,6 +73,8 @@ class MyClassActivity : BaseActivity() {
         }
 
         tabLayout.setupWithViewPager(view_pager)
+
+
     }
 
     override fun onClick(v: View) {

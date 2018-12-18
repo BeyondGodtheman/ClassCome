@@ -11,6 +11,7 @@ import com.scwang.smartrefresh.layout.footer.ClassicsFooter
 import com.scwang.smartrefresh.layout.header.ClassicsHeader
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener
 import com.sunny.classcome.R
+import com.sunny.classcome.activity.ClassListActivity
 import com.sunny.classcome.activity.LocationActivity
 import com.sunny.classcome.activity.LoginActivity
 import com.sunny.classcome.activity.MyMsgActivity
@@ -23,10 +24,11 @@ import com.sunny.classcome.http.ApiManager
 import com.sunny.classcome.http.Constant
 import com.sunny.classcome.utils.LocationUtil
 import com.sunny.classcome.utils.UserManger
-import kotlinx.android.synthetic.main.fragment_class_list.*
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.home_class_list.*
 import kotlinx.android.synthetic.main.layout_home_recommend_text.view.*
 import kotlinx.android.synthetic.main.layout_home_title.view.*
+import kotlinx.android.synthetic.main.layout_home_type.*
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.delay
 import kotlinx.coroutines.experimental.launch
@@ -86,6 +88,12 @@ class HomeFragment : BaseFragment() {
         }.split(",")
 
 
+        rl_314.setOnClickListener(this)
+        rl_311.setOnClickListener(this)
+        rl_class.setOnClickListener(this)
+        rl_217.setOnClickListener(this)
+        rl_213.setOnClickListener(this)
+
         ll_location.setOnClickListener(this)
         ll_hot.setOnClickListener(this)
         ll_price.setOnClickListener(this)
@@ -126,7 +134,7 @@ class HomeFragment : BaseFragment() {
     override fun onClick(v: View) {
         when (v.id) {
 
-            R.id.rlLocation -> startActivityForResult(Intent(context, LocationActivity::class.java).putExtra("type",0), 0)
+            R.id.rlLocation -> startActivityForResult(Intent(context, LocationActivity::class.java).putExtra("type", 0), 0)
             R.id.ivMessage -> {
                 if (UserManger.isLogin()) {
                     startActivity(Intent(context, MyMsgActivity::class.java))
@@ -134,6 +142,27 @@ class HomeFragment : BaseFragment() {
                     startActivity(Intent(context, LoginActivity::class.java))
                 }
             }
+
+            R.id.rl_314 -> {
+                ClassListActivity.start(requireContext(), "314")
+            }
+
+            R.id.rl_311 -> {
+                ClassListActivity.start(requireContext(), "311")
+            }
+
+            R.id.rl_class -> {
+                ClassListActivity.start(requireContext(), "")
+            }
+
+            R.id.rl_217 -> {
+                ClassListActivity.start(requireContext(), "217")
+            }
+
+            R.id.rl_213 -> {
+                ClassListActivity.start(requireContext(), "213")
+            }
+
             R.id.ll_location -> {
                 sort(0)
             }
@@ -159,7 +188,7 @@ class HomeFragment : BaseFragment() {
             val layoutView = LayoutInflater.from(context)
                     .inflate(R.layout.layout_home_recommend_text, vf_home_commend, false)
             data.categoryList?.let {
-                if (it.isNotEmpty()){
+                if (it.isNotEmpty()) {
                     layoutView.txt_type.text = it[0].name
                 }
             }
@@ -203,7 +232,7 @@ class HomeFragment : BaseFragment() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 0 && resultCode == 0) {
             UserManger.getAddress().apply {
-                if(isEmpty() || !this.contains(",")){
+                if (isEmpty() || !this.contains(",")) {
                     return
                 }
                 localStr = split(",")
@@ -253,12 +282,12 @@ class HomeFragment : BaseFragment() {
                 if (isFlag) {
                     dataList.clear()
                     refresh.finishRefresh()
-                }else{
+                } else {
                     refresh.finishLoadMore()
                 }
 
                 data.content?.dataList?.let {
-                    if (isFlag){
+                    if (isFlag) {
                         initRecommend(it)
                     }
                     dataList.addAll(it)

@@ -217,5 +217,11 @@
 
         <!--支付页面-->
         <activity android:name=".activity.PayActivity"/>
+
+        <!--微信支付回调页面-->
+        <activity android:name=".wxapi.WXPayEntryActivity" android:exported="true"/>
+
+        <!--课程列表-->
+        <activity android:name=".activity.ClassListActivity"/>
     </application>
 </manifest>

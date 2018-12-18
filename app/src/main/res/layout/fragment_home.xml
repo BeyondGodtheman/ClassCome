@@ -45,7 +45,7 @@
             </LinearLayout>
 
             <include
-                layout="@layout/fragment_class_list"
+                layout="@layout/home_class_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="10pt" />

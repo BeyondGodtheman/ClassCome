@@ -7,6 +7,7 @@ import com.scwang.smartrefresh.layout.footer.ClassicsFooter
 import com.scwang.smartrefresh.layout.header.ClassicsHeader
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener
 import com.sunny.classcome.R
+import com.sunny.classcome.activity.MyClassActivity
 import com.sunny.classcome.adapter.MyParticipatedAdapter
 import com.sunny.classcome.adapter.MyPostedAdapter
 import com.sunny.classcome.base.BaseFragment
@@ -65,11 +66,16 @@ class MyClassFragment : BaseFragment() {
 
     }
 
-     fun load() {
+    fun autoLoad(){
+        refresh.autoRefresh()
+    }
+
+    private fun load() {
         val params = hashMapOf<String, String>()
         params["pageIndex"] = pageIndex.toString()
         params["relationType"] = type
         params["state"] = status
+        params["courseType"] = (getBaseActivity() as MyClassActivity).courseType
 
         ApiManager.post(getBaseActivity().composites, params, Constant.ORDER_QUERYMYRELATIONCOURSE, object : ApiManager.OnResult<ClassBean>() {
             override fun onSuccess(data: ClassBean) {
@@ -109,11 +115,11 @@ class MyClassFragment : BaseFragment() {
 
     //更新列表数据
     @Subscribe(threadMode = ThreadMode.MAIN)
-    fun onUpdateEvent(posted: Posted){
+    fun onUpdateEvent(posted: Posted) {
         load()
     }
 
-    
+
     override fun close() {
         EventBus.getDefault().unregister(this)
     }

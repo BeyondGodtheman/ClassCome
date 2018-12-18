@@ -126,6 +126,8 @@ object Constant {
 
     const val COURSE_GETCATEGORYALL = "course/getCategoryAll" //查询课程类别（查询所有）
 
+    const val COURSE_GETCATEGORY = "course/getCategory" //课程类别
+
     const val COURSE_PUBLISHCOURSE = "course/publishCourse" //发布课程
 
     const val COURSE_GETCOURSEDETAIL = "course/getCourseDetail" //课程详情
