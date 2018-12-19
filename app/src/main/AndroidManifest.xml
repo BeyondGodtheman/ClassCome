@@ -236,5 +236,8 @@
 
         <!--搜索课程列表-->
         <activity android:name=".activity.SearchActivity" />
+
+        <!--我的行程-->
+        <activity android:name=".activity.MyItineraryActivity"/>
     </application>
 </manifest>

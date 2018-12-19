@@ -62,8 +62,8 @@ class HomeFragment : BaseFragment() {
             } else {
                 if (it.isNotEmpty()) {
                     titleView.text_home_Location.text = it
-                    loadAddress()
                 }
+                loadAddress()
             }
         }
     }

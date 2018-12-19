@@ -21,7 +21,7 @@ data class UserBean(
             var cardBack: String,
             var identityCard: String,
             var authentication: String,
-            var userPic: String,
+            var userPic: String?,
             var isDel: String,
             var authCode: String,
             var organization: String,

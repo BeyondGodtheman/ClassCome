@@ -100,7 +100,7 @@ class MineFragment : BaseFragment() {
             R.id.rl_member -> startActivity(Intent(context, LevelActivity::class.java)
                     .putExtra("level", txt_member.text.toString()))
 
-            R.id.rl_my_trip -> intent(PurchaserActivity::class.java)
+            R.id.rl_my_trip -> intent(MyItineraryActivity::class.java)
             R.id.rl_my_publish -> MyClassActivity.start(requireContext(),1)
             R.id.rl_my_partake -> MyClassActivity.start(requireContext(),2)
 

@@ -105,7 +105,7 @@ class PayActivity: BaseActivity() {
                 data.content?.course?.let {
                     txt_class_name.text = it.title
                     txt_order_time.text = (DateUtil.dateFormatYYMMdd(it.createTime) +"至"+DateUtil.dateFormatYYMMdd(it.expirationTime))
-                    txt_money.text = ("实付：¥"+StringUtil.formatMoney(it.sumPrice.toFloat()))
+                    txt_money.text = ("实付：¥"+StringUtil.formatMoney((it.sumPrice?:"0").toDouble()))
                 }
             }
 

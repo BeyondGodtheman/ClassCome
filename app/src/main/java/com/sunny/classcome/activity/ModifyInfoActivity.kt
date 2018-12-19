@@ -75,8 +75,8 @@ class ModifyInfoActivity : BaseActivity() {
             override fun onSuccess(data: BaseBean<UserBean>) {
                 hideLoading()
                 data.content?.data?.user?.let {
-                    headPic = it.userPic
-                    GlideUtil.loadHead(this@ModifyInfoActivity, img_head, it.userPic)
+                    headPic = it.userPic?:""
+                    GlideUtil.loadHead(this@ModifyInfoActivity, img_head, it.userPic?:"")
                     edit_name.setText(it.userName)
                     txt_phone.text = it.telephone
 

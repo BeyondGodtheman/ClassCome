@@ -76,7 +76,7 @@ class MyPostedAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleAdapter
         }
 
         holder.itemView.txt_title.text = getData(position).course.title
-        holder.itemView.txt_money.text = ("¥" + StringUtil.formatMoney(getData(position).course.sumPrice.toFloat()))
+        holder.itemView.txt_money.text = ("¥" + StringUtil.formatMoney((getData(position).course.sumPrice?:"0").toDouble()))
 
         val timeSb = StringBuilder()
 

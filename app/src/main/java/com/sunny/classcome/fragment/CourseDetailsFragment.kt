@@ -28,9 +28,9 @@ class CourseDetailsFragment : BaseFragment() {
 
         MyApplication.getApp().getData<ClassDetailBean>(Constant.CLASS_DETAIL, true)?.content?.resCourseVO?.let { bean ->
 
-            lan = bean.course.latitude
+            lan = bean.course.latitude?:""
 
-            lon = bean.course.longitude
+            lon = bean.course.longitude?:""
 
             name = bean.classAddress
 

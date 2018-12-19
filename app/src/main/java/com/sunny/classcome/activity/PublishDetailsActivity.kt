@@ -249,7 +249,7 @@ class PublishDetailsActivity : BaseActivity() {
         txt_brief.text = bean.resCourseVO.description
 
         // 发布者头像、用户名
-        GlideUtil.loadPhoto(this, img_user_head, bean.user.userPic)
+        GlideUtil.loadPhoto(this, img_user_head, bean.user.userPic?:"")
         txt_user_name.text = bean.user.userName
     }
 }

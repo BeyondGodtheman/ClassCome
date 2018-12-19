@@ -36,7 +36,6 @@ data class ClassBean(
                     var title: String,
                     var materialId: String,
                     var price: String,
-                    var sumPrice: String,
                     var courseNum: String,
                     var dicId: String,
                     var personType: String,
@@ -49,8 +48,8 @@ data class ClassBean(
                     var category: String,
                     var description: String,
                     var userId: String,
-                    var latitude: String,
-                    var longitude: String,
+                    var latitude: String?,
+                    var longitude: String?,
                     var distance: String,
                     var winningBidder: String,
                     var state: String,
@@ -61,13 +60,25 @@ data class ClassBean(
                     var cityId: String,
                     var countyId: String,
                     var townId: String,
-                    var coursetype:String,
-                    var onetime: String,//单次使用时长
+                    var coursetype: String,
+                    var onetime: String?,//单次使用时长
+                    var onecost:String?, //培训 单次费用
+                    var oneallcost:String?, //培训 单独购买价格
                     var captynum: String,//容纳人数
                     var workspace: String,//场地空间
                     var worktime: String//营业时间
-
-            )
+            ){
+                var sumPrice: String? = null
+                get(){
+                    if (coursetype == "4"){
+                        return price
+                    }
+                    if (coursetype == "5"){
+                        return oneallcost
+                    }
+                    return field
+                }
+            }
 
             data class Material(
                     var type: String?, //1头像 2轮播图 3素材图 4素材视频

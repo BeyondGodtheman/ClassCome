@@ -138,5 +138,7 @@ object Constant {
 
     const val ORDER_CREATEORDERSTR = "order/createOrderStr" //支付宝支付下单
 
+    const val COURSE_GETMYJOURNEY = "course/getMyJourney" //我的行程
+
 }
 

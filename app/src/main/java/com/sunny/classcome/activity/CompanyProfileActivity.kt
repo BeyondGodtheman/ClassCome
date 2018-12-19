@@ -58,7 +58,7 @@ class CompanyProfileActivity : BaseActivity() {
 
                 hideLoading()
                 data.content?.data?.user?.let { bean ->
-                    GlideUtil.loadHead(this@CompanyProfileActivity, img_user_head, bean.userPic)
+                    GlideUtil.loadHead(this@CompanyProfileActivity, img_user_head, bean.userPic?:"")
                     txt_name.text = bean.userName
 
                     txt_points.text = ("${bean.source}积分")
