@@ -42,7 +42,7 @@ class MyItineraryActivity : BaseActivity() {
             setOnItemClickListener { _, index ->
                 select(index)
                 selectDate = dataList[index].date
-                loadMyJourney()
+                refresh2.autoRefresh()
             }
         }
 
@@ -63,6 +63,8 @@ class MyItineraryActivity : BaseActivity() {
         refresh2.setOnRefreshListener {
             loadMyJourney()
         }
+
+        recl.layoutManager = LinearLayoutManager(this)
 
         beforeCalendar.add(Calendar.DAY_OF_MONTH, -1)
 
@@ -111,6 +113,12 @@ class MyItineraryActivity : BaseActivity() {
         ApiManager.post(composites,params,Constant.COURSE_GETMYJOURNEY,object :ApiManager.OnResult<JourneyBean>(){
             override fun onSuccess(data: JourneyBean) {
                 refresh2.finishRefresh()
+                if (data.content != null){
+                    layout_error.visibility = View.GONE
+                    recl.adapter = ItineraryDescAdapter(data.content?: arrayListOf())
+                }else{
+                    layout_error.visibility = View.VISIBLE
+                }
             }
 
             override fun onFailed(code: String, message: String) {

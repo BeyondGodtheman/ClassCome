@@ -52,9 +52,8 @@ class OrderDetailActivity : BaseActivity() {
         const val order_winning_bid = 43    // 已中标
         const val order_settlement = 44     // 待结算
 
-        fun start(context: Context, type: Int, id: String) {
+        fun start(context: Context,id: String) {
             context.startActivity(Intent(context, OrderDetailActivity::class.java)
-                    .putExtra("type", type)
                     .putExtra("id", id))
         }
     }
@@ -63,7 +62,7 @@ class OrderDetailActivity : BaseActivity() {
         showTitle(titleManager.defaultTitle(getString(R.string.order_detail)))
 
         view_detail.setOnClickListener(this)
-
+        rl_info.setOnClickListener(this)
     }
 
     private fun showAudited() {
@@ -216,9 +215,13 @@ class OrderDetailActivity : BaseActivity() {
     }
 
     override fun onClick(v: View) {
-        when(v.id){
+        when (v.id) {
             R.id.view_detail -> {
-                PublishDetailsActivity.startPublishDetail(this,classBean?.course?.coursetype?:"",classBean?.course?.id?:"")
+                PublishDetailsActivity.startPublishDetail(this, classBean?.course?.coursetype
+                        ?: "", classBean?.course?.id ?: "")
+            }
+            R.id.rl_info -> {
+                MyProfileActivity.start(this,classBean?.course?.winningBidder?:"")
             }
         }
     }
@@ -232,34 +235,62 @@ class OrderDetailActivity : BaseActivity() {
             override fun onSuccess(data: OrderDetailBean) {
                 hideLoading()
                 classBean = data.content
+                //代课
+                if (data.content?.course?.coursetype == "2")
+                    when (data.content?.order?.state) {
+                        "-1" -> showOffShelf()
+                        "3" -> showClassIng()
+                        "4" -> showClassPay()
+                        "5" -> showClassFinish()
 
-                when (intent.getIntExtra("type", order_tobe_audited)) {
+//                    order_tobe_audited -> showOrderToBeAudited()
+//                    order_unaudited -> showUnaudited()
+//                    order_off_shelf -> showOffShelf()
+//                    order_audited -> showAudited()
+//
+//                    order_class_pay -> showClassPay()
+//                    order_class_ing -> showClassIng()
+//                    order_class_finish -> showClassFinish()
+//
+//                    order_pay_wait -> showPayWait()
+//                    order_paying -> showPaying()
+//                    order_pay_finish -> showPayFinish()
+//
+//                    order_field -> showField()
+//                    order_purchaser -> showPurchaser()
+//                    order_winning_bid -> showWinningBid()
+//                    order_settlement -> showSettlement()
 
-                    order_tobe_audited -> showOrderToBeAudited()
-                    order_unaudited -> showUnaudited()
-                    order_off_shelf -> showOffShelf()
-                    order_audited -> showAudited()
+                    }
 
-                    order_class_pay -> showClassPay()
-                    order_class_ing -> showClassIng()
-                    order_class_finish -> showClassFinish()
 
-                    order_pay_wait -> showPayWait()
-                    order_paying -> showPaying()
-                    order_pay_finish -> showPayFinish()
-
-                    order_field -> showField()
-                    order_purchaser -> showPurchaser()
-                    order_winning_bid -> showWinningBid()
-                    order_settlement -> showSettlement()
-
-                }
+//                when (intent.getIntExtra("type", order_tobe_audited)) {
+//
+//                    order_tobe_audited -> showOrderToBeAudited()
+//                    order_unaudited -> showUnaudited()
+//                    order_off_shelf -> showOffShelf()
+//                    order_audited -> showAudited()
+//
+//                    order_class_pay -> showClassPay()
+//                    order_class_ing -> showClassIng()
+//                    order_class_finish -> showClassFinish()
+//
+//                    order_pay_wait -> showPayWait()
+//                    order_paying -> showPaying()
+//                    order_pay_finish -> showPayFinish()
+//
+//                    order_field -> showField()
+//                    order_purchaser -> showPurchaser()
+//                    order_winning_bid -> showWinningBid()
+//                    order_settlement -> showSettlement()
+//
+//                }
 
                 txt_date.text = DateUtil.dateFormatYYMMddHHssmm(classBean?.course?.createTime ?: "")
                 txt_class.text = classBean?.course?.title
                 classBean?.materialList?.let {
                     if (it.isNotEmpty()) {
-                        GlideUtil.loadPhoto(this@OrderDetailActivity, img_class, it[0].url?:"")
+                        GlideUtil.loadPhoto(this@OrderDetailActivity, img_class, it[0].url ?: "")
                     }
                 }
 

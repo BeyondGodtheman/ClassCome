@@ -15,7 +15,6 @@ import com.sunny.classcome.utils.StringUtil
 import com.sunny.classcome.utils.showBlueBtn
 import com.sunny.classcome.utils.showGrayBtn
 import kotlinx.android.synthetic.main.item_my_class.view.*
-import java.lang.StringBuilder
 
 class MyPostedAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleAdapter<ClassBean.Bean.Data>(list) {
     override fun setLayout(parent: ViewGroup, viewType: Int): View = LayoutInflater.from(context).inflate(R.layout.item_my_class, parent, false)
@@ -26,7 +25,6 @@ class MyPostedAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleAdapter
         holder.itemView.txt_mid.visibility = View.GONE
         holder.itemView.txt_right.visibility = View.GONE
 
-        var orderDetailsType = 0
 
         val type = when (getData(position).course.state) {
 
@@ -36,28 +34,28 @@ class MyPostedAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleAdapter
             }
             "1" -> "待审核"
             "2" -> {
-                invite(holder.itemView.txt_left,getData(position).course.id)
-                applicants(holder.itemView.txt_mid,getData(position).course.id)
-                cancel(holder.itemView.txt_right,getData(position).course.id)
-                orderDetailsType = OrderDetailActivity.order_audited
+                invite(holder.itemView.txt_left, getData(position).course.id)
+                applicants(holder.itemView.txt_mid, getData(position).course.id)
+                cancel(holder.itemView.txt_right, getData(position).course.id)
+
                 "审核通过,未中标"
             }
             "3" -> {
 //                delete(holder.itemView.txt_mid)
                 publishAgain(holder.itemView.txt_right)
-                orderDetailsType = OrderDetailActivity.order_off_shelf
+
                 "已取消"
             }
             "4" -> {
-                cancel(holder.itemView.txt_mid,getData(position).course.id)
-                goPay(holder.itemView.txt_right,getData(position).course.id)
-                orderDetailsType = OrderDetailActivity.order_pay_wait
+                cancel(holder.itemView.txt_mid, getData(position).course.id)
+                goPay(holder.itemView.txt_right, getData(position).course.id)
+
                 "未付款"
             }
             "5" -> {
-                cancel(holder.itemView.txt_mid,getData(position).course.id)
+                cancel(holder.itemView.txt_mid, getData(position).course.id)
                 account(holder.itemView.txt_right)
-                orderDetailsType = OrderDetailActivity.order_class_ing
+
 
 
                 "进行中"
@@ -70,13 +68,14 @@ class MyPostedAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleAdapter
 
         holder.itemView.txt_status.text = type
         getData(position).materialList?.let {
-            if (it.isNotEmpty()){
-                GlideUtil.loadPhoto(context, holder.itemView.img_class_photo, it[0].url?:"")
+            if (it.isNotEmpty()) {
+                GlideUtil.loadPhoto(context, holder.itemView.img_class_photo, it[0].url ?: "")
             }
         }
 
         holder.itemView.txt_title.text = getData(position).course.title
-        holder.itemView.txt_money.text = ("¥" + StringUtil.formatMoney((getData(position).course.sumPrice?:"0").toDouble()))
+        holder.itemView.txt_money.text = ("¥" + StringUtil.formatMoney((getData(position).course.sumPrice
+                ?: "0").toDouble()))
 
         val timeSb = StringBuilder()
 
@@ -94,27 +93,27 @@ class MyPostedAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleAdapter
         holder.itemView.txt_date.text = timeSb.toString()
 
         holder.itemView.setOnClickListener {
-            OrderDetailActivity.start(context, orderDetailsType, getData(position).course.id)
+            OrderDetailActivity.start(context, getData(position).course.id)
         }
     }
 
 
     //取消
-    private fun cancel(textView: TextView,id:String) {
+    private fun cancel(textView: TextView, id: String) {
         textView.apply {
             showGrayBtn(this, "取消订单")
             setOnClickListener {
-                CancelPromptActivity.start(context,1,id)
+                CancelPromptActivity.start(context, 1, id)
             }
         }
     }
 
     //去支付
-    private fun goPay(textView: TextView,id:String) {
+    private fun goPay(textView: TextView, id: String) {
         textView.apply {
             showBlueBtn(this, "去支付")
             setOnClickListener {
-                PayActivity.start(context,id)
+                PayActivity.start(context, id)
             }
         }
     }
@@ -149,20 +148,20 @@ class MyPostedAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleAdapter
         }
     }
 
-    private fun invite(textView: TextView,courseId:String) {
+    private fun invite(textView: TextView, courseId: String) {
         textView.apply {
             showBlueBtn(this, "邀请用户")
             setOnClickListener {
-                    InviteActivity.start(context,courseId)
+                InviteActivity.start(context, courseId)
             }
         }
     }
 
-    private fun applicants(textView: TextView,courseId:String) {
+    private fun applicants(textView: TextView, courseId: String) {
         textView.apply {
             showBlueBtn(this, "应聘者")
             setOnClickListener {
-                ApplicantsActivity.start(context,courseId)
+                ApplicantsActivity.start(context, courseId)
             }
         }
     }

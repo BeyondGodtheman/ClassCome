@@ -1,5 +1,6 @@
 package com.sunny.classcome.activity
 
+import android.content.Context
 import android.content.Intent
 import android.support.v7.widget.GridLayoutManager
 import android.view.View
@@ -33,6 +34,14 @@ class MyProfileActivity : BaseActivity() {
         intent.getStringExtra("uid") ?: "" //他人
     }
     private val myUid = UserManger.getLogin()?.content?.userId ?: "" // 自己
+
+
+    companion object {
+        fun start(context:Context,uid:String){
+            context.startActivity(Intent(context,MyProfileActivity::class.java)
+                    .putExtra("uid",uid))
+        }
+    }
 
     override fun setLayout(): Int = R.layout.activity_my_profile
 

@@ -121,7 +121,7 @@ class PublishDetailsActivity : BaseActivity() {
 
     override fun onClick(v: View) {
         when (v.id) {
-            R.id.rl_user_more -> startActivity(Intent(this, MyProfileActivity::class.java).putExtra("uid", uid))
+            R.id.rl_user_more -> MyProfileActivity.start(this,uid)
             R.id.rl_history_more,R.id.txt_more,R.id.img_more -> PastReleaseActivity.start(this,uid)
             R.id.txt_collection -> loadOption(if (isCollection == "1") -1 else 1)// 若为已收藏，点击后为取消收藏状态
             R.id.txt_accept -> loadOption(2)
