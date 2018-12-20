@@ -12,9 +12,7 @@ import com.sunny.classcome.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_map.*
 import com.amap.api.maps2d.model.LatLng
 import com.amap.api.maps2d.model.MarkerOptions
-
-
-
+import com.sunny.classcome.utils.ToastUtil
 
 
 /**
@@ -44,10 +42,17 @@ class MapActivity : BaseActivity() {
         lon = intent.getStringExtra("lon")?:"0"
         lan = intent.getStringExtra("lan")?:"0"
 
-        val latLng = LatLng(lan.toDouble(), lon.toDouble())
 
-        mapView.map.addMarker(MarkerOptions().position(latLng).title(name))
-        mapView.map.moveCamera(CameraUpdateFactory.newCameraPosition(CameraPosition(latLng,20f,0f,0f)))
+        if (lon.isNotEmpty() && lan.isNotEmpty()){
+            val latLng = LatLng(lan.toDouble(), lon.toDouble())
+
+            mapView.map.addMarker(MarkerOptions().position(latLng).title(name))
+            mapView.map.moveCamera(CameraUpdateFactory.newCameraPosition(CameraPosition(latLng,20f,0f,0f)))
+        }else{
+            ToastUtil.show("暂无地理信息")
+        }
+
+
     }
 
     override fun onClick(v: View?) {
