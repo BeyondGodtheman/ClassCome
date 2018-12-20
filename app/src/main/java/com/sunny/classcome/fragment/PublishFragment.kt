@@ -30,10 +30,7 @@ class PublishFragment : BaseFragment() {
 
     private val activityList = arrayListOf(
             PublishTrainActivity::class.java,
-            PublishFieldActivity::class.java,
-            PublishClassActivity::class.java,
-            PublishTutorActivity::class.java,
-            PublishActiveActivity::class.java
+            PublishFieldActivity::class.java
     )
 
 
@@ -48,7 +45,16 @@ class PublishFragment : BaseFragment() {
         val adapter = PublishAdapter(list)
         recl_publish.adapter = adapter
         adapter.setOnItemClickListener { _, index ->
-            IntentUtil.start(requireActivity(), activityList[index])
+
+            when (index) {
+                2 -> PublishClassActivity.start(requireContext(), "2")
+                3 -> PublishClassActivity.start(requireContext(), "1")
+                4 -> PublishClassActivity.start(requireContext(), "3")
+                else -> {
+                    IntentUtil.start(requireActivity(), activityList[index])
+                }
+            }
+
         }
 
     }
