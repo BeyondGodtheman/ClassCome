@@ -11,5 +11,8 @@ data class ClassTypeBean(
             var id:String,
             var pId:String,
             var name:String,
-            var sort:String)
+            var sort:String
+    ){
+        var isSelect = false
+    }
 }

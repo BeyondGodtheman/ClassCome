@@ -43,8 +43,8 @@
                 android:layout_marginStart="60pt"
                 android:text="@string/current_location" />
 
-            <EditText
-                android:id="@+id/edit_location"
+            <TextView
+                android:id="@+id/txt_location"
                 style="@style/style_edit_publish"
                 android:layout_toEndOf="@id/test_location"
                 android:hint="@string/current_location" />
@@ -99,7 +99,8 @@
             <EditText
                 android:id="@+id/edit_cost"
                 style="@style/style_edit_publish"
-                android:hint="@string/rmb" />
+                android:hint="@string/rmb"
+                android:inputType="number" />
         </LinearLayout>
 
         <View style="@style/style_view_line_publish" />
@@ -127,7 +128,8 @@
             <EditText
                 android:id="@+id/edit_separate_cost"
                 style="@style/style_edit_publish"
-                android:hint="@string/rmb" />
+                android:hint="@string/rmb"
+                android:inputType="numberDecimal" />
         </LinearLayout>
 
         <View style="@style/style_view_line_publish" />
@@ -145,7 +147,8 @@
             <EditText
                 android:id="@+id/edit_group_cost"
                 style="@style/style_edit_publish"
-                android:hint="@string/rmb" />
+                android:hint="@string/rmb"
+                android:inputType="numberDecimal" />
         </LinearLayout>
 
         <View style="@style/style_view_line_publish" />
@@ -159,17 +162,45 @@
                 android:id="@+id/test_people_limit"
                 style="@style/style_font_gray_28pt_60pt"
                 android:layout_marginTop="0pt"
+                android:layout_centerVertical="true"
                 android:text="@string/people_limit" />
 
             <EditText
-                android:id="@+id/edit_people_limit"
+                android:id="@+id/edit_people_start"
                 style="@style/style_edit_publish"
                 android:layout_toEndOf="@id/test_people_limit"
-                android:hint="1-100人" />
+                android:layout_width="100pt"
+                android:layout_height="60pt"
+                android:hint="1"
+                android:gravity="center"
+                android:inputType="number"
+                android:layout_centerVertical="true"
+                android:maxLines="5"
+                android:background="@drawable/draw_bg_fillet_gray_border"/>
 
-            <ImageView
-                style="@style/style_more_btn"
-                android:contentDescription="@string/app" />
+            <TextView
+                android:id="@+id/txt_zhi"
+                style="@style/style_font_default_28pt"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@id/edit_people_start"
+                android:layout_marginStart="20pt"
+                android:layout_marginEnd="20pt"
+                android:text="至"/>
+
+            <EditText
+                android:id="@+id/edit_people_end"
+                style="@style/style_edit_publish"
+                android:layout_toEndOf="@id/txt_zhi"
+                android:layout_width="100pt"
+                android:layout_height="60pt"
+                android:hint="100"
+                android:gravity="center"
+                android:inputType="number"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="0dp"
+                android:maxLines="5"
+                android:background="@drawable/draw_bg_fillet_gray_border"/>
+
         </RelativeLayout>
 
         <View style="@style/style_view_line_publish" />
@@ -189,7 +220,8 @@
                 android:id="@+id/edit_time_limit"
                 style="@style/style_edit_publish"
                 android:layout_toEndOf="@id/test_time_limit"
-                android:hint="30天" />
+                android:hint="天"
+                android:inputType="number" />
 
             <ImageView
                 style="@style/style_more_btn"
@@ -211,7 +243,8 @@
             android:id="@+id/edit_hour"
             style="@style/style_edit_publish"
             android:layout_marginTop="15pt"
-            android:hint="@string/hour" />
+            android:hint="@string/hour"
+            android:inputType="number" />
 
         <View style="@style/style_view_line_publish" />
 
@@ -224,7 +257,8 @@
             android:id="@+id/edit_people"
             style="@style/style_edit_publish"
             android:layout_marginTop="15pt"
-            android:hint="@string/people" />
+            android:hint="@string/people"
+            android:inputType="number" />
 
         <View style="@style/style_view_line_publish" />
 
@@ -237,7 +271,8 @@
             android:id="@+id/edit_square"
             style="@style/style_edit_publish"
             android:layout_marginTop="15pt"
-            android:hint="@string/per_square_metre" />
+            android:hint="@string/per_square_metre"
+            android:inputType="numberDecimal" />
 
         <View style="@style/style_view_line_publish" />
 
@@ -247,9 +282,10 @@
             android:text="@string/train_time" />
 
         <EditText
-            android:id="@+id/edit_train_time"
+            android:id="@+id/txt_train_time"
             style="@style/style_edit_publish"
-            android:layout_marginTop="15pt" />
+            android:layout_marginTop="15pt"
+            android:hint="周一至周五"/>
 
         <View style="@style/style_view_line_publish" />
 
@@ -259,6 +295,7 @@
 
 
         <RelativeLayout
+            android:id="@+id/rl_tran"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="50pt">
@@ -298,8 +335,8 @@
             android:layout_marginTop="50pt"
             android:text="@string/training_brief" />
 
-        <include
-            layout="@layout/layout_photo_video"
+        <com.sunny.classcome.widget.UpPhotoVideoView
+            android:id="@+id/view_up"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

@@ -9,6 +9,7 @@ import com.sunny.classcome.base.BaseRecycleAdapter
 import com.sunny.classcome.base.BaseRecycleViewHolder
 import com.sunny.classcome.bean.ClassBean
 import com.sunny.classcome.utils.GlideUtil
+import com.sunny.classcome.utils.StringUtil
 import kotlinx.android.synthetic.main.item_class.view.*
 
 class ClassListAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleAdapter<ClassBean.Bean.Data>(list) {
@@ -31,7 +32,7 @@ class ClassListAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleAdapte
 
         holder.itemView.text_class_time.text = timeSb.toString()
 
-        holder.itemView.text_class_price.text = ("¥" + getData(position).course.sumPrice)
+        holder.itemView.text_class_price.text = ("¥" + StringUtil.formatMoney((getData(position).course.sumPrice?:"0").toDouble()))
         holder.itemView.text_class_author.text = getData(position).course.createUser
         holder.itemView.text_class_address.text = getData(position).course.classAddress
         getData(position).categoryList?.let {

@@ -111,7 +111,7 @@
     <string name="field_cost">场地费用(次)</string>
     <string name="single_cost">单次费用</string>
     <string name="rmb">￥</string>
-    <string name="group_purchase">团购（非必填，入无团购可不填写）</string>
+    <string name="group_purchase">团购（非必填，如无团购可不填写）</string>
     <string name="separate_purchase_cost">单独购买费用</string>
     <string name="group_purchase_cost">拼团购买费用</string>
     <string name="people_limit">成团人数限制</string>
@@ -122,7 +122,7 @@
     <string name="accommodating_population">容纳人数</string>
     <string name="people">人</string>
     <string name="field_square">场地空间</string>
-    <string name="per_square_metre">m2</string>
+    <string name="per_square_metre">㎡</string>
     <string name="train_time">培训时间</string>
     <string name="field_time">营业时间</string>
     <string name="site_facility">场地设施</string>

@@ -239,5 +239,8 @@
 
         <!--我的行程-->
         <activity android:name=".activity.MyItineraryActivity"/>
+
+        <!--场地设施-->
+        <activity android:name=".activity.TranTypeActivity"/>
     </application>
 </manifest>

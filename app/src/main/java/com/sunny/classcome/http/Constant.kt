@@ -27,6 +27,7 @@ object Constant {
     const val USER_BEAN = "userBean" //我的简历
 
     const val CLASS_TYPE = "classType" //课程分类
+    const val TRAN_TYPE = "tranType" //场地设施
 
     const val CLASS_DETAIL = "classdetailbean" //课程详情类
 
