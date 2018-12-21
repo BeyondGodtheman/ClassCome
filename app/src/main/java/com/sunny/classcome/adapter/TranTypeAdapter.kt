@@ -10,7 +10,7 @@ import com.sunny.classcome.base.BaseRecycleViewHolder
 import com.sunny.classcome.bean.ClassTypeBean
 import kotlinx.android.synthetic.main.item_class_type.view.*
 
-class TranTypeAdapter(list: ArrayList<ClassTypeBean>) : BaseRecycleAdapter<ClassTypeBean>(list) {
+class TranTypeAdapter(list: ArrayList<ClassTypeBean>, var selectSet: HashSet<String>) : BaseRecycleAdapter<ClassTypeBean>(list) {
     override fun setLayout(parent: ViewGroup, viewType: Int): View = LayoutInflater.from(context).inflate(R.layout.item_class_type, parent, false)
 
     override fun onBindViewHolder(holder: BaseRecycleViewHolder, position: Int) {
@@ -19,10 +19,14 @@ class TranTypeAdapter(list: ArrayList<ClassTypeBean>) : BaseRecycleAdapter<Class
             setHasFixedSize(true)
             isNestedScrollingEnabled = false
             layoutManager = GridLayoutManager(context, 4)
-            adapter = TranTypeChildAdapter(getData(position).subCategoryList).apply {
+            adapter = TranTypeChildAdapter(getData(position).subCategoryList,selectSet).apply {
                 setOnItemClickListener { _, index ->
-                        getData(index).isSelect = !getData(index).isSelect
-                        this@TranTypeAdapter.notifyDataSetChanged()
+                    if (selectSet.contains(getData(index).name)) {
+                        selectSet.remove(getData(index).name)
+                    } else {
+                        selectSet.add(getData(index).name)
+                    }
+                    this@TranTypeAdapter.notifyDataSetChanged()
                 }
             }
 

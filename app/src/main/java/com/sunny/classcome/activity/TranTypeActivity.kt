@@ -14,17 +14,14 @@ import kotlinx.android.synthetic.main.layout_refresh_recycler.*
 class TranTypeActivity : BaseActivity() {
 
     var list = arrayListOf<ClassTypeBean>()
-
-    val adapter: TranTypeAdapter by lazy {
-        TranTypeAdapter(list)
-    }
-
+    //保存上次操作记录（用于取消操作）
+    private var selectSet = HashSet<String>()
 
     override fun setLayout(): Int = R.layout.layout_refresh_recycler
 
     override fun initView() {
         val titleView = titleManager.defaultTitle("课程分类", "确定", View.OnClickListener {
-            MyApplication.getApp().setData(Constant.TRAN_TYPE, list)
+            MyApplication.getApp().setData(Constant.TRAN_TYPE, selectSet)
             setResult(2)
             finish()
         })
@@ -38,7 +35,6 @@ class TranTypeActivity : BaseActivity() {
         refresh.setEnableRefresh(false)
 
         recl.layoutManager = LinearLayoutManager(this)
-        recl.adapter = adapter
     }
 
     override fun onClick(v: View?) {
@@ -47,11 +43,8 @@ class TranTypeActivity : BaseActivity() {
 
     @Suppress("UNCHECKED_CAST")
     override fun loadData() {
-        list.clear()
-        MyApplication.getApp().getData<ArrayList<ClassTypeBean>>(Constant.TRAN_TYPE, true)?.let {
-            list.addAll(it)
-            adapter.notifyDataSetChanged()
-            return
+        MyApplication.getApp().getData<HashSet<String>>(Constant.TRAN_TYPE, true)?.let {
+            selectSet = it
         }
 
         val listOne = arrayListOf<ClassTypeBean.SubCategory>()
@@ -80,6 +73,7 @@ class TranTypeActivity : BaseActivity() {
         listThree.add(ClassTypeBean.SubCategory("", "", "游泳池", ""))
         listThree.add(ClassTypeBean.SubCategory("", "", "麻将桌", ""))
         list.add(ClassTypeBean("", "", "特殊设施", "", listThree))
-        adapter.notifyDataSetChanged()
+
+        recl.adapter = TranTypeAdapter(list,selectSet)
     }
 }
