@@ -21,7 +21,6 @@
         android:id="@+id/recl_photo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:src="@drawable/bg_default_photo" />
+        android:layout_gravity="center_horizontal"/>
 
 </LinearLayout>
