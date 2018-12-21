@@ -60,7 +60,6 @@ class MyClassActivity : BaseActivity() {
         fragments.add(MyClassFragment().setStatus(type.toString(), "5"))
         fragments.add(MyClassFragment().setStatus(type.toString(), "6"))
 
-
         view_pager.offscreenPageLimit = 4
         view_pager.adapter = object : FragmentPagerAdapter(supportFragmentManager) {
             override fun getItem(index: Int): Fragment = fragments[index]

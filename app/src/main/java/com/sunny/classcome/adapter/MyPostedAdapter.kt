@@ -26,47 +26,40 @@ class MyPostedAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleAdapter
         holder.itemView.txt_right.visibility = View.GONE
 
 
-        val type = when (getData(position).course.state) {
+        when (getData(position).course.state) {
 
             "-1" -> {
-
-                "驳回"
             }
-            "1" -> "待审核"
+            "1" -> {
+            }
             "2" -> {
-                invite(holder.itemView.txt_left, getData(position).course.id)
-                applicants(holder.itemView.txt_mid, getData(position).course.id)
-                cancel(holder.itemView.txt_right, getData(position).course.id)
-
-                "审核通过,未中标"
+                if (getData(position).course.coursetype == "5") {
+                    cancelTairn(holder.itemView.txt_mid, getData(position).course.id)
+                    buy(holder.itemView.txt_right, getData(position).course.id)
+                } else {
+                    invite(holder.itemView.txt_left, getData(position).course.id)
+                    applicants(holder.itemView.txt_mid, getData(position).course.id)
+                    cancelOrder(holder.itemView.txt_right, getData(position).course.id)
+                }
             }
             "3" -> {
 //                delete(holder.itemView.txt_mid)
                 publishAgain(holder.itemView.txt_right)
 
-                "已取消"
             }
             "4" -> {
-                cancel(holder.itemView.txt_mid, getData(position).course.id)
+                cancelOrder(holder.itemView.txt_mid, getData(position).course.id)
                 goPay(holder.itemView.txt_right, getData(position).course.id)
 
-                "未付款"
             }
             "5" -> {
-                cancel(holder.itemView.txt_mid, getData(position).course.id)
+                cancelOrder(holder.itemView.txt_mid, getData(position).course.id)
                 account(holder.itemView.txt_right)
-
-
-
-                "进行中"
             }
-            "6" -> "完成"
-            "8" -> "申请退款"
-            "9" -> "已退款"
-            else -> "全部"
+
         }
 
-        holder.itemView.txt_status.text = type
+        holder.itemView.txt_status.text = getData(position).course.stateInfo
         getData(position).materialList?.let {
             if (it.isNotEmpty()) {
                 GlideUtil.loadPhoto(context, holder.itemView.img_class_photo, it[0].url ?: "")
@@ -77,20 +70,25 @@ class MyPostedAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleAdapter
         holder.itemView.txt_money.text = ("¥" + StringUtil.formatMoney((getData(position).course.sumPrice
                 ?: "0").toDouble()))
 
-        val timeSb = StringBuilder()
+        if (getData(position).course.coursetype == "5"){
+            holder.itemView.txt_date.text = getData(position).course.worktime
+        }else{
+            val timeSb = StringBuilder()
 
-        getData(position).course.startTime?.let {
-            timeSb.append(it.split(" ")[0])
+            getData(position).course.startTime?.let {
+                timeSb.append(it.split(" ")[0])
 
+            }
+            timeSb.append("至")
+
+            getData(position).course.endTime?.let {
+                timeSb.append(it.split(" ")[0])
+
+            }
+
+            holder.itemView.txt_date.text = timeSb.toString()
         }
-        timeSb.append("至")
 
-        getData(position).course.endTime?.let {
-            timeSb.append(it.split(" ")[0])
-
-        }
-
-        holder.itemView.txt_date.text = timeSb.toString()
 
         holder.itemView.setOnClickListener {
             OrderDetailActivity.start(context, getData(position).course.id)
@@ -99,7 +97,7 @@ class MyPostedAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleAdapter
 
 
     //取消
-    private fun cancel(textView: TextView, id: String) {
+    private fun cancelOrder(textView: TextView, id: String) {
         textView.apply {
             showGrayBtn(this, "取消订单")
             setOnClickListener {
@@ -107,6 +105,17 @@ class MyPostedAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleAdapter
             }
         }
     }
+
+    //取消发布
+    private fun cancelTairn(textView: TextView, id: String) {
+        textView.apply {
+            showGrayBtn(this, "取消发布")
+            setOnClickListener {
+                CancelPromptActivity.start(context, 1, id)
+            }
+        }
+    }
+
 
     //去支付
     private fun goPay(textView: TextView, id: String) {
@@ -156,6 +165,17 @@ class MyPostedAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleAdapter
             }
         }
     }
+
+
+    private fun buy(textView: TextView, courseId: String) {
+        textView.apply {
+            showBlueBtn(this, "购买者")
+            setOnClickListener {
+                InviteActivity.start(context, courseId)
+            }
+        }
+    }
+
 
     private fun applicants(textView: TextView, courseId: String) {
         textView.apply {

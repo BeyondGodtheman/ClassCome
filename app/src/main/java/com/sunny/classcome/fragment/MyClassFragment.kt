@@ -25,8 +25,8 @@ class MyClassFragment : BaseFragment() {
 
     val list = arrayListOf<ClassBean.Bean.Data>()
     var pageIndex = 1
-    private var type = "1"
-    private var status = "7"
+    private var type = "7"
+    private var status = "2"
 
 
     override fun setLayout(): Int = R.layout.layout_refresh_recycler
@@ -66,7 +66,7 @@ class MyClassFragment : BaseFragment() {
 
     }
 
-    fun autoLoad(){
+    fun autoLoad() {
         refresh.autoRefresh()
     }
 

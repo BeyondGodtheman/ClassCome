@@ -74,6 +74,9 @@ data class ClassBean(
                         return price
                     }
                     if (coursetype == "5"){
+                        if (oneallcost == null){
+                            return onecost
+                        }
                         return oneallcost
                     }
                     return field
