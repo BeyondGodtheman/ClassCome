@@ -137,6 +137,7 @@ class OrderDetailActivity : BaseActivity() {
     }
 
     private fun showSettlement() {
+
         txt_info.text = "订单进行中"
         txt_prompt.text = "系统默认将在课程结束后7天，对课程进行结算"
 

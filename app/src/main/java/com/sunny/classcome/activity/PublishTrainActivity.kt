@@ -20,16 +20,9 @@ import org.json.JSONArray
  */
 class PublishTrainActivity : BaseActivity() {
 
-    private var isEndData = false
-    private var isEndTime = false
-    private var startData = ""
-    private var endData = ""
-    private var startTime = ""
-    private var endTime = ""
     private var cityId = ""
     private var countyId = ""
     private var townId = ""
-    private var classPid = ""
     private var latitude = ""
     private var longitude = ""
 
@@ -186,10 +179,10 @@ class PublishTrainActivity : BaseActivity() {
             commondeviceSb.deleteCharAt(commondeviceSb.lastIndex)
         }
         if (meetdeviceSb.isNotEmpty()) {
-            meetdeviceSb.deleteCharAt(commondeviceSb.lastIndex)
+            meetdeviceSb.deleteCharAt(meetdeviceSb.lastIndex)
         }
         if (specialdeviceSb.isNotEmpty()) {
-            specialdeviceSb.deleteCharAt(commondeviceSb.lastIndex)
+            specialdeviceSb.deleteCharAt(specialdeviceSb.lastIndex)
         }
 
         params["commondevice"] = commondeviceSb //通用设备
