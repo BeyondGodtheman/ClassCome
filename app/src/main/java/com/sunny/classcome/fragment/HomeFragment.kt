@@ -3,9 +3,14 @@ package com.sunny.classcome.fragment
 import android.content.Intent
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.LinearLayoutManager
+import android.text.TextUtils
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
+import android.view.animation.Animation
+import android.view.animation.LinearInterpolator
 import android.widget.ImageView
+import android.widget.TextView
 import com.scwang.smartrefresh.layout.api.RefreshLayout
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter
 import com.scwang.smartrefresh.layout.header.ClassicsHeader
@@ -17,11 +22,10 @@ import com.sunny.classcome.activity.LoginActivity
 import com.sunny.classcome.activity.MyMsgActivity
 import com.sunny.classcome.adapter.ClassListAdapter
 import com.sunny.classcome.base.BaseFragment
-import com.sunny.classcome.bean.BannerBean
-import com.sunny.classcome.bean.ClassBean
-import com.sunny.classcome.bean.LocalCityBean
+import com.sunny.classcome.bean.*
 import com.sunny.classcome.http.ApiManager
 import com.sunny.classcome.http.Constant
+import com.sunny.classcome.utils.DateUtil
 import com.sunny.classcome.utils.LocationUtil
 import com.sunny.classcome.utils.UserManger
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -287,12 +291,38 @@ class HomeFragment : BaseFragment() {
 
                 data.content?.dataList?.let {
                     if (isFlag) {
+                        loadPinTuan()
                         initRecommend(it)
                     }
                     dataList.addAll(it)
                     recl.adapter?.notifyDataSetChanged()
                     return
                 }
+            }
+
+            override fun onFailed(code: String, message: String) {
+            }
+
+        })
+    }
+
+    fun loadPinTuan(){
+        ApiManager.post(getBaseActivity().composites,null,Constant.ORDER_GETPINTUAN,object :ApiManager.OnResult<BaseBean<ArrayList<HomePinTuanBean>>>(){
+            override fun onSuccess(data: BaseBean<ArrayList<HomePinTuanBean>>) {
+                titleView.vf_home_pintuan.removeAllViews()
+                data.content?.data?.let { list ->
+                    list.forEach {
+                        val textView = TextView(context)
+                        textView.text = ((it.userName?:"")+"发起了拼团")
+                        textView.setTextSize(TypedValue.COMPLEX_UNIT_PX,resources.getDimension(R.dimen.pt28))
+                        textView.setTextColor(ContextCompat.getColor(requireContext(),R.color.color_white))
+                        textView.setLines(1)
+                        textView.ellipsize = TextUtils.TruncateAt.END
+                        titleView.vf_home_pintuan.addView(textView)
+                    }
+                }
+                titleView.vf_home_pintuan.inAnimation.interpolator = LinearInterpolator()
+                titleView.vf_home_pintuan.startFlipping()
             }
 
             override fun onFailed(code: String, message: String) {

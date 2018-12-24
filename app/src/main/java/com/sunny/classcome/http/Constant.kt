@@ -141,5 +141,7 @@ object Constant {
 
     const val COURSE_GETMYJOURNEY = "course/getMyJourney" //我的行程
 
+    const val ORDER_GETPINTUAN = "order/getpintuan" //获取拼团滚动数据
+
 }
 

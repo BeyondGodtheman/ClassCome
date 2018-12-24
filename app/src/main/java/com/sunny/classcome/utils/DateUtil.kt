@@ -19,4 +19,12 @@ object DateUtil {
         val dateFormat = SimpleDateFormat("yyy-MM-dd HH:ss:mm", Locale.getDefault())
         return dateFormat.format(Date(date.toLong()))
     }
+
+    fun dateFormatHHssmm(date: String): String {
+        if (date.isEmpty()) {
+            return ""
+        }
+        val dateFormat = SimpleDateFormat("HH:ss:mm", Locale.getDefault())
+        return dateFormat.format(Date(date.toLong()))
+    }
 }

@@ -30,6 +30,20 @@
         android:contentDescription="@string/more" />
     </RelativeLayout>
 
+    <ViewFlipper
+        android:id="@+id/vf_home_pintuan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32pt"
+        android:layout_marginEnd="32pt"
+        android:inAnimation="@anim/anim_alpha_in"
+        android:outAnimation="@anim/anim_alpha_out"
+        android:flipInterval="6000"
+        android:layout_toEndOf="@id/rlLocation"
+        android:layout_centerVertical="true"
+        android:layout_toStartOf="@id/ivMessage"
+        />
+
     <ImageView
         android:id="@+id/ivMessage"
         android:layout_width="68pt"
