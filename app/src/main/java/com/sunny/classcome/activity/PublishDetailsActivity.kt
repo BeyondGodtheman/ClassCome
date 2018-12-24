@@ -3,6 +3,7 @@ package com.sunny.classcome.activity
 import android.content.Context
 import android.content.Intent
 import android.support.v4.app.Fragment
+import android.support.v4.view.ViewPager
 import android.support.v7.widget.GridLayoutManager
 import android.view.View
 import com.sunny.classcome.MyApplication
@@ -116,6 +117,21 @@ class PublishDetailsActivity : BaseActivity() {
         txt_collection.setOnClickListener(this)
         txt_accept.setOnClickListener(this)
 
+        viewPager.addOnPageChangeListener(object :ViewPager.OnPageChangeListener{
+            override fun onPageScrollStateChanged(state: Int) {
+
+            }
+
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+                txt_current.text = (position + 1).toString()
+            }
+
+            override fun onPageSelected(position: Int) {
+
+            }
+
+        })
+
         initRecycleView()
     }
 
@@ -142,6 +158,7 @@ class PublishDetailsActivity : BaseActivity() {
 
                 hideLoading()
                 initData(data.content)
+                txt_all.text = data.content.resCourseVO.materialList.size.toString()
                 initPhotoVideo(this@PublishDetailsActivity, viewPager, data.content.resCourseVO.materialList)
 
                 uid = data.content.user.id

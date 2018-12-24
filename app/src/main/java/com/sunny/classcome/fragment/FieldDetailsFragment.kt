@@ -43,15 +43,54 @@ open class FieldDetailsFragment : BaseFragment() {
             txt_time.text = bean.worktime
             txt_address.text = bean.classDetailAdress
 
+            bean.commondevice?.let {
+                val list = if (it.contains(",")) {
+                    it.split(",").toList()
+                } else {
+                    if (it.isNotEmpty()){
+                        arrayListOf(it)
+                    }else{
+                        arrayListOf()
+                    }
+                }
+                if (list.isNotEmpty()){
+                    recl_common.layoutManager = GridLayoutManager(context, 4)
+                    recl_common.adapter = LabelAdapter(list as ArrayList<String>)
+                }
+            }
 
-            recl_common.layoutManager = GridLayoutManager(context,4)
-            recl_common.adapter = LabelAdapter(bean.commondevice.split(",").toList() as ArrayList<String>)
+            bean.meetdevice?.let {
+                val list = if (it.contains(",")) {
+                    it.split(",").toList()
+                } else {
+                    if (it.isNotEmpty()){
+                        arrayListOf(it)
+                    }else{
+                        arrayListOf()
+                    }
+                }
+                if (list.isNotEmpty()){
+                    recl_meeting.layoutManager = GridLayoutManager(context, 4)
+                    recl_meeting.adapter = LabelAdapter(list as ArrayList<String>)
+                }
+            }
 
-            recl_meeting.layoutManager = GridLayoutManager(context,4)
-            recl_meeting.adapter = LabelAdapter(bean.meetdevice.split(",").toList() as ArrayList<String>)
+            bean.specialdevice?.let {
+                val list = if (it.contains(",")) {
+                    it.split(",").toList()
+                } else {
+                    if (it.isNotEmpty()){
+                        arrayListOf(it)
+                    }else{
+                        arrayListOf()
+                    }
+                }
+                if (list.isNotEmpty()){
+                    recl_special.layoutManager = GridLayoutManager(context, 4)
+                    recl_special.adapter = LabelAdapter(list as ArrayList<String>)
+                }
+            }
 
-            recl_special.layoutManager = GridLayoutManager(context,4)
-            recl_special.adapter = LabelAdapter(bean.specialdevice.split(",").toList() as ArrayList<String>)
         }
 
         ll_map.setOnClickListener(this)

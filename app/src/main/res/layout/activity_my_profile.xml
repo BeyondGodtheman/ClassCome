@@ -238,17 +238,55 @@
             android:layout_marginTop="40pt"
             android:text="个人简介" />
 
-        <android.support.v4.view.ViewPager
-            android:id="@+id/viewPager"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="320pt"
-            android:layout_marginStart="32pt"
-            android:layout_marginTop="20pt"
-            android:layout_marginEnd="32pt"
-            android:background="@color/color_divider"
-            android:visibility="gone">
+            android:layout_height="320pt">
 
-        </android.support.v4.view.ViewPager>
+            <android.support.v4.view.ViewPager
+                android:id="@+id/viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="32pt"
+                android:layout_marginTop="20pt"
+                android:layout_marginEnd="32pt"
+                android:background="@color/color_divider" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="38pt"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="51pt"
+                android:layout_marginBottom="25pt"
+                android:background="@drawable/bg_pager_label"
+                android:paddingLeft="24pt"
+                android:paddingRight="24pt">
+
+                <TextView
+                    android:id="@+id/txt_current"
+                    style="@style/style_font_white_24pt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="1" />
+
+                <TextView
+                    style="@style/style_font_white_24pt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="/" />
+
+                <TextView
+                    android:id="@+id/txt_all"
+                    style="@style/style_font_white_24pt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="1" />
+
+            </LinearLayout>
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/txt_brief"

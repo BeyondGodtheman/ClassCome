@@ -2,6 +2,7 @@ package com.sunny.classcome.activity
 
 import android.content.Context
 import android.content.Intent
+import android.support.v4.view.ViewPager
 import android.support.v7.widget.GridLayoutManager
 import android.view.View
 import com.sunny.classcome.MyApplication
@@ -111,9 +112,22 @@ class MyProfileActivity : BaseActivity() {
                 }
 
                 data.content?.data?.materialList?.let {
-                    initPhotoVideo(this@MyProfileActivity, viewPager, it)
-                    viewPager.visibility = View.VISIBLE
+                    txt_all.text = it.size.toString()
+                    viewPager.addOnPageChangeListener(object :ViewPager.OnPageChangeListener{
+                        override fun onPageScrollStateChanged(p0: Int) {
 
+                        }
+
+                        override fun onPageScrolled(p0: Int, p1: Float, p2: Int) {
+
+                        }
+
+                        override fun onPageSelected(position: Int) {
+                            txt_current.text = (position+1).toString()
+                        }
+
+                    })
+                    initPhotoVideo(this@MyProfileActivity, viewPager, it)
                 }
             }
 
