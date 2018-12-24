@@ -242,7 +242,7 @@ class PublishDetailsActivity : BaseActivity() {
         GlideUtil.loadPhoto(this, img_class_photo, bean.resCourseVO.materialList[0].url ?: "")
 
         txt_class_name.text = bean.resCourseVO.title
-        txt_class_price.text = ("￥${bean.resCourseVO.sumPrice}")
+        txt_class_price.text = ("￥${StringUtil.formatMoney((bean.resCourseVO.course.sumPrice?:"0").toDouble())}")
         txt_class_time.text = DateUtil.dateFormatYYMMdd(bean.resCourseVO.createTime)
 
         // 课程简介
