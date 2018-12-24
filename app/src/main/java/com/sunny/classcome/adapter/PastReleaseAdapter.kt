@@ -8,6 +8,7 @@ import com.sunny.classcome.base.BaseRecycleAdapter
 import com.sunny.classcome.base.BaseRecycleViewHolder
 import com.sunny.classcome.bean.ClassBean
 import com.sunny.classcome.utils.GlideUtil
+import com.sunny.classcome.utils.StringUtil
 import kotlinx.android.synthetic.main.item_past_release.view.*
 
 //过往发布预览适配器
@@ -24,6 +25,6 @@ class PastReleaseAdapter(list:ArrayList<ClassBean.Bean.Data>): BaseRecycleAdapte
         }
 
         holder.itemView.text_class_name.text = getData(position).course.title
-        holder.itemView.txt_money.text = ("¥"+getData(position).course.sumPrice)
+        holder.itemView.txt_money.text = ("¥"+StringUtil.formatMoney((getData(position).course.sumPrice?:"0").toDouble()))
     }
 }
