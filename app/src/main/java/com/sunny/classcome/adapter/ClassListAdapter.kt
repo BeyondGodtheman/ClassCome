@@ -21,16 +21,19 @@ class ClassListAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleAdapte
 
         val timeSb = StringBuilder()
 
-        getData(position).course.startTime?.let {
-            timeSb.append(it.split(" ")[0])
-        }
-        timeSb.append("至")
+        if (getData(position).course.coursetype == "4" || getData(position).course.coursetype == "5"){
+            holder.itemView.text_class_time.text = getData(position).course.worktime
+        }else{
+            getData(position).course.startTime?.let {
+                timeSb.append(it.split(" ")[0])
+            }
+            timeSb.append("至")
 
-        getData(position).course.endTime?.let {
-            timeSb.append(it.split(" ")[0])
+            getData(position).course.endTime?.let {
+                timeSb.append(it.split(" ")[0])
+            }
+            holder.itemView.text_class_time.text = timeSb.toString()
         }
-
-        holder.itemView.text_class_time.text = timeSb.toString()
 
         holder.itemView.text_class_price.text = ("¥" + StringUtil.formatMoney((getData(position).course.sumPrice?:"0").toDouble()))
         holder.itemView.text_class_author.text = getData(position).course.createUser

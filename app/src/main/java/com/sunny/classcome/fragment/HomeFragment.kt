@@ -208,7 +208,6 @@ class HomeFragment : BaseFragment() {
 
             override fun onFailed(code: String, message: String) {
             }
-
         })
     }
 
