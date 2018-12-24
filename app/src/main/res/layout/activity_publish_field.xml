@@ -185,18 +185,40 @@
             android:layout_marginTop="35pt"
             android:text="@string/common_facility" />
 
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recl_common"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60pt"
+            android:layout_marginEnd="60pt"
+            android:layout_marginTop="20pt" />
 
         <TextView
             style="@style/style_font_gray_28pt_60pt"
             android:layout_marginTop="40pt"
             android:text="@string/conference_facility" />
 
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recl_meeting"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60pt"
+            android:layout_marginEnd="60pt"
+            android:layout_marginTop="20pt" />
 
         <TextView
             style="@style/style_font_gray_28pt_60pt"
             android:layout_marginTop="40pt"
-            android:layout_marginBottom="50pt"
             android:text="@string/special_facility" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recl_special"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60pt"
+            android:layout_marginEnd="60pt"
+            android:layout_marginTop="20pt"
+            android:layout_marginBottom="50pt"/>
 
         <View style="@style/style_view_divider" />
 

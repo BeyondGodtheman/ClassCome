@@ -163,7 +163,9 @@ class ClassListActivity : BaseActivity() {
 
     private fun loadNav() {
         val params = HashMap<String, String>()
-        params["pId"] = pId
+        if (courseType == "4" || courseType == "5"){
+            params["pId"] = pId
+        }
         ApiManager.post(composites, params, Constant.COURSE_GETCATEGORY, object : ApiManager.OnResult<ClassChildType>() {
             override fun onSuccess(data: ClassChildType) {
                 tabLayout.removeAllTabs()

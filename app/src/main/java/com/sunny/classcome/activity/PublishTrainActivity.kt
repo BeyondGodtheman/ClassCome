@@ -1,9 +1,11 @@
 package com.sunny.classcome.activity
 
 import android.content.Intent
+import android.support.v7.widget.GridLayoutManager
 import android.view.View
 import com.sunny.classcome.MyApplication
 import com.sunny.classcome.R
+import com.sunny.classcome.adapter.LabelAdapter
 import com.sunny.classcome.base.BaseActivity
 import com.sunny.classcome.bean.BaseBean
 import com.sunny.classcome.http.ApiManager
@@ -68,6 +70,39 @@ class PublishTrainActivity : BaseActivity() {
         if (requestCode == 2 && resultCode == 2) {
             selectSet = MyApplication.getApp().getData<HashSet<String>>(Constant.TRAN_TYPE, true)
                     ?: hashSetOf()
+
+            val commondevice = arrayListOf<String>()
+            val meetdevice = arrayListOf<String>()
+            val specialdevice = arrayListOf<String>()
+
+            selectSet.forEach {
+
+                if (commondeviceList.contains(it)) {
+                    commondevice.add(it)
+                }
+
+                if (meetdeviceList.contains(it)) {
+                    meetdevice.add(it)
+                }
+
+                if (specialdeviceList.contains(it)) {
+                    specialdevice.add(it)
+                }
+            }
+
+            if (commondevice.isNotEmpty()) {
+                recl_common.layoutManager = GridLayoutManager(this, 4)
+                recl_common.adapter = LabelAdapter(commondevice)
+            }
+            if (meetdevice.isNotEmpty()) {
+                recl_meeting.layoutManager = GridLayoutManager(this, 4)
+                recl_meeting.adapter = LabelAdapter(meetdevice)
+            }
+
+            if (specialdevice.isNotEmpty()) {
+                recl_special.layoutManager = GridLayoutManager(this, 4)
+                recl_special.adapter = LabelAdapter(specialdevice)
+            }
         }
 
         view_up.onActivityResult(requestCode, resultCode, data)
