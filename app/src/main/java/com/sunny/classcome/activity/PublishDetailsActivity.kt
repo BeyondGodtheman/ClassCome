@@ -121,8 +121,8 @@ class PublishDetailsActivity : BaseActivity() {
 
     override fun onClick(v: View) {
         when (v.id) {
-            R.id.rl_user_more -> MyProfileActivity.start(this,uid)
-            R.id.rl_history_more,R.id.txt_more,R.id.img_more -> PastReleaseActivity.start(this,uid)
+            R.id.rl_user_more -> MyProfileActivity.start(this, uid)
+            R.id.rl_history_more, R.id.txt_more, R.id.img_more -> PastReleaseActivity.start(this, uid)
             R.id.txt_collection -> loadOption(if (isCollection == "1") -1 else 1)// 若为已收藏，点击后为取消收藏状态
             R.id.txt_accept -> loadOption(2)
         }
@@ -195,8 +195,14 @@ class PublishDetailsActivity : BaseActivity() {
                 ToastUtil.show(data.content?.info)
                 if (data.content?.statu == "1") {// 成功
                     when (relationType) {
-                        -1 -> txt_collection.text = "收藏"
-                        1 -> txt_collection.text = "已收藏"
+                        -1 -> {
+                            txt_collection.text = "收藏"
+                            isCollection = "0"
+                        }
+                        1 -> {
+                            txt_collection.text = "已收藏"
+                            isCollection = "1"
+                        }
                         2 -> {
                             txt_accept.text = "已应聘"
                             isAppointment = "1"
@@ -242,14 +248,15 @@ class PublishDetailsActivity : BaseActivity() {
         GlideUtil.loadPhoto(this, img_class_photo, bean.resCourseVO.materialList[0].url ?: "")
 
         txt_class_name.text = bean.resCourseVO.title
-        txt_class_price.text = ("￥${StringUtil.formatMoney((bean.resCourseVO.course.sumPrice?:"0").toDouble())}")
+        txt_class_price.text = ("￥${StringUtil.formatMoney((bean.resCourseVO.course.sumPrice
+                ?: "0").toDouble())}")
         txt_class_time.text = DateUtil.dateFormatYYMMdd(bean.resCourseVO.createTime)
 
         // 课程简介
         txt_brief.text = bean.resCourseVO.description
 
         // 发布者头像、用户名
-        GlideUtil.loadPhoto(this, img_user_head, bean.user.userPic?:"")
+        GlideUtil.loadPhoto(this, img_user_head, bean.user.userPic ?: "")
         txt_user_name.text = bean.user.userName
     }
 }
