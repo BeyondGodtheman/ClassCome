@@ -1,9 +1,11 @@
 package com.sunny.classcome.fragment
 
+import android.support.v7.widget.GridLayoutManager
 import android.view.View
 import com.sunny.classcome.MyApplication
 import com.sunny.classcome.R
 import com.sunny.classcome.activity.MapActivity
+import com.sunny.classcome.adapter.LabelAdapter
 import com.sunny.classcome.base.BaseFragment
 import com.sunny.classcome.bean.ClassDetailBean
 import com.sunny.classcome.http.Constant
@@ -26,9 +28,9 @@ open class FieldDetailsFragment : BaseFragment() {
 
         MyApplication.getApp().getData<ClassDetailBean>(Constant.CLASS_DETAIL, true)?.content?.resCourseVO?.course?.let { bean ->
 
-            lan = bean.latitude?:""
+            lan = bean.latitude ?: ""
 
-            lon = bean.longitude?:""
+            lon = bean.longitude ?: ""
 
             name = bean.classAddress
 
@@ -40,6 +42,16 @@ open class FieldDetailsFragment : BaseFragment() {
             txt_square.text = bean.workspace
             txt_time.text = bean.worktime
             txt_address.text = bean.classDetailAdress
+
+
+            recl_common.layoutManager = GridLayoutManager(context,4)
+            recl_common.adapter = LabelAdapter(bean.commondevice.split(",").toList() as ArrayList<String>)
+
+            recl_meeting.layoutManager = GridLayoutManager(context,4)
+            recl_meeting.adapter = LabelAdapter(bean.meetdevice.split(",").toList() as ArrayList<String>)
+
+            recl_special.layoutManager = GridLayoutManager(context,4)
+            recl_special.adapter = LabelAdapter(bean.specialdevice.split(",").toList() as ArrayList<String>)
         }
 
         ll_map.setOnClickListener(this)

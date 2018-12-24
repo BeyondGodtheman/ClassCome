@@ -66,7 +66,10 @@ data class ClassBean(
                     var oneallcost:String?, //培训 单独购买价格
                     var captynum: String,//容纳人数
                     var workspace: String,//场地空间
-                    var worktime: String//营业时间
+                    var worktime: String,//营业时间
+                    var commondevice:String, //通用设施
+                    var meetdevice:String, //会议设施
+                    var specialdevice:String //特殊设施
             ){
                 var sumPrice: String? = null
                 get(){
