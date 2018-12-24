@@ -133,7 +133,7 @@ class PublishFieldActivity : BaseActivity() {
 
 
         val params = hashMapOf<String, Any>()
-        params["coursetype"] = "5" //5:培训
+        params["coursetype"] = "4" //4:场地
         params["title"] = edit_title.text.toString()
         params["cityId"] = cityId
         params["countyId"] = countyId

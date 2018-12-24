@@ -95,7 +95,7 @@
                 android:id="@+id/edit_cost"
                 style="@style/style_edit_publish"
                 android:hint="@string/rmb"
-                android:inputType="number" />
+                android:inputType="numberDecimal" />
         </LinearLayout>
 
         <View style="@style/style_view_line_publish" />

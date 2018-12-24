@@ -7,10 +7,12 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.sunny.classcome.R
 import com.sunny.classcome.activity.CancelPromptActivity
+import com.sunny.classcome.activity.OrderDetailActivity
 import com.sunny.classcome.base.BaseRecycleAdapter
 import com.sunny.classcome.base.BaseRecycleViewHolder
 import com.sunny.classcome.bean.ClassBean
 import com.sunny.classcome.utils.GlideUtil
+import com.sunny.classcome.utils.StringUtil
 import com.sunny.classcome.utils.showBlueBtn
 import com.sunny.classcome.utils.showGrayBtn
 import kotlinx.android.synthetic.main.item_my_class.view.*
@@ -59,7 +61,7 @@ class MyParticipatedAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleA
         }
 
         holder.itemView.txt_title.text = getData(position).course.title
-        holder.itemView.txt_money.text = ("¥" + getData(position).course.sumPrice)
+        holder.itemView.txt_money.text = ("¥" + StringUtil.formatMoney((getData(position).course.sumPrice?:"0").toDouble()))
         val timeSb = StringBuilder()
 
         getData(position).course.startTime?.let {
@@ -75,6 +77,9 @@ class MyParticipatedAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleA
 
         holder.itemView.txt_date.text = timeSb
 
+        holder.itemView.setOnClickListener {
+            OrderDetailActivity.start(context, getData(position).course.id)
+        }
     }
 
 
