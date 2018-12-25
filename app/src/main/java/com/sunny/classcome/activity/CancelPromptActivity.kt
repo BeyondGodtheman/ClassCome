@@ -41,9 +41,7 @@ class CancelPromptActivity : BaseActivity() {
     override fun onClick(v: View) {
         when (v.id) {
             R.id.txt_prompt -> {
-                if (type == 1){
-                    cancelPublish()
-                }
+                cancelPublish()
             }
         }
     }
@@ -64,9 +62,7 @@ class CancelPromptActivity : BaseActivity() {
         ApiManager.post(composites, params, url, object : ApiManager.OnResult<BaseBean<String>>() {
             override fun onSuccess(data: BaseBean<String>) {
                 if (data.content?.statu == "1") {
-                    if (type ==1){
-                        EventBus.getDefault().post(Posted())
-                    }
+                    EventBus.getDefault().post(Posted())
                     finish()
                 }
                 ToastUtil.show(data.content?.info)
@@ -75,6 +71,5 @@ class CancelPromptActivity : BaseActivity() {
             override fun onFailed(code: String, message: String) {
             }
         })
-
     }
 }

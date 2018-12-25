@@ -142,6 +142,7 @@ class PayActivity: BaseActivity() {
         fun start(context:Context,data: ClassBean.Bean.Data){
             MyApplication.getApp().setData(Constant.COURSE,data)
             context.startActivity(Intent(context,PayActivity::class.java)
+                    .putExtra("id",data.course.id)
                     .putExtra("type",2))
         }
     }

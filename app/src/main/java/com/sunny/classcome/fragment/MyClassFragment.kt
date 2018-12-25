@@ -116,6 +116,7 @@ class MyClassFragment : BaseFragment() {
     //更新列表数据
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onUpdateEvent(posted: Posted) {
+        pageIndex = 1
         load()
     }
 

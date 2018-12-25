@@ -46,20 +46,26 @@ class MyParticipatedAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleA
         holder.itemView.txt_title.text = getData(position).course.title
         holder.itemView.txt_money.text = ("¥" + StringUtil.formatMoney((getData(position).course.sumPrice
                 ?: "0").toDouble()))
-        val timeSb = StringBuilder()
 
-        getData(position).course.startTime?.let {
-            timeSb.append(it.split(" ")[0])
+        if (getData(position).course.coursetype == "4" || getData(position).course.coursetype == "5"){
+            holder.itemView.txt_date.text = getData(position).course.worktime
+        }else{
+            val timeSb = StringBuilder()
 
+            getData(position).course.startTime?.let {
+                timeSb.append(it.split(" ")[0])
+
+            }
+            timeSb.append("至")
+
+            getData(position).course.endTime?.let {
+                timeSb.append(it.split(" ")[0])
+
+            }
+
+            holder.itemView.txt_date.text = timeSb
         }
-        timeSb.append("至")
 
-        getData(position).course.endTime?.let {
-            timeSb.append(it.split(" ")[0])
-
-        }
-
-        holder.itemView.txt_date.text = timeSb
 
         holder.itemView.setOnClickListener {
             OrderDetailActivity.start(context, getData(position).course.id)
