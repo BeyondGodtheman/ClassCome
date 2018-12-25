@@ -35,13 +35,13 @@ open class FieldDetailsFragment : BaseFragment() {
             name = bean.classAddress
 
             // 使用时长/容纳人数
-            txt_use_long.text = bean.onetime
-            txt_people_count.text = bean.captynum
+            txt_use_long.text = (bean.onetime+"小时（次）")
+            txt_people_count.text = (bean.captynum + "人")
 
             // 场地空间/营业时间/场地位置
-            txt_square.text = bean.workspace
+            txt_square.text = (bean.workspace + "㎡")
             txt_time.text = bean.worktime
-            txt_address.text = bean.classDetailAdress
+            txt_address.text = bean.classAddress
 
             bean.commondevice?.let {
                 val list = if (it.contains(",")) {

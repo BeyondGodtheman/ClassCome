@@ -52,7 +52,7 @@
         android:layout_alignStart="@id/txt_use_long"
         android:layout_alignTop="@id/text3"
         android:layout_toEndOf="@id/text3"
-        tools:text="65m^2" />
+        tools:text="65㎡" />
 
     <TextView
         android:id="@+id/txt_time_desc"
@@ -86,7 +86,7 @@
         android:layout_marginEnd="40pt"
         android:layout_toEndOf="@id/text5"
         android:maxLines="2"
-        tools:text="¥4000" />
+        tools:text="上海市" />
 
     <LinearLayout
         android:id="@+id/ll_map"

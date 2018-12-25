@@ -46,7 +46,7 @@ class PublishDetailsActivity : BaseActivity() {
     var courseId = ""
     var coursetype = ""
     var title = ""
-
+    var order_no = ""
     /**
      * 是否已收藏：
      * 1 已经收藏，
@@ -117,7 +117,7 @@ class PublishDetailsActivity : BaseActivity() {
         txt_collection.setOnClickListener(this)
         txt_accept.setOnClickListener(this)
 
-        viewPager.addOnPageChangeListener(object :ViewPager.OnPageChangeListener{
+        viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(state: Int) {
 
             }
@@ -140,7 +140,15 @@ class PublishDetailsActivity : BaseActivity() {
             R.id.rl_user_more -> MyProfileActivity.start(this, uid)
             R.id.rl_history_more, R.id.txt_more, R.id.img_more -> PastReleaseActivity.start(this, uid)
             R.id.txt_collection -> loadOption(if (isCollection == "1") -1 else 1)// 若为已收藏，点击后为取消收藏状态
-            R.id.txt_accept -> loadOption(2)
+            R.id.txt_accept -> {
+                when (isAppointment) {
+                    "1" -> ToastUtil.show("请不要重复操作")
+                    "2" -> {
+                        loadOption(2)
+                    }
+                    "4","5" -> PayActivity.start(this,courseId)
+                }
+            }
         }
     }
 
@@ -168,8 +176,15 @@ class PublishDetailsActivity : BaseActivity() {
                 txt_collection.text = if (isCollection == "1") "已收藏" else "收藏"
 
                 isAppointment = data.content.resCourseVO.isAppointment
-                txt_accept.text = if (isAppointment == "1") "已应聘" else "应聘"
 
+                val accept = when (isAppointment) {
+                    "1" -> "已应聘"
+                    "2" -> "未应聘"
+                    "4" -> "待支付"
+                    "5" -> "拼团待支付"
+                    else -> ""
+                }
+                txt_accept.text = accept
 
                 // uid如果是本人的，底部收藏和应聘按钮隐藏
                 ll_bottom_btn.visibility = if (uid == UserManger.getLogin()?.content?.userId) {

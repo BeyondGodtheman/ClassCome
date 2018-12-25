@@ -10,10 +10,7 @@ import com.alipay.sdk.app.PayTask
 import com.sunny.classcome.MyApplication
 import com.sunny.classcome.R
 import com.sunny.classcome.base.BaseActivity
-import com.sunny.classcome.bean.BaseBean
-import com.sunny.classcome.bean.OrderDetailBean
-import com.sunny.classcome.bean.PayResult
-import com.sunny.classcome.bean.WXPayBean
+import com.sunny.classcome.bean.*
 import com.sunny.classcome.http.ApiManager
 import com.sunny.classcome.http.Constant
 import com.sunny.classcome.utils.*
@@ -26,6 +23,8 @@ import org.greenrobot.eventbus.EventBus
 class PayActivity: BaseActivity() {
 
     private val SDK_PAY_FLAG = 1
+
+    private var type = 1
 
     private val handler = Handler{
 
@@ -57,6 +56,9 @@ class PayActivity: BaseActivity() {
 
     override fun initView() {
         showTitle(titleManager.defaultTitle("支付"))
+
+        type = intent.getIntExtra("type",1)
+
         cbox_wx.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked){
                 cbox_al.isChecked = false
@@ -87,39 +89,60 @@ class PayActivity: BaseActivity() {
     }
 
     override fun loadData() {
-        showLoading()
-        val params = HashMap<String, String>()
-        params["id"] = intent.getStringExtra("id") ?: ""
-        ApiManager.post(composites, params, Constant.ORDER_GETORDERDETAILNEW, object : ApiManager.OnResult<OrderDetailBean>() {
-            override fun onSuccess(data: OrderDetailBean) {
-                hideLoading()
-                data.content?.materialList?.let {
+        if (type == 1){
+            showLoading()
+            val params = HashMap<String, String>()
+            params["id"] = intent.getStringExtra("id") ?: ""
+            ApiManager.post(composites, params, Constant.ORDER_GETORDERDETAILNEW, object : ApiManager.OnResult<OrderDetailBean>() {
+                override fun onSuccess(data: OrderDetailBean) {
+                    hideLoading()
+                    data.content?.materialList?.let {
+                        if (it.isNotEmpty()){
+                            GlideUtil.loadPhoto(this@PayActivity,img_class_photo,it[0].url?:"")
+                        }
+                    }
+                    data.content?.order?.let {
+                        txt_order_number.text = ("订单编号："+ it.orderNum)
+
+                    }
+                    data.content?.course?.let {
+                        txt_class_name.text = it.title
+                        txt_order_time.text = (DateUtil.dateFormatYYMMdd(it.createTime) +"至"+DateUtil.dateFormatYYMMdd(it.expirationTime))
+                        txt_money.text = ("实付：¥"+StringUtil.formatMoney((it.sumPrice?:"0").toDouble()))
+                    }
+                }
+
+                override fun onFailed(code: String, message: String) {
+                    hideLoading()
+                }
+
+            })
+        }else{
+            MyApplication.getApp().getData<ClassBean.Bean.Data>(Constant.COURSE,true).let { it ->
+                it?.materialList?.let {
                     if (it.isNotEmpty()){
                         GlideUtil.loadPhoto(this@PayActivity,img_class_photo,it[0].url?:"")
                     }
                 }
-                data.content?.order?.let {
-                    txt_order_number.text = ("订单编号："+ it.orderNum)
-
-                }
-                data.content?.course?.let {
-                    txt_class_name.text = it.title
-                    txt_order_time.text = (DateUtil.dateFormatYYMMdd(it.createTime) +"至"+DateUtil.dateFormatYYMMdd(it.expirationTime))
-                    txt_money.text = ("实付：¥"+StringUtil.formatMoney((it.sumPrice?:"0").toDouble()))
-                }
+                txt_order_number.text = ("订单编号："+ it?.order?.orderNum)
+                txt_class_name.text = it?.course?.title
+                txt_order_time.text = it?.course?.worktime
+                txt_money.text = ("实付：¥"+StringUtil.formatMoney((it?.order?.paymentMoney?:"0").toDouble()))
             }
 
-            override fun onFailed(code: String, message: String) {
-                hideLoading()
-            }
-
-        })
+        }
     }
 
     companion object {
         fun start(context:Context,id:String){
             context.startActivity(Intent(context,PayActivity::class.java)
-                    .putExtra("id",id))
+                    .putExtra("id",id)
+                    .putExtra("type",1))
+        }
+        fun start(context:Context,data: ClassBean.Bean.Data){
+            MyApplication.getApp().setData(Constant.COURSE,data)
+            context.startActivity(Intent(context,PayActivity::class.java)
+                    .putExtra("type",2))
         }
     }
 

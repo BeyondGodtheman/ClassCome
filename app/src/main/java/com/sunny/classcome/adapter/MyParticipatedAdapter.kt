@@ -8,6 +8,7 @@ import android.widget.TextView
 import com.sunny.classcome.R
 import com.sunny.classcome.activity.CancelPromptActivity
 import com.sunny.classcome.activity.OrderDetailActivity
+import com.sunny.classcome.activity.PayActivity
 import com.sunny.classcome.base.BaseRecycleAdapter
 import com.sunny.classcome.base.BaseRecycleViewHolder
 import com.sunny.classcome.bean.ClassBean
@@ -27,41 +28,24 @@ class MyParticipatedAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleA
         holder.itemView.txt_mid.visibility = View.GONE
         holder.itemView.txt_right.visibility = View.GONE
 
-        val type = when (getData(position).course.state) {
+        when (getData(position).order.state) {
+            "1" -> {
+                cancel(holder.itemView.txt_mid, getData(position).course.id)
+                pay(holder.itemView.txt_right, position)
+            }
 
-            "-1" -> {
-
-                "驳回"
-            }
-            "1" -> "待审核"
-            "2" -> "未中标"
-            "3" -> {
-                delete(holder.itemView.txt_right)
-                "已取消"
-            }
-            "4" -> {
-                cancel(holder.itemView.txt_right,getData(position).course.id)
-                "已中标"
-            }
-            "5" -> "待结算"
-            "6" -> {
-                complete(holder.itemView.txt_right)
-                "完成"
-            }
-            "8" -> "申请退款"
-            "9" -> "已退款"
-            else -> "全部"
         }
+        holder.itemView.txt_status.text = getData(position).course.stateInfo
 
-        holder.itemView.txt_status.text = type
         getData(position).materialList?.let {
-            if (it.isNotEmpty()){
-                GlideUtil.loadPhoto(context, holder.itemView.img_class_photo, it[0].url?:"")
+            if (it.isNotEmpty()) {
+                GlideUtil.loadPhoto(context, holder.itemView.img_class_photo, it[0].url ?: "")
             }
         }
 
         holder.itemView.txt_title.text = getData(position).course.title
-        holder.itemView.txt_money.text = ("¥" + StringUtil.formatMoney((getData(position).course.sumPrice?:"0").toDouble()))
+        holder.itemView.txt_money.text = ("¥" + StringUtil.formatMoney((getData(position).course.sumPrice
+                ?: "0").toDouble()))
         val timeSb = StringBuilder()
 
         getData(position).course.startTime?.let {
@@ -84,38 +68,37 @@ class MyParticipatedAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleA
 
 
     //取消
-    private fun cancel(textView: TextView,id:String) {
+    private fun cancel(textView: TextView, id: String) {
         textView.apply {
             showGrayBtn(this, "取消订单")
             setOnClickListener {
-                CancelPromptActivity.start(context,2,id)
+                CancelPromptActivity.start(context, 2, id)
             }
         }
     }
 
-    private fun publish(textView: TextView){
+    private fun publish(textView: TextView) {
         textView.apply {
             showBlueBtn(this, "再次发布")
             setOnClickListener {
-                context.startActivity(Intent(context,CancelPromptActivity::class.java))
+                context.startActivity(Intent(context, CancelPromptActivity::class.java))
 
             }
         }
     }
 
 
-    //删除
-    private fun delete(textView: TextView){
+    //支付
+    private fun pay(textView: TextView, position: Int) {
         textView.apply {
-            showGrayBtn(this, "删除")
+            showBlueBtn(this, "去支付")
             setOnClickListener {
-                context.startActivity(Intent(context,CancelPromptActivity::class.java))
-
+                PayActivity.start(context,getData(position))
             }
         }
     }
 
-    private fun complete(textView: TextView){
+    private fun complete(textView: TextView) {
         textView.apply {
             showBlueBtn(this, "评价")
             setOnClickListener {
