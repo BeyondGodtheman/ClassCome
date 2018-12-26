@@ -46,7 +46,9 @@ class PublishDetailsActivity : BaseActivity() {
     var courseId = ""
     var coursetype = ""
     var title = ""
-    var order_no = ""
+
+    var data:ClassBean.Bean.Data? = null
+
     /**
      * 是否已收藏：
      * 1 已经收藏，
@@ -141,12 +143,16 @@ class PublishDetailsActivity : BaseActivity() {
             R.id.rl_history_more, R.id.txt_more, R.id.img_more -> PastReleaseActivity.start(this, uid)
             R.id.txt_collection -> loadOption(if (isCollection == "1") -1 else 1)// 若为已收藏，点击后为取消收藏状态
             R.id.txt_accept -> {
-                when (isAppointment) {
-                    "1" -> ToastUtil.show("请不要重复操作")
-                    "2" -> {
-                        loadOption(2)
+                if (coursetype == "4" || coursetype == "5"){
+                    PayActivity.start(this,courseId)
+                }else{
+                    when (isAppointment) {
+                        "1" -> ToastUtil.show("请不要重复操作")
+                        "2" -> {
+                            loadOption(2)
+                        }
+                        "4","5" -> PayActivity.start(this,courseId)
                     }
-                    "4","5" -> PayActivity.start(this,courseId)
                 }
             }
         }
@@ -179,7 +185,13 @@ class PublishDetailsActivity : BaseActivity() {
 
                 val accept = when (isAppointment) {
                     "1" -> "已应聘"
-                    "2" -> "未应聘"
+                    "2" -> {
+                        if (coursetype == "4" || coursetype == "5") {
+                            "去支付"
+                        } else {
+                            "未应聘"
+                        }
+                    }
                     "4" -> "待支付"
                     "5" -> "拼团待支付"
                     else -> ""
@@ -195,6 +207,15 @@ class PublishDetailsActivity : BaseActivity() {
 
                 //加载发布的课程
                 loadPastRelease()
+
+//                data = ClassBean.Bean.Data(
+//                        data.content.resCourseVO.course,
+//                        data.content.resCourseVO.materialList,
+//                        data.content.resCourseVO.category,
+//                        data.content.user,
+//                        data.content.resCourseVO,
+//                        isAppointment
+//                )
 
             }
 
