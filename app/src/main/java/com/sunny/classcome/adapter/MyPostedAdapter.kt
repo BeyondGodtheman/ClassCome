@@ -91,7 +91,7 @@ class MyPostedAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleAdapter
 
 
         holder.itemView.setOnClickListener {
-            OrderDetailActivity.start(context, getData(position).course.id)
+            OrderDetailActivity.start(context, getData(position).course.id,true)
         }
     }
 

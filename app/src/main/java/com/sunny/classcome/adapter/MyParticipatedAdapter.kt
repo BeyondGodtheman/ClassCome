@@ -68,7 +68,11 @@ class MyParticipatedAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleA
 
 
         holder.itemView.setOnClickListener {
-            OrderDetailActivity.start(context, getData(position).course.id)
+            if (getData(position).course.coursetype == "4" || getData(position).course.coursetype == "5"){
+                OrderDetailActivity.start(context,getData(position),false)
+            }else{
+                OrderDetailActivity.start(context, getData(position).course.id,false)
+            }
         }
     }
 

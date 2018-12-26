@@ -3,9 +3,11 @@ package com.sunny.classcome.activity
 import android.content.Context
 import android.content.Intent
 import android.view.View
+import com.sunny.classcome.MyApplication
 import com.sunny.classcome.R
 import com.sunny.classcome.base.BaseActivity
 import com.sunny.classcome.bean.ClassBean
+import com.sunny.classcome.bean.ClassDetailBean
 import com.sunny.classcome.bean.OrderDetailBean
 import com.sunny.classcome.http.ApiManager
 import com.sunny.classcome.http.Constant
@@ -31,35 +33,28 @@ class OrderDetailActivity : BaseActivity() {
 
     private var classBean: ClassBean.Bean.Data? = null
 
+    private var isAuthor = false
 
     companion object {
-        const val order_tobe_audited = 1    // 发布-待审核
-        const val order_unaudited = 2       // 发布-审核未通过
-        const val order_audited = 3         // 发布-审核通过，未中标
-        const val order_off_shelf = 4       // 发布-已下架(已取消)
-
-
-        const val order_class_pay = 21     // 代课-课程待支付
-        const val order_class_ing = 22     // 代课-课程进行中
-        const val order_class_finish = 23  // 代课-课程已结束
-
-        const val order_pay_wait = 31       // 待支付
-        const val order_paying = 32         // 支付中
-        const val order_pay_finish = 33     // 评价售后
-
-        const val order_field = 41          // 场地
-        const val order_purchaser = 42      // 购买者
-        const val order_winning_bid = 43    // 已中标
-        const val order_settlement = 44     // 待结算
-
-        fun start(context: Context,id: String) {
+        fun start(context: Context, id: String,isAuthor:Boolean) {
             context.startActivity(Intent(context, OrderDetailActivity::class.java)
-                    .putExtra("id", id))
+                    .putExtra("id", id)
+                    .putExtra("isAuthor",isAuthor)
+                    .putExtra("type", 1))
+        }
+
+        fun start(context: Context, classBean: ClassBean.Bean.Data,isAuthor:Boolean) {
+            MyApplication.getApp().setData(Constant.COURSE, classBean)
+            context.startActivity(Intent(context, OrderDetailActivity::class.java)
+                    .putExtra("isAuthor",isAuthor)
+                    .putExtra("type", 2))
         }
     }
 
     override fun initView() {
         showTitle(titleManager.defaultTitle(getString(R.string.order_detail)))
+
+        isAuthor = intent.getBooleanExtra("isAuthor",false)
 
         view_detail.setOnClickListener(this)
         rl_info.setOnClickListener(this)
@@ -176,16 +171,25 @@ class OrderDetailActivity : BaseActivity() {
         showGrayBtn(txt_order_right, "取消订单")
     }
 
+    //场地、培训待支付
     private fun showPayWait() {
         txt_info.text = "订单已生成，付款后订单生效"
-        txt_order_number.text = ("订单编号：${classBean?.order?.orderNum}")
+        txt_order_number.text = ("订单编号：${classBean?.course?.id}")
         showGrayBtn(txt_order_mid, "取消订单")
+        txt_order_mid.setOnClickListener{
+            CancelPromptActivity.start(this,if (isAuthor) 1 else 2,classBean?.course?.id?:"")
+        }
+
         showBlueBtn(txt_order_right, "去支付")
-
+        txt_order_right.setOnClickListener {
+            classBean?.let {
+                PayActivity.start(this@OrderDetailActivity,it)
+            }
+        }
         rl_money.visibility = View.VISIBLE
+        txt_date.text = DateUtil.dateFormatYYMMddHHssmm(classBean?.order?.createTime?:"")
         txt_money_desc.text = "实付款"
-        txt_money_count.text = ("￥${classBean?.course?.sumPrice}")
-
+        txt_money_count.text = ("￥${classBean?.course?.price}")
     }
 
     private fun showOffShelf() {
@@ -222,13 +226,30 @@ class OrderDetailActivity : BaseActivity() {
                         ?: "", classBean?.course?.id ?: "")
             }
             R.id.rl_info -> {
-                MyProfileActivity.start(this,classBean?.course?.winningBidder?:"")
+                MyProfileActivity.start(this, classBean?.course?.winningBidder ?: "")
             }
         }
     }
 
 
     override fun loadData() {
+
+        if (intent.getIntExtra("type", 1) == 2) {
+            classBean =  MyApplication.getApp().getData<ClassBean.Bean.Data>(Constant.COURSE,true)
+            when (classBean?.order?.state) {
+                "1" -> showPayWait()
+            }
+
+            txt_date.text = DateUtil.dateFormatYYMMddHHssmm(classBean?.course?.createTime ?: "")
+            txt_class.text = classBean?.course?.title
+            classBean?.materialList?.let {
+                if (it.isNotEmpty()) {
+                    GlideUtil.loadPhoto(this@OrderDetailActivity, img_class, it[0].url ?: "")
+                }
+            }
+            return
+        }
+
         showLoading()
         val params = HashMap<String, String>()
         params["id"] = intent.getStringExtra("id") ?: ""
@@ -236,13 +257,12 @@ class OrderDetailActivity : BaseActivity() {
             override fun onSuccess(data: OrderDetailBean) {
                 hideLoading()
                 classBean = data.content
-                //代课
-                if (data.content?.course?.coursetype == "2")
-                    when (data.content?.order?.state) {
-                        "-1" -> showOffShelf()
-                        "3" -> showClassIng()
-                        "4" -> showClassPay()
-                        "5" -> showClassFinish()
+
+                when (data.content?.order?.state) {
+                    "-1" -> showOffShelf()
+                    "3" -> showClassIng()
+                    "4" -> showClassPay()
+                    "5" -> showClassFinish()
 
 //                    order_tobe_audited -> showOrderToBeAudited()
 //                    order_unaudited -> showUnaudited()
@@ -262,8 +282,7 @@ class OrderDetailActivity : BaseActivity() {
 //                    order_winning_bid -> showWinningBid()
 //                    order_settlement -> showSettlement()
 
-                    }
-
+                }
 
 //                when (intent.getIntExtra("type", order_tobe_audited)) {
 //

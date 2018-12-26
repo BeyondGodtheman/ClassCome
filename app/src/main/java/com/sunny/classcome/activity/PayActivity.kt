@@ -20,15 +20,15 @@ import org.greenrobot.eventbus.EventBus
 
 
 @Suppress("UNCHECKED_CAST")
-class PayActivity: BaseActivity() {
+class PayActivity : BaseActivity() {
 
     private val SDK_PAY_FLAG = 1
 
     private var type = 1
 
-    private val handler = Handler{
+    private val handler = Handler {
 
-        when(it.what){
+        when (it.what) {
             SDK_PAY_FLAG -> {
                 val payResult = PayResult(it.obj as Map<String, String>)
                 /**
@@ -57,16 +57,16 @@ class PayActivity: BaseActivity() {
     override fun initView() {
         showTitle(titleManager.defaultTitle("支付"))
 
-        type = intent.getIntExtra("type",1)
+        type = intent.getIntExtra("type", 1)
 
         cbox_wx.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked){
+            if (isChecked) {
                 cbox_al.isChecked = false
             }
         }
 
         cbox_al.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked){
+            if (isChecked) {
                 cbox_wx.isChecked = false
             }
         }
@@ -75,13 +75,13 @@ class PayActivity: BaseActivity() {
     }
 
     override fun onClick(v: View) {
-        when(v.id){
+        when (v.id) {
             R.id.txt_commit -> {
-                if (cbox_wx.isChecked){
+                if (cbox_wx.isChecked) {
                     createWxOrder()
                 }
 
-                if (cbox_al.isChecked){
+                if (cbox_al.isChecked) {
                     createAliOrder()
                 }
             }
@@ -89,7 +89,7 @@ class PayActivity: BaseActivity() {
     }
 
     override fun loadData() {
-        if (type == 1){
+        if (type == 1) {
             showLoading()
             val params = HashMap<String, String>()
             params["id"] = intent.getStringExtra("id") ?: ""
@@ -97,16 +97,17 @@ class PayActivity: BaseActivity() {
                 override fun onSuccess(data: OrderDetailBean) {
                     hideLoading()
                     data.content?.materialList?.let {
-                        if (it.isNotEmpty()){
-                            GlideUtil.loadPhoto(this@PayActivity,img_class_photo,it[0].url?:"")
+                        if (it.isNotEmpty()) {
+                            GlideUtil.loadPhoto(this@PayActivity, img_class_photo, it[0].url ?: "")
                         }
                     }
 
                     data.content?.course?.let {
                         txt_order_number.text = ("订单编号：${it.id}")
                         txt_class_name.text = it.title
-                        txt_order_time.text = (DateUtil.dateFormatYYMMdd(it.createTime) +"至"+DateUtil.dateFormatYYMMdd(it.expirationTime))
-                        txt_money.text = ("实付：¥"+StringUtil.formatMoney((it.sumPrice?:"0").toDouble()))
+                        txt_order_time.text = (DateUtil.dateFormatYYMMdd(it.createTime) + "至" + DateUtil.dateFormatYYMMdd(it.expirationTime))
+                        txt_money.text = ("实付：¥" + StringUtil.formatMoney((it.sumPrice
+                                ?: "0").toDouble()))
                     }
                 }
 
@@ -115,90 +116,93 @@ class PayActivity: BaseActivity() {
                 }
 
             })
-        }else{
-            MyApplication.getApp().getData<ClassBean.Bean.Data>(Constant.COURSE,true).let { it ->
+        } else {
+            MyApplication.getApp().getData<ClassBean.Bean.Data>(Constant.COURSE, true).let { it ->
                 it?.materialList?.let {
-                    if (it.isNotEmpty()){
-                        GlideUtil.loadPhoto(this@PayActivity,img_class_photo,it[0].url?:"")
+                    if (it.isNotEmpty()) {
+                        GlideUtil.loadPhoto(this@PayActivity, img_class_photo, it[0].url ?: "")
                     }
                 }
-                txt_order_number.text = ("订单编号："+ it?.course?.id)
+                txt_order_number.text = ("订单编号：" + it?.course?.id)
                 txt_class_name.text = it?.course?.title
                 txt_order_time.text = it?.course?.worktime
-                txt_money.text = ("实付：¥"+StringUtil.formatMoney((it?.order?.paymentMoney?:"0").toDouble()))
+                txt_money.text = ("实付：¥" + StringUtil.formatMoney((it?.course?.onecost
+                        ?: "0").toDouble()))
             }
 
         }
     }
 
     companion object {
-        fun start(context:Context,id:String){
-            context.startActivity(Intent(context,PayActivity::class.java)
-                    .putExtra("id",id)
-                    .putExtra("type",1))
+        fun start(context: Context, id: String) {
+            context.startActivity(Intent(context, PayActivity::class.java)
+                    .putExtra("id", id)
+                    .putExtra("type", 1))
         }
-        fun start(context:Context,data: ClassBean.Bean.Data){
-            MyApplication.getApp().setData(Constant.COURSE,data)
-            context.startActivity(Intent(context,PayActivity::class.java)
-                    .putExtra("id",data.course.id)
-                    .putExtra("type",2))
+
+        fun start(context: Context, data: ClassBean.Bean.Data) {
+            MyApplication.getApp().setData(Constant.COURSE, data)
+            context.startActivity(Intent(context, PayActivity::class.java)
+                    .putExtra("id", data.course.id)
+                    .putExtra("type", 2))
         }
     }
 
 
-    private fun createWxOrder(){
+    private fun createWxOrder() {
         showLoading()
         val params = HashMap<String, String>()
         params["id"] = intent.getStringExtra("id") ?: ""
 //        params["pintuan"] = ""
-        ApiManager.post(composites,params,Constant.ORDER_CREATEVCHARORDERSTR,object :ApiManager.OnResult<BaseBean<WXPayBean>>(){
+        ApiManager.post(composites, params, Constant.ORDER_CREATEVCHARORDERSTR, object : ApiManager.OnResult<BaseBean<WXPayBean>>() {
             override fun onSuccess(data: BaseBean<WXPayBean>) {
                 hideLoading()
-                if (data.content?.statu == "1"){
+                if (data.content?.statu == "1") {
                     data.content?.data?.let {
                         wxPay(it)
                     }
-                }else{
+                } else {
                     ToastUtil.show(data.content?.info)
                 }
             }
 
             override fun onFailed(code: String, message: String) {
-            hideLoading()
+                hideLoading()
+                ToastUtil.show("支付失败！")
             }
 
         })
     }
 
 
-    private fun createAliOrder(){
+    private fun createAliOrder() {
         showLoading()
         val params = HashMap<String, String>()
         params["id"] = intent.getStringExtra("id") ?: ""
 //        params["pintuan"] = ""
-        ApiManager.post(composites,params,Constant.ORDER_CREATEORDERSTR,object :ApiManager.OnResult<BaseBean<String>>(){
+        ApiManager.post(composites, params, Constant.ORDER_CREATEORDERSTR, object : ApiManager.OnResult<BaseBean<String>>() {
             override fun onSuccess(data: BaseBean<String>) {
                 hideLoading()
-                if (data.content?.statu == "1"){
+                if (data.content?.statu == "1") {
                     data.content?.data?.let {
                         aliPay(it)
                     }
-                }else{
+                } else {
                     ToastUtil.show(data.content?.info)
                 }
             }
 
             override fun onFailed(code: String, message: String) {
                 hideLoading()
+                ToastUtil.show("支付失败！")
             }
 
         })
     }
 
 
-
     //调用微信支付
-    fun wxPay(wxPayBean: WXPayBean){
+    fun wxPay(wxPayBean: WXPayBean) {
         val payReq = PayReq()
         payReq.appId = wxPayBean.appid
         payReq.partnerId = wxPayBean.partnerid
@@ -211,8 +215,8 @@ class PayActivity: BaseActivity() {
     }
 
 
-    fun aliPay(authInfo:String){
-        val authRunnable = Runnable{
+    fun aliPay(authInfo: String) {
+        val authRunnable = Runnable {
             // 构造AuthTask 对象
             val payTask = PayTask(this)
             val result = payTask.payV2(authInfo, true)

@@ -13,7 +13,6 @@ import com.sunny.classcome.base.BaseActivity
 import com.sunny.classcome.bean.BaseBean
 import com.sunny.classcome.bean.ClassBean
 import com.sunny.classcome.bean.ClassDetailBean
-import com.sunny.classcome.bean.UserBean
 import com.sunny.classcome.fragment.CourseDetailsFragment
 import com.sunny.classcome.fragment.FieldDetailsFragment
 import com.sunny.classcome.fragment.TrainDetailsFragment
@@ -48,7 +47,7 @@ class PublishDetailsActivity : BaseActivity() {
     var coursetype = ""
     var title = ""
 
-    var classData:ClassBean.Bean.Data? = null
+    var classData: ClassBean.Bean.Data? = null
 
     /**
      * 是否已收藏：
@@ -144,18 +143,18 @@ class PublishDetailsActivity : BaseActivity() {
             R.id.rl_history_more, R.id.txt_more, R.id.img_more -> PastReleaseActivity.start(this, uid)
             R.id.txt_collection -> loadOption(if (isCollection == "1") -1 else 1)// 若为已收藏，点击后为取消收藏状态
             R.id.txt_accept -> {
-                if (coursetype == "4" || coursetype == "5"){
+                if (coursetype == "4" || coursetype == "5") {
                     classData?.let {
-                        PayActivity.start(this,it)
+                        PayActivity.start(this, it)
                     }
 
-                }else{
+                } else {
                     when (isAppointment) {
                         "1" -> ToastUtil.show("请不要重复操作")
                         "2" -> {
                             loadOption(2)
                         }
-                        "4","5" -> PayActivity.start(this,courseId)
+                        "4", "5" -> PayActivity.start(this, courseId)
                     }
                 }
             }
@@ -203,7 +202,7 @@ class PublishDetailsActivity : BaseActivity() {
                 txt_accept.text = accept
 
                 // uid如果是本人的，底部收藏和应聘按钮隐藏
-                ll_bottom_btn.visibility = if (uid == UserManger.getLogin()?.content?.userId) {
+                ll_bottom_btn.visibility = if (uid == UserManger.getLogin()?.content?.userId || isAppointment == "3") {
                     View.GONE
                 } else {
                     View.VISIBLE
@@ -212,13 +211,13 @@ class PublishDetailsActivity : BaseActivity() {
                 //加载发布的课程
                 loadPastRelease()
 
-               classData = ClassBean.Bean.Data(
+                classData = ClassBean.Bean.Data(
                         data.content.resCourseVO.course,
                         data.content.resCourseVO.materialList,
                         arrayListOf(),
-                        ClassBean.Bean.Data.User(data.content.user.userName,data.content.user.telephone,data.content.user.userPic),
-                       ClassBean.Bean.Data.Order("","","",""
-                               ,data.content.resCourseVO.price,"","","","","",""),
+                        ClassBean.Bean.Data.User(data.content.user.userName, data.content.user.telephone, data.content.user.userPic),
+                        ClassBean.Bean.Data.Order("", "", "", ""
+                                , data.content.resCourseVO.price, "", "", "", "", "", ""),
                         data.content.resCourseVO.isAppraise
                 )
 

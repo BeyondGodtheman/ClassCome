@@ -22,7 +22,7 @@ class ItineraryDescAdapter(list:ArrayList<JourneyBean.Bean>):BaseRecycleAdapter<
                 holder.itemView.txt_title.text = list[0].title
 
                 holder.itemView.setOnClickListener {
-                    OrderDetailActivity.start(context,list[0].courseId)
+                    OrderDetailActivity.start(context,list[0].courseId,false)
                 }
             }
         }
