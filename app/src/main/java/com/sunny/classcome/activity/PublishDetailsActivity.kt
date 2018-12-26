@@ -13,6 +13,7 @@ import com.sunny.classcome.base.BaseActivity
 import com.sunny.classcome.bean.BaseBean
 import com.sunny.classcome.bean.ClassBean
 import com.sunny.classcome.bean.ClassDetailBean
+import com.sunny.classcome.bean.UserBean
 import com.sunny.classcome.fragment.CourseDetailsFragment
 import com.sunny.classcome.fragment.FieldDetailsFragment
 import com.sunny.classcome.fragment.TrainDetailsFragment
@@ -47,7 +48,7 @@ class PublishDetailsActivity : BaseActivity() {
     var coursetype = ""
     var title = ""
 
-    var data:ClassBean.Bean.Data? = null
+    var classData:ClassBean.Bean.Data? = null
 
     /**
      * 是否已收藏：
@@ -144,7 +145,10 @@ class PublishDetailsActivity : BaseActivity() {
             R.id.txt_collection -> loadOption(if (isCollection == "1") -1 else 1)// 若为已收藏，点击后为取消收藏状态
             R.id.txt_accept -> {
                 if (coursetype == "4" || coursetype == "5"){
-                    PayActivity.start(this,courseId)
+                    classData?.let {
+                        PayActivity.start(this,it)
+                    }
+
                 }else{
                     when (isAppointment) {
                         "1" -> ToastUtil.show("请不要重复操作")
@@ -208,14 +212,15 @@ class PublishDetailsActivity : BaseActivity() {
                 //加载发布的课程
                 loadPastRelease()
 
-//                data = ClassBean.Bean.Data(
-//                        data.content.resCourseVO.course,
-//                        data.content.resCourseVO.materialList,
-//                        data.content.resCourseVO.category,
-//                        data.content.user,
-//                        data.content.resCourseVO,
-//                        isAppointment
-//                )
+               classData = ClassBean.Bean.Data(
+                        data.content.resCourseVO.course,
+                        data.content.resCourseVO.materialList,
+                        arrayListOf(),
+                        ClassBean.Bean.Data.User(data.content.user.userName,data.content.user.telephone,data.content.user.userPic),
+                       ClassBean.Bean.Data.Order("","","",""
+                               ,data.content.resCourseVO.price,"","","","","",""),
+                        data.content.resCourseVO.isAppraise
+                )
 
             }
 

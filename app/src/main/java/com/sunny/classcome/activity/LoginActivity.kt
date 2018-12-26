@@ -63,7 +63,6 @@ class LoginActivity : BaseActivity() {
         when (v.id) {
 
             view_weixin.id -> {
-                showLoading()
                 WXEntryActivity.loginWeixin()
             }
         }
@@ -75,7 +74,6 @@ class LoginActivity : BaseActivity() {
 
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
-        hideLoading()
         if (intent.getStringExtra("type") == "wx"){
             UserManger.getLogin()?.let {
                 if (it.content.isBindPhone == "1"){

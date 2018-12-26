@@ -101,11 +101,9 @@ class PayActivity: BaseActivity() {
                             GlideUtil.loadPhoto(this@PayActivity,img_class_photo,it[0].url?:"")
                         }
                     }
-                    data.content?.order?.let {
-                        txt_order_number.text = ("订单编号："+ it.orderNum)
 
-                    }
                     data.content?.course?.let {
+                        txt_order_number.text = ("订单编号：${it.id}")
                         txt_class_name.text = it.title
                         txt_order_time.text = (DateUtil.dateFormatYYMMdd(it.createTime) +"至"+DateUtil.dateFormatYYMMdd(it.expirationTime))
                         txt_money.text = ("实付：¥"+StringUtil.formatMoney((it.sumPrice?:"0").toDouble()))
@@ -124,7 +122,7 @@ class PayActivity: BaseActivity() {
                         GlideUtil.loadPhoto(this@PayActivity,img_class_photo,it[0].url?:"")
                     }
                 }
-                txt_order_number.text = ("订单编号："+ it?.order?.orderNum)
+                txt_order_number.text = ("订单编号："+ it?.course?.id)
                 txt_class_name.text = it?.course?.title
                 txt_order_time.text = it?.course?.worktime
                 txt_money.text = ("实付：¥"+StringUtil.formatMoney((it?.order?.paymentMoney?:"0").toDouble()))
