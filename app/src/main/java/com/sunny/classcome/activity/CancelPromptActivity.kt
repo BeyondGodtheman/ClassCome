@@ -10,6 +10,7 @@ import com.sunny.classcome.http.ApiManager
 import com.sunny.classcome.http.Constant
 import com.sunny.classcome.utils.Posted
 import com.sunny.classcome.utils.ToastUtil
+import com.sunny.classcome.utils.UserManger
 import kotlinx.android.synthetic.main.activity_cancel_prompt.*
 import org.greenrobot.eventbus.EventBus
 
@@ -41,7 +42,12 @@ class CancelPromptActivity : BaseActivity() {
     override fun onClick(v: View) {
         when (v.id) {
             R.id.txt_prompt -> {
-                cancelPublish()
+                if (type == 3){
+                    cancelOrther()
+                }else{
+                    cancelPublish()
+                }
+
             }
         }
     }
@@ -60,6 +66,24 @@ class CancelPromptActivity : BaseActivity() {
         val params = HashMap<String, String>()
         params["courseId"] = courseId
         ApiManager.post(composites, params, url, object : ApiManager.OnResult<BaseBean<String>>() {
+            override fun onSuccess(data: BaseBean<String>) {
+                if (data.content?.statu == "1") {
+                    EventBus.getDefault().post(Posted())
+                    finish()
+                }
+                ToastUtil.show(data.content?.info)
+            }
+
+            override fun onFailed(code: String, message: String) {
+            }
+        })
+    }
+
+    private fun cancelOrther(){
+        val params = HashMap<String, String>()
+        params["courseId"] = courseId
+        params["useUserId"] = UserManger.getLogin()?.content?.userId?:""
+        ApiManager.post(composites, params, Constant.ORDER_CANCLE_NEWORDER, object : ApiManager.OnResult<BaseBean<String>>() {
             override fun onSuccess(data: BaseBean<String>) {
                 if (data.content?.statu == "1") {
                     EventBus.getDefault().post(Posted())

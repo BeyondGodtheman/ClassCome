@@ -53,8 +53,12 @@ class MyPostedAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleAdapter
 
             }
             "5" -> {
-                cancelOrder(holder.itemView.txt_mid, getData(position).course.id)
-                account(holder.itemView.txt_right)
+                if (getData(position).course.coursetype == "4" || getData(position).course.coursetype == "5"){
+                    cancelOrherOrder(holder.itemView.txt_mid, getData(position).course.id)
+                }else{
+                    cancelOrder(holder.itemView.txt_mid, getData(position).course.id)
+                }
+                buy(holder.itemView.txt_right,getData(position).course.id)
             }
 
         }
@@ -105,6 +109,17 @@ class MyPostedAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleAdapter
             }
         }
     }
+
+    //取消
+    private fun cancelOrherOrder(textView: TextView, id: String) {
+        textView.apply {
+            showGrayBtn(this, "取消订单")
+            setOnClickListener {
+                CancelPromptActivity.start(context, 3, id)
+            }
+        }
+    }
+
 
     //取消发布
     private fun cancelTairn(textView: TextView, id: String) {
@@ -171,10 +186,11 @@ class MyPostedAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleAdapter
         textView.apply {
             showBlueBtn(this, "购买者")
             setOnClickListener {
-                InviteActivity.start(context, courseId)
+                BuyActivity.start(context, courseId)
             }
         }
     }
+
 
 
     private fun applicants(textView: TextView, courseId: String) {

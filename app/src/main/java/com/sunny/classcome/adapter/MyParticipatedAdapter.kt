@@ -30,8 +30,10 @@ class MyParticipatedAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleA
 
         when (getData(position).order.state) {
             "1" -> {
-                cancel(holder.itemView.txt_mid, getData(position).course.id)
                 pay(holder.itemView.txt_right, position)
+            }
+            "2" -> {
+                cancel(holder.itemView.txt_right, position)
             }
 
         }
@@ -47,9 +49,9 @@ class MyParticipatedAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleA
         holder.itemView.txt_money.text = ("¥" + StringUtil.formatMoney((getData(position).course.sumPrice
                 ?: "0").toDouble()))
 
-        if (getData(position).course.coursetype == "4" || getData(position).course.coursetype == "5"){
+        if (getData(position).course.coursetype == "4" || getData(position).course.coursetype == "5") {
             holder.itemView.txt_date.text = getData(position).course.worktime
-        }else{
+        } else {
             val timeSb = StringBuilder()
 
             getData(position).course.startTime?.let {
@@ -68,21 +70,25 @@ class MyParticipatedAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleA
 
 
         holder.itemView.setOnClickListener {
-            if (getData(position).course.coursetype == "4" || getData(position).course.coursetype == "5"){
-                OrderDetailActivity.start(context,getData(position),false)
-            }else{
-                OrderDetailActivity.start(context, getData(position).course.id,false)
+            if (getData(position).course.coursetype == "4" || getData(position).course.coursetype == "5") {
+                OrderDetailActivity.start(context, getData(position), false)
+            } else {
+                OrderDetailActivity.start(context, getData(position).course.id, false)
             }
         }
     }
 
 
     //取消
-    private fun cancel(textView: TextView, id: String) {
+    private fun cancel(textView: TextView, position: Int) {
         textView.apply {
             showGrayBtn(this, "取消订单")
             setOnClickListener {
-                CancelPromptActivity.start(context, 2, id)
+                var type = 2
+                if (getData(position).course.coursetype == "4" || getData(position).course.coursetype == "5") {
+                    type = 3
+                }
+                CancelPromptActivity.start(context, type, getData(position).course.id)
             }
         }
     }
@@ -103,7 +109,7 @@ class MyParticipatedAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleA
         textView.apply {
             showBlueBtn(this, "去支付")
             setOnClickListener {
-                PayActivity.start(context,getData(position),"")
+                PayActivity.start(context, getData(position), "")
             }
         }
     }

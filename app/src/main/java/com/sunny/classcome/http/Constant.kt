@@ -109,6 +109,8 @@ object Constant {
 
     const val ORDER_CACELORDER = "order/cacelOrder" //取消我发布的订单
 
+    const val ORDER_CANCLE_NEWORDER = "order/cancle/newOrder" //申请取消订单 场地和培训专用
+
     const val ORDER_CACELORDEROFTEACHER = "order/cacelOrderOfTeacher" //取消我参与的订单
 
     const val ORDER_MATCHAPPLICANTLIST = "order/matchApplicantList" //邀请代课者列表
@@ -116,6 +118,8 @@ object Constant {
     const val ORDER_INVITETEACHER = "order/inviteTeacher" //邀请代课者
 
     const val ORDER_GETAPPLICANTLIST = "order/getApplicantList" //应聘者列表
+
+    const val ORDER_GETCOURSEUSER_ORDER = "order/getCourseUser/order" //获取场地培训下的购买者列表
 
     const val ORDER_APPLYCOURSE = "order/applyCourse" //选择候选人或中标人
 
@@ -144,6 +148,8 @@ object Constant {
     const val COURSE_GETMYJOURNEY = "course/getMyJourney" //我的行程
 
     const val ORDER_GETPINTUAN = "order/getpintuan" //获取拼团滚动数据
+
+    const val ORDER_ACCOUNTSORDER = "order/accountsOrder" //结算 + 核销
 
 }
 

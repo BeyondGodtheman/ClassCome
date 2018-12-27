@@ -20,6 +20,9 @@ import com.sunny.classcome.http.ApiManager
 import com.sunny.classcome.http.Constant
 import com.sunny.classcome.utils.*
 import kotlinx.android.synthetic.main.activity_publish_details.*
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 
 /**
  * Desc 发布详情：课程详情、场地详情、培训详情
@@ -87,6 +90,8 @@ class PublishDetailsActivity : BaseActivity() {
     override fun setLayout(): Int = R.layout.activity_publish_details
 
     override fun initView() {
+
+        EventBus.getDefault().register(this)
 
         courseId = intent.getStringExtra("id")
 
@@ -368,5 +373,14 @@ class PublishDetailsActivity : BaseActivity() {
         // 发布者头像、用户名
         GlideUtil.loadHead(this, img_user_head, bean.user.userPic ?: "")
         txt_user_name.text = bean.user.userName
+    }
+
+    override fun close() {
+        EventBus.getDefault().unregister(this)
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onPayEvent(pay:Pay){
+        finish()
     }
 }

@@ -73,6 +73,9 @@ class OrderDetailActivity : BaseActivity() {
         txt_info.text = "订单进行中"
         txt_prompt.text = "您的信息正在发布中"
         showGrayBtn(txt_order_right, "取消发布")
+        txt_order_right.setOnClickListener {
+            CancelPromptActivity.start(this,3,classBean?.course?.id?:"")
+        }
     }
 
     private fun showPurchaser() {
@@ -175,11 +178,10 @@ class OrderDetailActivity : BaseActivity() {
     private fun showPayWait() {
         txt_info.text = "订单已生成，付款后订单生效"
         txt_order_number.text = ("订单编号：${classBean?.course?.id}")
-        showGrayBtn(txt_order_mid, "取消订单")
-        txt_order_mid.setOnClickListener{
-            CancelPromptActivity.start(this,if (isAuthor) 1 else 2,classBean?.course?.id?:"")
-        }
-
+//        showGrayBtn(txt_order_mid, "取消订单")
+//        txt_order_mid.setOnClickListener{
+//            CancelPromptActivity.start(this,if (isAuthor) 1 else 2,classBean?.course?.id?:"")
+//        }
         showBlueBtn(txt_order_right, "去支付")
         txt_order_right.setOnClickListener {
             classBean?.let {
@@ -238,6 +240,7 @@ class OrderDetailActivity : BaseActivity() {
             classBean =  MyApplication.getApp().getData<ClassBean.Bean.Data>(Constant.COURSE,true)
             when (classBean?.order?.state) {
                 "1" -> showPayWait()
+                "2" -> showField()
             }
 
             txt_date.text = DateUtil.dateFormatYYMMddHHssmm(classBean?.course?.createTime ?: "")

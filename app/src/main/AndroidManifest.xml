@@ -199,6 +199,10 @@
             android:name=".activity.InvitationRecordActivity"
             android:launchMode="singleTop" />
 
+        <!--购买者-->
+        <activity android:name=".activity.BuyActivity"
+            android:launchMode="singleTop"/>
+
         <!--过往发布信息-->
         <activity
             android:name=".activity.PastReleaseActivity"
