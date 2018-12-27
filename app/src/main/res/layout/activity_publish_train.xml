@@ -1,13 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/color_white"
         android:orientation="vertical">
+
+        <TextView
+            style="@style/style_font_default_32pt_40pt"
+            android:layout_marginTop="30pt"
+            android:text="培训分类" />
+
+        <RelativeLayout
+            android:id="@+id/rl_class_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35pt"
+            android:layout_marginBottom="40pt">
+
+            <TextView
+                android:id="@+id/txt_class_name"
+                style="@style/style_font_default_28pt"
+                android:layout_marginStart="60pt"
+                tools:text="@string/art" />
+
+            <View
+                android:id="@+id/view_triangle"
+                android:layout_width="35pt"
+                android:layout_height="35pt"
+                android:background="@drawable/ic_triangle_right"
+                android:layout_toEndOf="@id/txt_class_name"
+                android:layout_marginStart="20pt"
+                android:layout_marginTop="3pt"
+                android:layout_marginEnd="20pt"/>
+
+            <TextView
+                android:id="@+id/txt_class_value"
+                style="@style/style_font_default_28pt"
+                android:layout_toEndOf="@id/view_triangle"
+                android:layout_toStartOf="@id/img_more"
+                tools:text="@string/sketch" />
+
+            <ImageView
+                android:id="@+id/img_more"
+                style="@style/style_more_btn"
+                android:contentDescription="@string/app" />
+        </RelativeLayout>
+
 
         <TextView
             style="@style/style_font_default_32pt_40pt"
@@ -125,11 +168,10 @@
                 android:layout_marginTop="0pt"
                 android:text="@string/separate_purchase_cost" />
 
-            <EditText
+            <TextView
                 android:id="@+id/edit_separate_cost"
                 style="@style/style_edit_publish"
-                android:hint="@string/rmb"
-                android:inputType="numberDecimal" />
+                android:hint="@string/rmb" />
         </LinearLayout>
 
         <View style="@style/style_view_line_publish" />

@@ -103,7 +103,7 @@ class MyParticipatedAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleA
         textView.apply {
             showBlueBtn(this, "去支付")
             setOnClickListener {
-                PayActivity.start(context,getData(position))
+                PayActivity.start(context,getData(position),"")
             }
         }
     }

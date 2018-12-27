@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="570pt"
+    android:layout_height="716pt"
+    android:background="@color/color_white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="98pt">
+
+        <TextView
+            style="@style/style_font_default_30pt"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="正在拼单"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txt_close"
+            style="@style/style_font_default_28pt"
+            android:layout_alignParentEnd="true"
+            android:paddingStart="20pt"
+            android:paddingTop="20pt"
+            android:paddingEnd="20pt"
+            android:paddingBottom="20pt"
+            android:text="关闭" />
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1pt"
+        android:background="@color/color_divider"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</LinearLayout>

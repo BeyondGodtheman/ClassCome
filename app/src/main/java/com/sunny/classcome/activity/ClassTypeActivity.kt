@@ -23,6 +23,8 @@ class ClassTypeActivity : BaseActivity() {
         ClassTypeAdapter(list, selectMap)
     }
 
+    var pId = "0"
+
     private val selectMap = hashMapOf<String, ArrayList<ClassTypeBean.SubCategory>>()
     //保存上次操作记录（用于取消操作）
     private var subCategoryList = arrayListOf<ClassTypeBean.SubCategory>()
@@ -56,6 +58,8 @@ class ClassTypeActivity : BaseActivity() {
 
         showTitle(titleView)
 
+        pId = intent.getStringExtra("pId")?:"0"
+
         intent.getStringExtra("classPid")?.let { s ->
             MyApplication.getApp().getData<ArrayList<ClassTypeBean.SubCategory>>(Constant.CLASS_TYPE, false)?.let {
                 if (s.isNotEmpty()) {
@@ -87,7 +91,11 @@ class ClassTypeActivity : BaseActivity() {
                 refresh.finishRefresh()
                 hideLoading()
                 list.clear()
-                list.addAll(data.content?.data ?: arrayListOf())
+                if (pId == "0"){
+                    list.addAll(data.content?.data ?: arrayListOf())
+                }else{
+                    list.addAll(data.content?.data?.filter { it.id == pId } ?: arrayListOf())
+                }
                 adapter.notifyDataSetChanged()
             }
 

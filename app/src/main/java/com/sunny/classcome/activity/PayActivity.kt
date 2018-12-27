@@ -17,6 +17,8 @@ import com.sunny.classcome.utils.*
 import com.tencent.mm.opensdk.modelpay.PayReq
 import kotlinx.android.synthetic.main.activity_pay.*
 import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 
 
 @Suppress("UNCHECKED_CAST")
@@ -25,6 +27,9 @@ class PayActivity : BaseActivity() {
     private val SDK_PAY_FLAG = 1
 
     private var type = 1
+
+    private var isPintuan = false
+    private var pintuanId = ""
 
     private val handler = Handler {
 
@@ -57,7 +62,10 @@ class PayActivity : BaseActivity() {
     override fun initView() {
         showTitle(titleManager.defaultTitle("支付"))
 
+        EventBus.getDefault().register(this)
+
         type = intent.getIntExtra("type", 1)
+        pintuanId = intent.getStringExtra("pintuanId")?:""
 
         cbox_wx.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
@@ -126,8 +134,13 @@ class PayActivity : BaseActivity() {
                 txt_order_number.text = ("订单编号：" + it?.course?.id)
                 txt_class_name.text = it?.course?.title
                 txt_order_time.text = it?.course?.worktime
-                txt_money.text = ("实付：¥" + StringUtil.formatMoney((it?.course?.onecost
-                        ?: "0").toDouble()))
+                if (pintuanId.isNotEmpty()){
+                    txt_money.text = ("实付：¥" + StringUtil.formatMoney((it?.course?.assemcost
+                            ?: "0").toDouble()))
+                }else{
+                    txt_money.text = ("实付：¥" + StringUtil.formatMoney((it?.course?.sumPrice
+                            ?: "0").toDouble()))
+                }
             }
 
         }
@@ -140,11 +153,12 @@ class PayActivity : BaseActivity() {
                     .putExtra("type", 1))
         }
 
-        fun start(context: Context, data: ClassBean.Bean.Data) {
+        fun start(context: Context, data: ClassBean.Bean.Data,pintuanId:String?) {
             MyApplication.getApp().setData(Constant.COURSE, data)
             context.startActivity(Intent(context, PayActivity::class.java)
                     .putExtra("id", data.course.id)
-                    .putExtra("type", 2))
+                    .putExtra("type", 2)
+                    .putExtra("pintuanId",pintuanId))
         }
     }
 
@@ -153,7 +167,10 @@ class PayActivity : BaseActivity() {
         showLoading()
         val params = HashMap<String, String>()
         params["id"] = intent.getStringExtra("id") ?: ""
-//        params["pintuan"] = ""
+        if (pintuanId.isNotEmpty()){
+            params["pintuan"] = pintuanId
+        }
+
         ApiManager.post(composites, params, Constant.ORDER_CREATEVCHARORDERSTR, object : ApiManager.OnResult<BaseBean<WXPayBean>>() {
             override fun onSuccess(data: BaseBean<WXPayBean>) {
                 hideLoading()
@@ -179,7 +196,9 @@ class PayActivity : BaseActivity() {
         showLoading()
         val params = HashMap<String, String>()
         params["id"] = intent.getStringExtra("id") ?: ""
-//        params["pintuan"] = ""
+        if (pintuanId.isNotEmpty()){
+            params["pintuan"] = pintuanId
+        }
         ApiManager.post(composites, params, Constant.ORDER_CREATEORDERSTR, object : ApiManager.OnResult<BaseBean<String>>() {
             override fun onSuccess(data: BaseBean<String>) {
                 hideLoading()
@@ -226,5 +245,14 @@ class PayActivity : BaseActivity() {
             handler.sendMessage(message)
         }
         Thread(authRunnable).start()
+    }
+
+    override fun close() {
+        EventBus.getDefault().unregister(this)
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onPayEvent(pay:Pay){
+        finish()
     }
 }

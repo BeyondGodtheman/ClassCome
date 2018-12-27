@@ -31,7 +31,7 @@ object Constant {
     const val CLASS_TYPE = "classType" //课程分类
     const val TRAN_TYPE = "tranType" //场地设施
 
-    const val CLASS_DETAIL = "classdetailbean" //课程详情类
+    const val CLASS_DETAIL = "classDetailBean" //课程详情类
 
     const val REQUEST_CODE_CHOOSE = 0x100 //选择图片请求CODE
 

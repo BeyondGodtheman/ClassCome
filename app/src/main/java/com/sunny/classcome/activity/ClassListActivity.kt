@@ -200,6 +200,7 @@ class ClassListActivity : BaseActivity() {
         params[sortStr] = if (sortFlag) "1" else "0"
         val categoryArray = JSONArray()
         categoryArray.put(category)
+        params["courseType"] = courseType
         params["category"] = categoryArray
         params["pageIndex"] = pageIndex.toString()
         ApiManager.post(composites, params, Constant.COURSE_GETCOURSELISTS, object : ApiManager.OnResult<ClassBean>() {

@@ -49,6 +49,7 @@ class PublishDetailsActivity : BaseActivity() {
 
     var classData: ClassBean.Bean.Data? = null
 
+    var classDetailBean: ClassDetailBean? = null
     /**
      * 是否已收藏：
      * 1 已经收藏，
@@ -119,6 +120,9 @@ class PublishDetailsActivity : BaseActivity() {
         txt_collection.setOnClickListener(this)
         txt_accept.setOnClickListener(this)
 
+        txt_pintuan.setOnClickListener(this)
+        txt_pintuan_self.setOnClickListener(this)
+
         viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(state: Int) {
 
@@ -137,25 +141,55 @@ class PublishDetailsActivity : BaseActivity() {
         initRecycleView()
     }
 
+
+    //拼团支付
+    private fun pay() {
+        classData?.let { data ->
+            var pintuan = "0"
+            classDetailBean?.let {
+                if (it.content.resCourseVO.pintuanlist.isNotEmpty()) {
+                    pintuan = it.content.resCourseVO.pintuanlist[0].pintuanInfo?.id?:"0"
+                }
+            }
+            PayActivity.start(this, data, pintuan)
+        }
+    }
+
+
     override fun onClick(v: View) {
         when (v.id) {
             R.id.rl_user_more -> MyProfileActivity.start(this, uid)
             R.id.rl_history_more, R.id.txt_more, R.id.img_more -> PastReleaseActivity.start(this, uid)
             R.id.txt_collection -> loadOption(if (isCollection == "1") -1 else 1)// 若为已收藏，点击后为取消收藏状态
             R.id.txt_accept -> {
-                if (coursetype == "4" || coursetype == "5") {
-                    classData?.let {
-                        PayActivity.start(this, it)
+                when (isAppointment) {
+                    "1" -> ToastUtil.show("请不要重复操作")
+                    "2" -> {
+                        loadOption(2)
+                    }
+                    "4" -> {
+                        if (coursetype == "4" || coursetype == " 5") {
+                            classData?.let {
+                                PayActivity.start(this, it, "")
+                            }
+                        }else{
+                            PayActivity.start(this, courseId)
+                        }
+                    }
+                    "5" -> {
+                        pay()
                     }
 
-                } else {
-                    when (isAppointment) {
-                        "1" -> ToastUtil.show("请不要重复操作")
-                        "2" -> {
-                            loadOption(2)
-                        }
-                        "4", "5" -> PayActivity.start(this, courseId)
-                    }
+                }
+            }
+            R.id.txt_pintuan -> {
+                classData?.let {
+                    PayActivity.start(this, it, "0")
+                }
+            }
+            R.id.txt_pintuan_self -> {
+                classData?.let {
+                    PayActivity.start(this, it, null)
                 }
             }
         }
@@ -169,7 +203,7 @@ class PublishDetailsActivity : BaseActivity() {
 //        map["pintuan"] = id
         ApiManager.post(composites, map, Constant.COURSE_GETCOURSEDETAIL, object : ApiManager.OnResult<ClassDetailBean>() {
             override fun onSuccess(data: ClassDetailBean) {
-
+                classDetailBean = data
                 MyApplication.getApp().setData(Constant.CLASS_DETAIL, data)
                 supportFragmentManager.beginTransaction().replace(R.id.fl_container, fragment).commit()
 
@@ -187,9 +221,26 @@ class PublishDetailsActivity : BaseActivity() {
                 isAppointment = data.content.resCourseVO.isAppointment
 
                 val accept = when (isAppointment) {
-                    "1" -> "已应聘"
+                    "1" -> {
+                        if (coursetype == "4" || coursetype == "5"){
+                            "已购买"
+                        }else{
+                            "已应聘"
+                        }
+                    }
                     "2" -> {
                         if (coursetype == "4" || coursetype == "5") {
+                            if (coursetype == "5" && data.content.resCourseVO.course.assemcost != null) {
+                                txt_accept.visibility = View.GONE
+                                ll_pintuan.visibility = View.VISIBLE
+                                txt_pintuan.text = ("¥" + StringUtil.formatMoney((data.content.resCourseVO.course.assemcost
+                                        ?: "0").toDouble()) + "\n发起拼团")
+                                txt_pintuan_self.text = ("¥" + StringUtil.formatMoney((data.content.resCourseVO.course.price
+                                        ?: "0").toDouble()) + "\n单独购买")
+                            } else {
+                                txt_accept.visibility = View.VISIBLE
+                                ll_pintuan.visibility = View.GONE
+                            }
                             "去支付"
                         } else {
                             "未应聘"
@@ -199,7 +250,9 @@ class PublishDetailsActivity : BaseActivity() {
                     "5" -> "拼团待支付"
                     else -> ""
                 }
+
                 txt_accept.text = accept
+
 
                 // uid如果是本人的，底部收藏和应聘按钮隐藏
                 ll_bottom_btn.visibility = if (uid == UserManger.getLogin()?.content?.userId || isAppointment == "3") {

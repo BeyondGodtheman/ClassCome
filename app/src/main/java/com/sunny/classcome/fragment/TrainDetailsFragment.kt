@@ -1,13 +1,13 @@
 package com.sunny.classcome.fragment
 
+import android.support.v7.widget.LinearLayoutManager
 import android.view.View
-import com.sunny.classcome.MyApplication
 import com.sunny.classcome.R
 import com.sunny.classcome.activity.MapActivity
-import com.sunny.classcome.activity.SplashActivity
+import com.sunny.classcome.adapter.PinTuanAdapter
+import com.sunny.classcome.bean.ClassBean
 import com.sunny.classcome.bean.ClassDetailBean
-import com.sunny.classcome.http.Constant
-import com.sunny.classcome.utils.IntentUtil
+import com.sunny.classcome.widget.dialog.PinTuanDialog
 import kotlinx.android.synthetic.main.fragment_field_details.*
 import kotlinx.android.synthetic.main.fragment_train_details.*
 import kotlinx.android.synthetic.main.layout_train_details.*
@@ -31,24 +31,60 @@ class TrainDetailsFragment : FieldDetailsFragment() {
         txt_long_desc.text = "培训时长"
         txt_time_desc.text = "培训时间"
 
-        MyApplication.getApp().getData<ClassDetailBean>(Constant.CLASS_DETAIL, true).let { bean ->
+        txt_pintuan_more.setOnClickListener(this)
+        img_pintuan_more.setOnClickListener(this)
 
-            lan = bean?.content?.resCourseVO?.latitude?:"0"
+        classDetailBean.let { bean ->
 
-            lon = bean?.content?.resCourseVO?.longitude?:"0"
+            lan = bean?.content?.resCourseVO?.latitude ?: "0"
 
-            name = bean?.content?.resCourseVO?.classAddress?:""
+            lon = bean?.content?.resCourseVO?.longitude ?: "0"
 
-            txt_pin.text = "36人在拼单"
+            name = bean?.content?.resCourseVO?.classAddress ?: ""
+
+            var number = 0
+
+            bean?.content?.resCourseVO?.pintuanlist?.let { it ->
+                number += it.size
+                it.forEach {
+                    number += (it.tuanyuan ?: arrayListOf()).size
+                }
+                val list = arrayListOf<ClassDetailBean.Content.ResCourseVO.PintuanResponseVO>()
+                list.addAll(it.take(2))
+                if (list.isNotEmpty()) {
+                    recl_pin.layoutManager = LinearLayoutManager(context)
+
+                    recl_pin.adapter = PinTuanAdapter(bean.content.resCourseVO.isAppointment, ClassBean.Bean.Data(
+                            bean.content.resCourseVO.course,
+                            bean.content.resCourseVO.materialList,
+                            arrayListOf(),
+                            ClassBean.Bean.Data.User(bean.content.user.userName, bean.content.user.telephone, bean.content.user.userPic),
+                            ClassBean.Bean.Data.Order("", "", "", ""
+                                    , bean.content.resCourseVO.price, "", "", "", "", "", ""),
+                            bean.content.resCourseVO.isAppraise), list)
+                }
+            }
+            txt_pin.text = ("${number}人在拼团")
         }
-
-
     }
 
     override fun onClick(v: View) {
         super.onClick(v)
         when (v.id) {
             R.id.txt_more -> MapActivity.start(requireContext(), lan, lon, name)
+            R.id.txt_pintuan_more, R.id.img_pintuan_more -> {
+                classDetailBean?.let {
+                    PinTuanDialog(requireContext(), it.content.resCourseVO.isAppointment, ClassBean.Bean.Data(
+                            it.content.resCourseVO.course,
+                            it.content.resCourseVO.materialList,
+                            arrayListOf(),
+                            ClassBean.Bean.Data.User(it.content.user.userName, it.content.user.telephone, it.content.user.userPic),
+                            ClassBean.Bean.Data.Order("", "", "", ""
+                                    , it.content.resCourseVO.price, "", "", "", "", "", ""),
+                            it.content.resCourseVO.isAppraise), it.content.resCourseVO.pintuanlist).show()
+                }
+
+            }
         }
     }
 

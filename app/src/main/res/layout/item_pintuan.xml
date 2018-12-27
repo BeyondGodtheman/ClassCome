@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="130pt"
+    android:orientation="vertical">
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/img_photo"
+        android:layout_width="80pt"
+        android:layout_height="80pt"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="40pt"
+        android:scaleType="centerCrop"
+        android:src="@color/color_divider"
+        app:riv_oval="true" />
+
+    <TextView
+        android:id="@+id/txt_name"
+        style="@style/style_font_default_28pt"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="20pt"
+        android:layout_marginEnd="20pt"
+        android:layout_toEndOf="@id/img_photo"
+        android:layout_toStartOf="@id/txt_count"
+        tools:text="成人大保健" />
+
+    <TextView
+        android:id="@+id/txt_count"
+        style="@style/style_font_default_28pt"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="20pt"
+        android:layout_marginEnd="20pt"
+        android:layout_toStartOf="@id/btn_complete"
+        tools:text="还差2人" />
+
+    <Button
+        android:id="@+id/btn_complete"
+        style="@style/style_font_default_28pt"
+        android:layout_width="150pt"
+        android:layout_height="60pt"
+        android:textColor="@color/color_white"
+        android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="36pt"
+        android:text="去拼团"
+        android:background="@drawable/draw_bg_fillet_blue"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1pt"
+        android:background="@color/color_divider"
+        android:layout_alignParentBottom="true"/>
+</RelativeLayout>

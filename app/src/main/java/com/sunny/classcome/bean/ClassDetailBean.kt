@@ -44,8 +44,31 @@ data class ClassDetailBean(
                 var state: String,
                 var fatherCategoryName: String,
                 var isAppraise: String,
-                var course: ClassBean.Bean.Data.Course
-        )
+                var course: ClassBean.Bean.Data.Course,
+                var pintuanlist:ArrayList<PintuanResponseVO>
+        ){
+           data class PintuanResponseVO(
+                    var pintuanInfo:PintuanInfo?, //拼团信息 ,
+                    var shenyurenshu:String?, //拼团信息
+                    var tuanyuan:ArrayList<Any>?,
+                    var userName:String?,
+                    var userPic:String?
+
+            ){
+               data class PintuanInfo(
+                       var courseId:String?, //拼团课程id ,
+                       var createTime:String?, //拼团创建时间 ,
+                       var id:String?, // 拼团id
+                       var maxPersonNum:String?, //拼团最大人数
+                       var order:String?, //订单号 前台忽略
+                       var parentId:String?, //拼团父id
+                       var personNum:String?, //拼团人数但钱
+                       var state:String?, //拼团状态 1 未生效, 2 已生效, 3 已结束
+                       var userId:String? //拼团用户id
+               )
+
+           }
+        }
 
     }
 }

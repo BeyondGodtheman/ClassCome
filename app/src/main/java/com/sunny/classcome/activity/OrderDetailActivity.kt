@@ -183,7 +183,7 @@ class OrderDetailActivity : BaseActivity() {
         showBlueBtn(txt_order_right, "去支付")
         txt_order_right.setOnClickListener {
             classBean?.let {
-                PayActivity.start(this@OrderDetailActivity,it)
+                PayActivity.start(this@OrderDetailActivity,it,"")
             }
         }
         rl_money.visibility = View.VISIBLE

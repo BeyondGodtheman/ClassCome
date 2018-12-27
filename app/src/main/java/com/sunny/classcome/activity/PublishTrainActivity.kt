@@ -2,12 +2,15 @@ package com.sunny.classcome.activity
 
 import android.content.Intent
 import android.support.v7.widget.GridLayoutManager
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import com.sunny.classcome.MyApplication
 import com.sunny.classcome.R
 import com.sunny.classcome.adapter.LabelAdapter
 import com.sunny.classcome.base.BaseActivity
 import com.sunny.classcome.bean.BaseBean
+import com.sunny.classcome.bean.ClassTypeBean
 import com.sunny.classcome.http.ApiManager
 import com.sunny.classcome.http.Constant
 import com.sunny.classcome.utils.ToastUtil
@@ -28,10 +31,14 @@ class PublishTrainActivity : BaseActivity() {
     private var latitude = ""
     private var longitude = ""
 
+    private var classPid = ""
+
     override fun setLayout(): Int = R.layout.activity_publish_train
 
     //保存上次操作记录（用于取消操作）
     private var selectSet = HashSet<String>()
+
+    private var subCategoryList = java.util.ArrayList<ClassTypeBean.SubCategory>()
 
     override fun initView() {
         showTitle(titleManager.defaultTitle("发布培训"))
@@ -39,11 +46,33 @@ class PublishTrainActivity : BaseActivity() {
         txt_location.setOnClickListener(this)
         rl_tran.setOnClickListener(this)
         txt_publish.setOnClickListener(this)
+        rl_class_type.setOnClickListener(this)
+
+        edit_cost.addTextChangedListener(object :TextWatcher{
+            override fun afterTextChanged(s: Editable?) {
+
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                edit_separate_cost.text = edit_cost.text
+            }
+        })
+
+
         view_up.setHint("请描述一下您的场地服务情况")
     }
 
     override fun onClick(v: View) {
         when (v.id) {
+            R.id.rl_class_type -> {
+                startActivityForResult(Intent(this, ClassTypeActivity::class.java)
+                        .putExtra("pId", "314"), 0)
+            }
+
             R.id.txt_location -> {
                 startActivityForResult(Intent(this, AddressActivity::class.java), 1)
             }
@@ -65,6 +94,22 @@ class PublishTrainActivity : BaseActivity() {
             cityId = data?.getStringExtra("cityId") ?: ""
             latitude = data?.getStringExtra("latitude") ?: ""
             longitude = data?.getStringExtra("longitude") ?: ""
+        }
+
+        if (requestCode == 0 && resultCode == 1) {
+            MyApplication.getApp().getData<ArrayList<ClassTypeBean.SubCategory>>(Constant.CLASS_TYPE, false)?.let { list ->
+                val strSb = StringBuilder()
+                subCategoryList = list
+                list.forEach {
+                    strSb.append(it.name).append(" ")
+                }
+                if (strSb.isNotEmpty()) {
+                    strSb.deleteCharAt(strSb.lastIndex)
+                }
+                classPid = data?.getStringExtra("classPid") ?: ""
+                txt_class_name.text = data?.getStringExtra("classPName") ?: ""
+                txt_class_value.text = strSb
+            }
         }
 
         if (requestCode == 2 && resultCode == 2) {
@@ -124,6 +169,10 @@ class PublishTrainActivity : BaseActivity() {
     )
 
     fun publish() {
+        if (subCategoryList.isEmpty()) {
+            ToastUtil.show("请选择培训分类！")
+            return
+        }
 
         if (edit_title.text.isEmpty()) {
             ToastUtil.show("请输入标题！")
@@ -166,8 +215,38 @@ class PublishTrainActivity : BaseActivity() {
             return
         }
 
+        //拼团参数拦截
+        if (edit_group_cost.text.isNotEmpty() || edit_people_start.text.isNotEmpty() || edit_people_end.text.isNotEmpty() || edit_time_limit.text.isNotEmpty()){
+
+            if (edit_group_cost.text.isEmpty()){
+                ToastUtil.show("请输入拼团购买费用")
+                return
+            }
+
+            if (edit_group_cost.text.isEmpty()){
+                ToastUtil.show("请输入拼团最小人数")
+                return
+            }
+
+            if (edit_group_cost.text.isEmpty()){
+                ToastUtil.show("请输入拼团最大人数")
+                return
+            }
+
+            if (edit_group_cost.text.isEmpty()){
+                ToastUtil.show("请输入拼团限制时间")
+                return
+            }
+
+        }
 
         val params = hashMapOf<String, Any>()
+
+        val categoryIdArray = JSONArray()
+        subCategoryList.forEach {
+            categoryIdArray.put(it.id.toInt())
+        }
+        params["categoryIdList"] = categoryIdArray //类型ID
         params["coursetype"] = "5" //5:培训
         params["title"] = edit_title.text.toString()
         params["cityId"] = cityId
@@ -177,8 +256,10 @@ class PublishTrainActivity : BaseActivity() {
         params["classDetailAdress"] = edit_street.text.toString()
         params["latitude"] = latitude
         params["longitude"] = longitude
-
         params["onecost"] = edit_cost.text.toString()
+        params["oneallcost"] = edit_cost.text.toString()
+        params["price"] = edit_cost.text.toString()
+        params["sumPrice"] = edit_cost.text.toString()
 
         //团购参数开始
         params["assemcost"] = edit_group_cost.text.toString()//拼团购买费用

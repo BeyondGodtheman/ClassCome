@@ -35,7 +35,7 @@ data class ClassBean(
                     var id: String,
                     var title: String,
                     var materialId: String,
-                    var price: String,
+                    var price: String?,
                     var courseNum: String,
                     var dicId: String,
                     var personType: String,
@@ -69,7 +69,8 @@ data class ClassBean(
                     var worktime: String,//营业时间
                     var commondevice:String?, //通用设施
                     var meetdevice:String?, //会议设施
-                    var specialdevice:String? //特殊设施
+                    var specialdevice:String?, //特殊设施
+                    var assemcost:String? //拼团购买价格
             ){
                 var sumPrice: String? = null
                 get(){

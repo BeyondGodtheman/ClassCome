@@ -22,11 +22,15 @@ open class FieldDetailsFragment : BaseFragment() {
     private var lon = "0"
     private var name = ""
 
+    var classDetailBean:ClassDetailBean? = null
+
     override fun setLayout(): Int = R.layout.fragment_train_details
 
     override fun initView() {
 
-        MyApplication.getApp().getData<ClassDetailBean>(Constant.CLASS_DETAIL, true)?.content?.resCourseVO?.course?.let { bean ->
+        classDetailBean = MyApplication.getApp().getData<ClassDetailBean>(Constant.CLASS_DETAIL, true)
+
+        classDetailBean?.content?.resCourseVO?.course?.let { bean ->
 
             lan = bean.latitude ?: ""
 

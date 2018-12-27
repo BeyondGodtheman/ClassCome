@@ -310,6 +310,7 @@ class PublishClassActivity : BaseActivity() {
         params["classAddress"] = txt_location.text.toString()
         params["classDetailAdress"] = edit_street.text.toString()
         params["courseNum"] = edit_total_class.text.toString()
+        params["onecost"] = edit_single_cost.text.toString()
         params["price"] = edit_single_cost.text.toString()
         params["sumPrice"] = edit_total_cost.text.toString()
         params["publishTotal"] = edit_recruit_people.text.toString() //招聘人数
