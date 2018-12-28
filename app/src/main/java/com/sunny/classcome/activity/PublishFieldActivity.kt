@@ -8,6 +8,7 @@ import com.sunny.classcome.R
 import com.sunny.classcome.adapter.LabelAdapter
 import com.sunny.classcome.base.BaseActivity
 import com.sunny.classcome.bean.BaseBean
+import com.sunny.classcome.bean.ClassTypeBean
 import com.sunny.classcome.http.ApiManager
 import com.sunny.classcome.http.Constant
 import com.sunny.classcome.utils.ToastUtil
@@ -28,14 +29,19 @@ class PublishFieldActivity : BaseActivity() {
     private var latitude = ""
     private var longitude = ""
 
+    private var classPid = ""
+
     override fun setLayout(): Int = R.layout.activity_publish_field
 
     //保存上次操作记录（用于取消操作）
     private var selectSet = HashSet<String>()
 
+    private var subCategoryList = java.util.ArrayList<ClassTypeBean.SubCategory>()
+
     override fun initView() {
         showTitle(titleManager.defaultTitle("发布场地"))
 
+        rl_class_type.setOnClickListener(this)
         txt_location.setOnClickListener(this)
         rl_tran.setOnClickListener(this)
         txt_publish.setOnClickListener(this)
@@ -44,6 +50,10 @@ class PublishFieldActivity : BaseActivity() {
 
     override fun onClick(v: View) {
         when (v.id) {
+            R.id.rl_class_type -> {
+                startActivityForResult(Intent(this, ClassTypeActivity::class.java)
+                        .putExtra("pId", "311"), 0)
+            }
             R.id.txt_location -> {
                 startActivityForResult(Intent(this, AddressActivity::class.java), 1)
             }
@@ -66,6 +76,23 @@ class PublishFieldActivity : BaseActivity() {
             latitude = data?.getStringExtra("latitude") ?: ""
             longitude = data?.getStringExtra("longitude") ?: ""
         }
+
+        if (requestCode == 0 && resultCode == 1) {
+            MyApplication.getApp().getData<ArrayList<ClassTypeBean.SubCategory>>(Constant.CLASS_TYPE, false)?.let { list ->
+                val strSb = StringBuilder()
+                subCategoryList = list
+                list.forEach {
+                    strSb.append(it.name).append(" ")
+                }
+                if (strSb.isNotEmpty()) {
+                    strSb.deleteCharAt(strSb.lastIndex)
+                }
+                classPid = data?.getStringExtra("classPid") ?: ""
+                txt_class_name.text = data?.getStringExtra("classPName") ?: ""
+                txt_class_value.text = strSb
+            }
+        }
+
 
         if (requestCode == 2 && resultCode == 2) {
             selectSet = MyApplication.getApp().getData<HashSet<String>>(Constant.TRAN_TYPE, true)
@@ -125,6 +152,11 @@ class PublishFieldActivity : BaseActivity() {
 
     fun publish() {
 
+        if (subCategoryList.isEmpty()) {
+            ToastUtil.show("请选择场地分类！")
+            return
+        }
+
         if (edit_title.text.isEmpty()) {
             ToastUtil.show("请输入标题！")
             return
@@ -173,6 +205,13 @@ class PublishFieldActivity : BaseActivity() {
 
 
         val params = hashMapOf<String, Any>()
+
+        val categoryIdArray = JSONArray()
+        subCategoryList.forEach {
+            categoryIdArray.put(it.id.toInt())
+        }
+        params["categoryIdList"] = categoryIdArray //类型ID
+
         params["coursetype"] = "4" //4:场地
         params["title"] = edit_title.text.toString()
         params["cityId"] = cityId
