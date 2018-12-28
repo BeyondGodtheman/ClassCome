@@ -2,7 +2,6 @@ package com.sunny.classcome.activity
 
 import android.content.Context
 import android.content.Intent
-import android.content.IntentFilter
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import com.scwang.smartrefresh.layout.api.RefreshLayout
@@ -19,7 +18,7 @@ import com.sunny.classcome.http.Constant
 import com.sunny.classcome.utils.ToastUtil
 import kotlinx.android.synthetic.main.layout_refresh_recycler.*
 
-class BuyActivity: BaseActivity() {
+class BuyActivity : BaseActivity() {
 
     private var courseId = ""
     private var pageIndex = 1
@@ -48,7 +47,7 @@ class BuyActivity: BaseActivity() {
         })
 
         recl.layoutManager = LinearLayoutManager(this)
-        recl.adapter = BuyAdapter(list){
+        recl.adapter = BuyAdapter(list) {
             option(it)
         }
         showLoading()
@@ -67,15 +66,20 @@ class BuyActivity: BaseActivity() {
                 if (pageIndex == 1) {
                     list.clear()
                     refresh.finishRefresh()
-                    if (data.content?.data == null){
+                    if (data.content?.data == null) {
                         ll_error.visibility = View.VISIBLE
-                    }else{
+                    } else {
                         ll_error.visibility = View.GONE
                     }
                 } else {
                     refresh.finishLoadMore()
                 }
-                list.addAll(data.content?.data?: arrayListOf())
+                data.content?.data?.let {
+                    if (!list.containsAll(it)) {
+                        list.addAll(it)
+                    }
+                }
+
                 recl.adapter?.notifyDataSetChanged()
             }
 
@@ -100,16 +104,16 @@ class BuyActivity: BaseActivity() {
         }
     }
 
-    private fun option(position:Int){
+    private fun option(position: Int) {
         showLoading()
         val params = hashMapOf<String, String>()
         params["courseId"] = courseId
-        params["useUserId"] = list[position].userId?:""
-        ApiManager.post(composites,params,Constant.ORDER_ACCOUNTSORDER,object : ApiManager.OnResult<BaseBean<String>>(){
+        params["useUserId"] = list[position].userId ?: ""
+        ApiManager.post(composites, params, Constant.ORDER_ACCOUNTSORDER, object : ApiManager.OnResult<BaseBean<String>>() {
             override fun onSuccess(data: BaseBean<String>) {
                 hideLoading()
                 ToastUtil.show(data.content?.info)
-                if (data.content?.statu == "1"){
+                if (data.content?.statu == "1") {
                     list[position].state = "3"
                     recl.adapter?.notifyDataSetChanged()
                 }

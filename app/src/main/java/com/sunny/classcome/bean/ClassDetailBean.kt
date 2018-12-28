@@ -45,7 +45,7 @@ data class ClassDetailBean(
                 var fatherCategoryName: String,
                 var isAppraise: String,
                 var course: ClassBean.Bean.Data.Course,
-                var pintuanlist:ArrayList<PintuanResponseVO>
+                var pintuanlist:ArrayList<PintuanResponseVO>?
         ){
            data class PintuanResponseVO(
                     var pintuanInfo:PintuanInfo?, //拼团信息 ,

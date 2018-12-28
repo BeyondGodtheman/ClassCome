@@ -1,6 +1,6 @@
 package com.sunny.classcome.bean
 
-class BuyBean(
+data class BuyBean(
         var userName: String?,
         var telephone: String?,
         var userPic: String?,

@@ -28,15 +28,15 @@ class MyParticipatedAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleA
         holder.itemView.txt_mid.visibility = View.GONE
         holder.itemView.txt_right.visibility = View.GONE
 
-        when (getData(position).order.state) {
-            "1" -> {
+        when (getData(position).course.state) {
+            "4" -> {
                 pay(holder.itemView.txt_right, position)
             }
-            "2" -> {
+            "5" -> {
                 cancel(holder.itemView.txt_right, position)
             }
-
         }
+
         holder.itemView.txt_status.text = getData(position).course.stateInfo
 
         getData(position).materialList?.let {

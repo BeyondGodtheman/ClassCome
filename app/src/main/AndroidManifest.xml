@@ -200,8 +200,9 @@
             android:launchMode="singleTop" />
 
         <!--购买者-->
-        <activity android:name=".activity.BuyActivity"
-            android:launchMode="singleTop"/>
+        <activity
+            android:name=".activity.BuyActivity"
+            android:launchMode="singleTop" />
 
         <!--过往发布信息-->
         <activity
@@ -242,9 +243,14 @@
         <activity android:name=".activity.SearchActivity" />
 
         <!--我的行程-->
-        <activity android:name=".activity.MyItineraryActivity"/>
+        <activity android:name=".activity.MyItineraryActivity" />
 
         <!--场地设施-->
-        <activity android:name=".activity.TranTypeActivity"/>
+        <activity android:name=".activity.TranTypeActivity" />
+
+        <!--搜索结果页面-->
+        <activity
+            android:name=".activity.SearchResultActivity"
+            android:launchMode="singleTop" />
     </application>
 </manifest>

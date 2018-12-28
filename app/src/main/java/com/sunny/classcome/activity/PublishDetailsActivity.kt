@@ -152,8 +152,8 @@ class PublishDetailsActivity : BaseActivity() {
         classData?.let { data ->
             var pintuan = "0"
             classDetailBean?.let {
-                if (it.content.resCourseVO.pintuanlist.isNotEmpty()) {
-                    pintuan = it.content.resCourseVO.pintuanlist[0].pintuanInfo?.id?:"0"
+                if ((it.content.resCourseVO.pintuanlist?: arrayListOf()).isNotEmpty()) {
+                    pintuan = it.content.resCourseVO.pintuanlist!![0].pintuanInfo?.id?:"0"
                 }
             }
             PayActivity.start(this, data, pintuan)
@@ -170,7 +170,13 @@ class PublishDetailsActivity : BaseActivity() {
                 when (isAppointment) {
                     "1" -> ToastUtil.show("请不要重复操作")
                     "2" -> {
-                        loadOption(2)
+                        if (coursetype == "4" || coursetype == " 5") {
+                            classData?.let {
+                                PayActivity.start(this, it, "")
+                            }
+                        }else{
+                            loadOption(2)
+                        }
                     }
                     "4" -> {
                         if (coursetype == "4" || coursetype == " 5") {

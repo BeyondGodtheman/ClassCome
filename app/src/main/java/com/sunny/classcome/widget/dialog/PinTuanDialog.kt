@@ -11,7 +11,7 @@ import com.sunny.classcome.bean.ClassBean
 import com.sunny.classcome.bean.ClassDetailBean
 import kotlinx.android.synthetic.main.layout_item_pindan.*
 
-class PinTuanDialog(context:Context, var isAppointment:String, var classBean: ClassBean.Bean.Data, list: ArrayList<ClassDetailBean.Content.ResCourseVO.PintuanResponseVO>): Dialog(context)  {
+class PinTuanDialog(context:Context,isAppointment:String,classBean: ClassBean.Bean.Data, list: ArrayList<ClassDetailBean.Content.ResCourseVO.PintuanResponseVO>): Dialog(context)  {
 
     init {
         requestWindowFeature(Window.FEATURE_NO_TITLE)

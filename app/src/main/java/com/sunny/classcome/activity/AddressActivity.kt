@@ -25,6 +25,14 @@ class AddressActivity: BaseActivity() {
         recl_city.layoutManager = LinearLayoutManager(this)
         recl_area.layoutManager = LinearLayoutManager(this)
 
+        if (intent.getBooleanExtra("search",false)){
+            txt_unlimited.visibility = View.VISIBLE
+
+            txt_unlimited.setOnClickListener {
+                setResult(1, resultIntent)
+                finish()
+            }
+        }
     }
 
     override fun onClick(v: View?) {

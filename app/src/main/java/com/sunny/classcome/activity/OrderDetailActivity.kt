@@ -7,7 +7,6 @@ import com.sunny.classcome.MyApplication
 import com.sunny.classcome.R
 import com.sunny.classcome.base.BaseActivity
 import com.sunny.classcome.bean.ClassBean
-import com.sunny.classcome.bean.ClassDetailBean
 import com.sunny.classcome.bean.OrderDetailBean
 import com.sunny.classcome.http.ApiManager
 import com.sunny.classcome.http.Constant
@@ -36,17 +35,17 @@ class OrderDetailActivity : BaseActivity() {
     private var isAuthor = false
 
     companion object {
-        fun start(context: Context, id: String,isAuthor:Boolean) {
+        fun start(context: Context, id: String, isAuthor: Boolean) {
             context.startActivity(Intent(context, OrderDetailActivity::class.java)
                     .putExtra("id", id)
-                    .putExtra("isAuthor",isAuthor)
+                    .putExtra("isAuthor", isAuthor)
                     .putExtra("type", 1))
         }
 
-        fun start(context: Context, classBean: ClassBean.Bean.Data,isAuthor:Boolean) {
+        fun start(context: Context, classBean: ClassBean.Bean.Data, isAuthor: Boolean) {
             MyApplication.getApp().setData(Constant.COURSE, classBean)
             context.startActivity(Intent(context, OrderDetailActivity::class.java)
-                    .putExtra("isAuthor",isAuthor)
+                    .putExtra("isAuthor", isAuthor)
                     .putExtra("type", 2))
         }
     }
@@ -54,7 +53,7 @@ class OrderDetailActivity : BaseActivity() {
     override fun initView() {
         showTitle(titleManager.defaultTitle(getString(R.string.order_detail)))
 
-        isAuthor = intent.getBooleanExtra("isAuthor",false)
+        isAuthor = intent.getBooleanExtra("isAuthor", false)
 
         view_detail.setOnClickListener(this)
         rl_info.setOnClickListener(this)
@@ -74,7 +73,7 @@ class OrderDetailActivity : BaseActivity() {
         txt_prompt.text = "您的信息正在发布中"
         showGrayBtn(txt_order_right, "取消发布")
         txt_order_right.setOnClickListener {
-            CancelPromptActivity.start(this,3,classBean?.course?.id?:"")
+            CancelPromptActivity.start(this, 3, classBean?.course?.id ?: "")
         }
     }
 
@@ -170,7 +169,7 @@ class OrderDetailActivity : BaseActivity() {
         txt_info.text = "订单进行中"
         txt_prompt.text = "您已付款成功"
         txt_order_number.text = ("订单编号：${classBean?.order?.orderNum}")
-        txt_order_remark.text = "验证码：2344 3455 3545"
+//        txt_order_remark.text = "验证码：2344 3455 3545"
         showGrayBtn(txt_order_right, "取消订单")
     }
 
@@ -185,11 +184,11 @@ class OrderDetailActivity : BaseActivity() {
         showBlueBtn(txt_order_right, "去支付")
         txt_order_right.setOnClickListener {
             classBean?.let {
-                PayActivity.start(this@OrderDetailActivity,it,"")
+                PayActivity.start(this@OrderDetailActivity, it, "")
             }
         }
         rl_money.visibility = View.VISIBLE
-        txt_date.text = DateUtil.dateFormatYYMMddHHssmm(classBean?.order?.createTime?:"")
+        txt_date.text = DateUtil.dateFormatYYMMddHHssmm(classBean?.order?.createTime ?: "")
         txt_money_desc.text = "实付款"
         txt_money_count.text = ("￥${classBean?.course?.price}")
     }
@@ -237,11 +236,27 @@ class OrderDetailActivity : BaseActivity() {
     override fun loadData() {
 
         if (intent.getIntExtra("type", 1) == 2) {
-            classBean =  MyApplication.getApp().getData<ClassBean.Bean.Data>(Constant.COURSE,true)
-            when (classBean?.order?.state) {
-                "1" -> showPayWait()
-                "2" -> showField()
+            classBean = MyApplication.getApp().getData<ClassBean.Bean.Data>(Constant.COURSE, true)
+            if (isAuthor) {
+                when (classBean?.course?.state) {
+                    "1" -> showPayWait() //待支付
+                    "2" -> showField()  //已支付
+                    "3" -> showOffShelf() //已取消
+                    "5" -> {
+                        if (classBean?.course?.coursetype == "4" || classBean?.course?.coursetype == "5") {
+                            showPurchaser()
+                        }
+                    }
+                }
+            } else {
+                when (classBean?.course?.state) {
+                    "2" -> showPayWait()  //待支付
+                    "3" -> showOffShelf() //已取消
+                    "5" -> showPaying() //进行中
+                }
+
             }
+
 
             txt_date.text = DateUtil.dateFormatYYMMddHHssmm(classBean?.course?.createTime ?: "")
             txt_class.text = classBean?.course?.title

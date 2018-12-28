@@ -81,7 +81,7 @@ class TrainDetailsFragment : FieldDetailsFragment() {
                             ClassBean.Bean.Data.User(it.content.user.userName, it.content.user.telephone, it.content.user.userPic),
                             ClassBean.Bean.Data.Order("", "", "", ""
                                     , it.content.resCourseVO.price, "", "", "", "", "", ""),
-                            it.content.resCourseVO.isAppraise), it.content.resCourseVO.pintuanlist).show()
+                            it.content.resCourseVO.isAppraise), it.content.resCourseVO.pintuanlist?: arrayListOf()).show()
                 }
 
             }

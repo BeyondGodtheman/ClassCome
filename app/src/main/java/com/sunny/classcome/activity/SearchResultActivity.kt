@@ -2,8 +2,6 @@ package com.sunny.classcome.activity
 
 import android.content.Context
 import android.content.Intent
-import android.support.design.widget.TabLayout
-import android.support.v4.content.ContextCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import android.widget.ImageView
@@ -15,23 +13,27 @@ import com.sunny.classcome.R
 import com.sunny.classcome.adapter.ClassListAdapter
 import com.sunny.classcome.base.BaseActivity
 import com.sunny.classcome.bean.ClassBean
-import com.sunny.classcome.bean.ClassChildType
 import com.sunny.classcome.http.ApiManager
 import com.sunny.classcome.http.Constant
 import kotlinx.android.synthetic.main.activity_class_list.*
 import org.json.JSONArray
 
+class SearchResultActivity : BaseActivity() {
 
-class ClassListActivity : BaseActivity() {
     private var sortIndex = 0
     private var pageIndex = 1
     private var sortFlag = false
 
-    //pId 活动 213, 217家教,311 场地, 314 培训
-
-    private var pId = "213"
+    private var keyWord = ""
     private var courseType = "2"
     private var category = "0"
+    private var startPrice = ""
+    private var endPrice = ""
+    private var cityId = ""
+    private var countyId = ""
+    private var townId = ""
+    private var startDate = ""
+    private var personType = ""
 
     val dataList = arrayListOf<ClassBean.Bean.Data>()
 
@@ -43,63 +45,27 @@ class ClassListActivity : BaseActivity() {
         arrayListOf(img_local_bottom, img_hot_bottom, img_price_bottom, img_time_bottom)
     }
 
-
     override fun setLayout(): Int = R.layout.activity_class_list
-
     override fun initView() {
+        tabLayout.visibility = View.GONE
 
-        pId = intent.getStringExtra("pId")
+        keyWord = intent.getStringExtra("keyWord")
+        courseType = intent.getStringExtra("courseType") ?: ""
+        category = intent.getStringExtra("category") ?: ""
+        startPrice = intent.getStringExtra("startPrice") ?: ""
+        endPrice = intent.getStringExtra("endPrice") ?: ""
+        cityId = intent.getStringExtra("cityId") ?: ""
+        countyId = intent.getStringExtra("countyId") ?: ""
+        townId = intent.getStringExtra("townId") ?: ""
+        startDate = intent.getStringExtra("startDate") ?: ""
+        personType = intent.getStringExtra("personType") ?: ""
 
-        val title = when (pId) {
-            "213" -> {
-                courseType = "3"
-                "活动"
-            }
-            "217" -> {
-                courseType = "1"
-                "家教"
-            }
-            "311" -> {
-                courseType = "4"
-                "场地"
-            }
-            "314" -> {
-                courseType = "5"
-                "培训"
-            }
-            else -> {
-                courseType = "2"
-                "代课"
-            }
-        }
-
-        showTitle(titleManager.iconTitle(title, View.OnClickListener {
-            SearchActivity.start(this,pId,courseType)
-        }))
-
-        tabLayout.visibility = View.VISIBLE
-
-        tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-            override fun onTabReselected(tab: TabLayout.Tab) {
-
-            }
-
-            override fun onTabUnselected(tab: TabLayout.Tab) {
-
-            }
-
-            override fun onTabSelected(tab: TabLayout.Tab) {
-                category = tab.tag as String
-                sort(0)
-            }
-
-        })
+        showTitle(titleManager.defaultTitle("搜索：$keyWord"))
 
         ll_location.setOnClickListener(this)
         ll_hot.setOnClickListener(this)
         ll_price.setOnClickListener(this)
         ll_time.setOnClickListener(this)
-
 
         recl.layoutManager = LinearLayoutManager(this)
         recl.isNestedScrollingEnabled = false
@@ -121,25 +87,10 @@ class ClassListActivity : BaseActivity() {
             }
         })
 
-        loadNav()
+        showLoading()
+       loadClass()
     }
 
-    override fun onClick(v: View) {
-        when (v.id) {
-            R.id.ll_location -> {
-                sort(0)
-            }
-            R.id.ll_hot -> {
-                sort(1)
-            }
-            R.id.ll_price -> {
-                sort(2)
-            }
-            R.id.ll_time -> {
-                sort(3)
-            }
-        }
-    }
 
     private fun sort(mSortIndex: Int) {
         bottomArrowList[sortIndex].setImageResource(R.mipmap.ic_arrow_bottom_gray)
@@ -161,31 +112,6 @@ class ClassListActivity : BaseActivity() {
     }
 
 
-    private fun loadNav() {
-        val params = HashMap<String, String>()
-        if (courseType == "4" || courseType == "5"){
-            params["pId"] = pId
-        }
-        ApiManager.post(composites, params, Constant.COURSE_GETCATEGORY, object : ApiManager.OnResult<ClassChildType>() {
-            override fun onSuccess(data: ClassChildType) {
-                tabLayout.removeAllTabs()
-                data.content?.forEach {
-                    tabLayout.addTab(tabLayout.newTab().setText(it.name).setTag(it.id))
-                }
-                category = data.content?.first()?.id ?: "0"
-
-                //加载课程数据
-                sort(0)
-            }
-
-            override fun onFailed(code: String, message: String) {
-            }
-        })
-
-
-    }
-
-
     private fun loadClass() {
         val sortStr = when (sortIndex) {
             0 -> "sortAdress"
@@ -196,21 +122,59 @@ class ClassListActivity : BaseActivity() {
 
 
         val params = HashMap<String, Any>()
-//        params["cityId"] = UserManger.getAddress().split(",")[0]
+        if (cityId.isNotEmpty()){
+            params["cityId"] = cityId
+        }
+
+        if (countyId.isNotEmpty()){
+            params["countyId"] = countyId
+        }
+        if (townId.isNotEmpty()){
+            params["townId"] = townId
+        }
+
         params[sortStr] = if (sortFlag) "1" else "0"
-        val categoryArray = JSONArray()
-        categoryArray.put(category)
-        params["courseType"] = courseType
-        params["category"] = categoryArray
+
+        if (category.isNotEmpty()){
+            val categoryArray = JSONArray()
+            categoryArray.put(category)
+            params["category"] = categoryArray
+        }
+
+        if (keyWord.isNotEmpty()){
+            params["keyWord"] = keyWord
+        }
+
+        if (personType.isNotEmpty()){
+            params["personType"] = personType //人员类型: 1 成人 2 儿童 3所有人
+        }
+
+        if (startDate != "设置日期"){
+            params["startTime"] = startDate
+        }
+
+        if (startPrice.isNotEmpty()){
+            params["startPrice"] = startPrice
+        }
+
+        if (endPrice.isNotEmpty()){
+            params["endPrice"] = endPrice
+        }
+
+      if (courseType.isNotEmpty()){
+          params["courseType"] = courseType
+      }
+
         params["pageIndex"] = pageIndex.toString()
         ApiManager.post(composites, params, Constant.COURSE_GETCOURSELISTS, object : ApiManager.OnResult<ClassBean>() {
             override fun onSuccess(data: ClassBean) {
+                hideLoading()
                 if (pageIndex == 1) {
                     dataList.clear()
                     refresh.finishRefresh()
-                    if (data.content?.dataList == null){
+                    if (data.content?.dataList == null) {
                         layout_error.visibility = View.VISIBLE
-                    }else{
+                    } else {
                         layout_error.visibility = View.GONE
                     }
                 } else {
@@ -224,15 +188,45 @@ class ClassListActivity : BaseActivity() {
             }
 
             override fun onFailed(code: String, message: String) {
+                hideLoading()
             }
 
         })
     }
 
+
+    override fun onClick(v: View) {
+        when (v.id) {
+            R.id.ll_location -> {
+                sort(0)
+            }
+            R.id.ll_hot -> {
+                sort(1)
+            }
+            R.id.ll_price -> {
+                sort(2)
+            }
+            R.id.ll_time -> {
+                sort(3)
+            }
+        }
+    }
+
+
     companion object {
-        fun start(context: Context, pId: String) {
-            context.startActivity(Intent(context, ClassListActivity::class.java)
-                    .putExtra("pId", pId))
+        fun start(context: Context,keyWord:String ,courseType: String, category: String, startPrice: String, endPrice: String, cityId: String, countyId: String,
+                  townId: String, startDate: String, personType: String) {
+            context.startActivity(Intent(context, SearchResultActivity::class.java)
+                    .putExtra("keyWord", keyWord)
+                    .putExtra("courseType", courseType)
+                    .putExtra("category", category)
+                    .putExtra("startPrice", startPrice)
+                    .putExtra("endPrice", endPrice)
+                    .putExtra("cityId", cityId)
+                    .putExtra("countyId", countyId)
+                    .putExtra("townId", townId)
+                    .putExtra("startDate", startDate)
+                    .putExtra("personType", personType))
         }
     }
 }

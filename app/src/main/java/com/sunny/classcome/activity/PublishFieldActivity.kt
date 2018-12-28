@@ -34,7 +34,7 @@ class PublishFieldActivity : BaseActivity() {
     private var selectSet = HashSet<String>()
 
     override fun initView() {
-        showTitle(titleManager.defaultTitle("发布培训"))
+        showTitle(titleManager.defaultTitle("发布场地"))
 
         txt_location.setOnClickListener(this)
         rl_tran.setOnClickListener(this)
@@ -142,22 +142,27 @@ class PublishFieldActivity : BaseActivity() {
 
         if (edit_cost.text.isEmpty()) {
             ToastUtil.show("请输入培训费用！")
+            return
         }
 
         if (edit_hour.text.isEmpty()) {
             ToastUtil.show("请输入单次培训时间！")
+            return
         }
 
         if (edit_people.text.isEmpty()) {
             ToastUtil.show("请输入场地容纳人数！")
+            return
         }
 
         if (edit_square.text.isEmpty()) {
             ToastUtil.show("请输入场地空间!")
+            return
         }
 
         if (txt_train_time.text.isEmpty()) {
             ToastUtil.show("请输入培训时间!")
+            return
         }
 
 
@@ -179,6 +184,9 @@ class PublishFieldActivity : BaseActivity() {
         params["longitude"] = longitude
 
         params["onecost"] = edit_cost.text.toString()
+        params["oneallcost"] = edit_cost.text.toString()
+        params["price"] = edit_cost.text.toString()
+        params["sumPrice"] = edit_cost.text.toString()
 
         //团购参数结束
         params["onetime"] = edit_hour.text.toString() //单次培训时间

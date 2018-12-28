@@ -155,7 +155,7 @@
             android:id="@+id/txt_train_time"
             style="@style/style_edit_publish"
             android:layout_marginTop="15pt"
-            android:hint="周一至周五"/>
+            android:hint="例如:周一至周五"/>
 
         <View style="@style/style_view_line_publish" />
 

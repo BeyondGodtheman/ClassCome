@@ -49,12 +49,17 @@
                     android:layout_marginStart="26pt"
                     android:background="@drawable/ic_search_white" />
 
-                <TextView
+                <EditText
                     android:id="@+id/edit_keyword"
                     style="@style/style_font_default_28pt"
                     android:layout_gravity="center_vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="42pt"
                     android:layout_marginStart="17pt"
-                    android:text="输入您想找的关键词"
+                    android:hint="输入您想找的关键词"
+                    android:background="@color/color_transparent"
+                    android:lines="1"
                     android:textColor="@color/color_white" />
 
             </LinearLayout>
@@ -96,23 +101,31 @@
             android:text="设置价格" />
 
         <TextView
+            android:id="@+id/txt_money"
             style="@style/style_font_default_30pt"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginEnd="30pt"
-            android:layout_toStartOf="@id/view_1"
+            android:layout_toStartOf="@id/rl_money"
             android:gravity="center_vertical|right"
             android:text="无限制"
             tools:ignore="RtlHardcoded" />
 
-        <View
-            android:id="@+id/view_1"
-            android:layout_width="22pt"
-            android:layout_height="12pt"
+        <RelativeLayout
+            android:id="@+id/rl_money"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_marginEnd="30pt"
-            android:background="@mipmap/ic_arrow_bottom_blue" />
+            android:paddingStart="30pt"
+            android:paddingEnd="30pt">
+
+            <View
+                android:layout_width="22pt"
+                android:layout_height="12pt"
+                android:layout_centerVertical="true"
+                android:background="@mipmap/ic_arrow_bottom_blue"
+                android:padding="30pt" />
+        </RelativeLayout>
     </RelativeLayout>
 
     <RelativeLayout
@@ -128,23 +141,31 @@
             android:text="设置地点" />
 
         <TextView
+            android:id="@+id/txt_address"
             style="@style/style_font_default_30pt"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginEnd="30pt"
-            android:layout_toStartOf="@id/view_2"
+            android:layout_toStartOf="@id/rl_address"
             android:gravity="center_vertical|right"
             android:text="无限制"
             tools:ignore="RtlHardcoded" />
 
-        <View
-            android:id="@+id/view_2"
-            android:layout_width="22pt"
-            android:layout_height="12pt"
+        <RelativeLayout
+            android:id="@+id/rl_address"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_marginEnd="30pt"
-            android:background="@mipmap/ic_arrow_bottom_blue" />
+            android:paddingStart="30pt"
+            android:paddingEnd="30pt">
+
+            <View
+                android:layout_width="22pt"
+                android:layout_height="12pt"
+                android:layout_centerVertical="true"
+                android:background="@mipmap/ic_arrow_bottom_blue"
+                android:padding="30pt" />
+        </RelativeLayout>
     </RelativeLayout>
 
     <RelativeLayout
@@ -160,15 +181,20 @@
             android:layout_marginStart="38pt"
             android:text="设置日期" />
 
-
-        <View
-            android:id="@+id/view_3"
-            android:layout_width="46pt"
-            android:layout_height="46pt"
+        <RelativeLayout
+            android:id="@+id/rl_date"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="30pt"
-            android:background="@mipmap/ic_date" />
+            android:paddingStart="30pt"
+            android:paddingEnd="30pt">
+
+            <View
+                android:layout_width="46pt"
+                android:layout_height="46pt"
+                android:layout_centerVertical="true"
+                android:background="@mipmap/ic_date" />
+        </RelativeLayout>
     </RelativeLayout>
 
     <LinearLayout

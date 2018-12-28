@@ -28,14 +28,9 @@ class MyPostedAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleAdapter
 
         when (getData(position).course.state) {
 
-            "-1" -> {
-            }
-            "1" -> {
-            }
             "2" -> {
-                if (getData(position).course.coursetype == "5") {
+                if (getData(position).course.coursetype == "4" || getData(position).course.coursetype == "5") {
                     cancelTairn(holder.itemView.txt_mid, getData(position).course.id)
-                    buy(holder.itemView.txt_right, getData(position).course.id)
                 } else {
                     invite(holder.itemView.txt_left, getData(position).course.id)
                     applicants(holder.itemView.txt_mid, getData(position).course.id)
@@ -43,8 +38,8 @@ class MyPostedAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleAdapter
                 }
             }
             "3" -> {
-//                delete(holder.itemView.txt_mid)
-                publishAgain(holder.itemView.txt_right)
+//                //订单取消
+                publishAgain(holder.itemView.txt_right,position)
 
             }
             "4" -> {
@@ -95,7 +90,11 @@ class MyPostedAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleAdapter
 
 
         holder.itemView.setOnClickListener {
-            OrderDetailActivity.start(context, getData(position).course.id,true)
+            if (getData(position).course.coursetype == "4" || getData(position).course.coursetype == "5"){
+                OrderDetailActivity.start(context,getData(position),true)
+            }else{
+                OrderDetailActivity.start(context, getData(position).course.id,true)
+            }
         }
     }
 
@@ -163,11 +162,17 @@ class MyPostedAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleAdapter
     }
 
     //再次发布
-    private fun publishAgain(textView: TextView) {
+    private fun publishAgain(textView: TextView,position: Int) {
         textView.apply {
             showBlueBtn(this, "再次发布")
             setOnClickListener {
-
+                when(getData(position).course.coursetype){
+                    "4" -> context.startActivity(Intent(context,PublishFieldActivity::class.java))
+                    "5" -> context.startActivity(Intent(context,PublishTrainActivity::class.java))
+                    else -> {
+                        PublishClassActivity.start(context,getData(position).course.coursetype)
+                    }
+                }
             }
         }
     }

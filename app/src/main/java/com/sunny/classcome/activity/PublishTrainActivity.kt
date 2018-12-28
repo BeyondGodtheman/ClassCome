@@ -191,22 +191,27 @@ class PublishTrainActivity : BaseActivity() {
 
         if (edit_cost.text.isEmpty()) {
             ToastUtil.show("请输入培训费用！")
+            return
         }
 
         if (edit_hour.text.isEmpty()) {
             ToastUtil.show("请输入单次培训时间！")
+            return
         }
 
         if (edit_people.text.isEmpty()) {
             ToastUtil.show("请输入场地容纳人数！")
+            return
         }
 
         if (edit_square.text.isEmpty()) {
             ToastUtil.show("请输入场地空间!")
+            return
         }
 
         if (txt_train_time.text.isEmpty()) {
             ToastUtil.show("请输入培训时间!")
+            return
         }
 
 
