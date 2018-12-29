@@ -27,7 +27,7 @@ class MyPostedAdapter(var baseActivity: BaseActivity,list: ArrayList<ClassBean.B
         holder.itemView.txt_right.visibility = View.GONE
 
 
-        when (getData(position).order.state) {
+        when (getData(position).course.state) {
             "1" -> {
 
             }
@@ -213,7 +213,7 @@ class MyPostedAdapter(var baseActivity: BaseActivity,list: ArrayList<ClassBean.B
 
     private fun buy(textView: TextView, courseId: String) {
         textView.apply {
-            showBlueBtn(this, "购买者")
+            showBlueBtn(this, "核销")
             setOnClickListener {
                 BuyActivity.start(context, courseId)
             }
