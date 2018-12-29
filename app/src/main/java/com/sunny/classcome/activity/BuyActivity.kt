@@ -66,7 +66,7 @@ class BuyActivity : BaseActivity() {
                 if (pageIndex == 1) {
                     list.clear()
                     refresh.finishRefresh()
-                    if (data.content?.data == null) {
+                    if (data.content?.data == null || data.content?.data?.isEmpty() == true) {
                         ll_error.visibility = View.VISIBLE
                     } else {
                         ll_error.visibility = View.GONE

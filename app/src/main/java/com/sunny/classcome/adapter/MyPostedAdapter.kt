@@ -34,6 +34,7 @@ class MyPostedAdapter(var baseActivity: BaseActivity,list: ArrayList<ClassBean.B
             "2" -> {
                 if (getData(position).course.coursetype == "4" || getData(position).course.coursetype == "5") {
                     cancelTairn(holder.itemView.txt_mid, getData(position).course.id)
+                    buy(holder.itemView.txt_right,getData(position).course.id)
                 } else {
                     invite(holder.itemView.txt_left, getData(position).course.id)
                     applicants(holder.itemView.txt_mid, getData(position).course.id)
@@ -213,7 +214,7 @@ class MyPostedAdapter(var baseActivity: BaseActivity,list: ArrayList<ClassBean.B
 
     private fun buy(textView: TextView, courseId: String) {
         textView.apply {
-            showBlueBtn(this, "核销")
+            showBlueBtn(this, "购买者")
             setOnClickListener {
                 BuyActivity.start(context, courseId)
             }

@@ -88,23 +88,28 @@ class OrderDetailActivity : BaseActivity() {
     private fun showPurchaser() {
         txt_info.text = "订单进行中"
         txt_prompt.text = "系统默认将在核销完成后7天，对订单进行结算"
-        txt_order_number.text = ("订单编号：${classBean?.order?.orderNum}")
-        txt_order_remark.text = ("验证码：${classBean?.course?.id}")
-        showBlueBtn(txt_order_right, "核销")
+        txt_order_number.text = ("订单编号：${classBean?.course?.id}")
+
+        showGrayBtn(txt_order_mid, "取消发布")
         txt_order_right.setOnClickListener {
-            BuyActivity.start(this,classBean?.course?.id?:"")
+            CancelPromptActivity.start(this, 3, classBean?.course?.id ?: "")
+        }
+
+        showBlueBtn(txt_order_right, "购买者")
+        txt_order_right.setOnClickListener {
+            BuyActivity.start(this, classBean?.course?.id ?: "")
         }
 
         rl_money.visibility = View.VISIBLE
         txt_money_desc.text = "支付金额"
         txt_money_count.text = ("￥${classBean?.course?.sumPrice}")
 
-        rl_contact.visibility = View.VISIBLE
-        txt_contact_desc.text = "联系方式"
-        txt_contact_phone.text = classBean?.user?.telephone
-
-        rl_info.visibility = View.VISIBLE
-        txt_info_desc.text = "购买者信息"
+//        rl_contact.visibility = View.VISIBLE
+//        txt_contact_desc.text = "联系方式"
+//        txt_contact_phone.text = classBean?.user?.telephone
+//
+//        rl_info.visibility = View.VISIBLE
+//        txt_info_desc.text = "购买者信息"
     }
 
     private fun showClassFinish() {
@@ -194,17 +199,20 @@ class OrderDetailActivity : BaseActivity() {
 
     private fun showPayFinish() {
         txt_info.text = "订单已完成"
-        txt_order_number.text = ("订单编号：${classBean?.order?.orderNum}")
-        txt_order_remark.text = "验证码：2344 3455 3545"
-        showBlueBtn(txt_order_right, "评价")
+        txt_order_number.text = ("订单编号：${classBean?.course?.id}")
+//        txt_order_remark.text = ("验证码：${classBean?.course?.id}")
+//        showBlueBtn(txt_order_right, "评价")
     }
 
     private fun showPaying() {
         txt_info.text = "订单进行中"
         txt_prompt.text = "您已付款成功"
-        txt_order_number.text = ("订单编号：${classBean?.order?.orderNum}")
+        txt_order_number.text = ("订单编号：${classBean?.course?.id}")
 //        txt_order_remark.text = "验证码：2344 3455 3545"
         showGrayBtn(txt_order_right, "取消订单")
+        txt_order_right.setOnClickListener {
+            CancelPromptActivity.start(this, 3, classBean?.course?.id ?: "")
+        }
     }
 
     //场地、培训待支付
@@ -289,15 +297,24 @@ class OrderDetailActivity : BaseActivity() {
             classBean = MyApplication.getApp().getData<ClassBean.Bean.Data>(Constant.COURSE, false)
             if (isAuthor) {
                 when (classBean?.course?.state) {
-                    "1" -> showPayWait() //待支付
-                    "2" -> showField()  //已支付
+                    "2" -> showPurchaser()  //已支付
                     "3" -> showOffShelf() //已取消
-                    "5" -> showPurchaser() }
+                    "6" -> showPayFinish()
+                }
             } else {
-                when (classBean?.course?.state) {
-                    "2" -> showPayWait()  //待支付
-                    "3" -> showOffShelf() //已取消
-                    "5" -> showPaying() //进行中
+                when (classBean?.order?.state) {
+                    "-1" -> showOffShelf() //已取消
+                    "1" -> showPayWait()  //待支付
+                    "2" -> showPaying() //进行中
+                    "3" -> {
+                        if (classBean?.course?.state == "3") {
+                            cancleClass() //进行中 //用户取消发布
+                        }
+                        if (classBean?.course?.state == "5"){
+                            showPayFinish()
+                        }
+                    }//
+                    "5" -> showPayFinish() //完成
                 }
 
             }

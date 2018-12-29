@@ -61,7 +61,7 @@ class TrainDetailsFragment : FieldDetailsFragment() {
                             ClassBean.Bean.Data.User(bean.content.user.userName, bean.content.user.telephone, bean.content.user.userPic),
                             ClassBean.Bean.Data.Order("", "", "", ""
                                     , bean.content.resCourseVO.price, "", "", "", "", "", ""),
-                            bean.content.resCourseVO.isAppraise), list)
+                            null,bean.content.resCourseVO.isAppraise), list)
                 }
             }
             txt_pin.text = ("${number}人在拼团")
@@ -81,7 +81,7 @@ class TrainDetailsFragment : FieldDetailsFragment() {
                             ClassBean.Bean.Data.User(it.content.user.userName, it.content.user.telephone, it.content.user.userPic),
                             ClassBean.Bean.Data.Order("", "", "", ""
                                     , it.content.resCourseVO.price, "", "", "", "", "", ""),
-                            it.content.resCourseVO.isAppraise), it.content.resCourseVO.pintuanlist?: arrayListOf()).show()
+                            null,it.content.resCourseVO.isAppraise), it.content.resCourseVO.pintuanlist?: arrayListOf()).show()
                 }
 
             }

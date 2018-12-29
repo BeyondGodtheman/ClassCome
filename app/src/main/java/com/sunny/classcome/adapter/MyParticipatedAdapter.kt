@@ -39,7 +39,7 @@ class MyParticipatedAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleA
                 }
             }
             "3" -> {
-                if (getData(position).course.state != "3"){
+                if (getData(position).course.state != "3" && getData(position).course.state != "5"){
                     cancel(holder.itemView.txt_right, position)
                 }
             }

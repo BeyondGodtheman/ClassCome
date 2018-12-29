@@ -25,6 +25,7 @@ data class ClassBean(
                 var categoryList: ArrayList<Category>?,
                 var user: User?,
                 var order: Order,
+                var userOrders: ArrayList<UserOrders>?,
                 var isAppraise: String
         ) {
             data class Course(
@@ -62,29 +63,29 @@ data class ClassBean(
                     var townId: String,
                     var coursetype: String,
                     var onetime: String?,//单次使用时长
-                    var onecost:String?, //培训 单次费用
-                    var oneallcost:String?, //培训 单独购买价格
+                    var onecost: String?, //培训 单次费用
+                    var oneallcost: String?, //培训 单独购买价格
                     var captynum: String,//容纳人数
                     var workspace: String,//场地空间
                     var worktime: String,//营业时间
-                    var commondevice:String?, //通用设施
-                    var meetdevice:String?, //会议设施
-                    var specialdevice:String?, //特殊设施
-                    var assemcost:String? //拼团购买价格
-            ){
+                    var commondevice: String?, //通用设施
+                    var meetdevice: String?, //会议设施
+                    var specialdevice: String?, //特殊设施
+                    var assemcost: String? //拼团购买价格
+            ) {
                 var sumPrice: String? = null
-                get(){
-                    if (coursetype == "4"){
-                        return price
-                    }
-                    if (coursetype == "5"){
-                        if (oneallcost == null){
-                            return onecost
+                    get() {
+                        if (coursetype == "4") {
+                            return price
                         }
-                        return oneallcost
+                        if (coursetype == "5") {
+                            if (oneallcost == null) {
+                                return onecost
+                            }
+                            return oneallcost
+                        }
+                        return field
                     }
-                    return field
-                }
             }
 
             data class Material(
@@ -127,6 +128,20 @@ data class ClassBean(
                     var modifyOrderTime: String?,
                     var effectTime: String?,
                     var payFail: String?)
+
+            data class UserOrders(
+                    var id: String,
+                    var orderNo: String,
+                    var state: String,
+                    var createTime: String,
+                    var courseId: String,
+                    var userId: String,
+                    var payTime: String,
+                    var money: String,
+                    var payWay: String,
+                    var pintuan: String,
+                    var telephone: String,
+                    var pintuanId: String)
         }
 
     }
