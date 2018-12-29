@@ -6,14 +6,12 @@ import android.view.View
 import com.sunny.classcome.MyApplication
 import com.sunny.classcome.R
 import com.sunny.classcome.base.BaseActivity
+import com.sunny.classcome.bean.BaseBean
 import com.sunny.classcome.bean.ClassBean
 import com.sunny.classcome.bean.OrderDetailBean
 import com.sunny.classcome.http.ApiManager
 import com.sunny.classcome.http.Constant
-import com.sunny.classcome.utils.DateUtil
-import com.sunny.classcome.utils.GlideUtil
-import com.sunny.classcome.utils.showBlueBtn
-import com.sunny.classcome.utils.showGrayBtn
+import com.sunny.classcome.utils.*
 import kotlinx.android.synthetic.main.activity_order_detail.*
 
 /**
@@ -64,8 +62,18 @@ class OrderDetailActivity : BaseActivity() {
         txt_order_number.text = ("订单编号：${classBean?.order?.orderNum}")
         txt_order_remark.text = getTime()
         showGrayBtn(txt_order_left, "取消订单")
+        txt_order_left.setOnClickListener {
+            CancelPromptActivity.start(this, 1, classBean?.course?.id ?: "")
+        }
+
         showBlueBtn(txt_order_mid, "邀请用户")
+        txt_order_mid.setOnClickListener {
+            InviteActivity.start(this, classBean?.course?.id ?: "")
+        }
         showBlueBtn(txt_order_right, "应聘者")
+        txt_order_right.setOnClickListener {
+            ApplicantsActivity.start(this, classBean?.course?.id ?: "")
+        }
     }
 
     private fun showField() {
@@ -99,7 +107,16 @@ class OrderDetailActivity : BaseActivity() {
     private fun showClassFinish() {
         txt_info.text = "课程已结束"
         showBlueBtn(txt_order_left, "再次发布")
-        showBlueBtn(txt_order_right, "评价")
+        txt_order_left.setOnClickListener {
+            when (classBean?.course?.coursetype) {
+                "4" -> startActivity(Intent(this, PublishFieldActivity::class.java))
+                "5" -> startActivity(Intent(this, PublishTrainActivity::class.java))
+                else -> {
+                    PublishClassActivity.start(this, classBean?.course?.coursetype ?: "")
+                }
+            }
+        }
+//        showBlueBtn(txt_order_right, "评价")
     }
 
     private fun showClassIng() {
@@ -107,8 +124,15 @@ class OrderDetailActivity : BaseActivity() {
         txt_prompt.text = "系统默认将在课程结束后7天，对课程进行结算"
         txt_order_number.text = ("订单编号：${classBean?.order?.orderNum}")
         txt_order_remark.text = getTime()
-        showGrayBtn(txt_order_left, "取消订单")
+        showGrayBtn(txt_order_mid, "取消订单")
+        txt_order_mid.setOnClickListener {
+            CancelPromptActivity.start(this, 1, classBean?.course?.id ?: "")
+        }
+
         showBlueBtn(txt_order_right, "结算")
+        txt_order_right.setOnClickListener {
+            account()
+        }
 
         rl_money.visibility = View.VISIBLE
         txt_money_desc.text = "实付款"
@@ -122,8 +146,15 @@ class OrderDetailActivity : BaseActivity() {
         txt_info.text = "课程已中标，付款后订单生效"
         txt_order_number.text = ("订单编号：${classBean?.order?.orderNum}")
         txt_order_remark.text = getTime()
-        showGrayBtn(txt_order_left, "取消订单")
+        showGrayBtn(txt_order_mid, "取消订单")
+        txt_order_mid.setOnClickListener {
+            CancelPromptActivity.start(this, 1, classBean?.course?.id ?: "")
+        }
+
         showBlueBtn(txt_order_right, "去支付")
+        txt_order_right.setOnClickListener {
+            PayActivity.start(this, classBean?.course?.id ?: "")
+        }
 
         rl_money.visibility = View.VISIBLE
         txt_money_desc.text = "实付款"
@@ -176,7 +207,7 @@ class OrderDetailActivity : BaseActivity() {
     //场地、培训待支付
     private fun showPayWait() {
         txt_info.text = "订单已生成，付款后订单生效"
-        txt_order_number.text = ("订单编号：${classBean?.course?.id}")
+        txt_order_number.text = ("订单编号：${classBean?.order?.orderNum}")
 //        showGrayBtn(txt_order_mid, "取消订单")
 //        txt_order_mid.setOnClickListener{
 //            CancelPromptActivity.start(this,if (isAuthor) 1 else 2,classBean?.course?.id?:"")
@@ -198,6 +229,15 @@ class OrderDetailActivity : BaseActivity() {
         txt_prompt.text = "您的信息已下架"
 //        showGrayBtn(txt_order_mid, "删除")
         showBlueBtn(txt_order_right, "再次发布")
+        txt_order_right.setOnClickListener {
+            when (classBean?.course?.coursetype) {
+                "4" -> startActivity(Intent(this, PublishFieldActivity::class.java))
+                "5" -> startActivity(Intent(this, PublishTrainActivity::class.java))
+                else -> {
+                    PublishClassActivity.start(this, classBean?.course?.coursetype ?: "")
+                }
+            }
+        }
     }
 
     private fun showUnaudited() {
@@ -209,6 +249,13 @@ class OrderDetailActivity : BaseActivity() {
         txt_info.text = "发布信息待审核"
         showGrayBtn(txt_order_right, "取消发布")
     }
+
+    private fun cancleClass(){
+        txt_info.text = "已取消"
+        txt_prompt.text = "发布者取消"
+        txt_order_number.text = ("订单编号：${classBean?.order?.orderNum}")
+    }
+
 
     private fun getTime(): String {
         val startTime = classBean?.course?.startTime?.let {
@@ -233,14 +280,14 @@ class OrderDetailActivity : BaseActivity() {
     }
 
 
-    override fun loadData() {
-
+    override fun update() {
+        //场地培训逻辑
         if (intent.getIntExtra("type", 1) == 2) {
-            classBean = MyApplication.getApp().getData<ClassBean.Bean.Data>(Constant.COURSE, true)
+            classBean = MyApplication.getApp().getData<ClassBean.Bean.Data>(Constant.COURSE, false)
             if (isAuthor) {
-                when (classBean?.course?.state) {
+                when (classBean?.order?.state) {
                     "1" -> showPayWait() //待支付
-                    "2" -> showField()  //已支付
+                    "2" -> showAudited()  //已支付
                     "3" -> showOffShelf() //已取消
                     "5" -> {
                         if (classBean?.course?.coursetype == "4" || classBean?.course?.coursetype == "5") {
@@ -275,17 +322,35 @@ class OrderDetailActivity : BaseActivity() {
             override fun onSuccess(data: OrderDetailBean) {
                 hideLoading()
                 classBean = data.content
-                if (isAuthor){
+                if (isAuthor) {
                     when (data.content?.order?.state) {
-                        "-1" -> showOffShelf() //取消
+                        "-1" -> showClassFinish()
                         "1" -> showOffShelf()
-                        "2" -> showOffShelf()
-                        "3" -> showOffShelf()
+                        "2" -> showAudited() //订单邀请应聘
+                        "3" -> showOffShelf() //已取消发布
                         "4" -> showClassPay()
-                        "5" -> showClassFinish()
+                        "5" -> {
+                            if (data.content?.course?.state == "5") {
+                                showClassIng()
+                            }
+                            if (data.content?.course?.state == "6") {
+                                showClassFinish()
+                            }
+                        }
                     }
-                }else{
-
+                } else {
+                    when (data.content?.order?.state) {
+                        "1" -> showOffShelf()
+                        "2" -> showWinningBid() //中标
+                        "3" ->{
+                            if (data.content?.course?.state == "3"){
+                                cancleClass()
+                            }else{
+                                showSettlement()
+                            }
+                        }
+                        "5" -> showSettlement() //待结算
+                    }
                 }
 
                 txt_date.text = DateUtil.dateFormatYYMMddHHssmm(classBean?.course?.createTime ?: "")
@@ -304,5 +369,31 @@ class OrderDetailActivity : BaseActivity() {
 
         })
 
+    }
+
+    override fun close() {
+        MyApplication.getApp().removeData(Constant.COURSE)
+    }
+
+    //结算
+    private fun account() {
+        val params = hashMapOf<String, String>()
+        params["courseId"] = classBean?.course?.id ?: ""
+        params["useUserId"] = classBean?.course?.winningBidder ?: ""
+        ApiManager.post(composites, params, Constant.ORDER_ACCOUNTSORDER, object : ApiManager.OnResult<BaseBean<String>>() {
+            override fun onSuccess(data: BaseBean<String>) {
+                hideLoading()
+                ToastUtil.show(data.content?.info)
+                if (data.content?.statu == "1") {
+                    loadData()
+                }
+
+            }
+
+            override fun onFailed(code: String, message: String) {
+                hideLoading()
+            }
+
+        })
     }
 }

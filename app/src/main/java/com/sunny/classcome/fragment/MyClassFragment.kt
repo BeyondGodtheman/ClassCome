@@ -54,7 +54,7 @@ class MyClassFragment : BaseFragment() {
 
         recl.layoutManager = LinearLayoutManager(context)
         if (type == "1") {
-            recl.adapter = MyPostedAdapter(list)
+            recl.adapter = MyPostedAdapter(getBaseActivity(),list)
         } else {
             recl.adapter = MyParticipatedAdapter(list)
         }

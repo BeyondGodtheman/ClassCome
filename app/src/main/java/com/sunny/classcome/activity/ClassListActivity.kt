@@ -31,7 +31,7 @@ class ClassListActivity : BaseActivity() {
 
     private var pId = "213"
     private var courseType = "2"
-    private var category = "0"
+    private var category = ""
 
     val dataList = arrayListOf<ClassBean.Bean.Data>()
 
@@ -172,7 +172,12 @@ class ClassListActivity : BaseActivity() {
                 data.content?.forEach {
                     tabLayout.addTab(tabLayout.newTab().setText(it.name).setTag(it.id))
                 }
-                category = data.content?.first()?.id ?: "0"
+                data.content?.let {
+                    if (it.isNotEmpty()){
+                        category = it.first().id
+                    }
+                }
+
 
                 //加载课程数据
                 sort(0)
@@ -198,10 +203,13 @@ class ClassListActivity : BaseActivity() {
         val params = HashMap<String, Any>()
 //        params["cityId"] = UserManger.getAddress().split(",")[0]
         params[sortStr] = if (sortFlag) "1" else "0"
-        val categoryArray = JSONArray()
-        categoryArray.put(category)
+        if (category.isNotEmpty()){
+            val categoryArray = JSONArray()
+            categoryArray.put(category)
+            params["category"] = categoryArray
+        }
+
         params["courseType"] = courseType
-        params["category"] = categoryArray
         params["pageIndex"] = pageIndex.toString()
         ApiManager.post(composites, params, Constant.COURSE_GETCOURSELISTS, object : ApiManager.OnResult<ClassBean>() {
             override fun onSuccess(data: ClassBean) {

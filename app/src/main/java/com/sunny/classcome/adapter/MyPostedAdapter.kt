@@ -7,16 +7,17 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.sunny.classcome.R
 import com.sunny.classcome.activity.*
+import com.sunny.classcome.base.BaseActivity
 import com.sunny.classcome.base.BaseRecycleAdapter
 import com.sunny.classcome.base.BaseRecycleViewHolder
+import com.sunny.classcome.bean.BaseBean
 import com.sunny.classcome.bean.ClassBean
-import com.sunny.classcome.utils.GlideUtil
-import com.sunny.classcome.utils.StringUtil
-import com.sunny.classcome.utils.showBlueBtn
-import com.sunny.classcome.utils.showGrayBtn
+import com.sunny.classcome.http.ApiManager
+import com.sunny.classcome.http.Constant
+import com.sunny.classcome.utils.*
 import kotlinx.android.synthetic.main.item_my_class.view.*
 
-class MyPostedAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleAdapter<ClassBean.Bean.Data>(list) {
+class MyPostedAdapter(var baseActivity: BaseActivity,list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleAdapter<ClassBean.Bean.Data>(list) {
     override fun setLayout(parent: ViewGroup, viewType: Int): View = LayoutInflater.from(context).inflate(R.layout.item_my_class, parent, false)
 
     override fun onBindViewHolder(holder: BaseRecycleViewHolder, position: Int) {
@@ -52,10 +53,13 @@ class MyPostedAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleAdapter
             "5" -> {
                 if (getData(position).course.coursetype == "4" || getData(position).course.coursetype == "5"){
                     cancelOrherOrder(holder.itemView.txt_mid, getData(position).course.id)
+                    buy(holder.itemView.txt_right,getData(position).course.id)
                 }else{
                     cancelOrder(holder.itemView.txt_mid, getData(position).course.id)
+                    if (getData(position).course.state == "5"){
+                        account(holder.itemView.txt_right,position)
+                    }
                 }
-                buy(holder.itemView.txt_right,getData(position).course.id)
             }
 
         }
@@ -144,11 +148,29 @@ class MyPostedAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleAdapter
     }
 
     //结算
-    private fun account(textView: TextView) {
+    private fun account(textView: TextView,position: Int) {
         textView.apply {
             showBlueBtn(this, "结算")
             setOnClickListener {
+                val params = hashMapOf<String, String>()
+                params["courseId"] = getData(position).course.id
+                params["useUserId"] = getData(position).course.winningBidder
+                ApiManager.post(baseActivity.composites, params, Constant.ORDER_ACCOUNTSORDER, object : ApiManager.OnResult<BaseBean<String>>() {
+                    override fun onSuccess(data: BaseBean<String>) {
 
+                        ToastUtil.show(data.content?.info)
+                        if (data.content?.statu == "1") {
+                            getData(position).course.state = "6"
+                            notifyDataSetChanged()
+                        }
+
+                    }
+
+                    override fun onFailed(code: String, message: String) {
+
+                    }
+
+                })
             }
         }
     }

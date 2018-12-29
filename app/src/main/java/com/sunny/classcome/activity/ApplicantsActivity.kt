@@ -109,15 +109,19 @@ class ApplicantsActivity : BaseActivity() {
         params["courseId"] = courseId
         params["state"] = state
         params["type"] = type
-        params["userId"] = list[position].userId
+        params["userId"] = list[position].userId?:""
         ApiManager.post(composites, params, Constant.ORDER_APPLYCOURSE, object : ApiManager.OnResult<BaseBean<String>>() {
             override fun onSuccess(data: BaseBean<String>) {
-                if (data.content?.statu == "1") {
-                    list[position].state = state
-
+                if (type == "1"){
+                    if (data.content?.statu == "1") {
+                        list[position].state = state
+                    }else{
+                        list[position].state = type
+                    }
                 }else{
-                    list[position].state = type
+                    list[position].state = "3"
                 }
+
                 recl.adapter?.notifyDataSetChanged()
                 EventBus.getDefault().post(Posted())
                 ToastUtil.show(data.content?.info)

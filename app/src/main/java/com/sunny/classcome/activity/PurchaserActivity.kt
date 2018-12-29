@@ -18,14 +18,8 @@ import kotlinx.android.synthetic.main.layout_refresh_recycler.*
  */
 class PurchaserActivity : BaseActivity() {
 
-    private val list: ArrayList<PurchaserBean> by lazy {
-        arrayListOf(
-                PurchaserBean("", "JoannChen", "800元", "13923457878", "2344 3435 3545", false),
-                PurchaserBean("", "Eason", "800元", "13923457878", "2344 3435 3545", true),
-                PurchaserBean("", "Justin", "500元", "18923457878", "2344 3435 7878", true)
-        )
+    private val list = ArrayList<PurchaserBean>()
 
-    }
 
     override fun setLayout(): Int = R.layout.layout_refresh_recycler
 

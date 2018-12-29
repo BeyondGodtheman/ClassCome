@@ -18,12 +18,12 @@ data class ApplicantsBean(
 
         data class Data(
                 var state: String,
-                var userName: String,
-                var telephone: String,
-                var userPic: String,
-                var createTime: String,
-                var userId: String,
-                var xgToken: String)
+                var userName: String?,
+                var telephone: String?,
+                var userPic: String?,
+                var createTime: String?,
+                var userId: String?,
+                var xgToken: String?)
     }
 
 }

@@ -89,7 +89,7 @@ class SearchActivity : BaseActivity() {
                             endPrice = ""
                         }
                         1 -> {
-                            startPrice = ""
+                            startPrice = "1"
                             endPrice = "100"
                         }
 
@@ -105,7 +105,7 @@ class SearchActivity : BaseActivity() {
 
                         4 -> {
                             startPrice = "500"
-                            endPrice = ""
+                            endPrice = "9999999"
                         }
                     }
                     txt_money.text = moneyList[it]

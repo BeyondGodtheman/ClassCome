@@ -18,9 +18,9 @@ class ApplicantsAdapter(list:ArrayList<ApplicantsBean.Bean.Data>,var applicantsO
     override fun setLayout(parent: ViewGroup, viewType: Int): View = LayoutInflater.from(context).inflate(R.layout.item_applicants,parent,false)
 
     override fun onBindViewHolder(holder: BaseRecycleViewHolder, position: Int) {
-        GlideUtil.loadHead(context,holder.itemView.img_user_head,getData(position).userPic)
-        holder.itemView.txt_name.text = (getData(position).userName+"对您的课程发起了应聘")
-        holder.itemView.txt_time.text = DateUtil.dateFormatYYMMddHHssmm(getData(position).createTime)
+        GlideUtil.loadHead(context,holder.itemView.img_user_head,getData(position).userPic?:"")
+        holder.itemView.txt_name.text = ((getData(position).userName?:"")+"对您的课程发起了应聘")
+        holder.itemView.txt_time.text = DateUtil.dateFormatYYMMddHHssmm(getData(position).createTime?:"")
 
         if (getData(position).state == "1"){
             holder.itemView.txt_status.text = ""
