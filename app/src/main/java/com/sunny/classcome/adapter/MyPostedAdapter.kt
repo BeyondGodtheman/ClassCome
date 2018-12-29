@@ -26,8 +26,10 @@ class MyPostedAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleAdapter
         holder.itemView.txt_right.visibility = View.GONE
 
 
-        when (getData(position).course.state) {
+        when (getData(position).order.state) {
+            "1" -> {
 
+            }
             "2" -> {
                 if (getData(position).course.coursetype == "4" || getData(position).course.coursetype == "5") {
                     cancelTairn(holder.itemView.txt_mid, getData(position).course.id)

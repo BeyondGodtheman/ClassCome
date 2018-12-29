@@ -90,7 +90,12 @@ class MyClassFragment : BaseFragment() {
                 } else {
                     refresh.finishLoadMore()
                 }
-                list.addAll(data.content?.dataList ?: arrayListOf())
+
+                data.content?.dataList?.let {
+                    if (!list.containsAll(it)) {
+                        list.addAll(it)
+                    }
+                }
                 recl.adapter?.notifyDataSetChanged()
             }
 

@@ -55,6 +55,7 @@ class SearchActivity : BaseActivity() {
         rl_address.setOnClickListener(this)
         txt_date.setOnClickListener(this)
         rl_date.setOnClickListener(this)
+        txt_search.setOnClickListener(this)
 
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabReselected(tab: TabLayout.Tab) {

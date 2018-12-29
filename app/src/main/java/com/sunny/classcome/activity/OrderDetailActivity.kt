@@ -275,54 +275,18 @@ class OrderDetailActivity : BaseActivity() {
             override fun onSuccess(data: OrderDetailBean) {
                 hideLoading()
                 classBean = data.content
-
-                when (data.content?.order?.state) {
-                    "-1" -> showOffShelf()
-                    "3" -> showClassIng()
-                    "4" -> showClassPay()
-                    "5" -> showClassFinish()
-
-//                    order_tobe_audited -> showOrderToBeAudited()
-//                    order_unaudited -> showUnaudited()
-//                    order_off_shelf -> showOffShelf()
-//                    order_audited -> showAudited()
-//
-//                    order_class_pay -> showClassPay()
-//                    order_class_ing -> showClassIng()
-//                    order_class_finish -> showClassFinish()
-//
-//                    order_pay_wait -> showPayWait()
-//                    order_paying -> showPaying()
-//                    order_pay_finish -> showPayFinish()
-//
-//                    order_field -> showField()
-//                    order_purchaser -> showPurchaser()
-//                    order_winning_bid -> showWinningBid()
-//                    order_settlement -> showSettlement()
+                if (isAuthor){
+                    when (data.content?.order?.state) {
+                        "-1" -> showOffShelf() //取消
+                        "1" -> showOffShelf()
+                        "2" -> showOffShelf()
+                        "3" -> showOffShelf()
+                        "4" -> showClassPay()
+                        "5" -> showClassFinish()
+                    }
+                }else{
 
                 }
-
-//                when (intent.getIntExtra("type", order_tobe_audited)) {
-//
-//                    order_tobe_audited -> showOrderToBeAudited()
-//                    order_unaudited -> showUnaudited()
-//                    order_off_shelf -> showOffShelf()
-//                    order_audited -> showAudited()
-//
-//                    order_class_pay -> showClassPay()
-//                    order_class_ing -> showClassIng()
-//                    order_class_finish -> showClassFinish()
-//
-//                    order_pay_wait -> showPayWait()
-//                    order_paying -> showPaying()
-//                    order_pay_finish -> showPayFinish()
-//
-//                    order_field -> showField()
-//                    order_purchaser -> showPurchaser()
-//                    order_winning_bid -> showWinningBid()
-//                    order_settlement -> showSettlement()
-//
-//                }
 
                 txt_date.text = DateUtil.dateFormatYYMMddHHssmm(classBean?.course?.createTime ?: "")
                 txt_class.text = classBean?.course?.title

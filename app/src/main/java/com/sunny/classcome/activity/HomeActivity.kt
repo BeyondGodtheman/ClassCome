@@ -1,6 +1,7 @@
 package com.sunny.classcome.activity
 
 import android.content.Intent
+import android.os.SystemClock
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
@@ -16,6 +17,7 @@ import com.sunny.classcome.base.BaseActivity
 import com.sunny.classcome.fragment.HomeFragment
 import com.sunny.classcome.fragment.MineFragment
 import com.sunny.classcome.fragment.PublishFragment
+import com.sunny.classcome.utils.ToastUtil
 import com.sunny.classcome.utils.UserManger
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -176,4 +178,24 @@ class HomeActivity : BaseActivity() {
     }
 
     fun getCurrentIndext() = currentPosition
+
+
+    private var mHits = LongArray(2)
+    private fun doubleClick(): Boolean {
+        System.arraycopy(mHits, 1, mHits, 0, mHits.size - 1)
+        mHits[mHits.size - 1] = SystemClock.uptimeMillis()
+        if (mHits[0] >= SystemClock.uptimeMillis() - 800) {
+            return true
+        } else {
+            ToastUtil.show("再按一次退出程序")
+        }
+        return false
+    }
+
+    override fun onBackPressed() {
+        if (doubleClick()) {
+            super.onBackPressed()
+            System.exit(0)
+        }
+    }
 }

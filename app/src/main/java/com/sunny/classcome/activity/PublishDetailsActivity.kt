@@ -2,7 +2,6 @@ package com.sunny.classcome.activity
 
 import android.content.Context
 import android.content.Intent
-import android.support.v4.app.Fragment
 import android.support.v4.view.ViewPager
 import android.support.v7.widget.GridLayoutManager
 import android.view.View
@@ -10,6 +9,7 @@ import com.sunny.classcome.MyApplication
 import com.sunny.classcome.R
 import com.sunny.classcome.adapter.PastReleaseAdapter
 import com.sunny.classcome.base.BaseActivity
+import com.sunny.classcome.base.BaseFragment
 import com.sunny.classcome.bean.BaseBean
 import com.sunny.classcome.bean.ClassBean
 import com.sunny.classcome.bean.ClassDetailBean
@@ -72,7 +72,7 @@ class PublishDetailsActivity : BaseActivity() {
 
     private val pastReleaseList = arrayListOf<ClassBean.Bean.Data>()
 
-    lateinit var fragment: Fragment
+    lateinit var fragment: BaseFragment
 
     private val courseDetailFragment: CourseDetailsFragment by lazy {
         CourseDetailsFragment()
@@ -92,6 +92,7 @@ class PublishDetailsActivity : BaseActivity() {
     override fun initView() {
 
         EventBus.getDefault().register(this)
+
 
         courseId = intent.getStringExtra("id")
 
@@ -117,6 +118,8 @@ class PublishDetailsActivity : BaseActivity() {
         }
 
         showTitle(titleManager.defaultTitle(title))
+
+        supportFragmentManager.beginTransaction().replace(R.id.fl_container, fragment).commit()
 
         rl_user_more.setOnClickListener(this)
         rl_history_more.setOnClickListener(this)
@@ -152,8 +155,8 @@ class PublishDetailsActivity : BaseActivity() {
         classData?.let { data ->
             var pintuan = "0"
             classDetailBean?.let {
-                if ((it.content.resCourseVO.pintuanlist?: arrayListOf()).isNotEmpty()) {
-                    pintuan = it.content.resCourseVO.pintuanlist!![0].pintuanInfo?.id?:"0"
+                if ((it.content.resCourseVO.pintuanlist ?: arrayListOf()).isNotEmpty()) {
+                    pintuan = it.content.resCourseVO.pintuanlist!![0].pintuanInfo?.id ?: "0"
                 }
             }
             PayActivity.start(this, data, pintuan)
@@ -170,20 +173,20 @@ class PublishDetailsActivity : BaseActivity() {
                 when (isAppointment) {
                     "1" -> ToastUtil.show("请不要重复操作")
                     "2" -> {
-                        if (coursetype == "4" || coursetype == " 5") {
+                        if (coursetype == "4" || coursetype == "5") {
                             classData?.let {
                                 PayActivity.start(this, it, "")
                             }
-                        }else{
+                        } else {
                             loadOption(2)
                         }
                     }
                     "4" -> {
-                        if (coursetype == "4" || coursetype == " 5") {
+                        if (coursetype == "4" || coursetype == "5") {
                             classData?.let {
                                 PayActivity.start(this, it, "")
                             }
-                        }else{
+                        } else {
                             PayActivity.start(this, courseId)
                         }
                     }
@@ -216,7 +219,7 @@ class PublishDetailsActivity : BaseActivity() {
             override fun onSuccess(data: ClassDetailBean) {
                 classDetailBean = data
                 MyApplication.getApp().setData(Constant.CLASS_DETAIL, data)
-                supportFragmentManager.beginTransaction().replace(R.id.fl_container, fragment).commit()
+                fragment.initView()
 
                 hideLoading()
                 initData(data.content)
@@ -233,9 +236,9 @@ class PublishDetailsActivity : BaseActivity() {
 
                 val accept = when (isAppointment) {
                     "1" -> {
-                        if (coursetype == "4" || coursetype == "5"){
+                        if (coursetype == "4" || coursetype == "5") {
                             "已购买"
-                        }else{
+                        } else {
                             "已应聘"
                         }
                     }
@@ -386,7 +389,7 @@ class PublishDetailsActivity : BaseActivity() {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    fun onPayEvent(pay:Pay){
+    fun onPayEvent(pay: Pay) {
         finish()
     }
 }
