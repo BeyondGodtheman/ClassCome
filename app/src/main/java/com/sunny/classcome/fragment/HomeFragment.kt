@@ -218,11 +218,15 @@ class HomeFragment : BaseFragment() {
     private fun loadAddress() {
         ApiManager.post(getBaseActivity().composites, null, Constant.PUB_GETCITYLIST, object : ApiManager.OnResult<LocalCityBean>() {
             override fun onSuccess(data: LocalCityBean) {
-                data.content.first { it.cityVoName == titleView.text_home_Location.text.toString() }.let {
-                    UserManger.setAddress(it.cityVoId, it.cityVoName)
-                    pageIndex = 1
-                    loadClass(true)
+                val localCityBean = data.content.find{it.cityVoName == titleView.text_home_Location.text.toString()}
+                if (localCityBean != null){
+                    UserManger.setAddress(localCityBean.cityVoId, localCityBean.cityVoName)
+                }else{
+                    UserManger.setAddress("37", "上海市")
                 }
+
+                pageIndex = 1
+                loadClass(true)
             }
 
             override fun onFailed(code: String, message: String) {
