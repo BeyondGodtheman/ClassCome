@@ -27,7 +27,7 @@ class ClassListActivity : BaseActivity() {
     private var pageIndex = 1
     private var sortFlag = false
 
-    //pId 活动 213, 217家教,311 场地, 314 培训
+    //pId 活动 213, 217家教,40000 场地, 50000 培训
 
     private var pId = "213"
     private var courseType = "2"
@@ -59,11 +59,11 @@ class ClassListActivity : BaseActivity() {
                 courseType = "1"
                 "家教"
             }
-            "311" -> {
+            "40000" -> {
                 courseType = "4"
                 "场地"
             }
-            "314" -> {
+            "50000" -> {
                 courseType = "5"
                 "培训"
             }

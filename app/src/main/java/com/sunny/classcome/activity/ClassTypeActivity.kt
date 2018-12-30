@@ -8,6 +8,7 @@ import com.sunny.classcome.MyApplication
 import com.sunny.classcome.R
 import com.sunny.classcome.adapter.ClassTypeAdapter
 import com.sunny.classcome.base.BaseActivity
+import com.sunny.classcome.base.BaseBeanContent
 import com.sunny.classcome.bean.BaseBean
 import com.sunny.classcome.bean.ClassTypeBean
 import com.sunny.classcome.http.ApiManager
@@ -86,23 +87,42 @@ class ClassTypeActivity : BaseActivity() {
 
     override fun loadData() {
         showLoading()
-        ApiManager.post(composites, null, Constant.COURSE_GETCATEGORYALL, object : ApiManager.OnResult<BaseBean<ArrayList<ClassTypeBean>>>() {
-            override fun onSuccess(data: BaseBean<ArrayList<ClassTypeBean>>) {
-                refresh.finishRefresh()
-                hideLoading()
-                list.clear()
-                if (pId == "0"){
+        if (pId == "0"){
+            ApiManager.post(composites, null, Constant.COURSE_GETCATEGORYALL, object : ApiManager.OnResult<BaseBean<ArrayList<ClassTypeBean>>>() {
+                override fun onSuccess(data: BaseBean<ArrayList<ClassTypeBean>>) {
+                    refresh.finishRefresh()
+                    hideLoading()
+                    list.clear()
                     list.addAll(data.content?.data ?: arrayListOf())
-                }else{
-                    list.addAll(data.content?.data?.filter { it.id == pId } ?: arrayListOf())
-                }
-                adapter.notifyDataSetChanged()
-            }
 
-            override fun onFailed(code: String, message: String) {
-                hideLoading()
-                refresh.finishRefresh()
-            }
-        })
+                    adapter.notifyDataSetChanged()
+                }
+
+                override fun onFailed(code: String, message: String) {
+                    hideLoading()
+                    refresh.finishRefresh()
+                }
+            })
+        }else{
+            ApiManager.post(composites, null, Constant.COURSE_GETCATEGORY, object : ApiManager.OnResult<BaseBeanContent<ArrayList<ClassTypeBean.SubCategory>>>() {
+                override fun onSuccess(data: BaseBeanContent<ArrayList<ClassTypeBean.SubCategory>>) {
+                    refresh.finishRefresh()
+                    hideLoading()
+                    list.clear()
+                    data.content?.filter {it.id == pId}?.forEach { subCategory ->
+                        list.add(ClassTypeBean(subCategory.id,subCategory.pId,subCategory.name,subCategory.sort,
+                                data.content?.filter { it.pId == subCategory.id } as ArrayList<ClassTypeBean.SubCategory>))
+                    }
+                    adapter.notifyDataSetChanged()
+                }
+
+                override fun onFailed(code: String, message: String) {
+                    hideLoading()
+                    refresh.finishRefresh()
+                }
+            })
+
+        }
+
     }
 }

@@ -70,7 +70,7 @@ class PublishTrainActivity : BaseActivity() {
         when (v.id) {
             R.id.rl_class_type -> {
                 startActivityForResult(Intent(this, ClassTypeActivity::class.java)
-                        .putExtra("pId", "314"), 0)
+                        .putExtra("pId", "50000"), 0)
             }
 
             R.id.txt_location -> {

@@ -52,7 +52,7 @@ class PublishFieldActivity : BaseActivity() {
         when (v.id) {
             R.id.rl_class_type -> {
                 startActivityForResult(Intent(this, ClassTypeActivity::class.java)
-                        .putExtra("pId", "311"), 0)
+                        .putExtra("pId", "40000"), 0)
             }
             R.id.txt_location -> {
                 startActivityForResult(Intent(this, AddressActivity::class.java), 1)

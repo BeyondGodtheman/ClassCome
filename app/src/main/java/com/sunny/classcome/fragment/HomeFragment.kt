@@ -148,11 +148,11 @@ class HomeFragment : BaseFragment() {
             }
 
             R.id.rl_314 -> {
-                ClassListActivity.start(requireContext(), "314")
+                ClassListActivity.start(requireContext(), "50000")
             }
 
             R.id.rl_311 -> {
-                ClassListActivity.start(requireContext(), "311")
+                ClassListActivity.start(requireContext(), "40000")
             }
 
             R.id.rl_class -> {
