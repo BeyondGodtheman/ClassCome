@@ -127,6 +127,8 @@ data class ClassBean(
                     var courseId: String?,
                     var modifyOrderTime: String?,
                     var effectTime: String?,
+                    var pintuan:Int,
+                    var pintuanId:String?,
                     var payFail: String?)
 
             data class UserOrders(

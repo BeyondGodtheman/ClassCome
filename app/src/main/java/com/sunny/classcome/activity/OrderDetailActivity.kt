@@ -226,7 +226,11 @@ class OrderDetailActivity : BaseActivity() {
         showBlueBtn(txt_order_right, "去支付")
         txt_order_right.setOnClickListener {
             classBean?.let {
-                PayActivity.start(this@OrderDetailActivity, it, "")
+                if (it.order.pintuanId == "0"){
+                    PayActivity.start(this@OrderDetailActivity, it, "")
+                }else{
+                    PayActivity.start(this@OrderDetailActivity, it, it.order.pintuanId?:"0")
+                }
             }
         }
         rl_money.visibility = View.VISIBLE
