@@ -249,7 +249,7 @@ class PublishDetailsActivity : BaseActivity() {
                                 ll_pintuan.visibility = View.VISIBLE
                                 txt_pintuan.text = ("¥" + StringUtil.formatMoney((data.content.resCourseVO.course.assemcost
                                         ?: "0").toDouble()) + "\n发起拼团")
-                                txt_pintuan_self.text = ("¥" + StringUtil.formatMoney((data.content.resCourseVO.course.price
+                                txt_pintuan_self.text = ("¥" + StringUtil.formatMoney((data.content.resCourseVO.course.oneallcost
                                         ?: "0").toDouble()) + "\n单独购买")
                             } else {
                                 txt_accept.visibility = View.VISIBLE

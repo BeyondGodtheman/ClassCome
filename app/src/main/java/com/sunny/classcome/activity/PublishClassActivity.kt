@@ -14,6 +14,7 @@ import com.sunny.classcome.bean.BaseBean
 import com.sunny.classcome.bean.ClassTypeBean
 import com.sunny.classcome.http.ApiManager
 import com.sunny.classcome.http.Constant
+import com.sunny.classcome.utils.StringUtil
 import com.sunny.classcome.utils.ToastUtil
 import kotlinx.android.synthetic.main.activity_publish_class.*
 import org.json.JSONArray
@@ -73,12 +74,12 @@ class PublishClassActivity : BaseActivity() {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                var price = 0f
+                var price = 0.0
                 edit_single_cost.text.toString().apply {
                     price = if (isEmpty()) {
-                        0f
+                        0.0
                     } else {
-                        toFloat()
+                        toDouble()
                     }
                 }
 
@@ -90,7 +91,7 @@ class PublishClassActivity : BaseActivity() {
                         toInt()
                     }
                 }
-                edit_total_cost.setText((total * price).toString())
+                edit_total_cost.text = StringUtil.formatMoney((total * price))
             }
 
         })
@@ -147,13 +148,15 @@ class PublishClassActivity : BaseActivity() {
         }
 
         val datePickerDialog = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
+            val monthStr = month + 1
             if (isEndData) {
                 isEndData = false
-                endData = "$year-${month + 1}-$dayOfMonth"
+
+                endData = "$year-${if (monthStr < 10)"0" else ""}$monthStr-${if (dayOfMonth < 10)"0" else ""}$dayOfMonth"
                 txt_class_date.text = ("${startData}至$endData")
             } else {
                 isEndData = true
-                startData = "$year-${month + 1}-$dayOfMonth"
+                startData = "$year-${if (monthStr < 10)"0" else ""}$monthStr-${if (dayOfMonth < 10)"0" else ""}$dayOfMonth"
                 showDataPick()
             }
         }, mYear, mMonth, mDay)
@@ -173,12 +176,12 @@ class PublishClassActivity : BaseActivity() {
         val timePickerDialog = TimePickerDialog(this, TimePickerDialog.OnTimeSetListener { _, hourOfDay, minute ->
             if (isEndTime) {
                 isEndTime = false
-                endTime = "${if (hourOfDay < 10) "0" else ""}$hourOfDay: ${if (minute < 10) "0" else ""}$minute"
+                endTime = "${if (hourOfDay < 10) "0" else ""}$hourOfDay:${if (minute < 10) "0" else ""}$minute"
 
                 txt_course_time.text = ("${startTime}至$endTime")
             } else {
                 isEndTime = true
-                startTime = "${if (hourOfDay < 10) "0" else ""}$hourOfDay: ${if (minute < 10) "0" else ""}$minute"
+                startTime = "${if (hourOfDay < 10) "0" else ""}$hourOfDay:${if (minute < 10) "0" else ""}$minute"
                 showTimePick()
             }
 
@@ -325,9 +328,10 @@ class PublishClassActivity : BaseActivity() {
         }
         params["materialUrlList"] = materialUrlArray
 
-
+        showLoading()
         ApiManager.post(composites, params, Constant.COURSE_PUBLISHCOURSE, object : ApiManager.OnResult<BaseBean<String>>() {
             override fun onSuccess(data: BaseBean<String>) {
+                hideLoading()
                 if (data.content?.statu == "1") {
                     startActivity(Intent(this@PublishClassActivity, PublishSuccessActivity::class.java))
                     finish()
@@ -337,7 +341,7 @@ class PublishClassActivity : BaseActivity() {
             }
 
             override fun onFailed(code: String, message: String) {
-
+                hideLoading()
             }
 
         })

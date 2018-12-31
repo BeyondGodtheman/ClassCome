@@ -282,4 +282,29 @@
         <item name="android:textColor">@color/color_gray_font</item>
         <item name="textAllCaps">true</item>
     </style>
+
+    <style name="publishClassText">
+        <item name="android:textSize">28pt</item>
+        <item name="android:textColor">@color/color_gray_font</item>
+        <item name="android:layout_width">200pt</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingBottom">20pt</item>
+        <item name="android:paddingTop">35pt</item>
+        <item name="android:paddingStart">60pt</item>
+    </style>
+
+    <style name="publishClassEdit" parent="publishClassText">
+        <item name="android:textSize">28pt</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:textColor">@color/color_default_font</item>
+        <item name="android:background">@color/color_transparent</item>
+    </style>
+
+
+    <style name="publish_line">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">2pt</item>
+        <item name="android:layout_marginStart">60pt</item>
+        <item name="android:background">@color/color_divider</item>
+    </style>
 </resources>

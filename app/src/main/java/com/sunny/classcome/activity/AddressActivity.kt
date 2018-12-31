@@ -29,7 +29,7 @@ class AddressActivity: BaseActivity() {
             txt_unlimited.visibility = View.VISIBLE
 
             txt_unlimited.setOnClickListener {
-                setResult(1, resultIntent)
+                setResult(1, Intent())
                 finish()
             }
         }

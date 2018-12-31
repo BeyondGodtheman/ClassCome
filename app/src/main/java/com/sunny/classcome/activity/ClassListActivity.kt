@@ -3,7 +3,6 @@ package com.sunny.classcome.activity
 import android.content.Context
 import android.content.Intent
 import android.support.design.widget.TabLayout
-import android.support.v4.content.ContextCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import android.widget.ImageView
@@ -90,6 +89,7 @@ class ClassListActivity : BaseActivity() {
 
             override fun onTabSelected(tab: TabLayout.Tab) {
                 category = tab.tag as String
+                refresh.closeHeaderOrFooter()
                 sort(0)
             }
 
@@ -142,6 +142,8 @@ class ClassListActivity : BaseActivity() {
     }
 
     private fun sort(mSortIndex: Int) {
+
+        pageIndex = 1
         bottomArrowList[sortIndex].setImageResource(R.mipmap.ic_arrow_bottom_gray)
         topArrowList[sortIndex].setImageResource(R.mipmap.ic_arrow_top_gray)
         if (mSortIndex != sortIndex) {
@@ -157,7 +159,8 @@ class ClassListActivity : BaseActivity() {
             true
         }
 
-        refresh.autoRefresh()
+        showLoading()
+        loadClass()
     }
 
 
@@ -213,6 +216,7 @@ class ClassListActivity : BaseActivity() {
         params["pageIndex"] = pageIndex.toString()
         ApiManager.post(composites, params, Constant.COURSE_GETCOURSELISTS, object : ApiManager.OnResult<ClassBean>() {
             override fun onSuccess(data: ClassBean) {
+                hideLoading()
                 if (pageIndex == 1) {
                     dataList.clear()
                     refresh.finishRefresh()
@@ -232,6 +236,7 @@ class ClassListActivity : BaseActivity() {
             }
 
             override fun onFailed(code: String, message: String) {
+                hideLoading()
             }
 
         })

@@ -226,33 +226,33 @@
 
             <TextView
                 android:id="@+id/text11"
-                style="@style/style_font_gray_28pt_60pt"
+                style="@style/publishClassText"
+                android:layout_width="200pt"
                 android:layout_marginTop="36pt"
                 android:text="课程总节数" />
 
             <EditText
                 android:id="@+id/edit_total_class"
-                style="@style/style_edit_publish"
+                style="@style/publishClassEdit"
                 android:layout_alignBottom="@id/text11"
-                android:layout_marginStart="60pt"
                 android:layout_toEndOf="@id/text11"
                 android:inputType="number"
                 android:hint="节" />
 
             <View
                 android:id="@+id/line11"
-                style="@style/style_view_line_publish"
+                style="@style/publish_line"
                 android:layout_below="@id/edit_total_class" />
 
             <TextView
                 android:id="@+id/text22"
-                style="@style/style_font_gray_28pt_60pt"
+                style="@style/publishClassText"
                 android:layout_below="@id/line11"
                 android:text="招聘总人数" />
 
             <EditText
                 android:id="@+id/edit_recruit_people"
-                style="@style/style_edit_publish"
+                style="@style/publishClassEdit"
                 android:layout_alignBottom="@id/text22"
                 android:layout_alignStart="@id/edit_total_class"
                 android:layout_marginStart="0pt"
@@ -260,19 +260,18 @@
 
             <View
                 android:id="@+id/line22"
-                style="@style/style_view_line_publish"
+                style="@style/publish_line"
                 android:layout_below="@id/edit_recruit_people" />
 
             <TextView
                 android:id="@+id/text33"
-                style="@style/style_font_gray_28pt_60pt"
+                style="@style/publishClassText"
                 android:layout_below="@id/line22"
-                android:layout_marginTop="40pt"
                 android:text="单节酬劳" />
 
             <EditText
                 android:id="@+id/edit_single_cost"
-                style="@style/style_edit_publish"
+                style="@style/publishClassEdit"
                 android:layout_alignBottom="@id/text33"
                 android:layout_alignStart="@id/edit_total_class"
                 android:layout_marginStart="0pt"
@@ -281,26 +280,25 @@
 
             <View
                 android:id="@+id/line33"
-                style="@style/style_view_line_publish"
+                style="@style/publish_line"
                 android:layout_below="@id/edit_single_cost" />
 
             <TextView
                 android:id="@+id/text44"
-                style="@style/style_font_gray_28pt_60pt"
+                style="@style/publishClassText"
                 android:layout_below="@id/line33"
-                android:layout_marginTop="40pt"
                 android:text="总酬劳" />
 
-            <EditText
+            <TextView
                 android:id="@+id/edit_total_cost"
-                style="@style/style_edit_publish"
+                style="@style/publishClassText"
                 android:layout_alignBottom="@id/text44"
                 android:layout_alignStart="@id/edit_total_class"
                 android:layout_marginStart="0pt"
-                android:hint="@string/rmb" />
+                android:hint="0.00" />
 
             <View
-                style="@style/style_view_line_publish"
+                style="@style/publish_line"
                 android:layout_below="@id/edit_total_cost" />
 
         </RelativeLayout>
