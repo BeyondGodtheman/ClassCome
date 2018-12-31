@@ -59,11 +59,11 @@
 
         <EditText
             android:id="@+id/edit_title"
-            style="@style/style_edit_publish"
+            style="@style/publishClassEdit"
             android:layout_marginTop="35pt"
             android:hint="@string/please_input_title" />
 
-        <View style="@style/style_view_line_publish" />
+        <View style="@style/publish_line" />
 
         <View
             style="@style/style_view_divider"
@@ -82,41 +82,38 @@
 
             <TextView
                 android:id="@+id/test_location"
-                style="@style/style_font_default_28pt"
-                android:layout_marginStart="60pt"
+                style="@style/publishClassText"
                 android:text="@string/current_location" />
 
             <TextView
                 android:id="@+id/txt_location"
-                style="@style/style_edit_publish"
+                style="@style/publishClassEdit"
                 android:layout_toEndOf="@id/test_location"
                 android:hint="@string/current_location" />
 
             <ImageView
                 style="@style/style_more_btn"
-
+                android:layout_centerVertical="true"
                 android:contentDescription="@string/app" />
         </RelativeLayout>
 
-        <View style="@style/style_view_line_publish" />
+        <View style="@style/publish_line" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="80pt">
+            android:layout_height="wrap_content">
 
             <TextView
-                style="@style/style_font_default_28pt"
-                android:layout_marginStart="60pt"
+                style="@style/publishClassText"
                 android:text="@string/detail_address" />
 
             <EditText
                 android:id="@+id/edit_street"
-                style="@style/style_edit_publish"
+                style="@style/publishClassEdit"
                 android:hint="@string/street_building_number" />
         </LinearLayout>
 
-        <View style="@style/style_view_line_publish" />
+        <View style="@style/publish_line" />
 
         <View
             style="@style/style_view_divider"
@@ -135,18 +132,17 @@
             android:layout_marginTop="35pt">
 
             <TextView
-                style="@style/style_font_gray_28pt"
-                android:layout_marginStart="60pt"
-                android:text="@string/training_cost" />
+                style="@style/publishClassText"
+                android:text="培训费用" />
 
             <EditText
                 android:id="@+id/edit_cost"
-                style="@style/style_edit_publish"
+                style="@style/publishClassEdit"
                 android:hint="@string/rmb"
                 android:inputType="numberDecimal" />
         </LinearLayout>
 
-        <View style="@style/style_view_line_publish" />
+        <View style="@style/publish_line" />
 
 
         <View
@@ -164,41 +160,41 @@
             android:layout_marginTop="36pt">
 
             <TextView
-                style="@style/style_font_gray_28pt_60pt"
-                android:layout_marginTop="0pt"
+                style="@style/publishClassText"
+                android:layout_width="230pt"
                 android:text="@string/separate_purchase_cost" />
 
             <TextView
                 android:id="@+id/edit_separate_cost"
-                style="@style/style_edit_publish"
+                style="@style/publishClassEdit"
                 android:hint="@string/rmb" />
         </LinearLayout>
 
-        <View style="@style/style_view_line_publish" />
+        <View style="@style/publish_line" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="80pt">
+            android:layout_marginTop="40pt">
 
             <TextView
-                style="@style/style_font_gray_28pt_60pt"
-                android:layout_marginTop="0pt"
+                style="@style/publishClassText"
+                android:layout_width="230pt"
                 android:text="@string/group_purchase_cost" />
 
             <EditText
                 android:id="@+id/edit_group_cost"
-                style="@style/style_edit_publish"
+                style="@style/publishClassEdit"
                 android:hint="@string/rmb"
                 android:inputType="numberDecimal" />
         </LinearLayout>
 
-        <View style="@style/style_view_line_publish" />
+        <View style="@style/publish_line" />
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="90pt">
+            android:layout_marginTop="40pt">
 
             <TextView
                 android:id="@+id/test_people_limit"
@@ -245,32 +241,34 @@
 
         </RelativeLayout>
 
-        <View style="@style/style_view_line_publish" />
+        <View style="@style/publish_line"
+            android:layout_marginTop="20pt"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="90pt">
+            android:layout_marginTop="40pt">
 
             <TextView
                 android:id="@+id/test_time_limit"
-                style="@style/style_font_gray_28pt_60pt"
-                android:layout_marginTop="0pt"
+                style="@style/publishClassText"
+               android:layout_width="230pt"
                 android:text="@string/time_limit" />
 
             <EditText
                 android:id="@+id/edit_time_limit"
-                style="@style/style_edit_publish"
+                style="@style/publishClassEdit"
                 android:layout_toEndOf="@id/test_time_limit"
                 android:hint="天"
                 android:inputType="number" />
 
             <ImageView
                 style="@style/style_more_btn"
-                android:contentDescription="@string/app" />
+                android:contentDescription="@string/app"
+                android:layout_centerVertical="true"/>
         </RelativeLayout>
 
-        <View style="@style/style_view_line_publish" />
+        <View style="@style/publish_line" />
 
         <View
             style="@style/style_view_divider"
