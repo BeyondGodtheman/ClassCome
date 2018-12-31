@@ -10,6 +10,7 @@ import com.sunny.classcome.base.BaseActivity
 import com.sunny.classcome.fragment.MyClassFragment
 import com.sunny.classcome.widget.dialog.SelectDialog
 import kotlinx.android.synthetic.main.activity_my_class.*
+import kotlinx.android.synthetic.main.layout_title_arrow.view.*
 
 class MyClassActivity : BaseActivity() {
 
@@ -25,6 +26,10 @@ class MyClassActivity : BaseActivity() {
 
     override fun setLayout(): Int = R.layout.activity_my_class
 
+    private var typeName = "家教"
+
+    private lateinit var titleView: View
+
     override fun initView() {
 
         type = intent.getIntExtra("type", 1)
@@ -34,25 +39,36 @@ class MyClassActivity : BaseActivity() {
             tabTitles.add("待支付")
             tabTitles.add("进行中")
 
-            "我的发布"
+            "发布的"
         } else {
             tabTitles.add("全部")
             tabTitles.add("已中标")
             tabTitles.add("待结算")
-            "我的参与"
+            "参与的"
         }
         tabTitles.add("评价/售后")
 
-
-        showTitle(titleManager.arrowTitle(title, View.OnClickListener { _ ->
+        titleView = titleManager.arrowTitle(title + typeName, View.OnClickListener { _ ->
             SelectDialog(this) { type ->
                 courseType = type
+                typeName = when (courseType) {
+                    "1" -> "家教"
+                    "2" -> "代课"
+                    "3" -> "活动"
+                    "4" -> "场地"
+                    "5" -> "培训"
+                    else -> ""
+                }
+                titleView.txt_arrow_title.text = (title + typeName)
+
                 fragments.forEach {
                     it.autoLoad()
                 }
 
             }.show()
-        }))
+        })
+
+        showTitle(titleView)
 
 
         fragments.add(MyClassFragment().setStatus(type.toString(), "7"))
