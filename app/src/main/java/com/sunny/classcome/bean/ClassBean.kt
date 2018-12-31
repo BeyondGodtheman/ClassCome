@@ -52,7 +52,7 @@ data class ClassBean(
                     var latitude: String?,
                     var longitude: String?,
                     var distance: String,
-                    var winningBidder: String,
+                    var winningBidder: String?,
                     var state: String,
                     var stateInfo: String,
                     var fatherCategoryName: String,

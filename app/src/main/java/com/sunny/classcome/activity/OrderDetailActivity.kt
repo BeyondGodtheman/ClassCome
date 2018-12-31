@@ -226,10 +226,10 @@ class OrderDetailActivity : BaseActivity() {
         showBlueBtn(txt_order_right, "去支付")
         txt_order_right.setOnClickListener {
             classBean?.let {
-                if (it.order.pintuanId == "0"){
+                if (it.order.pintuanId == "0") {
                     PayActivity.start(this@OrderDetailActivity, it, "")
-                }else{
-                    PayActivity.start(this@OrderDetailActivity, it, it.order.pintuanId?:"0")
+                } else {
+                    PayActivity.start(this@OrderDetailActivity, it, it.order.pintuanId ?: "0")
                 }
             }
         }
@@ -268,6 +268,35 @@ class OrderDetailActivity : BaseActivity() {
     private fun cancleClass() {
         txt_info.text = "已取消"
         txt_prompt.text = "发布者取消"
+        txt_order_number.text = ("订单编号：${classBean?.course?.id}")
+    }
+
+
+    private fun showOrderFinish() {
+        txt_info.text = "订单已完成"
+        txt_order_number.text = ("订单编号：${classBean?.course?.id}")
+        txt_order_remark.text = ("验证码：${classBean?.order?.orderNum}")
+        showBlueBtn(txt_order_mid, "再次发布")
+        txt_order_mid.setOnClickListener {
+
+            when (classBean?.course?.coursetype) {
+                "4" -> startActivity(Intent(this, PublishFieldActivity::class.java))
+                "5" -> startActivity(Intent(this, PublishTrainActivity::class.java))
+                else -> {
+                    PublishClassActivity.start(this, classBean?.course?.coursetype ?: "")
+                }
+
+            }
+        }
+        showBlueBtn(txt_order_right, "应聘者")
+        txt_order_right.setOnClickListener {
+            ApplicantsActivity.start(this, classBean?.course?.id ?: "")
+        }
+    }
+
+
+    private fun refund() {
+        txt_info.text = "您已申请退款，请等待后台审核"
         txt_order_number.text = ("订单编号：${classBean?.course?.id}")
     }
 
@@ -362,6 +391,12 @@ class OrderDetailActivity : BaseActivity() {
                             if (data.content?.course?.state == "6") {
                                 showClassFinish()
                             }
+                        }
+                        "6" -> {
+                            showOrderFinish()
+                        }
+                        "8" -> {
+                            refund()
                         }
                     }
                 } else {

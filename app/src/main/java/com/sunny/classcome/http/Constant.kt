@@ -151,5 +151,11 @@ object Constant {
 
     const val ORDER_ACCOUNTSORDER = "order/accountsOrder" //结算 + 核销
 
+    const val ORDER_CANCELAPPLYFORRETRUN = "order/cancelApplyForRetrun" //取消退款申请
+
+    const val ORDER_APPLYFORRETRUN = "order/applyForRetrun" //申请退款
+
+    const val COURSE_COMMENTUSER = "course/commentUser" //评论用户
+
 }
 

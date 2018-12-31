@@ -15,9 +15,11 @@ import com.sunny.classcome.bean.ClassBean
 import com.sunny.classcome.http.ApiManager
 import com.sunny.classcome.http.Constant
 import com.sunny.classcome.utils.*
+import com.sunny.classcome.widget.dialog.MyDialog
 import kotlinx.android.synthetic.main.item_my_class.view.*
+import org.greenrobot.eventbus.EventBus
 
-class MyPostedAdapter(var baseActivity: BaseActivity,list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleAdapter<ClassBean.Bean.Data>(list) {
+class MyPostedAdapter(var baseActivity: BaseActivity, list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleAdapter<ClassBean.Bean.Data>(list) {
     override fun setLayout(parent: ViewGroup, viewType: Int): View = LayoutInflater.from(context).inflate(R.layout.item_my_class, parent, false)
 
     override fun onBindViewHolder(holder: BaseRecycleViewHolder, position: Int) {
@@ -34,7 +36,7 @@ class MyPostedAdapter(var baseActivity: BaseActivity,list: ArrayList<ClassBean.B
             "2" -> {
                 if (getData(position).course.coursetype == "4" || getData(position).course.coursetype == "5") {
                     cancelTairn(holder.itemView.txt_mid, getData(position).course.id)
-                    buy(holder.itemView.txt_right,getData(position).course.id)
+                    buy(holder.itemView.txt_right, getData(position).course.id)
                 } else {
                     invite(holder.itemView.txt_left, getData(position).course.id)
                     applicants(holder.itemView.txt_mid, getData(position).course.id)
@@ -43,7 +45,7 @@ class MyPostedAdapter(var baseActivity: BaseActivity,list: ArrayList<ClassBean.B
             }
             "3" -> {
 //                //订单取消
-                publishAgain(holder.itemView.txt_right,position)
+                publishAgain(holder.itemView.txt_right, position)
 
             }
             "4" -> {
@@ -52,15 +54,27 @@ class MyPostedAdapter(var baseActivity: BaseActivity,list: ArrayList<ClassBean.B
 
             }
             "5" -> {
-                if (getData(position).course.coursetype == "4" || getData(position).course.coursetype == "5"){
+                if (getData(position).course.coursetype == "4" || getData(position).course.coursetype == "5") {
                     cancelOrherOrder(holder.itemView.txt_mid, getData(position).course.id)
-                    buy(holder.itemView.txt_right,getData(position).course.id)
-                }else{
+                    buy(holder.itemView.txt_right, getData(position).course.id)
+                } else {
                     cancelOrder(holder.itemView.txt_mid, getData(position).course.id)
-                    if (getData(position).course.state == "5"){
-                        account(holder.itemView.txt_right,position)
+                    if (getData(position).course.state == "5") {
+                        account(holder.itemView.txt_right, position)
                     }
                 }
+            }
+            "6" -> {
+                if (getData(position).course.state == "6") {
+                    comment(holder.itemView.txt_right,getData(position).course.id,getData(position).course.winningBidder?:"")
+                }
+                refund(holder.itemView.txt_mid, getData(position).course.id)
+            }
+            "8" -> {
+                if (getData(position).course.state == "8") {
+                    comment(holder.itemView.txt_right,getData(position).course.id,getData(position).course.winningBidder?:"")
+                }
+                cancelRefund(holder.itemView.txt_mid, getData(position).course.id)
             }
 
         }
@@ -76,9 +90,9 @@ class MyPostedAdapter(var baseActivity: BaseActivity,list: ArrayList<ClassBean.B
         holder.itemView.txt_money.text = ("¥" + StringUtil.formatMoney((getData(position).course.sumPrice
                 ?: "0").toDouble()))
 
-        if (getData(position).course.coursetype == "5"){
+        if (getData(position).course.coursetype == "5") {
             holder.itemView.txt_date.text = getData(position).course.worktime
-        }else{
+        } else {
             val timeSb = StringBuilder()
 
             getData(position).course.startTime?.let {
@@ -97,10 +111,10 @@ class MyPostedAdapter(var baseActivity: BaseActivity,list: ArrayList<ClassBean.B
 
 
         holder.itemView.setOnClickListener {
-            if (getData(position).course.coursetype == "4" || getData(position).course.coursetype == "5"){
-                OrderDetailActivity.start(context,getData(position),true)
-            }else{
-                OrderDetailActivity.start(context, getData(position).course.id,true)
+            if (getData(position).course.coursetype == "4" || getData(position).course.coursetype == "5") {
+                OrderDetailActivity.start(context, getData(position), true)
+            } else {
+                OrderDetailActivity.start(context, getData(position).course.id, true)
             }
         }
     }
@@ -149,13 +163,13 @@ class MyPostedAdapter(var baseActivity: BaseActivity,list: ArrayList<ClassBean.B
     }
 
     //结算
-    private fun account(textView: TextView,position: Int) {
+    private fun account(textView: TextView, position: Int) {
         textView.apply {
             showBlueBtn(this, "结算")
             setOnClickListener {
                 val params = hashMapOf<String, String>()
                 params["courseId"] = getData(position).course.id
-                params["useUserId"] = getData(position).course.winningBidder
+                params["useUserId"] = getData(position).course.winningBidder?:""
                 ApiManager.post(baseActivity.composites, params, Constant.ORDER_ACCOUNTSORDER, object : ApiManager.OnResult<BaseBean<String>>() {
                     override fun onSuccess(data: BaseBean<String>) {
 
@@ -187,15 +201,15 @@ class MyPostedAdapter(var baseActivity: BaseActivity,list: ArrayList<ClassBean.B
     }
 
     //再次发布
-    private fun publishAgain(textView: TextView,position: Int) {
+    private fun publishAgain(textView: TextView, position: Int) {
         textView.apply {
             showBlueBtn(this, "再次发布")
             setOnClickListener {
-                when(getData(position).course.coursetype){
-                    "4" -> context.startActivity(Intent(context,PublishFieldActivity::class.java))
-                    "5" -> context.startActivity(Intent(context,PublishTrainActivity::class.java))
+                when (getData(position).course.coursetype) {
+                    "4" -> context.startActivity(Intent(context, PublishFieldActivity::class.java))
+                    "5" -> context.startActivity(Intent(context, PublishTrainActivity::class.java))
                     else -> {
-                        PublishClassActivity.start(context,getData(position).course.coursetype)
+                        PublishClassActivity.start(context, getData(position).course.coursetype)
                     }
                 }
             }
@@ -222,7 +236,6 @@ class MyPostedAdapter(var baseActivity: BaseActivity,list: ArrayList<ClassBean.B
     }
 
 
-
     private fun applicants(textView: TextView, courseId: String) {
         textView.apply {
             showBlueBtn(this, "应聘者")
@@ -232,4 +245,68 @@ class MyPostedAdapter(var baseActivity: BaseActivity,list: ArrayList<ClassBean.B
         }
     }
 
+    private fun cancelRefund(textView: TextView, courseId: String) {
+        textView.apply {
+            showGrayBtn(this, "取消退款")
+            setOnClickListener { _ ->
+                val dialog = MyDialog(context)
+                dialog.setTitle("此操作将取消您的退款申请")
+                dialog.onClickListener1 = View.OnClickListener {
+                    val params = hashMapOf<String, String>()
+                    params["courseId"] = courseId
+                    baseActivity.showLoading()
+                    ApiManager.post(baseActivity.composites, params, Constant.ORDER_CANCELAPPLYFORRETRUN, object : ApiManager.OnResult<BaseBean<String>>() {
+                        override fun onSuccess(data: BaseBean<String>) {
+                            baseActivity.hideLoading()
+                            dialog.dismiss()
+                            EventBus.getDefault().post(Posted())
+                        }
+
+                        override fun onFailed(code: String, message: String) {
+                            baseActivity.hideLoading()
+                        }
+                    })
+                    dialog.dismiss()
+                }
+                dialog.show()
+            }
+        }
+    }
+
+    private fun refund(textView: TextView, courseId: String) {
+        textView.apply {
+            showGrayBtn(this, "申请退款")
+            setOnClickListener { _ ->
+                val dialog = MyDialog(context)
+                dialog.setTitle("申请退款功能需要人工审核，您申请完成后，会有服务人员与您联系")
+                dialog.onClickListener1 = View.OnClickListener {
+                    val params = hashMapOf<String, String>()
+                    params["courseId"] = courseId
+                    baseActivity.showLoading()
+                    ApiManager.post(baseActivity.composites, params, Constant.ORDER_APPLYFORRETRUN, object : ApiManager.OnResult<BaseBean<String>>() {
+                        override fun onSuccess(data: BaseBean<String>) {
+                            baseActivity.hideLoading()
+                            EventBus.getDefault().post(Posted())
+                        }
+
+                        override fun onFailed(code: String, message: String) {
+                            baseActivity.hideLoading()
+                        }
+                    })
+
+                    dialog.dismiss()
+                }
+                dialog.show()
+            }
+        }
+    }
+
+    private fun comment(textView: TextView, courseId: String,userId:String) {
+        textView.apply {
+            showBlueBtn(this, "评价")
+            setOnClickListener { _ ->
+                CommentActivity.start(context,courseId,userId)
+            }
+        }
+    }
 }

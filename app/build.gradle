@@ -100,4 +100,7 @@ dependencies {
     implementation 'org.greenrobot:eventbus:3.1.1'
     //阿里云OSS
     implementation 'com.aliyun.dpa:oss-android-sdk:+'
+
+    //星星
+    implementation 'com.hedgehog.ratingbar:app:1.1.2'
 }

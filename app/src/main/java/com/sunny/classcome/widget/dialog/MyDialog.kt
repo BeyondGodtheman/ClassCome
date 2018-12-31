@@ -22,7 +22,7 @@ class MyDialog(context: Context) : Dialog(context), View.OnClickListener {
         tvCancel.setOnClickListener(this)
         tvSure.setOnClickListener(this)
         setCanceledOnTouchOutside(false)
-        window?.attributes?.width = context.resources.getDimension(R.dimen.pt325).toInt()
+        window?.attributes?.width = context.resources.getDimension(R.dimen.pt570).toInt()
         window?.setBackgroundDrawableResource(R.color.color_transparent)
     }
 

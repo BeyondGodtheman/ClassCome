@@ -72,8 +72,10 @@ class ApplicantsActivity : BaseActivity() {
         val params = hashMapOf<String, String>()
         params["pageIndex"] = pageIndex.toString()
         params["courseId"] = courseId
+        showLoading()
         ApiManager.post(composites, params, Constant.ORDER_GETAPPLICANTLIST, object : ApiManager.OnResult<ApplicantsBean>() {
             override fun onSuccess(data: ApplicantsBean) {
+                hideLoading()
                 if (pageIndex == 1) {
                     list.clear()
                     refresh.finishRefresh()
@@ -90,6 +92,7 @@ class ApplicantsActivity : BaseActivity() {
             }
 
             override fun onFailed(code: String, message: String) {
+                hideLoading()
                 if (pageIndex == 1) {
                     list.clear()
                     refresh.finishRefresh()
@@ -110,8 +113,10 @@ class ApplicantsActivity : BaseActivity() {
         params["state"] = state
         params["type"] = type
         params["userId"] = list[position].userId?:""
+        showLoading()
         ApiManager.post(composites, params, Constant.ORDER_APPLYCOURSE, object : ApiManager.OnResult<BaseBean<String>>() {
             override fun onSuccess(data: BaseBean<String>) {
+                hideLoading()
                 if (type == "1"){
                     if (data.content?.statu == "1") {
                         list[position].state = state
@@ -128,7 +133,7 @@ class ApplicantsActivity : BaseActivity() {
             }
 
             override fun onFailed(code: String, message: String) {
-
+            hideLoading()
             }
 
         })

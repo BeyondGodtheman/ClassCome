@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.sunny.classcome.R
+import com.sunny.classcome.activity.MyProfileActivity
 import com.sunny.classcome.base.BaseRecycleAdapter
 import com.sunny.classcome.base.BaseRecycleViewHolder
 import com.sunny.classcome.bean.ApplicantsBean
@@ -54,6 +55,10 @@ class ApplicantsAdapter(list:ArrayList<ApplicantsBean.Bean.Data>,var applicantsO
 
         holder.itemView.btn_right.setOnClickListener {
             applicantsOption.winningBid(position)
+        }
+
+        holder.itemView.setOnClickListener {
+            MyProfileActivity.start(context,getData(position).userId?:"")
         }
 
     }

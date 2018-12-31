@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:hedgehog="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/color_white">
+
+    <TextView
+        style="@style/style_font_gray_28pt"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="37pt"
+        android:text="期待你的打分" />
+
+    <com.hedgehog.ratingbar.RatingBar
+        android:id="@+id/ratingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="10pt"
+        android:layout_marginTop="44pt"
+        hedgehog:halfstart="false"
+        hedgehog:starCount="5"
+        hedgehog:starEmpty="@mipmap/ic_stars_unselect"
+        hedgehog:starFill="@mipmap/ic_stars_selected"
+        hedgehog:starImageHeight="60pt"
+        hedgehog:starImagePadding="10pt"
+        hedgehog:starImageWidth="60pt" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2pt"
+        android:layout_marginStart="125pt"
+        android:layout_marginTop="39pt"
+        android:layout_marginEnd="125pt"
+        android:background="@color/color_divider" />
+
+    <EditText
+        android:id="@+id/edit_comment"
+        style="@style/style_font_default_32pt"
+        android:layout_width="match_parent"
+        android:layout_height="200pt"
+        android:gravity="top"
+        android:layout_marginStart="80pt"
+        android:layout_marginEnd="80pt"
+        android:layout_marginTop="26pt"
+        android:background="@color/color_transparent"
+        android:hint="输入评论…" />
+
+    <Button
+        android:id="@+id/btn_comment"
+        style="@style/style_button"
+        android:text="发表评论"
+        android:layout_marginTop="40pt"/>
+</LinearLayout>
