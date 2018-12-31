@@ -10,6 +10,7 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener
 import com.sunny.classcome.R
 import com.sunny.classcome.adapter.ItineraryDateAdapter
 import com.sunny.classcome.base.BaseActivity
+import com.sunny.classcome.base.BaseRecycleAdapter
 import com.sunny.classcome.bean.ItineraryDateBean
 import com.sunny.classcome.bean.JourneyBean
 import com.sunny.classcome.http.ApiManager
@@ -30,7 +31,7 @@ class MyItineraryActivity : BaseActivity() {
         Calendar.getInstance()
     }
 
-    private  var selectDate = ""
+    private var selectDate = ""
 
     override fun setLayout(): Int = R.layout.activity_itinerary
 
@@ -42,14 +43,15 @@ class MyItineraryActivity : BaseActivity() {
             setOnItemClickListener { _, index ->
                 select(index)
                 selectDate = dataList[index].date
-                refresh2.autoRefresh()
+                showLoading()
+                loadMyJourney()
             }
         }
 
         refresh.setRefreshHeader(BezierRadarHeader(this).setPrimaryColorId(R.color.color_white)
                 .setAccentColorId(R.color.color_nav_blue))
         refresh.setRefreshFooter(ClassicsFooter(this))
-        refresh.setOnRefreshLoadMoreListener(object :OnRefreshLoadMoreListener{
+        refresh.setOnRefreshLoadMoreListener(object : OnRefreshLoadMoreListener {
             override fun onLoadMore(refreshLayout: RefreshLayout) {
                 loadData()
             }
@@ -81,12 +83,25 @@ class MyItineraryActivity : BaseActivity() {
             val month = afterCalendar.get(Calendar.MONTH) + 1
             val day = afterCalendar.get(Calendar.DAY_OF_MONTH)
             val week = afterCalendar.get(Calendar.DAY_OF_WEEK)
-            dataList.add(ItineraryDateBean("${day}日", ("$year-$month-$day"), week -1))
+
+            val monthStr = (if (month < 10) "0" else "") + month
+            val dayStr = (if (day < 10) "0" else "") + day
+
+            dataList.add(ItineraryDateBean("${day}日", ("$year-$monthStr-$dayStr"), week - 1))
             afterCalendar.add(Calendar.DAY_OF_MONTH, 1)
         }
 
         refresh.finishLoadMore()
-        recl_date.adapter?.notifyDataSetChanged()
+        recl_date.adapter?.let {
+            it.notifyDataSetChanged()
+            if (it is ItineraryDateAdapter){
+                it.select(0)
+                selectDate = dataList[0].date
+                showLoading()
+                loadMyJourney()
+            }
+        }
+
     }
 
     fun loadBeforeData() {
@@ -97,32 +112,38 @@ class MyItineraryActivity : BaseActivity() {
             val day = beforeCalendar.get(Calendar.DAY_OF_MONTH)
             val week = beforeCalendar.get(Calendar.DAY_OF_WEEK)
             beforeCalendar.add(Calendar.DAY_OF_MONTH, -1)
-            resultList.add(ItineraryDateBean("${day}日", ("$year-$month-$day"), week -1))
+
+            val monthStr = (if (month < 10) "0" else "") + month
+            val dayStr = (if (day < 10) "0" else "") + day
+
+            resultList.add(ItineraryDateBean("${day}日", ("$year-$monthStr-$dayStr"), week - 1))
         }
         resultList.reverse()
-        dataList.addAll(0,resultList)
+        dataList.addAll(0, resultList)
 
         refresh.finishRefresh()
         recl_date.adapter?.notifyDataSetChanged()
         recl_date.scrollToPosition(37)
     }
 
-    private fun loadMyJourney(){
-        val params = HashMap<String,String>()
+    private fun loadMyJourney() {
+        val params = HashMap<String, String>()
         params["startTime"] = selectDate
-        ApiManager.post(composites,params,Constant.COURSE_GETMYJOURNEY,object :ApiManager.OnResult<JourneyBean>(){
+        ApiManager.post(composites, params, Constant.COURSE_GETMYJOURNEY, object : ApiManager.OnResult<JourneyBean>() {
             override fun onSuccess(data: JourneyBean) {
+                hideLoading()
                 refresh2.finishRefresh()
-                if (data.content != null){
+                val dataList = data.content?.filter { it.dateStr == selectDate }
+                if (dataList != null && dataList.isNotEmpty()) {
                     layout_error.visibility = View.GONE
-                    recl.adapter = ItineraryDescAdapter(data.content?: arrayListOf())
-                }else{
+                    recl.adapter = ItineraryDescAdapter(dataList as ArrayList<JourneyBean.Bean>)
+                } else {
                     layout_error.visibility = View.VISIBLE
                 }
             }
 
             override fun onFailed(code: String, message: String) {
-
+                hideLoading()
             }
 
         })

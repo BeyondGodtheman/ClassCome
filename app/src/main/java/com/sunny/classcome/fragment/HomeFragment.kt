@@ -296,8 +296,9 @@ class HomeFragment : BaseFragment() {
                 if (isFlag) {
                     loadPinTuan()
                     initRecommend(data.content?.dataList?: arrayListOf())
-                    dataList.addAll(data.content?.dataList?: arrayListOf())
-
+                }
+                data.content?.dataList?.let {
+                    dataList.addAll(it)
                 }
                 recl.adapter?.notifyDataSetChanged()
             }
