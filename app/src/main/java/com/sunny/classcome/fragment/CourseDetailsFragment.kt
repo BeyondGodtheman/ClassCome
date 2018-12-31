@@ -28,9 +28,9 @@ class CourseDetailsFragment : BaseFragment() {
 
         MyApplication.getApp().getData<ClassDetailBean>(Constant.CLASS_DETAIL, true)?.content?.resCourseVO?.let { bean ->
 
-            lan = bean.course.latitude?:""
+            lan = bean.course.latitude ?: ""
 
-            lon = bean.course.longitude?:""
+            lon = bean.course.longitude ?: ""
 
             name = bean.classAddress
 
@@ -43,9 +43,13 @@ class CourseDetailsFragment : BaseFragment() {
             txt_sum.text = ("￥${bean.sumPrice}")
 
             // 课程类别
-            if (bean.category?.isNotEmpty() == true) {
-                txt_class_type.text = bean.category!![0]
+            val categorySb = StringBuilder()
+            bean.category?.forEach {
+                categorySb.append(it).append(" ")
             }
+
+            txt_class_type.text = categorySb.toString()
+
 
             // 人员类型/课程日期
             txt_person_type.text = bean.personType
@@ -53,12 +57,15 @@ class CourseDetailsFragment : BaseFragment() {
                     ?: "")}至${DateUtil.dateFormatYYMMdd(bean.endTime ?: "")}")
 
             // 上课时段
-            if (bean.classTime?.isNotEmpty() == true) {
-                txt_time.text = bean.classTime!![0]
+            val classTimeSb = StringBuilder()
+            bean.classTime?.forEach {
+                classTimeSb.append(it).append(" ")
             }
 
+            txt_time.text = classTimeSb.toString()
+
             // 截至日期/上课地点
-            txt_by_date.text = DateUtil.dateFormatYYMMdd(bean.course.expirationTime)
+            txt_by_date.text = DateUtil.dateFormatYYMMdd(bean.endTime ?: "")
             txt_address.text = bean.classAddress
         }
 

@@ -93,7 +93,7 @@
     <TextView
         android:id="@+id/text22"
         style="@style/style_font_gray_28pt"
-        android:layout_below="@id/text11"
+        android:layout_below="@id/txt_class_type"
         android:layout_marginTop="20pt"
         android:text="人员类型" />
 
