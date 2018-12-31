@@ -4,13 +4,17 @@ import android.content.Context
 import android.content.Intent
 import android.support.v4.view.ViewPager
 import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.LinearLayoutManager
 import android.view.View
+import com.scwang.smartrefresh.layout.footer.ClassicsFooter
 import com.sunny.classcome.MyApplication
 import com.sunny.classcome.R
+import com.sunny.classcome.adapter.CommentAdapter
 import com.sunny.classcome.adapter.PastReleaseAdapter
 import com.sunny.classcome.base.BaseActivity
 import com.sunny.classcome.bean.BaseBean
 import com.sunny.classcome.bean.ClassBean
+import com.sunny.classcome.bean.CommentBean
 import com.sunny.classcome.bean.UserBean
 import com.sunny.classcome.http.ApiManager
 import com.sunny.classcome.http.Constant
@@ -30,6 +34,8 @@ class MyProfileActivity : BaseActivity() {
 
     private val pastReleaseList = arrayListOf<ClassBean.Bean.Data>()
     private var userBean: UserBean? = null
+    private var commentList = arrayListOf<CommentBean.Data>()
+    private var pageIndex = 1
 
     private val taUid by lazy {
         intent.getStringExtra("uid") ?: "" //他人
@@ -38,9 +44,9 @@ class MyProfileActivity : BaseActivity() {
 
 
     companion object {
-        fun start(context:Context,uid:String){
-            context.startActivity(Intent(context,MyProfileActivity::class.java)
-                    .putExtra("uid",uid))
+        fun start(context: Context, uid: String) {
+            context.startActivity(Intent(context, MyProfileActivity::class.java)
+                    .putExtra("uid", uid))
         }
     }
 
@@ -59,17 +65,27 @@ class MyProfileActivity : BaseActivity() {
 
         showTitle(titleView)
 
+        refresh.setEnableRefresh(false)
+        refresh.setRefreshFooter(ClassicsFooter(this))
+        refresh.setOnLoadMoreListener {
+            pageIndex ++
+            loadComment()
+        }
+
         recl.setHasFixedSize(true)
         recl.isNestedScrollingEnabled = false
         recl.layoutManager = GridLayoutManager(this, 2)
         recl.adapter = PastReleaseAdapter(pastReleaseList)
         txt_more.setOnClickListener(this)
+
+        recl_comment.layoutManager = LinearLayoutManager(this)
+        recl_comment.adapter = CommentAdapter(commentList)
     }
 
     override fun onClick(v: View) {
         when (v.id) {
             R.id.txt_more -> {
-                PastReleaseActivity.start(this,if (taUid.isEmpty()) myUid else taUid)
+                PastReleaseActivity.start(this, if (taUid.isEmpty()) myUid else taUid)
             }
 
         }
@@ -86,7 +102,7 @@ class MyProfileActivity : BaseActivity() {
 
                 hideLoading()
                 data.content?.data?.user?.let { bean ->
-                    GlideUtil.loadHead(this@MyProfileActivity, img_user_head, bean.userPic?:"")
+                    GlideUtil.loadHead(this@MyProfileActivity, img_user_head, bean.userPic ?: "")
                     txt_name.text = bean.userName
 
                     txt_points.text = ("${bean.source}积分")
@@ -113,7 +129,7 @@ class MyProfileActivity : BaseActivity() {
 
                 data.content?.data?.materialList?.let {
                     txt_all.text = it.size.toString()
-                    viewPager.addOnPageChangeListener(object :ViewPager.OnPageChangeListener{
+                    viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
                         override fun onPageScrollStateChanged(p0: Int) {
 
                         }
@@ -123,7 +139,7 @@ class MyProfileActivity : BaseActivity() {
                         }
 
                         override fun onPageSelected(position: Int) {
-                            txt_current.text = (position+1).toString()
+                            txt_current.text = (position + 1).toString()
                         }
 
                     })
@@ -139,6 +155,9 @@ class MyProfileActivity : BaseActivity() {
 
         //加载发布的课程
         loadPastRelease()
+        //加载评论
+        pageIndex = 1
+        loadComment()
     }
 
     private fun loadPastRelease() {
@@ -153,6 +172,36 @@ class MyProfileActivity : BaseActivity() {
             }
 
             override fun onFailed(code: String, message: String) {
+            }
+
+        })
+    }
+
+    private fun loadComment() {
+        val params = HashMap<String, String>()
+        params["id"] = if (taUid.isEmpty()) myUid else taUid
+        params["pageIndex"] = pageIndex.toString()
+        ApiManager.post(composites, params, Constant.USER_GETAPPRAISELIST, object : ApiManager.OnResult<BaseBean<CommentBean>>() {
+            override fun onSuccess(data: BaseBean<CommentBean>) {
+                if (pageIndex == 1) {
+                    commentList.clear()
+                }else{
+                    refresh.finishLoadMore()
+                    if (data.content?.data?.dataList == null || data.content?.data?.dataList?.isEmpty() == true){
+                        pageIndex --
+                    }
+                }
+                data.content?.data?.dataList?.let {
+                    if (it.isNotEmpty()) {
+                        if (!commentList.containsAll(it))
+                            commentList.addAll(it)
+                    }
+                }
+                recl_comment.adapter?.notifyDataSetChanged()
+            }
+
+            override fun onFailed(code: String, message: String) {
+                refresh.finishLoadMore()
             }
 
         })

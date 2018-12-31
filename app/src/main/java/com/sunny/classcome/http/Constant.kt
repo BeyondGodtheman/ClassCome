@@ -157,5 +157,7 @@ object Constant {
 
     const val COURSE_COMMENTUSER = "course/commentUser" //评论用户
 
+    const val USER_GETAPPRAISELIST = "user/getAppraiseList" //评论列表
+
 }
 

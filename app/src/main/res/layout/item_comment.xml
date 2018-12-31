@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:hedgehog="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/img_user_head"
+        android:layout_width="80pt"
+        android:layout_height="80pt"
+        android:layout_marginStart="40pt"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/ic_default_head"
+        app:riv_oval="true" />
+
+    <TextView
+        android:id="@+id/txt_user_name"
+        style="@style/style_font_gray_24pt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/img_user_head"
+        android:layout_marginStart="16pt"
+        android:layout_toEndOf="@id/img_user_head"
+        android:text="@string/app" />
+
+    <com.hedgehog.ratingbar.RatingBar
+        android:id="@+id/ratingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txt_user_name"
+        android:layout_marginStart="16pt"
+        android:layout_marginTop="5pt"
+        android:layout_toEndOf="@id/img_user_head"
+        hedgehog:clickable="false"
+        hedgehog:halfstart="false"
+        hedgehog:starCount="5"
+        hedgehog:starEmpty="@mipmap/ic_stars_unselect"
+        hedgehog:starFill="@mipmap/ic_stars_selected"
+        hedgehog:starImageHeight="30pt"
+        hedgehog:starImagePadding="1pt"
+        hedgehog:starImageWidth="30pt" />
+
+    <TextView
+        android:id="@+id/txt_content"
+        style="@style/style_font_default_30pt"
+        android:layout_below="@id/ratingBar"
+        android:layout_marginStart="16pt"
+        android:layout_marginTop="22pt"
+        android:layout_toEndOf="@id/img_user_head"
+        android:text="@string/app" />
+
+    <TextView
+        android:id="@+id/txt_date"
+        style="@style/style_font"
+        android:layout_below="@id/txt_content"
+        android:layout_marginStart="16pt"
+        android:layout_marginTop="6pt"
+        android:layout_toEndOf="@id/img_user_head"
+        android:text="@string/app"
+        android:textColor="@color/color_gray_font"
+        android:textSize="20pt" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2pt"
+        android:layout_below="@id/txt_date"
+        android:layout_marginTop="8pt"
+        android:layout_toEndOf="@id/img_user_head"
+        android:background="@color/color_divider"
+        android:layout_marginBottom="49pt"/>
+</RelativeLayout>
