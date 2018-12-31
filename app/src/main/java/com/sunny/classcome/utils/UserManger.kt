@@ -55,7 +55,6 @@ object UserManger {
 
     fun clear(){
         SharedUtil.remove(LOGIN)
-        SharedUtil.remove(CITY)
         SharedUtil.remove(MINE)
     }
 }
