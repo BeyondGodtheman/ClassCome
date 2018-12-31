@@ -60,7 +60,7 @@ class TrainDetailsFragment : FieldDetailsFragment() {
                             arrayListOf(),
                             ClassBean.Bean.Data.User(bean.content.user.userName, bean.content.user.telephone, bean.content.user.userPic),
                             ClassBean.Bean.Data.Order("", "", "", ""
-                                    , bean.content.resCourseVO.price, "", "", "", "", "", ""),
+                                    , bean.content.resCourseVO.price, "", "", "", "", "", if (bean.content.resCourseVO.isAppointment =="5") 1 else 0,null,""),
                             null,bean.content.resCourseVO.isAppraise), list)
                 }
             }
@@ -80,7 +80,7 @@ class TrainDetailsFragment : FieldDetailsFragment() {
                             arrayListOf(),
                             ClassBean.Bean.Data.User(it.content.user.userName, it.content.user.telephone, it.content.user.userPic),
                             ClassBean.Bean.Data.Order("", "", "", ""
-                                    , it.content.resCourseVO.price, "", "", "", "", "", ""),
+                                    , it.content.resCourseVO.price, "", "", "", "", "", if (it.content.resCourseVO.isAppointment =="5") 1 else 0,null,""),
                             null,it.content.resCourseVO.isAppraise), it.content.resCourseVO.pintuanlist?: arrayListOf()).show()
                 }
 

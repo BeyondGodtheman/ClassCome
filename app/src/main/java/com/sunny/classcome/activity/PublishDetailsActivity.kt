@@ -284,7 +284,7 @@ class PublishDetailsActivity : BaseActivity() {
                         arrayListOf(),
                         ClassBean.Bean.Data.User(data.content.user.userName, data.content.user.telephone, data.content.user.userPic),
                         ClassBean.Bean.Data.Order("", "", "", ""
-                                , data.content.resCourseVO.price, "", "", "", "", "", ""),
+                                , data.content.resCourseVO.price, "", "", "", "", "", if (data.content.resCourseVO.isAppointment =="5") 1 else 0,null,""),
                         null,data.content.resCourseVO.isAppraise
                 )
 
