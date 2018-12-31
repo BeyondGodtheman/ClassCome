@@ -1,7 +1,6 @@
 package com.sunny.classcome.adapter
 
 import android.content.Intent
-import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,7 +17,6 @@ import com.sunny.classcome.utils.StringUtil
 import com.sunny.classcome.utils.showBlueBtn
 import com.sunny.classcome.utils.showGrayBtn
 import kotlinx.android.synthetic.main.item_my_class.view.*
-import java.lang.StringBuilder
 
 class MyParticipatedAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleAdapter<ClassBean.Bean.Data>(list) {
     override fun setLayout(parent: ViewGroup, viewType: Int): View = LayoutInflater.from(context).inflate(R.layout.item_my_class, parent, false)
@@ -34,28 +32,30 @@ class MyParticipatedAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleA
                 pay(holder.itemView.txt_right, position)
             }
             "2" -> {
-                if (getData(position).course.state != "3"){
+                if (getData(position).course.state != "3") {
                     cancel(holder.itemView.txt_right, position)
                 }
             }
             "3" -> {
-                if (getData(position).course.state != "3" && getData(position).course.state != "5"){
+                if (getData(position).course.coursetype != "4" && getData(position).course.coursetype != "5") {
                     cancel(holder.itemView.txt_right, position)
                 }
             }
             "4" -> {
-
+                if (getData(position).course.state == "4") {
+                    cancel(holder.itemView.txt_right, position)
+                }
             }
             "5" -> {
 
             }
         }
 
-        if (getData(position).course.state == "3"){
-            holder.itemView.txt_status.text = "发布者已取消"
-        }else{
-            holder.itemView.txt_status.text = getData(position).course.stateInfo
-        }
+//        if (getData(position).course.state == "3"){
+//            holder.itemView.txt_status.text = "发布者已取消"
+//        }else{
+        holder.itemView.txt_status.text = getData(position).course.stateInfo
+//        }
 
 
         getData(position).materialList?.let {

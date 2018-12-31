@@ -59,7 +59,7 @@ class OrderDetailActivity : BaseActivity() {
 
     private fun showAudited() {
         txt_info.text = "审核通过，未中标"
-        txt_order_number.text = ("订单编号：${classBean?.order?.orderNum}")
+        txt_order_number.text = ("订单编号：${classBean?.course?.id}")
         txt_order_remark.text = getTime()
         showGrayBtn(txt_order_left, "取消订单")
         txt_order_left.setOnClickListener {
@@ -130,7 +130,7 @@ class OrderDetailActivity : BaseActivity() {
     private fun showClassIng() {
         txt_info.text = "订单进行中"
         txt_prompt.text = "系统默认将在课程结束后7天，对课程进行结算"
-        txt_order_number.text = ("订单编号：${classBean?.order?.orderNum}")
+        txt_order_number.text = ("订单编号：${classBean?.course?.id}")
         txt_order_remark.text = getTime()
         showGrayBtn(txt_order_mid, "取消订单")
         txt_order_mid.setOnClickListener {
@@ -152,7 +152,7 @@ class OrderDetailActivity : BaseActivity() {
 
     private fun showClassPay() {
         txt_info.text = "课程已中标，付款后订单生效"
-        txt_order_number.text = ("订单编号：${classBean?.order?.orderNum}")
+        txt_order_number.text = ("订单编号：${classBean?.course?.id}")
         txt_order_remark.text = getTime()
         showGrayBtn(txt_order_mid, "取消订单")
         txt_order_mid.setOnClickListener {
@@ -200,7 +200,7 @@ class OrderDetailActivity : BaseActivity() {
     private fun showPayFinish() {
         txt_info.text = "订单已完成"
         txt_order_number.text = ("订单编号：${classBean?.course?.id}")
-//        txt_order_remark.text = ("验证码：${classBean?.course?.id}")
+        txt_order_remark.text = ("验证码：${classBean?.order?.orderNum}")
 //        showBlueBtn(txt_order_right, "评价")
     }
 
@@ -218,7 +218,7 @@ class OrderDetailActivity : BaseActivity() {
     //场地、培训待支付
     private fun showPayWait() {
         txt_info.text = "订单已生成，付款后订单生效"
-        txt_order_number.text = ("订单编号：${classBean?.order?.orderNum}")
+        txt_order_number.text = ("订单编号：${classBean?.course?.id}")
 //        showGrayBtn(txt_order_mid, "取消订单")
 //        txt_order_mid.setOnClickListener{
 //            CancelPromptActivity.start(this,if (isAuthor) 1 else 2,classBean?.course?.id?:"")
@@ -264,7 +264,7 @@ class OrderDetailActivity : BaseActivity() {
     private fun cancleClass() {
         txt_info.text = "已取消"
         txt_prompt.text = "发布者取消"
-        txt_order_number.text = ("订单编号：${classBean?.order?.orderNum}")
+        txt_order_number.text = ("订单编号：${classBean?.course?.id}")
     }
 
 
@@ -285,7 +285,12 @@ class OrderDetailActivity : BaseActivity() {
                         ?: "", classBean?.course?.id ?: "")
             }
             R.id.rl_info -> {
-                MyProfileActivity.start(this, classBean?.course?.winningBidder ?: "")
+                if (txt_info_desc.text.toString() == "发布者信息") {
+                    MyProfileActivity.start(this, classBean?.course?.userId ?: "")
+                } else {
+                    MyProfileActivity.start(this, classBean?.course?.winningBidder ?: "")
+                }
+
             }
         }
     }
@@ -306,14 +311,18 @@ class OrderDetailActivity : BaseActivity() {
                     "-1" -> showOffShelf() //已取消
                     "1" -> showPayWait()  //待支付
                     "2" -> showPaying() //进行中
-                    "3" -> {
-                        if (classBean?.course?.state == "3") {
+                    "3" -> {  //参与培训和场已结算 发布为
+                        if (classBean?.course?.coursetype == "4" || classBean?.course?.coursetype == "5") {
+                            showPayFinish()
+                        } else {
                             cancleClass() //进行中 //用户取消发布
                         }
-                        if (classBean?.course?.state == "5"){
-                            showPayFinish()
+                    }
+                    "4" -> {
+                        if (classBean?.course?.coursetype == "4" || classBean?.course?.coursetype == "5") {
+                            showOffShelf()
                         }
-                    }//
+                    }
                     "5" -> showPayFinish() //完成
                 }
 
@@ -361,6 +370,12 @@ class OrderDetailActivity : BaseActivity() {
                             } else {
                                 showSettlement()
                             }
+                        }
+                        "4" -> {
+                            if (data.content?.course?.state == "4") {
+                                showWinningBid()
+                            }
+
                         }
                         "5" -> showSettlement() //待结算
                     }
