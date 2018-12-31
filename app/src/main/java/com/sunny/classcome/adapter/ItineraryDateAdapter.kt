@@ -19,12 +19,20 @@ class ItineraryDateAdapter(list: ArrayList<ItineraryDateBean>) : BaseRecycleAdap
     private val tomorrow: String by lazy {
         val calendar = Calendar.getInstance()
         calendar.add(Calendar.DAY_OF_MONTH, 1)
-        "${calendar.get(Calendar.YEAR)}-${calendar.get(Calendar.MONTH) + 1}-${calendar.get(Calendar.DAY_OF_MONTH)}"
+        val month = calendar.get(Calendar.MONTH) + 1
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
+        val monthStr = (if (month < 10) "0" else "") + month
+        val dayStr = (if (day < 10) "0" else "") + day
+        ("${calendar.get(Calendar.YEAR)}-$monthStr-$dayStr")
     }
 
     private val today: String by lazy {
         val calendar = Calendar.getInstance()
-        "${calendar.get(Calendar.YEAR)}-${calendar.get(Calendar.MONTH) + 1}-${calendar.get(Calendar.DAY_OF_MONTH)}"
+        val month = calendar.get(Calendar.MONTH) + 1
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
+        val monthStr = (if (month < 10) "0" else "") + month
+        val dayStr = (if (day < 10) "0" else "") + day
+        ("${calendar.get(Calendar.YEAR)}-$monthStr-$dayStr")
     }
 
     override fun setLayout(parent: ViewGroup, viewType: Int): View = LayoutInflater.from(context).inflate(R.layout.item_itinerary_date, parent, false)

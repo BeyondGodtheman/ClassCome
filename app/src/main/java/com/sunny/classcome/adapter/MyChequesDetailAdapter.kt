@@ -25,9 +25,9 @@ class MyChequesDetailAdapter(list: ArrayList<ChequesDetailBean.Bean.Data>) : Bas
     override fun onBindViewHolder(holder: BaseRecycleViewHolder, position: Int) {
         list[position].apply {
             holder.itemView.txt_type.text = remarks
-            holder.itemView.txt_date.text = DateUtil.dateFormatYYMMddHHssmm(createTime)
-            holder.itemView.txt_balance.text = ("余额：$sumMoney")
-            holder.itemView.txt_money.text = ((if (payType == "1") "+" else "-") + paymentMoney)
+            holder.itemView.txt_date.text = DateUtil.dateFormatYYMMddHHssmm(createTime?:"")
+            holder.itemView.txt_balance.text = ("余额：${sumMoney?:"0.00"}")
+            holder.itemView.txt_money.text = ((if (payType == "1") "+" else "-") + (paymentMoney?:"0.00"))
         }
     }
 

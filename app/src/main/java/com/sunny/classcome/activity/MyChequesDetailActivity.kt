@@ -61,7 +61,7 @@ class MyChequesDetailActivity : BaseActivity() {
         showLoading()
         val params = hashMapOf<String, String>()
         params["pageIndex"] = pageIndex.toString()
-        ApiManager.post(composites, null, Constant.ORDER_GETMYSTREAM, object : ApiManager.OnResult<ChequesDetailBean>() {
+        ApiManager.post(composites, params, Constant.ORDER_GETMYSTREAM, object : ApiManager.OnResult<ChequesDetailBean>() {
             override fun onSuccess(data: ChequesDetailBean) {
 
                 hideLoading()
