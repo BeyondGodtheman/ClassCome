@@ -253,6 +253,9 @@ class OrderDetailActivity : BaseActivity() {
     private fun showWinningBid() {
         txt_info.text = "您已中标，请按时完成代课"
         showGrayBtn(txt_order_right, "取消订单")
+        txt_order_right.setOnClickListener {
+            CancelPromptActivity.start(this,2,classBean?.course?.id?:"")
+        }
 
         rl_money.visibility = View.VISIBLE
         txt_money_desc.text = "代课款"
@@ -334,6 +337,9 @@ class OrderDetailActivity : BaseActivity() {
         txt_info.text = "已取消"
         txt_prompt.text = "发布者取消"
         txt_order_number.text = ("订单编号：${classBean?.course?.id}")
+        txt_order_right.visibility = View.GONE
+        txt_order_mid.visibility = View.GONE
+        txt_order_left.visibility = View.GONE
     }
 
 
