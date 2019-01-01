@@ -112,7 +112,7 @@ class OrderDetailActivity : BaseActivity() {
 
         rl_money.visibility = View.VISIBLE
         txt_money_desc.text = "支付金额"
-        txt_money_count.text = ("￥${classBean?.course?.sumPrice}")
+        txt_money_count.text = ("￥${StringUtil.formatMoney((buyBean?.money?:"0").toDouble())}")
 
         rl_contact.visibility = View.VISIBLE
         txt_contact_desc.text = "联系方式"

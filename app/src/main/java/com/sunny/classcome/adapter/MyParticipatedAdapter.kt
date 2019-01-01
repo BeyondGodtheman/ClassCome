@@ -53,11 +53,11 @@ class MyParticipatedAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleA
             }
         }
 
-//        if (getData(position).course.state == "3"){
-//            holder.itemView.txt_status.text = "发布者已取消"
-//        }else{
+        if (getData(position).course.state == "3"){
+            holder.itemView.txt_status.text = "已取消"
+        }else{
         holder.itemView.txt_status.text = getData(position).course.stateInfo
-//        }
+        }
 
 
         getData(position).materialList?.let {

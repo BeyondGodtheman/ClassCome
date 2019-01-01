@@ -20,6 +20,7 @@ import com.sunny.classcome.http.ApiManager
 import com.sunny.classcome.http.Constant
 import com.sunny.classcome.utils.*
 import kotlinx.android.synthetic.main.activity_publish_details.*
+import kotlinx.android.synthetic.main.layout_title_icon.view.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
@@ -117,7 +118,12 @@ class PublishDetailsActivity : BaseActivity() {
             else -> courseDetailFragment
         }
 
-        showTitle(titleManager.defaultTitle(title))
+        val titleView = titleManager.iconTitle(title, View.OnClickListener {
+
+        })
+        titleView.view_icon_right.setBackgroundResource(R.drawable.ic_share)
+
+        showTitle(titleView)
 
         supportFragmentManager.beginTransaction().replace(R.id.fl_container, fragment).commit()
 
@@ -153,13 +159,13 @@ class PublishDetailsActivity : BaseActivity() {
     //拼团支付
     private fun pay() {
         classData?.let { data ->
-            var pintuan = "0"
-            classDetailBean?.let {
-                if ((it.content.resCourseVO.pintuanlist ?: arrayListOf()).isNotEmpty()) {
-                    pintuan = it.content.resCourseVO.pintuanlist!![0].pintuanInfo?.id ?: "0"
-                }
-            }
-            PayActivity.start(this, data, pintuan)
+            //            val pintuan = "0"
+//            classDetailBean?.let {
+//                if ((it.content.resCourseVO.pintuanlist ?: arrayListOf()).isNotEmpty()) {
+//                    pintuan = it.content.resCourseVO.pintuanlist!![0].pintuanInfo?.id ?: "0"
+//                }
+//            }
+            PayActivity.start(this, data, "0")
         }
     }
 
@@ -284,8 +290,8 @@ class PublishDetailsActivity : BaseActivity() {
                         arrayListOf(),
                         ClassBean.Bean.Data.User(data.content.user.userName, data.content.user.telephone, data.content.user.userPic),
                         ClassBean.Bean.Data.Order("", "", "", ""
-                                , data.content.resCourseVO.price, "", "", "", "", "", if (data.content.resCourseVO.isAppointment =="5") 1 else 0,null,""),
-                        null,data.content.resCourseVO.isAppraise
+                                , data.content.resCourseVO.price, "", "", "", "", "", if (data.content.resCourseVO.isAppointment == "5") 1 else 0, null, ""),
+                        null, data.content.resCourseVO.isAppraise
                 )
 
             }

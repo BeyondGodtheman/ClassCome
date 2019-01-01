@@ -79,9 +79,15 @@ class BuyActivity : BaseActivity() {
                 } else {
                     refresh.finishLoadMore()
                 }
-                data.content?.data?.let {
-                    if (!list.containsAll(it)) {
-                        list.addAll(it)
+                data.content?.data?.let { arrayList ->
+                   val dataList =  arrayList.filter {  it.state != "1" && it.state != "4" }
+                    if(dataList.isEmpty() && pageIndex == 1){
+                        ll_error.visibility = View.VISIBLE
+                    }else{
+                        ll_error.visibility = View.GONE
+                    }
+                    if (!list.containsAll(dataList)) {
+                        list.addAll(dataList)
                     }
                 }
 
