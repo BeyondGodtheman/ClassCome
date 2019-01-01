@@ -62,6 +62,7 @@ class MyClassActivity : BaseActivity() {
                 titleView.txt_arrow_title.text = (title + typeName)
 
                 fragments.forEach {
+                    it.setCourseType(courseType)
                     it.autoLoad()
                 }
 

@@ -27,7 +27,7 @@ class MyClassFragment : BaseFragment() {
     var pageIndex = 1
     private var type = "7"
     private var status = "2"
-
+    private var courseType = "1"
 
     override fun setLayout(): Int = R.layout.layout_refresh_recycler
 
@@ -71,6 +71,15 @@ class MyClassFragment : BaseFragment() {
     }
 
     private fun load() {
+
+        if (courseType == "4" || courseType == "5"){
+            if (status == "4"){
+                refresh.closeHeaderOrFooter()
+                ll_error.visibility = View.VISIBLE
+                return
+            }
+        }
+
         val params = hashMapOf<String, String>()
         params["pageIndex"] = pageIndex.toString()
         params["relationType"] = type
@@ -110,10 +119,13 @@ class MyClassFragment : BaseFragment() {
         })
     }
 
+    fun setCourseType(courseType:String){
+        this.courseType = courseType
+    }
+
     fun setStatus(type: String, status: String): MyClassFragment {
         this.type = type
         this.status = status
-
         return this
     }
 
