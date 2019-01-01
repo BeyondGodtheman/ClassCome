@@ -35,8 +35,8 @@ class MyPostedAdapter(var baseActivity: BaseActivity, list: ArrayList<ClassBean.
             }
             "2" -> {
                 if (getData(position).course.coursetype == "4" || getData(position).course.coursetype == "5") {
-                    cancelTairn(holder.itemView.txt_mid, getData(position).course.id)
-                    buy(holder.itemView.txt_right, getData(position).course.id)
+                    cancelTrain(holder.itemView.txt_mid, getData(position).course.id)
+                    buy(holder.itemView.txt_right,position)
                 } else {
                     invite(holder.itemView.txt_left, getData(position).course.id)
                     applicants(holder.itemView.txt_mid, getData(position).course.id)
@@ -55,8 +55,8 @@ class MyPostedAdapter(var baseActivity: BaseActivity, list: ArrayList<ClassBean.
             }
             "5" -> {
                 if (getData(position).course.coursetype == "4" || getData(position).course.coursetype == "5") {
-                    cancelOrherOrder(holder.itemView.txt_mid, getData(position).course.id)
-                    buy(holder.itemView.txt_right, getData(position).course.id)
+                    cancelTrain(holder.itemView.txt_mid, getData(position).course.id)
+                    buy(holder.itemView.txt_right,position)
                 } else {
                     cancelOrder(holder.itemView.txt_mid, getData(position).course.id)
                     if (getData(position).course.state == "5") {
@@ -90,7 +90,7 @@ class MyPostedAdapter(var baseActivity: BaseActivity, list: ArrayList<ClassBean.
         holder.itemView.txt_money.text = ("¥" + StringUtil.formatMoney((getData(position).course.sumPrice
                 ?: "0").toDouble()))
 
-        if (getData(position).course.coursetype == "5") {
+        if (getData(position).course.coursetype == "4" || getData(position).course.coursetype == "5") {
             holder.itemView.txt_date.text = getData(position).course.worktime
         } else {
             val timeSb = StringBuilder()
@@ -130,23 +130,13 @@ class MyPostedAdapter(var baseActivity: BaseActivity, list: ArrayList<ClassBean.
         }
     }
 
-    //取消
-    private fun cancelOrherOrder(textView: TextView, id: String) {
+
+    //取消发布
+    private fun cancelTrain(textView: TextView, id: String) {
         textView.apply {
             showGrayBtn(this, "取消订单")
             setOnClickListener {
                 CancelPromptActivity.start(context, 3, id)
-            }
-        }
-    }
-
-
-    //取消发布
-    private fun cancelTairn(textView: TextView, id: String) {
-        textView.apply {
-            showGrayBtn(this, "取消发布")
-            setOnClickListener {
-                CancelPromptActivity.start(context, 1, id)
             }
         }
     }
@@ -226,11 +216,11 @@ class MyPostedAdapter(var baseActivity: BaseActivity, list: ArrayList<ClassBean.
     }
 
 
-    private fun buy(textView: TextView, courseId: String) {
+    private fun buy(textView: TextView, position: Int) {
         textView.apply {
             showBlueBtn(this, "购买者")
             setOnClickListener {
-                BuyActivity.start(context, courseId)
+                BuyActivity.start(context, getData(position).course.id,getData(position))
             }
         }
     }

@@ -5,16 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.sunny.classcome.R
+import com.sunny.classcome.activity.BuyActivity
 import com.sunny.classcome.activity.MyProfileActivity
+import com.sunny.classcome.activity.OrderDetailActivity
 import com.sunny.classcome.base.BaseRecycleAdapter
 import com.sunny.classcome.base.BaseRecycleViewHolder
 import com.sunny.classcome.bean.BuyBean
+import com.sunny.classcome.bean.ClassBean
 import com.sunny.classcome.utils.GlideUtil
 import com.sunny.classcome.utils.StringUtil
 import kotlinx.android.synthetic.main.item_buy.view.*
 
 
-class BuyAdapter(list: ArrayList<BuyBean>,var onOption:(position: Int)->Unit) : BaseRecycleAdapter<BuyBean>(list) {
+class BuyAdapter(list: ArrayList<BuyBean>, var classBean: ClassBean.Bean.Data?, var onOption:(position: Int)->Unit) : BaseRecycleAdapter<BuyBean>(list) {
     override fun setLayout(parent: ViewGroup, viewType: Int): View = LayoutInflater.from(context).inflate(R.layout.item_buy, parent, false)
 
     override fun onBindViewHolder(holder: BaseRecycleViewHolder, position: Int) {
@@ -22,8 +25,11 @@ class BuyAdapter(list: ArrayList<BuyBean>,var onOption:(position: Int)->Unit) : 
         holder.itemView.txt_name.text = (getData(position).userName?:"")
         holder.itemView.txt_money.text = ("支付金额：${StringUtil.formatMoney((getData(position).money ?: "0").toDouble())}元")
         holder.itemView.txt_phone.text = ("联系方式：${getData(position).telephone}")
-        holder.itemView.setOnClickListener {
-            MyProfileActivity.start(context,getData(position).userId?:"")
+        holder.itemView.setOnClickListener { _ ->
+            classBean?.let {
+                OrderDetailActivity.start(context,it,getData(position))
+            }
+
         }
 
         if (getData(position).state == "3"){

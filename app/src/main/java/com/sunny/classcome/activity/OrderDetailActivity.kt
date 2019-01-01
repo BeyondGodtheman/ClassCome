@@ -7,6 +7,7 @@ import com.sunny.classcome.MyApplication
 import com.sunny.classcome.R
 import com.sunny.classcome.base.BaseActivity
 import com.sunny.classcome.bean.BaseBean
+import com.sunny.classcome.bean.BuyBean
 import com.sunny.classcome.bean.ClassBean
 import com.sunny.classcome.bean.OrderDetailBean
 import com.sunny.classcome.http.ApiManager
@@ -29,6 +30,7 @@ class OrderDetailActivity : BaseActivity() {
     override fun setLayout(): Int = R.layout.activity_order_detail
 
     private var classBean: ClassBean.Bean.Data? = null
+    private var buyBean: BuyBean? = null
 
     private var isAuthor = false
 
@@ -46,12 +48,22 @@ class OrderDetailActivity : BaseActivity() {
                     .putExtra("isAuthor", isAuthor)
                     .putExtra("type", 2))
         }
+
+        //核销专用
+        fun start(context: Context, classBean: ClassBean.Bean.Data,buyBean: BuyBean) {
+            MyApplication.getApp().setData(Constant.BUYER, buyBean)
+            MyApplication.getApp().setData(Constant.COURSE, classBean)
+            context.startActivity(Intent(context, OrderDetailActivity::class.java)
+                    .putExtra("isAuthor", true)
+                    .putExtra("type", 3))
+        }
     }
 
     override fun initView() {
         showTitle(titleManager.defaultTitle(getString(R.string.order_detail)))
 
         isAuthor = intent.getBooleanExtra("isAuthor", false)
+        buyBean = MyApplication.getApp().getData<BuyBean>(Constant.BUYER,true)
 
         view_detail.setOnClickListener(this)
         rl_info.setOnClickListener(this)
@@ -85,19 +97,72 @@ class OrderDetailActivity : BaseActivity() {
         }
     }
 
-    private fun showPurchaser() {
+    //核销操作
+    private fun writeOff() {
         txt_info.text = "订单进行中"
         txt_prompt.text = "系统默认将在核销完成后7天，对订单进行结算"
         txt_order_number.text = ("订单编号：${classBean?.course?.id}")
 
-        showGrayBtn(txt_order_mid, "取消发布")
+        showBlueBtn(txt_order_right, if (buyBean?.state == "3") "已核销" else "核销")
         txt_order_right.setOnClickListener {
+            if (buyBean?.state != "3"){
+                option()
+            }
+        }
+
+        rl_money.visibility = View.VISIBLE
+        txt_money_desc.text = "支付金额"
+        txt_money_count.text = ("￥${classBean?.course?.sumPrice}")
+
+        rl_contact.visibility = View.VISIBLE
+        txt_contact_desc.text = "联系方式"
+        txt_contact_phone.text = buyBean?.telephone?:""
+
+        rl_info.visibility = View.VISIBLE
+        txt_info_desc.text = "购买者信息"
+    }
+
+    private fun option() {
+        showLoading()
+        val params = hashMapOf<String, String>()
+        params["courseId"] = classBean?.course?.id?:""
+        params["useUserId"] = buyBean?.userId?: ""
+        ApiManager.post(composites, params, Constant.ORDER_ACCOUNTSORDER, object : ApiManager.OnResult<BaseBean<String>>() {
+            override fun onSuccess(data: BaseBean<String>) {
+                hideLoading()
+                ToastUtil.show(data.content?.info)
+                if (data.content?.statu == "1") {
+                    buyBean?.state = "3"
+                    txt_order_right.text = "已核销"
+                }
+
+            }
+
+            override fun onFailed(code: String, message: String) {
+                hideLoading()
+            }
+
+        })
+
+    }
+
+
+    private fun showPurchaser() {
+        txt_info.text = "订单进行中"
+        txt_prompt.text = "您的信息正在发布中"
+        txt_order_number.text = ("订单编号：${classBean?.course?.id}")
+
+        showGrayBtn(txt_order_mid, "取消发布")
+        txt_order_mid.setOnClickListener {
             CancelPromptActivity.start(this, 3, classBean?.course?.id ?: "")
         }
 
         showBlueBtn(txt_order_right, "购买者")
-        txt_order_right.setOnClickListener {
-            BuyActivity.start(this, classBean?.course?.id ?: "")
+        txt_order_right.setOnClickListener { _ ->
+            classBean?.let {
+                BuyActivity.start(this, classBean?.course?.id ?: "",it)
+            }
+
         }
 
         rl_money.visibility = View.VISIBLE
@@ -320,7 +385,10 @@ class OrderDetailActivity : BaseActivity() {
             R.id.rl_info -> {
                 if (txt_info_desc.text.toString() == "发布者信息") {
                     MyProfileActivity.start(this, classBean?.course?.userId ?: "")
-                } else {
+                } else if(txt_info_desc.text.toString() == "购买者信息") {
+                    MyProfileActivity.start(this, buyBean?.userId ?: "")
+                }
+                else {
                     MyProfileActivity.start(this, classBean?.course?.winningBidder ?: "")
                 }
 
@@ -331,11 +399,12 @@ class OrderDetailActivity : BaseActivity() {
 
     override fun update() {
         //场地培训逻辑
-        if (intent.getIntExtra("type", 1) == 2) {
+        val type = intent.getIntExtra("type", 1)
+        if (type == 2 || type == 3) {
             classBean = MyApplication.getApp().getData<ClassBean.Bean.Data>(Constant.COURSE, false)
             if (isAuthor) {
                 when (classBean?.course?.state) {
-                    "2" -> showPurchaser()  //已支付
+                    "2" -> if (type == 2) showPurchaser() else writeOff()  //已支付
                     "3" -> showOffShelf() //已取消
                     "6" -> showPayFinish()
                 }

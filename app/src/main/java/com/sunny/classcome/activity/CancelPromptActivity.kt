@@ -32,8 +32,12 @@ class CancelPromptActivity : BaseActivity() {
 
         if (type == 1) {
             txt_name.text = getString(R.string.cancel_prompt)
-        } else {
+        } else if(type == 2) {
             txt_name.text = getString(R.string.cancel_prompt2)
+        }else if( type == 3){
+            txt_name.text = ("订单取消后，已购买的订单依旧生效\n确定取消订单?")
+        }else{
+            txt_name.text = ("订单支持随时退款!")
         }
 
         txt_prompt.setOnClickListener(this)
@@ -42,7 +46,7 @@ class CancelPromptActivity : BaseActivity() {
     override fun onClick(v: View) {
         when (v.id) {
             R.id.txt_prompt -> {
-                if (type == 3){
+                if (type == 4){
                     cancelOrther()
                 }else{
                     cancelPublish()
@@ -62,7 +66,8 @@ class CancelPromptActivity : BaseActivity() {
 
     //取消我发布的
     private fun cancelPublish() {
-        val url = if (type == 1) Constant.ORDER_CACELORDER else Constant.ORDER_CACELORDEROFTEACHER
+        //1是我发布的代课 3 我发布的培训或场地
+        val url = if (type == 1 || type == 3) Constant.ORDER_CACELORDER else Constant.ORDER_CACELORDEROFTEACHER
         val params = HashMap<String, String>()
         params["courseId"] = courseId
         ApiManager.post(composites, params, url, object : ApiManager.OnResult<BaseBean<String>>() {

@@ -105,7 +105,7 @@ class MyParticipatedAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleA
             setOnClickListener {
                 var type = 2
                 if (getData(position).course.coursetype == "4" || getData(position).course.coursetype == "5") {
-                    type = 3
+                    type = 4
                 }
                 CancelPromptActivity.start(context, type, getData(position).course.id)
             }

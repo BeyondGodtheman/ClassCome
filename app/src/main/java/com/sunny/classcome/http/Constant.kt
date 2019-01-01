@@ -28,6 +28,8 @@ object Constant {
 
     const val COURSE = "course" //课程
 
+    const val BUYER = "buyer" //购买者数据
+
     const val CLASS_TYPE = "classType" //课程分类
     const val TRAN_TYPE = "tranType" //场地设施
 

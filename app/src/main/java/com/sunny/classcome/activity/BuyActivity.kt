@@ -8,11 +8,13 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter
 import com.scwang.smartrefresh.layout.header.ClassicsHeader
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener
+import com.sunny.classcome.MyApplication
 import com.sunny.classcome.R
 import com.sunny.classcome.adapter.BuyAdapter
 import com.sunny.classcome.base.BaseActivity
 import com.sunny.classcome.bean.BaseBean
 import com.sunny.classcome.bean.BuyBean
+import com.sunny.classcome.bean.ClassBean
 import com.sunny.classcome.http.ApiManager
 import com.sunny.classcome.http.Constant
 import com.sunny.classcome.utils.ToastUtil
@@ -23,12 +25,15 @@ class BuyActivity : BaseActivity() {
     private var courseId = ""
     private var pageIndex = 1
     private val list = arrayListOf<BuyBean>()
+    private var classBean: ClassBean.Bean.Data? = null
 
     override fun setLayout(): Int = R.layout.layout_refresh_recycler
 
     override fun initView() {
         showTitle(titleManager.defaultTitle("购买者"))
         courseId = intent.getStringExtra("courseId")
+
+        classBean = MyApplication.getApp().getData<ClassBean.Bean.Data>(Constant.COURSE, true)
 
         refresh.setRefreshHeader(ClassicsHeader(this))
         refresh.setRefreshFooter(ClassicsFooter(this))
@@ -47,7 +52,7 @@ class BuyActivity : BaseActivity() {
         })
 
         recl.layoutManager = LinearLayoutManager(this)
-        recl.adapter = BuyAdapter(list) {
+        recl.adapter = BuyAdapter(list,classBean) {
             option(it)
         }
         showLoading()
@@ -98,7 +103,8 @@ class BuyActivity : BaseActivity() {
     }
 
     companion object {
-        fun start(context: Context, courseId: String) {
+        fun start(context: Context, courseId: String,classBean: ClassBean.Bean.Data) {
+            MyApplication.getApp().setData(Constant.COURSE, classBean)
             context.startActivity(Intent(context, BuyActivity::class.java)
                     .putExtra("courseId", courseId))
         }
@@ -126,5 +132,9 @@ class BuyActivity : BaseActivity() {
 
         })
 
+    }
+
+    override fun update() {
+        recl.adapter?.notifyDataSetChanged()
     }
 }
