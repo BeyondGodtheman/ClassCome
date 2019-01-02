@@ -73,7 +73,7 @@ class SettingActivity : BaseActivity() {
             override fun onSuccess(data: BaseBean<String>) {
                 hideLoading()
                 data.content?.data.let {
-                    WXEntryActivity.shareWeb(it ?: "")
+                    WXEntryActivity.shareInvite(it ?: "")
                 }
             }
 

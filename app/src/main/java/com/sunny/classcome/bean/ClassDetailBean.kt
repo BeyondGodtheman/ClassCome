@@ -15,7 +15,7 @@ data class ClassDetailBean(
                 var id: String,
                 var createTime: String,
                 var title: String,
-                var materialList: ArrayList<ClassBean.Bean.Data.Material>,
+                var materialList: ArrayList<ClassBean.Bean.Data.Material>?,
                 var price: String,//单节酬劳
                 var sumPrice: String,//酬劳总价
                 var courseNum: String,// 课程总节数

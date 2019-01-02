@@ -29,6 +29,7 @@ class MyParticipatedAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleA
 
         when (getData(position).order.state) {
             "1" -> {
+                holder.itemView.txt_status.text = "待支付"
                 pay(holder.itemView.txt_right, position)
             }
             "2" -> {
@@ -55,7 +56,7 @@ class MyParticipatedAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleA
 
         if (getData(position).course.state == "3"){
             holder.itemView.txt_status.text = "已取消"
-        }else{
+        }else if(getData(position).order.state != "1"){
         holder.itemView.txt_status.text = getData(position).course.stateInfo
         }
 
@@ -130,7 +131,13 @@ class MyParticipatedAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleA
         textView.apply {
             showBlueBtn(this, "去支付")
             setOnClickListener {
-                PayActivity.start(context, getData(position), "")
+                getData(position).let {
+                    if (it.order.pintuanId == "0") {
+                        PayActivity.start(context, it, "")
+                    } else {
+                        PayActivity.start(context, it, it.order.pintuanId ?: "0")
+                    }
+                }
             }
         }
     }

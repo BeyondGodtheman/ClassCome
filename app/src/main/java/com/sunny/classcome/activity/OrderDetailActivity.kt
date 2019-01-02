@@ -14,6 +14,9 @@ import com.sunny.classcome.http.ApiManager
 import com.sunny.classcome.http.Constant
 import com.sunny.classcome.utils.*
 import kotlinx.android.synthetic.main.activity_order_detail.*
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 
 /**
  * Desc 订单详情页
@@ -50,7 +53,7 @@ class OrderDetailActivity : BaseActivity() {
         }
 
         //核销专用
-        fun start(context: Context, classBean: ClassBean.Bean.Data,buyBean: BuyBean) {
+        fun start(context: Context, classBean: ClassBean.Bean.Data, buyBean: BuyBean) {
             MyApplication.getApp().setData(Constant.BUYER, buyBean)
             MyApplication.getApp().setData(Constant.COURSE, classBean)
             context.startActivity(Intent(context, OrderDetailActivity::class.java)
@@ -62,8 +65,9 @@ class OrderDetailActivity : BaseActivity() {
     override fun initView() {
         showTitle(titleManager.defaultTitle(getString(R.string.order_detail)))
 
+        EventBus.getDefault().register(this)
         isAuthor = intent.getBooleanExtra("isAuthor", false)
-        buyBean = MyApplication.getApp().getData<BuyBean>(Constant.BUYER,true)
+        buyBean = MyApplication.getApp().getData<BuyBean>(Constant.BUYER, true)
 
         view_detail.setOnClickListener(this)
         rl_info.setOnClickListener(this)
@@ -105,18 +109,18 @@ class OrderDetailActivity : BaseActivity() {
 
         showBlueBtn(txt_order_right, if (buyBean?.state == "3") "已核销" else "核销")
         txt_order_right.setOnClickListener {
-            if (buyBean?.state != "3"){
+            if (buyBean?.state != "3") {
                 option()
             }
         }
 
         rl_money.visibility = View.VISIBLE
         txt_money_desc.text = "支付金额"
-        txt_money_count.text = ("￥${StringUtil.formatMoney((buyBean?.money?:"0").toDouble())}")
+        txt_money_count.text = ("￥${StringUtil.formatMoney((buyBean?.money ?: "0").toDouble())}")
 
         rl_contact.visibility = View.VISIBLE
         txt_contact_desc.text = "联系方式"
-        txt_contact_phone.text = buyBean?.telephone?:""
+        txt_contact_phone.text = buyBean?.telephone ?: ""
 
         rl_info.visibility = View.VISIBLE
         txt_info_desc.text = "购买者信息"
@@ -125,8 +129,8 @@ class OrderDetailActivity : BaseActivity() {
     private fun option() {
         showLoading()
         val params = hashMapOf<String, String>()
-        params["courseId"] = classBean?.course?.id?:""
-        params["useUserId"] = buyBean?.userId?: ""
+        params["courseId"] = classBean?.course?.id ?: ""
+        params["useUserId"] = buyBean?.userId ?: ""
         ApiManager.post(composites, params, Constant.ORDER_ACCOUNTSORDER, object : ApiManager.OnResult<BaseBean<String>>() {
             override fun onSuccess(data: BaseBean<String>) {
                 hideLoading()
@@ -160,7 +164,7 @@ class OrderDetailActivity : BaseActivity() {
         showBlueBtn(txt_order_right, "购买者")
         txt_order_right.setOnClickListener { _ ->
             classBean?.let {
-                BuyActivity.start(this, classBean?.course?.id ?: "",it)
+                BuyActivity.start(this, classBean?.course?.id ?: "", it)
             }
 
         }
@@ -254,7 +258,7 @@ class OrderDetailActivity : BaseActivity() {
         txt_info.text = "您已中标，请按时完成代课"
         showGrayBtn(txt_order_right, "取消订单")
         txt_order_right.setOnClickListener {
-            CancelPromptActivity.start(this,2,classBean?.course?.id?:"")
+            CancelPromptActivity.start(this, 2, classBean?.course?.id ?: "")
         }
 
         rl_money.visibility = View.VISIBLE
@@ -279,7 +283,7 @@ class OrderDetailActivity : BaseActivity() {
 //        txt_order_remark.text = "验证码：2344 3455 3545"
         showGrayBtn(txt_order_right, "取消订单")
         txt_order_right.setOnClickListener {
-            CancelPromptActivity.start(this, 3, classBean?.course?.id ?: "")
+            CancelPromptActivity.start(this, if (isAuthor) 3 else 4, classBean?.course?.id ?: "")
         }
     }
 
@@ -292,7 +296,7 @@ class OrderDetailActivity : BaseActivity() {
 //            CancelPromptActivity.start(this,if (isAuthor) 1 else 2,classBean?.course?.id?:"")
 //        }
         showBlueBtn(txt_order_right, "去支付")
-        txt_order_right.setOnClickListener {
+        txt_order_right.setOnClickListener { _ ->
             classBean?.let {
                 if (it.order.pintuanId == "0") {
                     PayActivity.start(this@OrderDetailActivity, it, "")
@@ -304,7 +308,7 @@ class OrderDetailActivity : BaseActivity() {
         rl_money.visibility = View.VISIBLE
         txt_date.text = DateUtil.dateFormatYYMMddHHssmm(classBean?.order?.createTime ?: "")
         txt_money_desc.text = "实付款"
-        txt_money_count.text = ("￥${classBean?.course?.price}")
+        txt_money_count.text = ("￥${classBean?.order?.paymentMoney}")
     }
 
     private fun showOffShelf() {
@@ -337,9 +341,9 @@ class OrderDetailActivity : BaseActivity() {
         txt_info.text = "已取消"
         txt_prompt.text = "发布者取消"
         txt_order_number.text = ("订单编号：${classBean?.course?.id}")
-        txt_order_right.visibility = View.GONE
-        txt_order_mid.visibility = View.GONE
-        txt_order_left.visibility = View.GONE
+        txt_order_right.visibility = View.INVISIBLE
+        txt_order_mid.visibility = View.INVISIBLE
+        txt_order_left.visibility = View.INVISIBLE
     }
 
 
@@ -371,6 +375,11 @@ class OrderDetailActivity : BaseActivity() {
         txt_order_number.text = ("订单编号：${classBean?.course?.id}")
     }
 
+    private fun selfCancel() {
+        txt_info.text = "订单已取消"
+        txt_order_number.text = ("订单编号：${classBean?.course?.id}")
+    }
+
 
     private fun getTime(): String {
         val startTime = classBean?.course?.startTime?.let {
@@ -391,10 +400,9 @@ class OrderDetailActivity : BaseActivity() {
             R.id.rl_info -> {
                 if (txt_info_desc.text.toString() == "发布者信息") {
                     MyProfileActivity.start(this, classBean?.course?.userId ?: "")
-                } else if(txt_info_desc.text.toString() == "购买者信息") {
+                } else if (txt_info_desc.text.toString() == "购买者信息") {
                     MyProfileActivity.start(this, buyBean?.userId ?: "")
-                }
-                else {
+                } else {
                     MyProfileActivity.start(this, classBean?.course?.winningBidder ?: "")
                 }
 
@@ -403,7 +411,7 @@ class OrderDetailActivity : BaseActivity() {
     }
 
 
-    override fun update() {
+    override fun loadData() {
         //场地培训逻辑
         val type = intent.getIntExtra("type", 1)
         if (type == 2 || type == 3) {
@@ -418,17 +426,27 @@ class OrderDetailActivity : BaseActivity() {
                 when (classBean?.order?.state) {
                     "-1" -> showOffShelf() //已取消
                     "1" -> showPayWait()  //待支付
-                    "2" -> showPaying() //进行中
-                    "3" -> {  //参与培训和场已结算 发布为
-                        if (classBean?.course?.coursetype == "4" || classBean?.course?.coursetype == "5") {
-                            showPayFinish()
-                        } else {
+                    "2" -> {
+                        if (classBean?.course?.state != "3") {
+                            showPaying()
+                        } //进行中
+                        else {
+                            cancleClass()
+                        }
+                    }
+                    "3" -> {
+                        //参与培训和场已结算 发布为
+                        if (classBean?.course?.state == "3") {
                             cancleClass() //进行中 //用户取消发布
+                        } else {
+                            if (classBean?.course?.coursetype == "4" || classBean?.course?.coursetype == "5") {
+                                showPayFinish()
+                            }
                         }
                     }
                     "4" -> {
                         if (classBean?.course?.coursetype == "4" || classBean?.course?.coursetype == "5") {
-                            showOffShelf()
+                            selfCancel()
                         }
                     }
                     "5" -> showPayFinish() //完成
@@ -450,70 +468,74 @@ class OrderDetailActivity : BaseActivity() {
         showLoading()
         val params = HashMap<String, String>()
         params["id"] = intent.getStringExtra("id") ?: ""
-        ApiManager.post(composites, params, Constant.ORDER_GETORDERDETAILNEW, object : ApiManager.OnResult<OrderDetailBean>() {
-            override fun onSuccess(data: OrderDetailBean) {
-                hideLoading()
-                classBean = data.content
-                if (isAuthor) {
-                    when (data.content?.order?.state) {
-                        "2" -> showAudited() //订单邀请应聘
-                        "3" -> showOffShelf() //已取消发布
-                        "4" -> showClassPay()
-                        "5" -> {
-                            if (data.content?.course?.state == "5") {
-                                showClassIng()
+        ApiManager.post(composites, params, Constant.ORDER_GETORDERDETAILNEW,
+                object : ApiManager.OnResult<OrderDetailBean>() {
+                    override fun onSuccess(data: OrderDetailBean) {
+                        hideLoading()
+                        classBean = data.content
+                        if (isAuthor) {
+                            when (data.content?.order?.state) {
+                                "2" -> showAudited() //订单邀请应聘
+                                "3" -> showOffShelf() //已取消发布
+                                "4" -> showClassPay()
+                                "5" -> {
+                                    if (data.content?.course?.state == "5") {
+                                        showClassIng()
+                                    }
+                                    if (data.content?.course?.state == "6") {
+                                        showClassFinish()
+                                    }
+                                }
+                                "6" -> {
+                                    showOrderFinish()
+                                }
+                                "8" -> {
+                                    refund()
+                                }
                             }
-                            if (data.content?.course?.state == "6") {
-                                showClassFinish()
+                        } else {
+                            when (data.content?.order?.state) {
+                                "1" -> showOffShelf()
+                                "2" -> showWinningBid() //中标
+                                "3" -> {
+                                    if (data.content?.course?.state == "3") {
+                                        cancleClass()
+                                    } else {
+                                        showSettlement()
+                                    }
+                                }
+                                "4" -> {
+                                    if (data.content?.course?.state == "4") {
+                                        showWinningBid()
+                                    }
+
+                                }
+                                "5" -> showSettlement() //待结算
                             }
                         }
-                        "6" -> {
-                            showOrderFinish()
+
+                        txt_date.text = DateUtil.dateFormatYYMMddHHssmm(classBean?.course?.createTime
+                                ?: "")
+                        txt_class.text = classBean?.course?.title
+                        classBean?.materialList?.let {
+                            if (it.isNotEmpty()) {
+                                GlideUtil.loadPhoto(this@OrderDetailActivity, img_class, it[0].url
+                                        ?: "")
+                            }
                         }
-                        "8" -> {
-                            refund()
-                        }
+
                     }
-                } else {
-                    when (data.content?.order?.state) {
-                        "1" -> showOffShelf()
-                        "2" -> showWinningBid() //中标
-                        "3" -> {
-                            if (data.content?.course?.state == "3") {
-                                cancleClass()
-                            } else {
-                                showSettlement()
-                            }
-                        }
-                        "4" -> {
-                            if (data.content?.course?.state == "4") {
-                                showWinningBid()
-                            }
 
-                        }
-                        "5" -> showSettlement() //待结算
+                    override fun onFailed(code: String, message: String) {
+                        hideLoading()
                     }
-                }
 
-                txt_date.text = DateUtil.dateFormatYYMMddHHssmm(classBean?.course?.createTime ?: "")
-                txt_class.text = classBean?.course?.title
-                classBean?.materialList?.let {
-                    if (it.isNotEmpty()) {
-                        GlideUtil.loadPhoto(this@OrderDetailActivity, img_class, it[0].url ?: "")
-                    }
-                }
-
-            }
-
-            override fun onFailed(code: String, message: String) {
-                hideLoading()
-            }
-
-        })
+                })
 
     }
 
     override fun close() {
+        EventBus.getDefault().unregister(this)
         MyApplication.getApp().removeData(Constant.COURSE)
     }
 
@@ -537,5 +559,11 @@ class OrderDetailActivity : BaseActivity() {
             }
 
         })
+    }
+
+    //更新列表数据
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onUpdateEvent(posted: Posted) {
+        finish()
     }
 }

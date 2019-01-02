@@ -19,6 +19,7 @@ import com.sunny.classcome.fragment.TrainDetailsFragment
 import com.sunny.classcome.http.ApiManager
 import com.sunny.classcome.http.Constant
 import com.sunny.classcome.utils.*
+import com.sunny.classcome.wxapi.WXEntryActivity
 import kotlinx.android.synthetic.main.activity_publish_details.*
 import kotlinx.android.synthetic.main.layout_title_icon.view.*
 import org.greenrobot.eventbus.EventBus
@@ -119,7 +120,7 @@ class PublishDetailsActivity : BaseActivity() {
         }
 
         val titleView = titleManager.iconTitle(title, View.OnClickListener {
-
+            share(classData?.course?.title?:"",classData?.course?.description?:"")
         })
         titleView.view_icon_right.setBackgroundResource(R.drawable.ic_share)
 
@@ -229,8 +230,8 @@ class PublishDetailsActivity : BaseActivity() {
 
                 hideLoading()
                 initData(data.content)
-                txt_all.text = data.content.resCourseVO.materialList.size.toString()
-                initPhotoVideo(this@PublishDetailsActivity, viewPager, data.content.resCourseVO.materialList)
+                txt_all.text = (data.content.resCourseVO.materialList?.size?:"0").toString()
+                initPhotoVideo(this@PublishDetailsActivity, viewPager, data.content.resCourseVO.materialList?: arrayListOf())
 
                 uid = data.content.user.id
                 courseId = data.content.resCourseVO.course.id
@@ -374,8 +375,11 @@ class PublishDetailsActivity : BaseActivity() {
     }
 
     private fun initData(bean: ClassDetailBean.Content) {
+        if ( bean.resCourseVO.materialList?.isNotEmpty() == true){
+            GlideUtil.loadPhoto(this, img_class_photo, bean.resCourseVO.materialList!![0].url ?: "")
+        }
 
-        GlideUtil.loadPhoto(this, img_class_photo, bean.resCourseVO.materialList[0].url ?: "")
+
 
         txt_class_name.text = bean.resCourseVO.title
         txt_class_price.text = ("￥${StringUtil.formatMoney((bean.resCourseVO.course.sumPrice
@@ -392,6 +396,23 @@ class PublishDetailsActivity : BaseActivity() {
 
     override fun close() {
         EventBus.getDefault().unregister(this)
+    }
+
+    private fun share(title:String,desc:String) {
+        showLoading()
+        ApiManager.post(composites, null, Constant.PUB_GETSHOWURL, object : ApiManager.OnResult<BaseBean<String>>() {
+            override fun onSuccess(data: BaseBean<String>) {
+                hideLoading()
+                data.content?.data.let {
+                    WXEntryActivity.shareCourse(it ?: "",title,desc)
+                }
+            }
+
+            override fun onFailed(code: String, message: String) {
+                hideLoading()
+            }
+        })
+
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

@@ -2,7 +2,6 @@ package com.sunny.classcome.wxapi
 
 import android.app.Activity
 import android.content.Intent
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import com.sunny.classcome.MyApplication
 import com.sunny.classcome.R
@@ -50,7 +49,7 @@ class WXEntryActivity : Activity(), IWXAPIEventHandler {
         }
 
 
-        fun shareWeb(url: String) {
+        fun shareInvite(url: String) {
             // 判断是否安装了微信客户端
             if (!MyApplication.getApp().wxApi.isWXAppInstalled) {
                 ToastUtil.show("您还未安装微信客户端！")
@@ -62,6 +61,23 @@ class WXEntryActivity : Activity(), IWXAPIEventHandler {
             val msg = WXMediaMessage(wxWebPageObject)
             msg.title = MyApplication.getApp().getString(R.string.share_invite)
             msg.description = (UserManger.getMine()?.userName + MyApplication.getApp().getString(R.string.share_invite_desc))
+            val req = SendMessageToWX.Req()
+            req.message = msg
+            MyApplication.getApp().wxApi.sendReq(req)
+        }
+
+        fun shareCourse(url: String,title:String,desc:String) {
+            // 判断是否安装了微信客户端
+            if (!MyApplication.getApp().wxApi.isWXAppInstalled) {
+                ToastUtil.show("您还未安装微信客户端！")
+                return
+            }
+            val wxWebPageObject = WXWebpageObject()
+            wxWebPageObject.webpageUrl = url
+
+            val msg = WXMediaMessage(wxWebPageObject)
+            msg.title = title
+            msg.description = desc
             val req = SendMessageToWX.Req()
             req.message = msg
             MyApplication.getApp().wxApi.sendReq(req)
