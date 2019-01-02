@@ -74,7 +74,7 @@
                 android:layout_width="42pt"
                 android:layout_height="42pt"
                 android:layout_centerVertical="true"
-                android:layout_marginStart="474pt"
+                android:layout_marginStart="454pt"
                 android:background="@mipmap/ic_phone" />
         </RelativeLayout>
 

@@ -280,7 +280,7 @@ class OrderDetailActivity : BaseActivity() {
         txt_info.text = "订单进行中"
         txt_prompt.text = "您已付款成功"
         txt_order_number.text = ("订单编号：${classBean?.course?.id}")
-//        txt_order_remark.text = "验证码：2344 3455 3545"
+        txt_order_remark.text = ("验证码：${classBean?.order?.orderNum?:""}")
         showGrayBtn(txt_order_right, "取消订单")
         txt_order_right.setOnClickListener {
             CancelPromptActivity.start(this, if (isAuthor) 3 else 4, classBean?.course?.id ?: "")

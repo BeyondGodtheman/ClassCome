@@ -130,6 +130,16 @@
                 android:contentDescription="@string/app"
                 android:src="@drawable/draw_ic_title_msg"/>
 
+            <View
+                android:id="@+id/view_point"
+                android:layout_width="15pt"
+                android:layout_height="15pt"
+                android:background="@drawable/bg_point_red"
+                android:layout_alignEnd="@id/img_message"
+                android:layout_alignTop="@id/img_message"
+                android:visibility="gone"
+                android:layout_marginTop="5pt"/>
+
         </RelativeLayout>
 
         <!--横向列表-->
