@@ -29,11 +29,14 @@ class MyParticipatedAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleA
 
         when (getData(position).order.state) {
             "1" -> {
-                holder.itemView.txt_status.text = "待支付"
-                pay(holder.itemView.txt_right, position)
+                if (getData(position).course.state != "3"){
+                    holder.itemView.txt_status.text = "待支付"
+                    pay(holder.itemView.txt_right, position)
+                }
             }
             "2" -> {
                 if (getData(position).course.state != "3") {
+                    holder.itemView.txt_status.text = "进行中"
                     cancel(holder.itemView.txt_right, position)
                 }
             }
@@ -56,7 +59,7 @@ class MyParticipatedAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleA
 
         if (getData(position).course.state == "3"){
             holder.itemView.txt_status.text = "已取消"
-        }else if(getData(position).order.state != "1"){
+        }else if(getData(position).order.state != "1" && getData(position).order.state != "2"){
         holder.itemView.txt_status.text = getData(position).course.stateInfo
         }
 

@@ -14,6 +14,7 @@ import com.sunny.classcome.base.BaseFragment
 import com.sunny.classcome.bean.ClassBean
 import com.sunny.classcome.http.ApiManager
 import com.sunny.classcome.http.Constant
+import com.sunny.classcome.utils.Pay
 import com.sunny.classcome.utils.Posted
 import kotlinx.android.synthetic.main.layout_refresh_recycler.*
 import org.greenrobot.eventbus.EventBus
@@ -54,7 +55,7 @@ class MyClassFragment : BaseFragment() {
 
         recl.layoutManager = LinearLayoutManager(context)
         if (type == "1") {
-            recl.adapter = MyPostedAdapter(getBaseActivity(),list)
+            recl.adapter = MyPostedAdapter(getBaseActivity(), list)
         } else {
             recl.adapter = MyParticipatedAdapter(list)
         }
@@ -72,8 +73,8 @@ class MyClassFragment : BaseFragment() {
 
     private fun load() {
 
-        if (courseType == "4" || courseType == "5"){
-            if (status == "4"){
+        if (courseType == "4" || courseType == "5") {
+            if (status == "4") {
                 refresh.closeHeaderOrFooter()
                 ll_error.visibility = View.VISIBLE
                 return
@@ -119,7 +120,7 @@ class MyClassFragment : BaseFragment() {
         })
     }
 
-    fun setCourseType(courseType:String){
+    fun setCourseType(courseType: String) {
         this.courseType = courseType
     }
 
@@ -133,6 +134,13 @@ class MyClassFragment : BaseFragment() {
     //更新列表数据
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onUpdateEvent(posted: Posted) {
+        pageIndex = 1
+        load()
+    }
+
+    //更新列表数据
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onPayEvent(pay: Pay) {
         pageIndex = 1
         load()
     }

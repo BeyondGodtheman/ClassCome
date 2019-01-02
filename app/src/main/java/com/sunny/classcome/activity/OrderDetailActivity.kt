@@ -424,14 +424,20 @@ class OrderDetailActivity : BaseActivity() {
                 }
             } else {
                 when (classBean?.order?.state) {
-                    "-1" -> showOffShelf() //已取消
-                    "1" -> showPayWait()  //待支付
+                    "-1" -> selfCancel() //已取消
+                    "1" -> {
+                        if (classBean?.course?.state == "3"){
+                            selfCancel()
+                        }else{
+                            showPayWait()
+                        }
+                    }  //待支付
                     "2" -> {
                         if (classBean?.course?.state != "3") {
                             showPaying()
                         } //进行中
                         else {
-                            cancleClass()
+                            selfCancel()
                         }
                     }
                     "3" -> {
