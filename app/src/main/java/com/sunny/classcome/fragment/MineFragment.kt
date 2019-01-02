@@ -10,11 +10,11 @@ import com.sunny.classcome.bean.HtmlBean
 import com.sunny.classcome.bean.MineBean
 import com.sunny.classcome.http.ApiManager
 import com.sunny.classcome.http.Constant
-import com.sunny.classcome.utils.GlideUtil
-import com.sunny.classcome.utils.IntentUtil
-import com.sunny.classcome.utils.ToastUtil
-import com.sunny.classcome.utils.UserManger
+import com.sunny.classcome.utils.*
 import kotlinx.android.synthetic.main.fragment_mine.*
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 
 
 /**
@@ -28,6 +28,8 @@ class MineFragment : BaseFragment() {
     override fun setLayout(): Int = R.layout.fragment_mine
 
     override fun initView() {
+
+        EventBus.getDefault().register(this)
 
         txt_user_name.setOnClickListener(this)
         txt_user_address.setOnClickListener(this)
@@ -139,4 +141,19 @@ class MineFragment : BaseFragment() {
 
         })
     }
+
+    override fun close() {
+        EventBus.getDefault().unregister(this)
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onShowMessageEvent(showMessage: ShowMessage) {
+        view_point.visibility = View.VISIBLE
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onHideMessageEvent(hideMessage: HideMessage) {
+        view_point.visibility = View.GONE
+    }
+
 }

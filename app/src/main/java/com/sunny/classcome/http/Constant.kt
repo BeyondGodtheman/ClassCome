@@ -161,5 +161,7 @@ object Constant {
 
     const val USER_GETAPPRAISELIST = "user/getAppraiseList" //评论列表
 
+    const val COURSE_SETMSGISREAD = "course/setMsgIsRead" //设置消息已读
+
 }
 

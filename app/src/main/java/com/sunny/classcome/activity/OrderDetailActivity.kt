@@ -92,6 +92,17 @@ class OrderDetailActivity : BaseActivity() {
         }
     }
 
+    private fun showAudited2() {
+        txt_info.text = "审核通过，未中标"
+        txt_order_number.text = ("订单编号：${classBean?.course?.id}")
+        txt_order_remark.text = getTime()
+        showGrayBtn(txt_order_right, "取消订单")
+        txt_order_right.setOnClickListener {
+            CancelPromptActivity.start(this, 2, classBean?.course?.id ?: "")
+        }
+    }
+
+
     private fun showField() {
         txt_info.text = "订单进行中"
         txt_prompt.text = "您的信息正在发布中"
@@ -280,7 +291,7 @@ class OrderDetailActivity : BaseActivity() {
         txt_info.text = "订单进行中"
         txt_prompt.text = "您已付款成功"
         txt_order_number.text = ("订单编号：${classBean?.course?.id}")
-        txt_order_remark.text = ("验证码：${classBean?.order?.orderNum?:""}")
+        txt_order_remark.text = ("验证码：${classBean?.order?.orderNum ?: ""}")
         showGrayBtn(txt_order_right, "取消订单")
         txt_order_right.setOnClickListener {
             CancelPromptActivity.start(this, if (isAuthor) 3 else 4, classBean?.course?.id ?: "")
@@ -426,9 +437,9 @@ class OrderDetailActivity : BaseActivity() {
                 when (classBean?.order?.state) {
                     "-1" -> selfCancel() //已取消
                     "1" -> {
-                        if (classBean?.course?.state == "3"){
+                        if (classBean?.course?.state == "3") {
                             selfCancel()
-                        }else{
+                        } else {
                             showPayWait()
                         }
                     }  //待支付
@@ -502,7 +513,13 @@ class OrderDetailActivity : BaseActivity() {
                         } else {
                             when (data.content?.order?.state) {
                                 "1" -> showOffShelf()
-                                "2" -> showWinningBid() //中标
+                                "2" -> {
+                                    if (data.content?.course?.state == "2") {
+                                        showAudited2()
+                                    } else {
+                                        showWinningBid()
+                                    }
+                                } //中标
                                 "3" -> {
                                     if (data.content?.course?.state == "3") {
                                         cancleClass()

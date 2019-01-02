@@ -7,7 +7,6 @@ import android.text.TextUtils
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
-import android.view.animation.Animation
 import android.view.animation.LinearInterpolator
 import android.widget.ImageView
 import android.widget.TextView
@@ -25,8 +24,9 @@ import com.sunny.classcome.base.BaseFragment
 import com.sunny.classcome.bean.*
 import com.sunny.classcome.http.ApiManager
 import com.sunny.classcome.http.Constant
-import com.sunny.classcome.utils.DateUtil
+import com.sunny.classcome.utils.HideMessage
 import com.sunny.classcome.utils.LocationUtil
+import com.sunny.classcome.utils.ShowMessage
 import com.sunny.classcome.utils.UserManger
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.home_class_list.*
@@ -36,6 +36,9 @@ import kotlinx.android.synthetic.main.layout_home_type.*
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.delay
 import kotlinx.coroutines.experimental.launch
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 
 class HomeFragment : BaseFragment() {
 
@@ -79,6 +82,8 @@ class HomeFragment : BaseFragment() {
     override fun setLayout(): Int = R.layout.fragment_home
 
     override fun initView() {
+
+        EventBus.getDefault().register(this)
 
         localStr = UserManger.getAddress().apply {
             if (isNotEmpty()) {
@@ -218,10 +223,10 @@ class HomeFragment : BaseFragment() {
     private fun loadAddress() {
         ApiManager.post(getBaseActivity().composites, null, Constant.PUB_GETCITYLIST, object : ApiManager.OnResult<LocalCityBean>() {
             override fun onSuccess(data: LocalCityBean) {
-                val localCityBean = data.content.find{it.cityVoName == titleView.text_home_Location.text.toString()}
-                if (localCityBean != null){
+                val localCityBean = data.content.find { it.cityVoName == titleView.text_home_Location.text.toString() }
+                if (localCityBean != null) {
                     UserManger.setAddress(localCityBean.cityVoId, localCityBean.cityVoName)
-                }else{
+                } else {
                     UserManger.setAddress("37", "上海市")
                 }
 
@@ -295,7 +300,7 @@ class HomeFragment : BaseFragment() {
 
                 if (isFlag) {
                     loadPinTuan()
-                    initRecommend(data.content?.dataList?: arrayListOf())
+                    initRecommend(data.content?.dataList ?: arrayListOf())
                 }
                 data.content?.dataList?.let {
                     dataList.addAll(it)
@@ -309,16 +314,16 @@ class HomeFragment : BaseFragment() {
         })
     }
 
-    fun loadPinTuan(){
-        ApiManager.post(getBaseActivity().composites,null,Constant.ORDER_GETPINTUAN,object :ApiManager.OnResult<BaseBean<ArrayList<HomePinTuanBean>>>(){
+    fun loadPinTuan() {
+        ApiManager.post(getBaseActivity().composites, null, Constant.ORDER_GETPINTUAN, object : ApiManager.OnResult<BaseBean<ArrayList<HomePinTuanBean>>>() {
             override fun onSuccess(data: BaseBean<ArrayList<HomePinTuanBean>>) {
                 titleView.vf_home_pintuan.removeAllViews()
                 data.content?.data?.let { list ->
                     list.forEach {
                         val textView = TextView(context)
-                        textView.text = ((it.userName?:"")+"发起了拼团")
-                        textView.setTextSize(TypedValue.COMPLEX_UNIT_PX,resources.getDimension(R.dimen.pt28))
-                        textView.setTextColor(ContextCompat.getColor(requireContext(),R.color.color_white))
+                        textView.text = ((it.userName ?: "") + "发起了拼团")
+                        textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, resources.getDimension(R.dimen.pt28))
+                        textView.setTextColor(ContextCompat.getColor(requireContext(), R.color.color_white))
                         textView.setLines(1)
                         textView.ellipsize = TextUtils.TruncateAt.END
                         titleView.vf_home_pintuan.addView(textView)
@@ -332,5 +337,19 @@ class HomeFragment : BaseFragment() {
             }
 
         })
+    }
+
+    override fun close() {
+        EventBus.getDefault().unregister(this)
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onShowMessageEvent(showMessage: ShowMessage) {
+        titleView.view_point.visibility = View.VISIBLE
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onHideMessageEvent(hideMessage: HideMessage) {
+        titleView.view_point.visibility = View.GONE
     }
 }

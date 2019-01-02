@@ -11,11 +11,13 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener
 import com.sunny.classcome.R
 import com.sunny.classcome.adapter.MyMsgAdapter
 import com.sunny.classcome.base.BaseActivity
+import com.sunny.classcome.bean.BaseBean
 import com.sunny.classcome.bean.MsgBean
 import com.sunny.classcome.http.ApiManager
 import com.sunny.classcome.http.Constant
 import com.sunny.classcome.utils.ErrorViewType
 import kotlinx.android.synthetic.main.layout_refresh_recycler.*
+import org.json.JSONArray
 
 /**
  * Desc
@@ -88,7 +90,12 @@ class MyMsgActivity : BaseActivity() {
                 } else {
                     refresh.finishLoadMore()
                 }
-                list.addAll(data.content?.data?.dataList ?: arrayListOf())
+
+                data.content?.data?.dataList?.let {
+                    list.addAll(it)
+                    setMessageRed(it)
+                }
+
                 recl.adapter?.notifyDataSetChanged()
 
             }
@@ -101,6 +108,28 @@ class MyMsgActivity : BaseActivity() {
                 }
             }
         })
+    }
 
+    fun setMessageRed(msgList:ArrayList<MsgBean.Content.Bean.Data>){
+        val params = HashMap<String, Any>()
+
+        val idArray = JSONArray()
+
+        msgList.forEach {
+            if(it.isRead == "2" ){
+                idArray.put(it.id)
+            }
+        }
+        params["ids"] = idArray
+        ApiManager.post(composites,params,Constant.COURSE_SETMSGISREAD,object : ApiManager.OnResult<BaseBean<String>>(){
+            override fun onSuccess(data: BaseBean<String>) {
+
+            }
+
+            override fun onFailed(code: String, message: String) {
+
+            }
+
+        })
     }
 }

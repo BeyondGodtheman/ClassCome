@@ -8,19 +8,23 @@ import android.support.v4.app.FragmentPagerAdapter
 import android.support.v4.content.ContextCompat
 import android.support.v4.view.PagerAdapter
 import android.support.v4.view.ViewPager
-import android.view.LayoutInflater
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.TextView
 import com.sunny.classcome.R
 import com.sunny.classcome.base.BaseActivity
+import com.sunny.classcome.bean.MsgBean
 import com.sunny.classcome.fragment.HomeFragment
 import com.sunny.classcome.fragment.MineFragment
 import com.sunny.classcome.fragment.PublishFragment
+import com.sunny.classcome.http.ApiManager
+import com.sunny.classcome.http.Constant
+import com.sunny.classcome.utils.HideMessage
+import com.sunny.classcome.utils.ShowMessage
 import com.sunny.classcome.utils.ToastUtil
 import com.sunny.classcome.utils.UserManger
 import kotlinx.android.synthetic.main.activity_home.*
-import kotlinx.android.synthetic.main.fragment_home.*
+import org.greenrobot.eventbus.EventBus
 import java.util.*
 
 
@@ -197,5 +201,23 @@ class HomeActivity : BaseActivity() {
             super.onBackPressed()
             System.exit(0)
         }
+    }
+
+    override fun update() {
+        val params = HashMap<String, String>()
+        params["pageIndex"] = "1"
+        ApiManager.post(composites, params, Constant.COURSE_GETMESSAGELIST, object : ApiManager.OnResult<MsgBean>() {
+            override fun onSuccess(data: MsgBean) {
+                if (data.content?.info != "0") {
+                    EventBus.getDefault().post(ShowMessage())
+                } else {
+                    EventBus.getDefault().post(HideMessage())
+                }
+
+            }
+            override fun onFailed(code: String, message: String) {
+
+            }
+        })
     }
 }

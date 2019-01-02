@@ -3,3 +3,7 @@ package com.sunny.classcome.utils
 class Posted
 
 class Pay
+
+class ShowMessage
+
+class HideMessage

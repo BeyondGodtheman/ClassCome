@@ -35,8 +35,12 @@ class MyParticipatedAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleA
                 }
             }
             "2" -> {
-                if (getData(position).course.state != "3") {
-                    holder.itemView.txt_status.text = "进行中"
+                if (getData(position).course.coursetype == "4" || getData(position).course.coursetype == "5"){
+                    if (getData(position).course.state != "3") {
+                        holder.itemView.txt_status.text = "进行中"
+                        cancel(holder.itemView.txt_right, position)
+                    }
+                }else{
                     cancel(holder.itemView.txt_right, position)
                 }
             }
@@ -59,8 +63,14 @@ class MyParticipatedAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleA
 
         if (getData(position).course.state == "3"){
             holder.itemView.txt_status.text = "已取消"
-        }else if(getData(position).order.state != "1" && getData(position).order.state != "2"){
-        holder.itemView.txt_status.text = getData(position).course.stateInfo
+        }else{
+            if (getData(position).course.coursetype == "4" || getData(position).course.coursetype == "5"){
+                if(getData(position).order.state != "1" && getData(position).order.state != "2"){
+                    holder.itemView.txt_status.text = getData(position).course.stateInfo
+                }
+            }else{
+                holder.itemView.txt_status.text = getData(position).course.stateInfo
+            }
         }
 
 
