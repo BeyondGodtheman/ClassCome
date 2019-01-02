@@ -6,9 +6,11 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout
 import com.scwang.smartrefresh.layout.api.RefreshLayout
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter
 import com.scwang.smartrefresh.layout.header.ClassicsHeader
+import com.sunny.classcome.bean.XgBean
 import com.sunny.classcome.http.Constant
 import com.sunny.classcome.utils.LogUtil
 import com.sunny.classcome.utils.ToastUtil
+import com.sunny.classcome.utils.UserManger
 import com.tencent.android.tpush.XGIOperateCallback
 import com.tencent.android.tpush.XGPushConfig
 import com.tencent.android.tpush.XGPushManager
@@ -42,6 +44,24 @@ class MyApplication : Application() {
         AutoSizeConfig.getInstance().unitsManager
                 .setSupportDP(false)
                 .setSupportSP(false).supportSubunits = Subunits.PT
+
+        XGPushConfig.enableDebug(this, true)
+        XGPushManager.registerPush(this,object : XGIOperateCallback {
+            override fun onSuccess(data: Any, flag: Int) {
+                LogUtil.i("注册成功，设备token为：$data")
+                val xg = UserManger.getXg()
+                if (xg == null){
+                    UserManger.setXg(XgBean(data.toString(), false))
+                }else{
+                    xg.token = data.toString()
+                    UserManger.setXg(xg)
+                }
+            }
+
+            override fun onFail(data: Any?, errCode: Int, msg: String?) {
+                ToastUtil.show("注册失败，错误码：$errCode,错误信息：$msg")
+            }
+        })
     }
 
 

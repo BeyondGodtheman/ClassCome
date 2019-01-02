@@ -133,13 +133,15 @@ class MyItineraryActivity : BaseActivity() {
             override fun onSuccess(data: JourneyBean) {
                 hideLoading()
                 refresh2.finishRefresh()
-                val dataList = data.content?.filter { it.dateStr == selectDate }
-                if (dataList != null && dataList.isNotEmpty()) {
-                    layout_error.visibility = View.GONE
-                    recl.adapter = ItineraryDescAdapter(dataList as ArrayList<JourneyBean.Bean>)
-                } else {
+                val dataList = data.content?.find { it.dateStr == selectDate }
+                if (dataList == null || dataList.journeyInfo?.isEmpty() == true){
                     layout_error.visibility = View.VISIBLE
+                }else{
+                    layout_error.visibility = View.GONE
                 }
+
+                recl.adapter = ItineraryDescAdapter(dataList?.journeyInfo?: arrayListOf())
+
             }
 
             override fun onFailed(code: String, message: String) {

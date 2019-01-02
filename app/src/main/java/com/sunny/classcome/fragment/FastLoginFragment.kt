@@ -7,9 +7,11 @@ import com.sunny.classcome.MyApplication
 import com.sunny.classcome.R
 import com.sunny.classcome.base.BaseFragment
 import com.sunny.classcome.bean.BaseBean
+import com.sunny.classcome.bean.LoginBean
 import com.sunny.classcome.http.ApiManager
 import com.sunny.classcome.http.Constant
 import com.sunny.classcome.utils.ToastUtil
+import com.sunny.classcome.utils.UserManger
 import kotlinx.android.synthetic.main.fragment_fast_login.*
 
 /**
@@ -25,6 +27,7 @@ class FastLoginFragment: BaseFragment() {
     override fun setLayout(): Int = R.layout.fragment_fast_login
 
     override fun initView() {
+
         txt_fast_login.setOnClickListener(this)
         edit_login_phone.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
@@ -39,7 +42,14 @@ class FastLoginFragment: BaseFragment() {
                 MyApplication.getApp().setData(Constant.LOGIN_PHONE,edit_login_phone.text.toString())
             }
         })
+
+        txt_login_code.setClick(true)
+        txt_login_code.setCallListener(View.OnClickListener {
+            sendCode()
+        })
+
         btn_login.setOnClickListener(this)
+
     }
 
     fun initPhone(){
@@ -63,10 +73,16 @@ class FastLoginFragment: BaseFragment() {
         val params = HashMap<String, String>()
         params["telephone"] = edit_login_phone.text.toString()
         params["authCode"] = edit_login_code.text.toString()
-        ApiManager.post(getBaseActivity().composites, params, Constant.USER_LOGINUSERBYTELEPHONECODE, object : ApiManager.OnResult<BaseBean<String>>() {
-            override fun onSuccess(data: BaseBean<String>) {
+        ApiManager.post(getBaseActivity().composites, params, Constant.USER_LOGINUSERBYTELEPHONECODE, object : ApiManager.OnResult<LoginBean>() {
+            override fun onSuccess(data: LoginBean) {
                 getBaseActivity().hideLoading()
-                ToastUtil.show(data.content?.info)
+                if (data.content.statu != "0"){
+                    UserManger.setLogin(data)
+                    getBaseActivity().finish()
+                }else{
+                    ToastUtil.show(data.content.info)
+                }
+
             }
 
             override fun onFailed(code: String, message: String) {
@@ -80,6 +96,7 @@ class FastLoginFragment: BaseFragment() {
             txt_fast_login.id -> {
                 onChangeLogin?.invoke()
             }
+
             btn_login.id -> {
                 fastLogin()
             }
@@ -87,4 +104,29 @@ class FastLoginFragment: BaseFragment() {
     }
 
 
+    private fun sendCode() {
+        if (edit_login_phone.text.isEmpty()) {
+            ToastUtil.show("请输入手机号")
+            return
+        }
+        showLoading()
+        val params = HashMap<String, String>()
+        params["telephone"] = edit_login_phone.text.toString()
+        ApiManager.post(getBaseActivity().composites, params, Constant.USER_SENDCODEOFSHORTCUT, object : ApiManager.OnResult<BaseBean<String>>() {
+            override fun onSuccess(data: BaseBean<String>) {
+                hideLoading()
+                ToastUtil.show(data.content?.info)
+                if (data.content?.statu == "1") {
+                    txt_login_code.action()
+                }
+
+            }
+
+            override fun onFailed(code: String, message: String) {
+                hideLoading()
+            }
+
+        })
+
+    }
 }

@@ -13,6 +13,7 @@ import com.sunny.classcome.utils.UserManger
 import com.sunny.classcome.wxapi.WXEntryActivity
 import kotlinx.android.synthetic.main.layout_content.*
 import kotlinx.android.synthetic.main.layout_default_title.view.*
+import org.greenrobot.eventbus.EventBus
 
 /**
  * Desc

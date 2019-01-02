@@ -7,3 +7,5 @@ class Pay
 class ShowMessage
 
 class HideMessage
+
+class Login

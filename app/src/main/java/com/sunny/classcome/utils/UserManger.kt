@@ -49,7 +49,7 @@ object UserManger {
     }
 
 
-    fun setXg(xgBean: XgBean){
+    fun setXg(xgBean: XgBean) {
         SharedUtil.setString(XG, ApiManager.gSon.toJson(xgBean))
     }
 
@@ -71,17 +71,20 @@ object UserManger {
     fun getAddress(): String = SharedUtil.getString(CITY)
 
 
-    fun clear(){
+    fun clear() {
         SharedUtil.remove(LOGIN)
         SharedUtil.remove(MINE)
-        XGPushManager.unregisterPush(MyApplication.getApp(),object :XGIOperateCallback{
-            override fun onSuccess(p0: Any?, p1: Int) {
-                SharedUtil.remove(XG)
-            }
-
-            override fun onFail(p0: Any?, p1: Int, p2: String?) {
-
-            }
-        })
+        getXg()?.let {
+            it.isUpdate = false
+            setXg(it)
+        }
+//        XGPushManager.unregisterPush(MyApplication.getApp(), object : XGIOperateCallback {
+//            override fun onSuccess(p0: Any?, p1: Int) {
+//
+//            }
+//            override fun onFail(p0: Any?, p1: Int, p2: String?) {
+//
+//            }
+//        })
     }
 }
