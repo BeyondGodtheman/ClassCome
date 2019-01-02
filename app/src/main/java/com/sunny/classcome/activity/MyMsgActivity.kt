@@ -70,6 +70,7 @@ class MyMsgActivity : BaseActivity() {
 
         recl.adapter = myMsgAdapter
 
+        showLoading()
     }
 
     override fun onClick(v: View) {
@@ -80,6 +81,7 @@ class MyMsgActivity : BaseActivity() {
         params["pageIndex"] = pageIndex.toString()
         ApiManager.post(composites, params, Constant.COURSE_GETMESSAGELIST, object : ApiManager.OnResult<MsgBean>() {
             override fun onSuccess(data: MsgBean) {
+                hideLoading()
                 if (pageIndex == 1) {
                     list.clear()
                     refresh.finishRefresh()
@@ -101,6 +103,7 @@ class MyMsgActivity : BaseActivity() {
             }
 
             override fun onFailed(code: String, message: String) {
+                hideLoading()
                 if (pageIndex == 1) {
                     refresh.finishRefresh()
                 }else{
