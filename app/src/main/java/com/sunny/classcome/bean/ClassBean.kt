@@ -75,15 +75,15 @@ data class ClassBean(
             ) {
                 var sumPrice: String? = null
                     get() {
-                        if (coursetype == "4") {
+                        if (coursetype == "4" || coursetype == "5") {
                             return price
                         }
-                        if (coursetype == "5") {
-                            if (oneallcost == null) {
-                                return onecost
-                            }
-                            return oneallcost
-                        }
+//                        if (coursetype == "5") {
+//                            if (oneallcost == null) {
+//                                return price
+//                            }
+//                            return oneallcost
+//                        }
                         return field
                     }
             }

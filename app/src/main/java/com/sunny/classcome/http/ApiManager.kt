@@ -138,7 +138,6 @@ object ApiManager {
         params?.forEach {
             jsonObj.put(it.key, it.value)
         }
-        jsonObj.put("deviceId", Build.SERIAL)
         jsonObj.put("os_version", Build.VERSION.RELEASE)
         jsonObj.put("platform", "Android")
         jsonObj.put("version", BuildConfig.VERSION_NAME)
