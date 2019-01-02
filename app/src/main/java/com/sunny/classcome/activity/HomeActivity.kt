@@ -13,16 +13,18 @@ import android.widget.FrameLayout
 import android.widget.TextView
 import com.sunny.classcome.R
 import com.sunny.classcome.base.BaseActivity
+import com.sunny.classcome.bean.BaseBean
 import com.sunny.classcome.bean.MsgBean
+import com.sunny.classcome.bean.XgBean
 import com.sunny.classcome.fragment.HomeFragment
 import com.sunny.classcome.fragment.MineFragment
 import com.sunny.classcome.fragment.PublishFragment
 import com.sunny.classcome.http.ApiManager
 import com.sunny.classcome.http.Constant
-import com.sunny.classcome.utils.HideMessage
-import com.sunny.classcome.utils.ShowMessage
-import com.sunny.classcome.utils.ToastUtil
-import com.sunny.classcome.utils.UserManger
+import com.sunny.classcome.utils.*
+import com.tencent.android.tpush.XGIOperateCallback
+import com.tencent.android.tpush.XGPushConfig
+import com.tencent.android.tpush.XGPushManager
 import kotlinx.android.synthetic.main.activity_home.*
 import org.greenrobot.eventbus.EventBus
 import java.util.*
@@ -215,9 +217,46 @@ class HomeActivity : BaseActivity() {
                 }
 
             }
+
             override fun onFailed(code: String, message: String) {
 
             }
         })
+
+        if (UserManger.getXg() == null && UserManger.isLogin()) {
+            XGPushConfig.enableDebug(this, true)
+            XGPushManager.registerPush(this, object : XGIOperateCallback {
+                override fun onSuccess(data: Any, flag: Int) {
+                    LogUtil.i("注册成功，设备token为：$data")
+                    UserManger.setXg(XgBean(data.toString(), false))
+                    bindToken()
+                }
+
+                override fun onFail(data: Any?, errCode: Int, msg: String?) {
+                    ToastUtil.show("注册失败，错误码：$errCode,错误信息：$msg")
+                }
+            })
+        } else {
+            bindToken()
+        }
+    }
+
+    fun bindToken() {
+        UserManger.getXg()?.let {
+            if (!it.isUpdate) {
+                val params = HashMap<String, String>()
+                params["xgToken"] = it.token
+                ApiManager.post(composites, params, Constant.MESSAGE_SAVEXGTOKENTOSERVICE, object : ApiManager.OnResult<BaseBean<String>>() {
+                    override fun onSuccess(data: BaseBean<String>) {
+                        it.isUpdate = true
+                        UserManger.setXg(it)
+                    }
+
+                    override fun onFailed(code: String, message: String) {
+
+                    }
+                })
+            }
+        }
     }
 }

@@ -113,7 +113,21 @@ class PayActivity : BaseActivity() {
                     data.content?.course?.let {
                         txt_order_number.text = ("订单编号：${it.id}")
                         txt_class_name.text = it.title
-                        txt_order_time.text = (DateUtil.dateFormatYYMMdd(it.createTime) + "至" + DateUtil.dateFormatYYMMdd(it.expirationTime))
+
+
+                        var startTime = ""
+                        val startArray = it.startTime?.split(" ")
+                        if (startArray?.isNotEmpty() == true){
+                            startTime = startArray[0]
+                        }
+
+                        var endTime = ""
+                        val endArray = it.endTime?.split(" ")
+                        if (endArray?.isNotEmpty() == true){
+                            endTime = endArray[0]
+                        }
+
+                        txt_order_time.text = (startTime + "至" + endTime)
                         txt_money.text = ("实付：¥" + StringUtil.formatMoney((it.sumPrice
                                 ?: "0").toDouble()))
                     }

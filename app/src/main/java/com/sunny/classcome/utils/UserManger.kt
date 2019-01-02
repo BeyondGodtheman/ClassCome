@@ -1,8 +1,12 @@
 package com.sunny.classcome.utils
 
+import com.sunny.classcome.MyApplication
 import com.sunny.classcome.bean.LoginBean
 import com.sunny.classcome.bean.MineBean
+import com.sunny.classcome.bean.XgBean
 import com.sunny.classcome.http.ApiManager
+import com.tencent.android.tpush.XGIOperateCallback
+import com.tencent.android.tpush.XGPushManager
 
 /**
  * Desc
@@ -13,6 +17,7 @@ import com.sunny.classcome.http.ApiManager
 object UserManger {
     private const val LOGIN = "login"
     private const val MINE = "mine"
+    private const val XG = "xg"
     private const val CITY = "city"
 
     fun isLogin(): Boolean {
@@ -44,6 +49,19 @@ object UserManger {
     }
 
 
+    fun setXg(xgBean: XgBean){
+        SharedUtil.setString(XG, ApiManager.gSon.toJson(xgBean))
+    }
+
+
+    fun getXg(): XgBean? {
+        val json = SharedUtil.getString(XG)
+        if (json.isEmpty()) {
+            return null
+        }
+        return ApiManager.gSon.fromJson<XgBean>(json, XgBean::class.java)
+    }
+
     //保存选择地址
     fun setAddress(id: String, name: String) {
         SharedUtil.setString(CITY, "$id,$name")
@@ -56,5 +74,14 @@ object UserManger {
     fun clear(){
         SharedUtil.remove(LOGIN)
         SharedUtil.remove(MINE)
+        XGPushManager.unregisterPush(MyApplication.getApp(),object :XGIOperateCallback{
+            override fun onSuccess(p0: Any?, p1: Int) {
+                SharedUtil.remove(XG)
+            }
+
+            override fun onFail(p0: Any?, p1: Int, p2: String?) {
+
+            }
+        })
     }
 }

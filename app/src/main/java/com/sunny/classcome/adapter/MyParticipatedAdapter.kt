@@ -57,7 +57,9 @@ class MyParticipatedAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleA
                 }
             }
             "5" -> {
-
+//                if (getData(position).course.state == "5") {
+//                    cancel(holder.itemView.txt_right, position)
+//                }
             }
         }
 

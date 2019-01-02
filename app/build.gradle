@@ -12,6 +12,11 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        manifestPlaceholders = [
+                XG_ACCESS_ID:"2100323247",
+                XG_ACCESS_KEY : "AUC8PZ3543SR",
+        ]
     }
     buildTypes {
         release {
@@ -103,4 +108,13 @@ dependencies {
 
     //星星
     implementation 'com.hedgehog.ratingbar:app:1.1.2'
+
+    //信鸽普通版本jar，不包含厂商通道
+    implementation  'com.tencent.xinge:xinge:4.0.4-release'
+    //jg包
+    implementation'com.tencent.jg:jg:1.1'
+    //wup包
+    implementation 'com.tencent.wup:wup:1.0.0.E-release'
+    //mid包，minSdkVersion 14
+    implementation 'com.tencent.mid:mid:4.0.7-Release'
 }

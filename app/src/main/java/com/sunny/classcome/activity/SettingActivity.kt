@@ -39,8 +39,7 @@ class SettingActivity : BaseActivity() {
             R.id.txt_invitation_points -> share()
             R.id.txt_help -> startWeb(Constant.PUB_HELP)
             R.id.txt_logout -> {
-                UserManger.clear()
-                finish()
+                logOut()
             }
         }
     }
@@ -81,6 +80,31 @@ class SettingActivity : BaseActivity() {
                 hideLoading()
             }
         })
+
+    }
+
+    private fun logOut(){
+        showLoading()
+        UserManger.getLogin()?.content?.userId?.let {
+            val params  = HashMap<String,String>()
+            params["id"] = it
+            ApiManager.post(composites,params,Constant.USER_LOGINOUT,object :ApiManager.OnResult<BaseBean<String>>(){
+                override fun onSuccess(data: BaseBean<String>) {
+                    hideLoading()
+                    if (data.content?.statu == "1"){
+                        UserManger.clear()
+                        finish()
+                    }else{
+                        ToastUtil.show(data.content?.info)
+                    }
+                }
+
+                override fun onFailed(code: String, message: String) {
+                    hideLoading()
+                }
+            })
+        }
+
 
     }
 }

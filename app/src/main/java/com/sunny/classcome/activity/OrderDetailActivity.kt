@@ -534,6 +534,10 @@ class OrderDetailActivity : BaseActivity() {
 
                                 }
                                 "5" -> showSettlement() //待结算
+
+                                "6" -> {
+                                    showPayFinish()
+                                }
                             }
                         }
 
@@ -587,6 +591,12 @@ class OrderDetailActivity : BaseActivity() {
     //更新列表数据
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onUpdateEvent(posted: Posted) {
+        finish()
+    }
+
+    //更新列表数据
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onPayEvent(pay: Pay) {
         finish()
     }
 }

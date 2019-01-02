@@ -163,5 +163,8 @@ object Constant {
 
     const val COURSE_SETMSGISREAD = "course/setMsgIsRead" //设置消息已读
 
+    const val MESSAGE_SAVEXGTOKENTOSERVICE = "message/saveXgTokenToService" //绑定信鸽
+
+    const val USER_LOGINOUT = "user/loginOut" //退出登录
 }
 
