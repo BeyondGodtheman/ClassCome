@@ -264,9 +264,9 @@ class PublishDetailsActivity : BaseActivity() {
                                 txt_accept.visibility = View.VISIBLE
                                 ll_pintuan.visibility = View.GONE
                             }
-                            "去支付"
+                            "去购买"
                         } else {
-                            "未应聘"
+                            "应聘"
                         }
                     }
                     "4" -> "待支付"
