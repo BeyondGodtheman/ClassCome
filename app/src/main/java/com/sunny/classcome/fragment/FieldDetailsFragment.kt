@@ -28,6 +28,8 @@ open class FieldDetailsFragment : BaseFragment() {
 
     override fun initView() {
 
+        txt_brief_desc.text = "场地服务"
+
         classDetailBean = MyApplication.getApp().getData<ClassDetailBean>(Constant.CLASS_DETAIL, true)
 
         classDetailBean?.content?.resCourseVO?.course?.let { bean ->
@@ -46,6 +48,7 @@ open class FieldDetailsFragment : BaseFragment() {
             txt_square.text = (bean.workspace + "㎡")
             txt_time.text = bean.worktime
             txt_address.text = bean.classAddress
+
 
             bean.commondevice?.let {
                 val list = if (it.contains(",")) {
@@ -78,6 +81,9 @@ open class FieldDetailsFragment : BaseFragment() {
                     recl_meeting.adapter = LabelAdapter(list as ArrayList<String>)
                 }
             }
+
+
+            txt_brief.text = bean.description
 
             bean.specialdevice?.let {
                 val list = if (it.contains(",")) {

@@ -66,6 +66,13 @@
                     android:textColor="@color/color_price_red"
                     android:textSize="36pt"
                     tools:text="¥4000" />
+
+                <View
+                    android:layout_width="2pt"
+                    android:layout_height="150pt"
+                    android:background="@color/color_divider"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@id/txt_class_name"/>
             </RelativeLayout>
 
             <View style="@style/style_view_divider" />
@@ -128,21 +135,31 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <TextView
-                android:id="@+id/txt_brief_desc"
-                style="@style/style_font_default_34pt"
-                android:layout_marginStart="40pt"
-                android:layout_marginTop="40pt"
-                android:text="课程简介" />
+            <LinearLayout
+                android:id="@+id/ll_class_desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
 
-            <TextView
-                android:id="@+id/txt_brief"
-                style="@style/style_font_default_28pt"
-                android:layout_marginStart="40pt"
-                android:layout_marginTop="32pt"
-                android:layout_marginEnd="40pt"
-                android:layout_marginBottom="60pt"
-                tools:text="舞蹈是一种表演艺术，使用身体来完成各种优雅或高难度的动作" />
+                <View style="@style/style_view_divider" />
+
+                <TextView
+                    android:id="@+id/txt_brief_desc"
+                    style="@style/style_font_default_34pt"
+                    android:layout_marginStart="40pt"
+                    android:layout_marginTop="40pt"
+                    android:text="课程简介" />
+
+                <TextView
+                    android:id="@+id/txt_brief"
+                    style="@style/style_font_default_28pt"
+                    android:layout_marginStart="40pt"
+                    android:layout_marginTop="32pt"
+                    android:layout_marginEnd="40pt"
+                    android:layout_marginBottom="60pt"
+                    tools:text="舞蹈是一种表演艺术，使用身体来完成各种优雅或高难度的动作" />
+            </LinearLayout>
 
             <View style="@style/style_view_divider" />
 
@@ -241,16 +258,18 @@
             </RelativeLayout>
         </LinearLayout>
     </ScrollView>
+
     <View
         style="@style/style_view_line"
-        android:layout_above="@id/ll_bottom_btn"/>
+        android:layout_above="@id/ll_bottom_btn" />
+
     <LinearLayout
         android:id="@+id/ll_bottom_btn"
         android:layout_width="match_parent"
         android:layout_height="110pt"
-        android:orientation="horizontal"
         android:layout_alignParentBottom="true"
         android:background="@color/color_white"
+        android:orientation="horizontal"
         android:visibility="gone">
 
         <ImageView

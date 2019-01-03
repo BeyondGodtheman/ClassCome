@@ -35,7 +35,6 @@ import org.greenrobot.eventbus.ThreadMode
 class PublishDetailsActivity : BaseActivity() {
 
     companion object {
-        const val courseDetail = "2"
         const val filedDetail = "4"
         const val trainDetail = "5"
 
@@ -101,19 +100,20 @@ class PublishDetailsActivity : BaseActivity() {
         coursetype = intent.getStringExtra("type")
 
         fragment = when (coursetype) {
-            courseDetail -> {
+            "1","2","3" -> {
                 title = "课程详情"
-                txt_brief_desc.text = "课程简介"
+                ll_class_desc.visibility = View.VISIBLE
                 courseDetailFragment
             }
             filedDetail -> {
                 title = "场地详情"
-                txt_brief_desc.text = "场地简介"
+                ll_class_desc.visibility = View.GONE
                 fieldDetailsFragment
             }
             trainDetail -> {
+                ll_class_desc.visibility = View.GONE
                 title = "培训详情"
-                txt_brief_desc.text = "培训简介"
+
                 trainDetailsFragment
             }
             else -> courseDetailFragment

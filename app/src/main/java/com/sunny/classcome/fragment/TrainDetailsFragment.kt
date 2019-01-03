@@ -31,6 +31,8 @@ class TrainDetailsFragment : FieldDetailsFragment() {
         txt_long_desc.text = "培训时长"
         txt_time_desc.text = "培训时间"
 
+        txt_brief_desc.text = "培训简介"
+
         txt_pintuan_more.setOnClickListener(this)
         img_pintuan_more.setOnClickListener(this)
 
@@ -65,6 +67,8 @@ class TrainDetailsFragment : FieldDetailsFragment() {
                 }
             }
             txt_pin.text = ("${number}人在拼团")
+
+            txt_brief.text = bean?.content?.resCourseVO?.description?:""
         }
     }
 
