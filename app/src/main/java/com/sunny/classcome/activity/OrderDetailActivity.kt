@@ -127,7 +127,7 @@ class OrderDetailActivity : BaseActivity() {
 
         rl_money.visibility = View.VISIBLE
         txt_money_desc.text = "支付金额"
-        txt_money_count.text = ("￥${StringUtil.formatMoney((buyBean?.money ?: "0").toDouble())}")
+        txt_money_count.text = ("¥${StringUtil.formatMoney((buyBean?.money ?: "0").toDouble())}")
 
         rl_contact.visibility = View.VISIBLE
         txt_contact_desc.text = "联系方式"
@@ -182,7 +182,7 @@ class OrderDetailActivity : BaseActivity() {
 
         rl_money.visibility = View.VISIBLE
         txt_money_desc.text = "支付金额"
-        txt_money_count.text = ("￥${classBean?.course?.sumPrice}")
+        txt_money_count.text = ("¥${classBean?.course?.sumPrice}")
 
 //        rl_contact.visibility = View.VISIBLE
 //        txt_contact_desc.text = "联系方式"
@@ -224,7 +224,7 @@ class OrderDetailActivity : BaseActivity() {
 
         rl_money.visibility = View.VISIBLE
         txt_money_desc.text = "实付款"
-        txt_money_count.text = ("￥${classBean?.course?.sumPrice}")
+        txt_money_count.text = ("¥${classBean?.course?.sumPrice}")
 
         rl_info.visibility = View.VISIBLE
         txt_info_desc.text = "代课者信息"
@@ -246,7 +246,7 @@ class OrderDetailActivity : BaseActivity() {
 
         rl_money.visibility = View.VISIBLE
         txt_money_desc.text = "实付款"
-        txt_money_count.text = ("￥${classBean?.course?.sumPrice}")
+        txt_money_count.text = ("¥${classBean?.course?.sumPrice}")
 
         rl_info.visibility = View.VISIBLE
         txt_info_desc.text = "代课者信息"
@@ -260,7 +260,7 @@ class OrderDetailActivity : BaseActivity() {
         txt_order_remark.text = getTime()
         rl_money.visibility = View.VISIBLE
         txt_money_desc.text = "代课款"
-        txt_money_count.text = ("￥${classBean?.course?.sumPrice}")
+        txt_money_count.text = ("¥${classBean?.course?.sumPrice}")
 
         rl_info.visibility = View.VISIBLE
         txt_info_desc.text = "发布者信息"
@@ -275,7 +275,7 @@ class OrderDetailActivity : BaseActivity() {
 
         rl_money.visibility = View.VISIBLE
         txt_money_desc.text = "代课款"
-        txt_money_count.text = ("￥${classBean?.course?.sumPrice}")
+        txt_money_count.text = ("¥${classBean?.course?.sumPrice}")
 
         rl_info.visibility = View.VISIBLE
         txt_info_desc.text = "发布者信息"
@@ -320,7 +320,7 @@ class OrderDetailActivity : BaseActivity() {
         rl_money.visibility = View.VISIBLE
         txt_date.text = DateUtil.dateFormatYYMMddHHssmm(classBean?.order?.createTime ?: "")
         txt_money_desc.text = "实付款"
-        txt_money_count.text = ("￥${classBean?.order?.paymentMoney}")
+        txt_money_count.text = ("¥${classBean?.order?.paymentMoney}")
     }
 
     private fun showOffShelf() {

@@ -7,7 +7,7 @@ object StringUtil {
 
     //格式化钱保留两位小数
     fun formatMoney(money: Double):String{
-        val format = DecimalFormat("0.00")
+        val format = DecimalFormat("#.##")
        return format.format(money)
     }
 

@@ -39,8 +39,8 @@ class CourseDetailsFragment : BaseFragment() {
             txt_recruit.text = ("接口未定义字段")
 
             // 单节酬劳/酬劳总价
-            txt_price.text = ("￥${bean.price}")
-            txt_sum.text = ("￥${bean.sumPrice}")
+            txt_price.text = ("¥${bean.price}")
+            txt_sum.text = ("¥${bean.sumPrice}")
 
             // 课程类别
             val categorySb = StringBuilder()

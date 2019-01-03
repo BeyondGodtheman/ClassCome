@@ -110,7 +110,7 @@
     <string name="training_cost">培训费用(次)</string>
     <string name="field_cost">场地费用(次)</string>
     <string name="single_cost">单次费用</string>
-    <string name="rmb">￥</string>
+    <string name="rmb">¥</string>
     <string name="group_purchase">团购（非必填，如无团购可不填写）</string>
     <string name="separate_purchase_cost">单独购买费用</string>
     <string name="group_purchase_cost">拼团购买费用</string>

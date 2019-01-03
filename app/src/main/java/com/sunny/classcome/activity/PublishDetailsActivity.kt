@@ -389,7 +389,7 @@ class PublishDetailsActivity : BaseActivity() {
 
 
         txt_class_name.text = bean.resCourseVO.title
-        txt_class_price.text = ("￥${StringUtil.formatMoney((bean.resCourseVO.course.sumPrice
+        txt_class_price.text = ("¥${StringUtil.formatMoney((bean.resCourseVO.course.sumPrice
                 ?: "0").toDouble())}")
         txt_class_time.text = DateUtil.dateFormatYYMMdd(bean.resCourseVO.createTime)
 

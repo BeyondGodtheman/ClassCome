@@ -273,6 +273,7 @@ class HomeFragment : BaseFragment() {
             bottomArrowList[sortIndex].setImageResource(R.mipmap.ic_arrow_bottom_blue)
             true
         }
+        showLoading()
         pageIndex = 1
         loadClass(true)
     }
@@ -292,6 +293,7 @@ class HomeFragment : BaseFragment() {
 
         ApiManager.post(getBaseActivity().composites, params, Constant.COURSE_GETCOURSELISTS, object : ApiManager.OnResult<ClassBean>() {
             override fun onSuccess(data: ClassBean) {
+                hideLoading()
                 if (isFlag) {
                     dataList.clear()
                     refresh.finishRefresh()
@@ -310,6 +312,7 @@ class HomeFragment : BaseFragment() {
             }
 
             override fun onFailed(code: String, message: String) {
+                hideLoading()
             }
 
         })
