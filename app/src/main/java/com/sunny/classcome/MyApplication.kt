@@ -14,6 +14,7 @@ import com.sunny.classcome.utils.UserManger
 import com.tencent.android.tpush.XGIOperateCallback
 import com.tencent.android.tpush.XGPushConfig
 import com.tencent.android.tpush.XGPushManager
+import com.tencent.bugly.crashreport.CrashReport
 import com.tencent.mm.opensdk.openapi.IWXAPI
 import com.tencent.mm.opensdk.openapi.WXAPIFactory
 import me.jessyan.autosize.AutoSizeConfig
@@ -44,6 +45,10 @@ class MyApplication : Application() {
         AutoSizeConfig.getInstance().unitsManager
                 .setSupportDP(false)
                 .setSupportSP(false).supportSubunits = Subunits.PT
+
+        //BugLy初始化
+        CrashReport.initCrashReport(this, "54a4f760da", true)
+
 
         XGPushConfig.enableDebug(this, true)
         XGPushManager.registerPush(this,object : XGIOperateCallback {

@@ -191,6 +191,7 @@ class HomeFragment : BaseFragment() {
 
     //初始化推荐数据
     private fun initRecommend(arrayList: ArrayList<ClassBean.Bean.Data>) {
+        vf_home_commend.stopFlipping()
         vf_home_commend.removeAllViews()
 
         arrayList.forEach { data ->

@@ -256,7 +256,8 @@ class OrderDetailActivity : BaseActivity() {
 
         txt_info.text = "订单进行中"
         txt_prompt.text = "系统默认将在课程结束后7天，对课程进行结算"
-
+        txt_order_number.text = ("订单编号：${classBean?.course?.id}")
+        txt_order_remark.text = getTime()
         rl_money.visibility = View.VISIBLE
         txt_money_desc.text = "代课款"
         txt_money_count.text = ("￥${classBean?.course?.sumPrice}")
