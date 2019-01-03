@@ -33,6 +33,7 @@ class MyClassActivity : BaseActivity() {
     override fun initView() {
 
         type = intent.getIntExtra("type", 1)
+        courseType = intent.getStringExtra("courseType")?:"1"
 
         val title = if (type == 1) {
             tabTitles.add("全部")
@@ -98,9 +99,14 @@ class MyClassActivity : BaseActivity() {
     }
 
     companion object {
-        fun start(context: Context, type: Int) {
+        fun start(context: Context, type: Int,courseType:String?) {
             context.startActivity(Intent(context, MyClassActivity::class.java)
-                    .putExtra("type", type))
+                    .putExtra("type", type)
+                    .putExtra("courseType",courseType))
+        }
+
+        fun start(context: Context, type: Int) {
+            start(context,type,null)
         }
     }
 }

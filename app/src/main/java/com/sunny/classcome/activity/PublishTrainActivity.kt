@@ -322,7 +322,7 @@ class PublishTrainActivity : BaseActivity() {
             override fun onSuccess(data: BaseBean<String>) {
                 hideLoading()
                 if (data.content?.statu == "1") {
-                    startActivity(Intent(this@PublishTrainActivity, PublishSuccessActivity::class.java))
+                    PublishSuccessActivity.start(this@PublishTrainActivity,"5")
                     finish()
                 } else {
                     ToastUtil.show(data.content?.info)

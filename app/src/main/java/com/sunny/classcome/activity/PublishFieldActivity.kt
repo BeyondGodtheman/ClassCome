@@ -277,7 +277,7 @@ class PublishFieldActivity : BaseActivity() {
             override fun onSuccess(data: BaseBean<String>) {
                 hideLoading()
                 if (data.content?.statu == "1") {
-                    startActivity(Intent(this@PublishFieldActivity, PublishSuccessActivity::class.java))
+                    PublishSuccessActivity.start(this@PublishFieldActivity,"4")
                     finish()
                 } else {
                     ToastUtil.show(data.content?.info)
