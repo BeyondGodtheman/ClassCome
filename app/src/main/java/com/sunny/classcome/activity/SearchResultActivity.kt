@@ -60,7 +60,11 @@ class SearchResultActivity : BaseActivity() {
         startDate = intent.getStringExtra("startDate") ?: ""
         personType = intent.getStringExtra("personType") ?: ""
 
-        showTitle(titleManager.defaultTitle("搜索：$keyWord"))
+        showTitle(titleManager.searchTitle(keyWord){
+            keyWord = it
+            showLoading()
+            loadClass()
+        })
 
         ll_location.setOnClickListener(this)
         ll_hot.setOnClickListener(this)
@@ -107,8 +111,9 @@ class SearchResultActivity : BaseActivity() {
             bottomArrowList[sortIndex].setImageResource(R.mipmap.ic_arrow_bottom_blue)
             true
         }
-
-        refresh.autoRefresh()
+        pageIndex = 1
+        showLoading()
+        loadClass()
     }
 
 
@@ -133,7 +138,7 @@ class SearchResultActivity : BaseActivity() {
             params["townId"] = townId
         }
 
-        params[sortStr] = if (sortFlag) "1" else "0"
+        params[sortStr] = if (!sortFlag) "1" else "0"
 
         if (category.isNotEmpty()){
             val categoryArray = JSONArray()

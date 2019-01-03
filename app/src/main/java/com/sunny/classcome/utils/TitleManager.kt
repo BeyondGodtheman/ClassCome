@@ -7,6 +7,7 @@ import kotlinx.android.synthetic.main.layout_default_title.view.*
 import kotlinx.android.synthetic.main.layout_title_arrow.view.*
 import kotlinx.android.synthetic.main.layout_home_title.view.*
 import kotlinx.android.synthetic.main.layout_title_icon.view.*
+import kotlinx.android.synthetic.main.layout_title_search.view.*
 
 class TitleManager(var activity: Activity?) {
 
@@ -69,6 +70,20 @@ class TitleManager(var activity: Activity?) {
         titleOnClickListener?.let {
             view.view_icon_right.setOnClickListener(titleOnClickListener)
         }
+
+        return view
+    }
+
+    fun searchTitle(keyWord:String,action:(keyWord:String)-> Unit):View{
+        val view = View.inflate(activity, R.layout.layout_title_search, null)
+        view.edit_search_keyword.setText(keyWord)
+        view.ll_search_back.setOnClickListener {
+            activity?.finish()
+            activity?.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+        }
+        view.txt_search.setOnClickListener{
+                action(view.edit_search_keyword.text.toString())
+            }
 
         return view
     }

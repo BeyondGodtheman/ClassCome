@@ -205,7 +205,7 @@ class ClassListActivity : BaseActivity() {
 
         val params = HashMap<String, Any>()
 //        params["cityId"] = UserManger.getAddress().split(",")[0]
-        params[sortStr] = if (sortFlag) "1" else "0"
+        params[sortStr] = if (!sortFlag) "1" else "0"
         if (category.isNotEmpty()){
             val categoryArray = JSONArray()
             categoryArray.put(category)

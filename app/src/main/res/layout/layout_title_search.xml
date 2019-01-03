@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_title"
+    style="@style/style_title"
+    android:layout_width="match_parent">
+
+    <LinearLayout
+        android:id="@+id/ll_search_back"
+        android:layout_width="74pt"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="16pt"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="44pt"
+            android:layout_height="44pt"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="30pt"
+            android:contentDescription="@string/back"
+            android:src="@drawable/draw_ic_title_back" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/txt_search_title"
+        android:layout_width="match_parent"
+        android:layout_height="64pt"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_toStartOf="@id/txt_search"
+        android:layout_toEndOf="@id/ll_search_back"
+        android:background="@drawable/draw_bg_fillet_search2">
+
+
+        <EditText
+            android:id="@+id/edit_search_keyword"
+            style="@style/style_font_default_28pt"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:paddingStart="39pt"
+            android:paddingEnd="39pt"
+            android:background="@color/color_transparent"
+            android:hint="输入您想找的关键词"
+            android:lines="1"
+            android:textColor="@color/color_default_font" />
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/txt_search"
+        style="@style/style_font_default_32pt"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="17pt"
+        android:layout_marginEnd="30pt"
+        android:text="搜索"
+        android:textColor="@color/color_gray_font" />
+</RelativeLayout>

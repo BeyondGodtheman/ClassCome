@@ -288,7 +288,7 @@ class HomeFragment : BaseFragment() {
         val params = HashMap<String, String>()
         params["cityId"] = UserManger.getAddress().split(",")[0]
         params["pageIndex"] = pageIndex.toString()
-        params[sortStr] = if (sortFlag) "1" else "0"
+        params[sortStr] = if (!sortFlag) "1" else "0"
 
         ApiManager.post(getBaseActivity().composites, params, Constant.COURSE_GETCOURSELISTS, object : ApiManager.OnResult<ClassBean>() {
             override fun onSuccess(data: ClassBean) {
