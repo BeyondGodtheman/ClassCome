@@ -49,17 +49,13 @@ class MyClassActivity : BaseActivity() {
         }
         tabTitles.add("评价/售后")
 
+
+        getTitleName()
+
         titleView = titleManager.arrowTitle(title + typeName, View.OnClickListener { _ ->
             SelectDialog(this) { type ->
                 courseType = type
-                typeName = when (courseType) {
-                    "1" -> "家教"
-                    "2" -> "代课"
-                    "3" -> "活动"
-                    "4" -> "场地"
-                    "5" -> "培训"
-                    else -> ""
-                }
+                getTitleName()
                 titleView.txt_arrow_title.text = (title + typeName)
 
                 fragments.forEach {
@@ -107,6 +103,17 @@ class MyClassActivity : BaseActivity() {
 
         fun start(context: Context, type: Int) {
             start(context,type,null)
+        }
+    }
+
+    private fun getTitleName(){
+        typeName = when (courseType) {
+            "1" -> "家教"
+            "2" -> "代课"
+            "3" -> "活动"
+            "4" -> "场地"
+            "5" -> "培训"
+            else -> ""
         }
     }
 }
