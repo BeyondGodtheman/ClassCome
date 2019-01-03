@@ -60,7 +60,7 @@ class MyClassFragment : BaseFragment() {
             recl.adapter = MyParticipatedAdapter(list)
         }
 
-        refresh.autoRefresh()
+        autoLoad()
     }
 
     override fun onClick(v: View) {
@@ -68,7 +68,9 @@ class MyClassFragment : BaseFragment() {
     }
 
     fun autoLoad() {
-        refresh.autoRefresh()
+        showLoading()
+        pageIndex = 1
+        load()
     }
 
     private fun load() {
@@ -89,6 +91,7 @@ class MyClassFragment : BaseFragment() {
 
         ApiManager.post(getBaseActivity().composites, params, Constant.ORDER_QUERYMYRELATIONCOURSE, object : ApiManager.OnResult<ClassBean>() {
             override fun onSuccess(data: ClassBean) {
+                hideLoading()
                 if (pageIndex == 1) {
                     refresh.finishRefresh()
                     list.clear()
@@ -110,6 +113,7 @@ class MyClassFragment : BaseFragment() {
             }
 
             override fun onFailed(code: String, message: String) {
+                hideLoading()
                 if (pageIndex == 1) {
                     refresh.finishRefresh()
                 } else {

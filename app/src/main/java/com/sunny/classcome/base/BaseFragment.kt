@@ -19,6 +19,14 @@ abstract class BaseFragment : Fragment(), IBaseView, View.OnClickListener {
         getBaseActivity().titleManager
     }
 
+    val loadingView: View by lazy {
+        View.inflate(context, R.layout.layout_loading, null)
+    }
+
+    val errorView: View by lazy {
+        View.inflate(context, R.layout.layout_error, null)
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         this.savedInstanceState = savedInstanceState
         mView = inflater.inflate(R.layout.fragment_base, container, false)
@@ -73,24 +81,23 @@ abstract class BaseFragment : Fragment(), IBaseView, View.OnClickListener {
     }
 
     override fun showLoading() {
-        getBaseActivity().hideLoading()
         hideLoading()
-        iframeBody.addView(getBaseActivity().loadingView)
+        iframeBody.addView(loadingView)
     }
 
     override fun hideLoading() {
-        iframeBody.removeView(getBaseActivity().loadingView)
+        iframeBody.removeView(loadingView)
     }
 
     override fun showError(errorType: ErrorViewType) {
         hideError()
-        getBaseActivity().hideError()
-        iframeBody.addView(getBaseActivity().errorView)
+       hideError()
+        iframeBody.addView(errorView)
     }
 
 
     override fun hideError() {
-        iframeBody.removeView(getBaseActivity().errorView)
+        iframeBody.removeView(errorView)
     }
 
 
