@@ -90,6 +90,7 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/ll_money"
         android:layout_width="match_parent"
         android:layout_height="103pt"
         android:background="@color/color_white">

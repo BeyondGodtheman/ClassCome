@@ -109,7 +109,7 @@ class SearchActivity : BaseActivity() {
                         }
                     }
                     txt_money.text = moneyList[it]
-                }.showAsDropDown(txt_money)
+                }.showAsDropDown(ll_money)
             }
             R.id.txt_address, R.id.rl_address -> {
                 startActivityForResult(Intent(this, AddressActivity::class.java)

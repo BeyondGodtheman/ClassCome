@@ -2,13 +2,13 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
-    android:background="#7f000000">
+    android:background="#7f000000"
+    android:orientation="horizontal">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recl"
         android:layout_width="375pt"
         android:layout_height="390pt"
-        android:background="#F2F1F2"
-        android:layout_alignParentEnd="true"/>
+        android:layout_alignParentEnd="true"
+        android:background="#F2F1F2" />
 </RelativeLayout>

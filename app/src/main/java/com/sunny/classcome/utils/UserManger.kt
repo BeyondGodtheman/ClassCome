@@ -1,12 +1,9 @@
 package com.sunny.classcome.utils
 
-import com.sunny.classcome.MyApplication
 import com.sunny.classcome.bean.LoginBean
 import com.sunny.classcome.bean.MineBean
 import com.sunny.classcome.bean.XgBean
 import com.sunny.classcome.http.ApiManager
-import com.tencent.android.tpush.XGIOperateCallback
-import com.tencent.android.tpush.XGPushManager
 
 /**
  * Desc

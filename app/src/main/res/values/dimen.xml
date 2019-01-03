@@ -14,6 +14,7 @@
     <dimen name="pt375">375pt</dimen>
     <dimen name="pt390">390pt</dimen>
     <dimen name="pt500">500pt</dimen>
+    <dimen name="pt563">563pt</dimen>
     <dimen name="pt570">570pt</dimen>
     <dimen name="pt716">716pt</dimen>
 </resources>

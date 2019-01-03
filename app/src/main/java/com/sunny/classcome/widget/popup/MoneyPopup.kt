@@ -9,18 +9,21 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.PopupWindow
 import com.sunny.classcome.R
+import com.sunny.classcome.base.BaseActivity
 import com.sunny.classcome.base.BaseRecycleAdapter
 import com.sunny.classcome.base.BaseRecycleViewHolder
+import com.sunny.classcome.utils.DensityUtil
 import kotlinx.android.synthetic.main.item_dialog_select.view.*
 import kotlinx.android.synthetic.main.popup_money.view.*
 
-class MoneyPopup(context: Context, var list: ArrayList<String>, action: (Int) -> Unit) : PopupWindow(context) {
+class MoneyPopup(var context: BaseActivity, var list: ArrayList<String>, action: (Int) -> Unit) : PopupWindow(context) {
 
     init {
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         contentView = inflater.inflate(R.layout.popup_money, null, false)
+
         width = WindowManager.LayoutParams.MATCH_PARENT
-        height = WindowManager.LayoutParams.MATCH_PARENT
+
         setBackgroundDrawable(ColorDrawable(0))
         isFocusable = true
         isOutsideTouchable = true
@@ -41,5 +44,10 @@ class MoneyPopup(context: Context, var list: ArrayList<String>, action: (Int) ->
             holder.itemView.txt_name.text = getData(position)
         }
 
+    }
+
+    override fun showAsDropDown(anchor: View?) {
+        height = DensityUtil.appHeight() - DensityUtil.getStatusHeight() - (anchor?.bottom?:0)
+        super.showAsDropDown(anchor)
     }
 }

@@ -1,11 +1,6 @@
 package com.sunny.classcome
 
 import android.app.Application
-import android.content.Context
-import com.scwang.smartrefresh.layout.SmartRefreshLayout
-import com.scwang.smartrefresh.layout.api.RefreshLayout
-import com.scwang.smartrefresh.layout.footer.ClassicsFooter
-import com.scwang.smartrefresh.layout.header.ClassicsHeader
 import com.sunny.classcome.bean.XgBean
 import com.sunny.classcome.http.Constant
 import com.sunny.classcome.utils.LogUtil
@@ -14,7 +9,6 @@ import com.sunny.classcome.utils.UserManger
 import com.tencent.android.tpush.XGIOperateCallback
 import com.tencent.android.tpush.XGPushConfig
 import com.tencent.android.tpush.XGPushManager
-import com.tencent.bugly.crashreport.CrashReport
 import com.tencent.mm.opensdk.openapi.IWXAPI
 import com.tencent.mm.opensdk.openapi.WXAPIFactory
 import me.jessyan.autosize.AutoSizeConfig
@@ -45,9 +39,6 @@ class MyApplication : Application() {
         AutoSizeConfig.getInstance().unitsManager
                 .setSupportDP(false)
                 .setSupportSP(false).supportSubunits = Subunits.PT
-
-        //BugLy初始化
-        CrashReport.initCrashReport(this, "54a4f760da", true)
 
 
         XGPushConfig.enableDebug(this, true)
