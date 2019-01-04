@@ -272,7 +272,7 @@ class PublishDetailsActivity : BaseActivity() {
                     "4" -> "待支付"
                     "5" -> {
                         if (classDetailBean?.content?.resCourseVO?.state == "3"){
-                            "发布者已取消"
+                            "已取消"
                         }else
                         "拼团待支付"
                     }

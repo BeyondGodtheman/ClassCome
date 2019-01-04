@@ -15,10 +15,7 @@ import com.scwang.smartrefresh.layout.footer.ClassicsFooter
 import com.scwang.smartrefresh.layout.header.ClassicsHeader
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener
 import com.sunny.classcome.R
-import com.sunny.classcome.activity.ClassListActivity
-import com.sunny.classcome.activity.LocationActivity
-import com.sunny.classcome.activity.LoginActivity
-import com.sunny.classcome.activity.MyMsgActivity
+import com.sunny.classcome.activity.*
 import com.sunny.classcome.adapter.ClassListAdapter
 import com.sunny.classcome.base.BaseFragment
 import com.sunny.classcome.bean.*
@@ -39,7 +36,7 @@ import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 
-class HomeFragment : BaseFragment(){
+class HomeFragment : BaseFragment() {
 
     private var isShowLocal = false
     private var localStr = listOf<String>()
@@ -205,7 +202,14 @@ class HomeFragment : BaseFragment(){
             layoutView.txt_title.text = data.course.title
             vf_home_commend.addView(layoutView)
         }
+
+
         vf_home_commend.startFlipping()
+        ll_commend.setOnClickListener {
+            arrayList[vf_home_commend.displayedChild].apply {
+                PublishDetailsActivity.startPublishDetail(requireContext(), course.coursetype,course.id)
+            }
+        }
     }
 
 

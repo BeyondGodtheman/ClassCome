@@ -60,7 +60,7 @@ class MyProfileActivity : BaseActivity() {
                 IntentUtil.start(this, MyProfileEditActivity::class.java)
             })
         } else {
-            titleManager.defaultTitle("Ta的简介")
+            titleManager.defaultTitle("我的简介")
         }
 
         showTitle(titleView)
