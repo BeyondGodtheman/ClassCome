@@ -89,7 +89,7 @@ class SearchActivity : BaseActivity() {
                             endPrice = ""
                         }
                         1 -> {
-                            startPrice = "1"
+                            startPrice = "0"
                             endPrice = "100"
                         }
 

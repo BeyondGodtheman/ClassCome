@@ -76,7 +76,11 @@ class PastReleaseActivity: BaseActivity() {
                 } else {
                     refresh.finishLoadMore()
                 }
-                list.addAll(data.content?.dataList ?: arrayListOf())
+
+                data.content?.dataList?.filter { it.course.userId == uid}?.let {
+                    list.addAll(it)
+                }
+
                 recl.adapter?.notifyDataSetChanged()
             }
 
