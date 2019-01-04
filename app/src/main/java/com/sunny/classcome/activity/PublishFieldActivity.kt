@@ -278,7 +278,7 @@ class PublishFieldActivity : BaseActivity() {
                 hideLoading()
                 if (data.content?.statu == "1") {
                     PublishSuccessActivity.start(this@PublishFieldActivity,"4")
-                    finish()
+                    finishAfterTransition()
                 } else {
                     ToastUtil.show(data.content?.info)
                 }

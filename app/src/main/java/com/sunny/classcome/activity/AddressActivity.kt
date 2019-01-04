@@ -30,7 +30,7 @@ class AddressActivity: BaseActivity() {
 
             txt_unlimited.setOnClickListener {
                 setResult(1, Intent())
-                finish()
+                finishAfterTransition()
             }
         }
     }
@@ -91,7 +91,7 @@ class AddressActivity: BaseActivity() {
                 resultIntent.putExtra("latitude",location[1])
                 resultIntent.putExtra("longitude",location[0])
                 setResult(1, resultIntent)
-                finish()
+                finishAfterTransition()
             }
 
             override fun onFailed(code: String, message: String) {

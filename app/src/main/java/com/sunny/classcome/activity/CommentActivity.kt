@@ -72,7 +72,7 @@ class CommentActivity : BaseActivity() {
                 hideLoading()
                 if (data.content?.statu == "1") {
                     EventBus.getDefault().post(Posted())
-                    finish()
+                    finishAfterTransition()
                 } else {
                     ToastUtil.show(data.content?.info)
                 }

@@ -74,7 +74,7 @@ class CancelPromptActivity : BaseActivity() {
             override fun onSuccess(data: BaseBean<String>) {
                 if (data.content?.statu == "1") {
                     EventBus.getDefault().post(Posted())
-                    finish()
+                    finishAfterTransition()
                 }
                 ToastUtil.show(data.content?.info)
             }
@@ -92,7 +92,7 @@ class CancelPromptActivity : BaseActivity() {
             override fun onSuccess(data: BaseBean<String>) {
                 if (data.content?.statu == "1") {
                     EventBus.getDefault().post(Posted())
-                    finish()
+                    finishAfterTransition()
                 }
                 ToastUtil.show(data.content?.info)
             }

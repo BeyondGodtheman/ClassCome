@@ -45,7 +45,7 @@ class ClassTypeActivity : BaseActivity() {
             intent.putExtra("classPName", list.find { it.id == intent.getStringExtra("classPid") }?.name)
             setResult(1, intent)
             MyApplication.getApp().setData(Constant.CLASS_TYPE, selectMap.values.last())
-            finish()
+            finishAfterTransition()
         })
 
         titleView.ll_base_back.setOnClickListener {
@@ -54,7 +54,7 @@ class ClassTypeActivity : BaseActivity() {
             intent.putExtra("classPName", this@ClassTypeActivity.intent.getStringExtra("classPName"))
             setResult(1, intent)
             MyApplication.getApp().setData(Constant.CLASS_TYPE, subCategoryList)
-            finish()
+            finishAfterTransition()
         }
 
         showTitle(titleView)

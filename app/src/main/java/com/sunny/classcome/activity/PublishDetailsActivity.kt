@@ -427,6 +427,6 @@ class PublishDetailsActivity : BaseActivity() {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onPayEvent(pay: Pay) {
-        finish()
+        finishAfterTransition()
     }
 }

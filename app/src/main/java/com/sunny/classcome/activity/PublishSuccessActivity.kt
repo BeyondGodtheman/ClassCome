@@ -29,7 +29,7 @@ class PublishSuccessActivity: BaseActivity() {
             }
             R.id.btn_my -> {
                 MyClassActivity.start(this,1,courseType)
-                finish()
+                finishAfterTransition()
             }
         }
     }

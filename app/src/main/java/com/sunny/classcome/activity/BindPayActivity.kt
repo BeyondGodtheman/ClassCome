@@ -121,7 +121,7 @@ class BindPayActivity : BaseActivity() {
             override fun onSuccess(data: BaseBean<String>) {
                 ToastUtil.show(data.content?.info)
                 if (data.content?.statu == "1") {
-                    finish()
+                    finishAfterTransition()
                 }
             }
 

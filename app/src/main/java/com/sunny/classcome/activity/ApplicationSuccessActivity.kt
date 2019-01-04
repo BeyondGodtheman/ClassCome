@@ -26,7 +26,7 @@ class ApplicationSuccessActivity: BaseActivity() {
         when(v.id){
             R.id.btn_home -> {
                 OrderDetailActivity.start(this,id,false)
-                finish()
+                finishAfterTransition()
             }
             R.id.btn_my -> {
                 startActivity(Intent(this,HomeActivity::class.java))

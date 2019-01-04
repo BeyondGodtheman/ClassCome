@@ -83,7 +83,7 @@ class LoginActivity : BaseActivity() {
                     startActivity(Intent(MyApplication.getApp(),HomeActivity::class.java))
                 }
             }
-            finish()
+            finishAfterTransition()
         }
     }
 }

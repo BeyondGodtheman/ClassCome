@@ -55,7 +55,7 @@ class SplashActivity : BaseActivity() {
             dialog.setPositiveText("授权")
             dialog.cancelOnClickListener = View.OnClickListener {
                 dialog.dismiss()
-                finish()
+                finishAfterTransition()
             }
 
             dialog.onClickListener1 = View.OnClickListener {
@@ -91,7 +91,7 @@ class SplashActivity : BaseActivity() {
                     startActivity(Intent(this@SplashActivity,HomeActivity::class.java))
                 }
             }
-            finish()
+            finishAfterTransition()
         }
     }
 }

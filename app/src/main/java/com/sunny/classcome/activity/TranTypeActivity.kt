@@ -23,11 +23,11 @@ class TranTypeActivity : BaseActivity() {
         val titleView = titleManager.defaultTitle("课程分类", "确定", View.OnClickListener {
             MyApplication.getApp().setData(Constant.TRAN_TYPE, selectSet)
             setResult(2)
-            finish()
+            finishAfterTransition()
         })
 
         titleView.ll_base_back.setOnClickListener {
-            finish()
+            finishAfterTransition()
         }
 
         showTitle(titleView)

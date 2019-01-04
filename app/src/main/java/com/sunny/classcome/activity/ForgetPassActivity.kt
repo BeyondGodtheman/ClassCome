@@ -73,7 +73,7 @@ class ForgetPassActivity : BaseActivity() {
                 hideLoading()
                 ToastUtil.show(data.content?.info)
                 if (data.content?.statu == "1")
-                    finish()
+                    finishAfterTransition()
             }
 
             override fun onFailed(code: String, message: String) {

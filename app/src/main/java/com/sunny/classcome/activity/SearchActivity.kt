@@ -76,7 +76,7 @@ class SearchActivity : BaseActivity() {
     override fun onClick(v: View) {
         when (v.id) {
             R.id.ll_icon_back -> {
-                finish()
+                finishAfterTransition()
             }
             R.id.rl_title -> {
 

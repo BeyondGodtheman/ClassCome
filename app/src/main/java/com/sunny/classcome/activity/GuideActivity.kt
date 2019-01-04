@@ -39,7 +39,7 @@ class GuideActivity : BaseActivity() {
                 if(position == imgArray.size -1){
                     view.view_next.setOnClickListener {
                         startActivity(Intent(this@GuideActivity,HomeActivity::class.java))
-                        finish()
+                        finishAfterTransition()
                     }
                 }else{
                     view.view_next.setOnClickListener {

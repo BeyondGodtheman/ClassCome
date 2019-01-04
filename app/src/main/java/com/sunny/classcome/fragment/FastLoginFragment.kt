@@ -78,7 +78,7 @@ class FastLoginFragment: BaseFragment() {
                 getBaseActivity().hideLoading()
                 if (data.content.statu != "0"){
                     UserManger.setLogin(data)
-                    getBaseActivity().finish()
+                    getBaseActivity().finishAfterTransition()
                 }else{
                     ToastUtil.show(data.content.info)
                 }

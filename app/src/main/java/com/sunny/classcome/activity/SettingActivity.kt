@@ -93,7 +93,7 @@ class SettingActivity : BaseActivity() {
                     hideLoading()
                     if (data.content?.statu == "1"){
                         UserManger.clear()
-                        finish()
+                        finishAfterTransition()
                     }else{
                         ToastUtil.show(data.content?.info)
                     }

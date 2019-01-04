@@ -334,7 +334,7 @@ class PublishClassActivity : BaseActivity() {
                 hideLoading()
                 if (data.content?.statu == "1") {
                     PublishSuccessActivity.start(this@PublishClassActivity,coursetype)
-                    finish()
+                    finishAfterTransition()
                 } else {
                     ToastUtil.show(data.content?.info)
                 }

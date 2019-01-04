@@ -103,7 +103,7 @@ class RegisterActivity : BaseActivity() {
                 ToastUtil.show(data.content?.info)
                 if (data.content?.statu == "1") {
                     startActivity(Intent(this@RegisterActivity, RegSuccessActivity::class.java))
-                    finish()
+                    finishAfterTransition()
                 }
             }
 

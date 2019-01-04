@@ -96,11 +96,11 @@ class WXEntryActivity : Activity(), IWXAPIEventHandler {
                 ToastUtil.show(resp.errStr)
             }
         }
-        finish()
+        finishAfterTransition()
     }
 
     override fun onReq(resp: BaseReq) {
-        finish()
+        finishAfterTransition()
     }
 
 

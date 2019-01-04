@@ -35,7 +35,7 @@ class LocationActivity : BaseActivity() {
                 }else{
                     setResult(type,Intent().putExtra("cityName",cityList[index].cityVoName))
                 }
-                finish()
+                finishAfterTransition()
             }
         }
     }

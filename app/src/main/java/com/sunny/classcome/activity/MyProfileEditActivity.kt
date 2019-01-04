@@ -91,7 +91,7 @@ class MyProfileEditActivity : BaseActivity() {
         ApiManager.post(composites, params, Constant.USER_EDITMYINFO, object : ApiManager.OnResult<BaseBean<String>>() {
             override fun onSuccess(data: BaseBean<String>) {
                 if (data.content?.statu == "1") {
-                    finish()
+                    finishAfterTransition()
                 }
                 ToastUtil.show(data.content?.info)
             }

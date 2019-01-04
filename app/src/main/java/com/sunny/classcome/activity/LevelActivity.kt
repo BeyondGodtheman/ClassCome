@@ -40,7 +40,7 @@ class LevelActivity : BaseActivity() {
 
     override fun onClick(v: View) {
         when (v.id) {
-            R.id.ll_back -> finish()
+            R.id.ll_back -> finishAfterTransition()
             R.id.ll_prompt -> IntentUtil.start(this, LevelDescActivity::class.java)
         }
     }

@@ -22,8 +22,7 @@ class TitleManager(var activity: Activity?) {
             view.ll_base_back.visibility = View.GONE
         } else {
             view.ll_base_back.setOnClickListener {
-                activity?.finish()
-                activity?.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+                activity?.finishAfterTransition()
             }
         }
 
@@ -47,8 +46,7 @@ class TitleManager(var activity: Activity?) {
 
 
             view.ll_arrow_back.setOnClickListener {
-                activity?.finish()
-                activity?.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+                activity?.finishAfterTransition()
             }
 
         titleOnClickListener?.let {
@@ -62,8 +60,7 @@ class TitleManager(var activity: Activity?) {
         val view = View.inflate(activity, R.layout.layout_title_icon, null)
         view.txt_icon_title.text = title
         view.ll_icon_back.setOnClickListener {
-            activity?.finish()
-            activity?.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+            activity?.finishAfterTransition()
         }
 
         titleOnClickListener?.let {
@@ -77,8 +74,7 @@ class TitleManager(var activity: Activity?) {
         val view = View.inflate(activity, R.layout.layout_title_search, null)
         view.edit_search_keyword.setText(keyWord)
         view.ll_search_back.setOnClickListener {
-            activity?.finish()
-            activity?.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+            activity?.finishAfterTransition()
         }
         view.txt_search.setOnClickListener{
                 action(view.edit_search_keyword.text.toString())

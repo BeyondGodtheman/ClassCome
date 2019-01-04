@@ -216,7 +216,7 @@ class PersonAuthActivity : BaseActivity() {
             override fun onSuccess(data: BaseBean<String>) {
                 hideLoading()
                 if (data.content?.statu == "1") {
-                    finish()
+                    finishAfterTransition()
                 }
                 ToastUtil.show(data.content?.info)
             }

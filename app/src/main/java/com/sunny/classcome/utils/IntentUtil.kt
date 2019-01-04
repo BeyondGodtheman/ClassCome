@@ -24,9 +24,8 @@ object IntentUtil {
     fun start(activity: Activity, clazz: Class<*>, isFinish: Boolean = false) {
         val intent = Intent(activity, clazz)
         activity.startActivity(intent)
-        activity.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         if (isFinish) {
-            activity.finish()
+            activity.finishAfterTransition()
         }
     }
 
@@ -37,9 +36,8 @@ object IntentUtil {
         val intent = Intent(activity, clazz)
         intent.putExtras(bundle)
         activity.startActivity(intent)
-        activity.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         if (isFinish) {
-            activity.finish()
+            activity.finishAfterTransition()
         }
     }
 

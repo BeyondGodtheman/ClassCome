@@ -30,16 +30,16 @@ class WXPayEntryActivity : Activity(), IWXAPIEventHandler {
             "0" -> {
                 ToastUtil.show("支付成功")
                 EventBus.getDefault().post(Pay())
-                this@WXPayEntryActivity.finish()
+                this@WXPayEntryActivity.finishAfterTransition()
             }
             "-1" -> {
                 ToastUtil.show("支付失败")
-                this@WXPayEntryActivity.finish()
+                this@WXPayEntryActivity.finishAfterTransition()
 
             }
             "-2" -> {
                 ToastUtil.show("用户取消支付")
-                this@WXPayEntryActivity.finish()
+                this@WXPayEntryActivity.finishAfterTransition()
             }
         }
     }
