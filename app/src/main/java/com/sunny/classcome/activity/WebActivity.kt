@@ -17,6 +17,7 @@ class WebActivity : BaseActivity() {
     override fun initView() {
 
         showTitle(titleManager.defaultTitle(intent.getStringExtra("title")))
+
         webView.settings.javaScriptEnabled = true
         webView.settings.javaScriptCanOpenWindowsAutomatically = true
         webView.settings.allowFileAccess = true
