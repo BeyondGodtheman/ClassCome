@@ -17,6 +17,7 @@ import com.sunny.classcome.bean.ClassBean
 import com.sunny.classcome.bean.ClassChildType
 import com.sunny.classcome.http.ApiManager
 import com.sunny.classcome.http.Constant
+import com.sunny.classcome.utils.UserManger
 import kotlinx.android.synthetic.main.activity_class_list.*
 import org.json.JSONArray
 
@@ -209,7 +210,7 @@ class ClassListActivity : BaseActivity() {
 
 
         val params = HashMap<String, Any>()
-//        params["cityId"] = UserManger.getAddress().split(",")[0]
+        params["cityId"] = UserManger.getAddress().split(",")[0]
         if (sortStr.isNotEmpty()){
             params[sortStr] = if (!sortFlag) "1" else "0"
         }
