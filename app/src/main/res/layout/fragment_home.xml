@@ -1,26 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.scwang.smartrefresh.layout.SmartRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/refresh"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v4.widget.NestedScrollView
+    <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/app_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:orientation="vertical">
+            android:backgroundTint="@color/color_transparent"
+            android:elevation="0dp"
+            app:elevation="0dp"
+            app:layout_behavior="com.sunny.classcome.utils.CustomBehavior">
 
-            <com.sunny.classcome.widget.banner.BannerView
-                android:id="@+id/rl_banner"
+            <android.support.design.widget.CollapsingToolbarLayout
                 android:layout_width="match_parent"
-                android:layout_height="374pt" />
+                android:layout_height="wrap_content"
+                android:minHeight="?actionBarSize"
+                app:layout_scrollFlags="scroll">
 
-            <include layout="@layout/layout_home_type" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <com.sunny.classcome.widget.banner.BannerView
+                        android:id="@+id/rl_banner"
+                        android:layout_width="match_parent"
+                        android:layout_height="374pt" />
+
+                    <include layout="@layout/layout_home_type" />
+
+                </LinearLayout>
+            </android.support.design.widget.CollapsingToolbarLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -44,11 +61,193 @@
                     android:outAnimation="@anim/anim_translate_out" />
             </LinearLayout>
 
-            <include
-                layout="@layout/home_class_list"
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="10pt" />
-        </LinearLayout>
-    </android.support.v4.widget.NestedScrollView>
+                android:layout_height="86pt"
+                android:layout_marginTop="10pt"
+                android:background="@color/color_white">
+
+                <LinearLayout
+                    android:id="@+id/ll_location"
+                    android:layout_width="0pt"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/ClassListNavText"
+                        android:layout_marginStart="47pt"
+                        android:text="@string/place" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12pt"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/img_local_top"
+                            android:layout_width="19pt"
+                            android:layout_height="9pt"
+                            android:scaleType="fitXY"
+                            android:src="@mipmap/ic_arrow_top_gray" />
+
+                        <ImageView
+                            android:id="@+id/img_local_bottom"
+                            android:layout_width="19pt"
+                            android:layout_height="9pt"
+                            android:layout_marginTop="4pt"
+                            android:scaleType="fitXY"
+                            android:src="@mipmap/ic_arrow_bottom_gray" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="2pt"
+                    android:layout_height="34pt"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/color_divider" />
+
+                <LinearLayout
+                    android:id="@+id/ll_hot"
+                    android:layout_width="0pt"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/ClassListNavText"
+                        android:layout_marginStart="45pt"
+                        android:text="@string/heat" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12pt"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/img_hot_top"
+                            android:layout_width="19pt"
+                            android:layout_height="9pt"
+                            android:scaleType="fitXY"
+                            android:src="@mipmap/ic_arrow_top_gray" />
+
+                        <ImageView
+                            android:id="@+id/img_hot_bottom"
+                            android:layout_width="19pt"
+                            android:layout_height="9pt"
+                            android:layout_marginTop="4pt"
+                            android:scaleType="fitXY"
+                            android:src="@mipmap/ic_arrow_bottom_gray" />
+                    </LinearLayout>
+                </LinearLayout>
+
+
+                <View
+                    android:layout_width="2pt"
+                    android:layout_height="34pt"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/color_divider" />
+
+                <LinearLayout
+                    android:id="@+id/ll_price"
+                    android:layout_width="0pt"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/ClassListNavText"
+                        android:layout_marginStart="48pt"
+                        android:text="@string/price" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12pt"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/img_price_top"
+                            android:layout_width="19pt"
+                            android:layout_height="9pt"
+                            android:scaleType="fitXY"
+                            android:src="@mipmap/ic_arrow_top_gray" />
+
+                        <ImageView
+                            android:id="@+id/img_price_bottom"
+                            android:layout_width="19pt"
+                            android:layout_height="9pt"
+                            android:layout_marginTop="4pt"
+                            android:scaleType="fitXY"
+                            android:src="@mipmap/ic_arrow_bottom_gray" />
+                    </LinearLayout>
+                </LinearLayout>
+
+
+                <View
+                    android:layout_width="2pt"
+                    android:layout_height="34pt"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/color_divider" />
+
+                <LinearLayout
+                    android:id="@+id/ll_time"
+                    android:layout_width="0pt"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/ClassListNavText"
+                        android:layout_marginStart="24pt"
+                        android:text="@string/class_time" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12pt"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/img_time_top"
+                            android:layout_width="19pt"
+                            android:layout_height="9pt"
+                            android:scaleType="fitXY"
+                            android:src="@mipmap/ic_arrow_top_gray" />
+
+                        <ImageView
+                            android:id="@+id/img_time_bottom"
+                            android:layout_width="19pt"
+                            android:layout_height="9pt"
+                            android:layout_marginTop="4pt"
+                            android:scaleType="fitXY"
+                            android:src="@mipmap/ic_arrow_bottom_gray" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2pt"
+                android:background="@color/color_divider" />
+        </android.support.design.widget.AppBarLayout>
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recl"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </android.support.v4.widget.NestedScrollView>
+    </android.support.design.widget.CoordinatorLayout>
 </com.scwang.smartrefresh.layout.SmartRefreshLayout>

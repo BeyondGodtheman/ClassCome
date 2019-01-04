@@ -50,7 +50,8 @@
     <View
         style="@style/style_view_line"
         android:layout_height="98pt"
-        android:background="@color/color_white" />
+        android:background="@color/color_white"
+        android:visibility="gone"/>
 
     <View style="@style/style_view_divider" />
 

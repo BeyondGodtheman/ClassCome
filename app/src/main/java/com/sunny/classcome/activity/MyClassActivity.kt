@@ -17,7 +17,7 @@ class MyClassActivity : BaseActivity() {
     private var type = 1
 
     //发布类型 1: 家教,2:代课,3:活动,4:场地,5:培训
-    var courseType = "1"
+    var courseType = "5"
 
     //课程状态(《待支付|已中标4》《进行中|待结算5》《完成6》《全部7》 )
     private val tabTitles = arrayListOf<String>()
@@ -26,14 +26,14 @@ class MyClassActivity : BaseActivity() {
 
     override fun setLayout(): Int = R.layout.activity_my_class
 
-    private var typeName = "家教"
+    private var typeName = "培训"
 
     private lateinit var titleView: View
 
     override fun initView() {
 
         type = intent.getIntExtra("type", 1)
-        courseType = intent.getStringExtra("courseType")?:"1"
+        courseType = intent.getStringExtra("courseType")?:"5"
 
         val title = if (type == 1) {
             tabTitles.add("全部")
@@ -108,11 +108,11 @@ class MyClassActivity : BaseActivity() {
 
     private fun getTitleName(){
         typeName = when (courseType) {
-            "1" -> "家教"
-            "2" -> "代课"
-            "3" -> "活动"
-            "4" -> "场地"
             "5" -> "培训"
+            "4" -> "场地"
+            "2" -> "代课"
+            "1" -> "家教"
+            "3" -> "活动"
             else -> ""
         }
     }

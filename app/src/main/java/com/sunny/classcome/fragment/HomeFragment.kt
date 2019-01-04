@@ -2,10 +2,12 @@ package com.sunny.classcome.fragment
 
 import android.content.Intent
 import android.support.v4.content.ContextCompat
+import android.support.v4.view.ViewCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.text.TextUtils
 import android.util.TypedValue
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.animation.LinearInterpolator
 import android.widget.ImageView
@@ -29,7 +31,6 @@ import com.sunny.classcome.utils.LocationUtil
 import com.sunny.classcome.utils.ShowMessage
 import com.sunny.classcome.utils.UserManger
 import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.android.synthetic.main.home_class_list.*
 import kotlinx.android.synthetic.main.layout_home_recommend_text.view.*
 import kotlinx.android.synthetic.main.layout_home_title.view.*
 import kotlinx.android.synthetic.main.layout_home_type.*
@@ -40,7 +41,7 @@ import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 
-class HomeFragment : BaseFragment() {
+class HomeFragment : BaseFragment(){
 
     private var isShowLocal = false
     private var localStr = listOf<String>()
@@ -110,6 +111,7 @@ class HomeFragment : BaseFragment() {
 
         recl.layoutManager = LinearLayoutManager(context)
         recl.isNestedScrollingEnabled = false
+        recl.setHasFixedSize(true)
         recl.adapter = ClassListAdapter(dataList)
 
 
@@ -134,7 +136,6 @@ class HomeFragment : BaseFragment() {
                 loadClass(false)
             }
         })
-
 
         locationUtil.startLocation()
         loadBanner()

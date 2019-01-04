@@ -22,7 +22,7 @@ import org.json.JSONArray
 
 
 class ClassListActivity : BaseActivity() {
-    private var sortIndex = 0
+    private var sortIndex = -1
     private var pageIndex = 1
     private var sortFlag = false
 
@@ -144,8 +144,8 @@ class ClassListActivity : BaseActivity() {
     private fun sort(mSortIndex: Int) {
 
         pageIndex = 1
-        bottomArrowList[sortIndex].setImageResource(R.mipmap.ic_arrow_bottom_gray)
-        topArrowList[sortIndex].setImageResource(R.mipmap.ic_arrow_top_gray)
+        bottomArrowList[mSortIndex].setImageResource(R.mipmap.ic_arrow_bottom_gray)
+        topArrowList[mSortIndex].setImageResource(R.mipmap.ic_arrow_top_gray)
         if (mSortIndex != sortIndex) {
             sortFlag = false
         }
@@ -173,17 +173,17 @@ class ClassListActivity : BaseActivity() {
             override fun onSuccess(data: ClassChildType) {
                 tabLayout.removeAllTabs()
                 data.content?.forEach {
-                    tabLayout.addTab(tabLayout.newTab().setText(it.name).setTag(it.id))
+                    tabLayout.addTab(tabLayout.newTab().setText(it.name).setTag(it.id),false)
                 }
-                data.content?.let {
-                    if (it.isNotEmpty()){
-                        category = it.first().id
-                    }
-                }
+//                data.content?.let {
+//                    if (it.isNotEmpty()){
+//                        category = it.first().id
+//                    }
+//                }
 
 
                 //加载课程数据
-                sort(0)
+                loadClass()
             }
 
             override fun onFailed(code: String, message: String) {
@@ -199,13 +199,17 @@ class ClassListActivity : BaseActivity() {
             0 -> "sortAdress"
             1 -> "sortPopularity"
             2 -> "sortPrice"
-            else -> "sortTime"
+            4 -> "sortTime"
+            else -> ""
         }
 
 
         val params = HashMap<String, Any>()
 //        params["cityId"] = UserManger.getAddress().split(",")[0]
-        params[sortStr] = if (!sortFlag) "1" else "0"
+        if (sortStr.isNotEmpty()){
+            params[sortStr] = if (!sortFlag) "1" else "0"
+        }
+
         if (category.isNotEmpty()){
             val categoryArray = JSONArray()
             categoryArray.put(category)
