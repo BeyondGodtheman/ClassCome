@@ -22,11 +22,11 @@ abstract class BaseActivity : AppCompatActivity(), IBaseView, View.OnClickListen
         CompositeDisposable()
     }
 
-    val loadingView: View by lazy {
+    private val loadingView: View by lazy {
         View.inflate(this, R.layout.layout_loading, null)
     }
 
-    val errorView: View by lazy {
+    private val errorView: View by lazy {
         View.inflate(this, R.layout.layout_error, null)
     }
 

@@ -26,7 +26,7 @@ class TranTypeActivity : BaseActivity() {
             finish()
         })
 
-        titleView.ll_back.setOnClickListener {
+        titleView.ll_base_back.setOnClickListener {
             finish()
         }
 

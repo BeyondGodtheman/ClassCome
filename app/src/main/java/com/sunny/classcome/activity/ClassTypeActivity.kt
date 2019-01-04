@@ -48,7 +48,7 @@ class ClassTypeActivity : BaseActivity() {
             finish()
         })
 
-        titleView.ll_back.setOnClickListener {
+        titleView.ll_base_back.setOnClickListener {
             val intent = Intent()
             intent.putExtra("classPid", this@ClassTypeActivity.intent.getStringExtra("classPid"))
             intent.putExtra("classPName", this@ClassTypeActivity.intent.getStringExtra("classPName"))

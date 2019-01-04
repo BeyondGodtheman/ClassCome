@@ -105,8 +105,7 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
 
         <!--首页-->
-        <activity
-            android:name=".activity.SplashActivity">
+        <activity android:name=".activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -188,9 +187,7 @@
 
         <activity android:name=".activity.BindPhoneActivity" />
 
-        <activity
-            android:name=".activity.WebActivity"
-            android:launchMode="singleTask" />
+        <activity android:name=".activity.WebActivity" />
 
         <!--关于-->
         <activity android:name=".activity.AboutActivity" />
