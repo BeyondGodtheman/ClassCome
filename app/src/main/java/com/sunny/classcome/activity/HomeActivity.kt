@@ -205,6 +205,10 @@ class HomeActivity : BaseActivity() {
     }
 
     override fun update() {
+        if (!UserManger.isLogin()){
+            EventBus.getDefault().post(HideMessage())
+            return
+        }
         val params = HashMap<String, String>()
         params["pageIndex"] = "1"
         ApiManager.post(composites, params, Constant.COURSE_GETMESSAGELIST, object : ApiManager.OnResult<MsgBean>() {

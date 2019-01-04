@@ -78,7 +78,9 @@ class PastReleaseActivity: BaseActivity() {
                 }
 
                 data.content?.dataList?.filter { it.course.userId == uid}?.let {
-                    list.addAll(it)
+                    if (!list.containsAll(it)){
+                        list.addAll(it)
+                    }
                 }
 
                 recl.adapter?.notifyDataSetChanged()

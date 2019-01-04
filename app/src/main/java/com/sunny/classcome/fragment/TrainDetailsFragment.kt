@@ -27,7 +27,6 @@ class TrainDetailsFragment : FieldDetailsFragment() {
     override fun initView() {
         super.initView()
 
-        layout_pin.visibility = View.VISIBLE
         txt_long_desc.text = "培训时长"
         txt_time_desc.text = "培训时间"
 
@@ -66,7 +65,11 @@ class TrainDetailsFragment : FieldDetailsFragment() {
                             null,bean.content.resCourseVO.isAppraise), list)
                 }
             }
-            txt_pin.text = ("${number}人在拼团")
+
+            if (number > 0){
+                layout_pin.visibility = View.VISIBLE
+                txt_pin.text = ("${number}人在拼团")
+            }
 
             txt_brief.text = bean?.content?.resCourseVO?.description?:""
         }
