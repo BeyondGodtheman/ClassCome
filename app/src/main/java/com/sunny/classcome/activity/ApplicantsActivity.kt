@@ -62,6 +62,7 @@ class ApplicantsActivity : BaseActivity() {
             }
         })
 
+        showLoading()
     }
 
     override fun onClick(v: View?) {
@@ -72,7 +73,6 @@ class ApplicantsActivity : BaseActivity() {
         val params = hashMapOf<String, String>()
         params["pageIndex"] = pageIndex.toString()
         params["courseId"] = courseId
-        showLoading()
         ApiManager.post(composites, params, Constant.ORDER_GETAPPLICANTLIST, object : ApiManager.OnResult<ApplicantsBean>() {
             override fun onSuccess(data: ApplicantsBean) {
                 hideLoading()
