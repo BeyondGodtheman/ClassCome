@@ -32,13 +32,15 @@
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/xg_network_security_config"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning"
-        tools:replace="android:allowBackup"
-        android:networkSecurityConfig="@xml/xg_network_security_config">
+        tools:replace="android:allowBackup">
 
-        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
 
         <!--适配尺寸-->
         <meta-data
@@ -67,12 +69,12 @@
         <!-- 【必须】 通知service，此选项有助于提高抵达率 -->
         <receiver
             android:name="com.tencent.android.tpush.XGPushReceiver"
-            android:process=":xg_service_v4" >
-            <intent-filter android:priority="0x7fffffff" >
+            android:process=":xg_service_v4">
+            <intent-filter android:priority="0x7fffffff">
 
                 <!-- 【必须】 信鸽SDK的内部广播 -->
                 <action android:name="com.tencent.android.tpush.action.SDK" />
-                <action android:name="com.tencent.android.tpush.action.INTERNAL_PUSH_MESSAGE"/>
+                <action android:name="com.tencent.android.tpush.action.INTERNAL_PUSH_MESSAGE" />
                 <!-- 【必须】 系统广播：网络切换 -->
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
 
@@ -85,7 +87,7 @@
                 <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
             </intent-filter>
             <!-- 【可选】 usb相关的系统广播，增强信鸽service的复活机会，请根据需要添加 -->
-            <intent-filter android:priority="0x7fffffff" >
+            <intent-filter android:priority="0x7fffffff">
                 <action android:name="android.intent.action.MEDIA_UNMOUNTED" />
                 <action android:name="android.intent.action.MEDIA_REMOVED" />
                 <action android:name="android.intent.action.MEDIA_CHECKING" />
@@ -96,15 +98,15 @@
         </receiver>
 
 
-
         <activity
             android:name=".wxapi.WXEntryActivity"
             android:exported="true"
-            android:launchMode="singleTop"
+
             android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
 
         <!--首页-->
-        <activity android:name=".activity.SplashActivity">
+        <activity
+            android:name=".activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -112,14 +114,10 @@
         </activity>
 
         <!--注册页面-->
-        <activity
-            android:name=".activity.RegisterActivity"
-            android:launchMode="singleTop" />
+        <activity android:name=".activity.RegisterActivity" />
 
         <!--注册成功页面-->
-        <activity
-            android:name=".activity.RegSuccessActivity"
-            android:launchMode="singleTop" />
+        <activity android:name=".activity.RegSuccessActivity" />
 
         <!--登录页面-->
         <activity
@@ -127,9 +125,7 @@
             android:launchMode="singleTask" />
 
         <!--我的消息-->
-        <activity
-            android:name=".activity.MyMsgActivity"
-            android:launchMode="singleTop" />
+        <activity android:name=".activity.MyMsgActivity" />
 
         <activity
             android:name=".activity.HomeActivity"
@@ -188,82 +184,52 @@
         <activity android:name=".activity.LocationActivity" />
 
         <!--找回密码-->
-        <activity
-            android:name=".activity.ForgetPassActivity"
-            android:launchMode="singleTop" />
+        <activity android:name=".activity.ForgetPassActivity" />
 
-        <activity
-            android:name=".activity.BindPhoneActivity"
-            android:launchMode="singleTop" />
+        <activity android:name=".activity.BindPhoneActivity" />
 
         <activity
             android:name=".activity.WebActivity"
             android:launchMode="singleTask" />
 
         <!--关于-->
-        <activity
-            android:name=".activity.AboutActivity"
-            android:launchMode="singleTop" />
+        <activity android:name=".activity.AboutActivity" />
 
         <!--等级-->
-        <activity
-            android:name=".activity.LevelActivity"
-            android:launchMode="singleTop" />
+        <activity android:name=".activity.LevelActivity" />
 
         <!--等级说明-->
-        <activity
-            android:name=".activity.LevelDescActivity"
-            android:launchMode="singleTop" />
+        <activity android:name=".activity.LevelDescActivity" />
 
         <!--通用list页面-->
-        <activity
-            android:name=".activity.ListActivity"
-            android:launchMode="singleTop" />
+        <activity android:name=".activity.ListActivity" />
 
         <!--个人身份验证-->
-        <activity
-            android:name=".activity.PersonAuthActivity"
-            android:launchMode="singleTop" />
+        <activity android:name=".activity.PersonAuthActivity" />
 
         <!--我的发布/参与-->
-        <activity
-            android:name=".activity.MyClassActivity"
-            android:launchMode="singleTop" />
+        <activity android:name=".activity.MyClassActivity" />
 
         <!--邀请页面-->
-        <activity
-            android:name=".activity.InviteActivity"
-            android:launchMode="singleTop" />
+        <activity android:name=".activity.InviteActivity" />
 
         <!--邀请者-->
-        <activity
-            android:name=".activity.ApplicantsActivity"
-            android:launchMode="singleTop" />
+        <activity android:name=".activity.ApplicantsActivity" />
 
         <!--邀约记录-->
-        <activity
-            android:name=".activity.InvitationRecordActivity"
-            android:launchMode="singleTop" />
+        <activity android:name=".activity.InvitationRecordActivity" />
 
         <!--购买者-->
-        <activity
-            android:name=".activity.BuyActivity"
-            android:launchMode="singleTop" />
+        <activity android:name=".activity.BuyActivity" />
 
         <!--过往发布信息-->
-        <activity
-            android:name=".activity.PastReleaseActivity"
-            android:launchMode="singleTop" />
+        <activity android:name=".activity.PastReleaseActivity" />
 
         <!--公司简介-->
-        <activity
-            android:name=".activity.CompanyProfileActivity"
-            android:launchMode="singleTop" />
+        <activity android:name=".activity.CompanyProfileActivity" />
 
         <!--公司简历编辑-->
-        <activity
-            android:name=".activity.CompanyProfileEditActivity"
-            android:launchMode="singleTop" />
+        <activity android:name=".activity.CompanyProfileEditActivity" />
 
         <!--地址选择-->
         <activity android:name=".activity.AddressActivity" />
@@ -295,11 +261,13 @@
         <activity android:name=".activity.TranTypeActivity" />
 
         <!--搜索结果页面-->
-        <activity
-            android:name=".activity.SearchResultActivity"
-            android:launchMode="singleTop" />
+        <activity android:name=".activity.SearchResultActivity" />
 
-        <activity android:name=".activity.CommentActivity"
-            android:launchMode="singleTop"/>
+        <activity android:name=".activity.CommentActivity" />
+
+        <!--引导页面-->
+        <activity
+            android:name=".activity.GuideActivity"
+            android:theme="@style/GuideTheme" />
     </application>
 </manifest>

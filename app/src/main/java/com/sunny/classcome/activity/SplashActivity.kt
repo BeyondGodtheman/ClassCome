@@ -7,7 +7,9 @@ import android.view.View
 import com.sunny.classcome.R
 import com.sunny.classcome.base.BaseActivity
 import com.sunny.classcome.utils.PermissionUtil
+import com.sunny.classcome.utils.SharedUtil
 import com.sunny.classcome.widget.dialog.MyDialog
+import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.delay
 import kotlinx.coroutines.experimental.launch
 
@@ -79,9 +81,16 @@ class SplashActivity : BaseActivity() {
     }
 
     private fun startHome() {
-        launch {
+        launch(UI) {
             delay(1000)
-            startActivity(Intent(this@SplashActivity, HomeActivity::class.java))
+            SharedUtil.getBoolean("initFlag",false).let {
+                if (!it){
+                    SharedUtil.setBoolean("initFlag",true)
+                    startActivity(Intent(this@SplashActivity,GuideActivity::class.java))
+                }else{
+                    startActivity(Intent(this@SplashActivity,HomeActivity::class.java))
+                }
+            }
             finish()
         }
     }
