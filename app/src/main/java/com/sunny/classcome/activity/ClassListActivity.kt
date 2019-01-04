@@ -165,12 +165,14 @@ class ClassListActivity : BaseActivity() {
 
 
     private fun loadNav() {
+        showLoading()
         val params = HashMap<String, String>()
         if (courseType == "4" || courseType == "5"){
             params["pId"] = pId
         }
         ApiManager.post(composites, params, Constant.COURSE_GETCATEGORY, object : ApiManager.OnResult<ClassChildType>() {
             override fun onSuccess(data: ClassChildType) {
+                hideLoading()
                 tabLayout.removeAllTabs()
                 data.content?.forEach {
                     tabLayout.addTab(tabLayout.newTab().setText(it.name).setTag(it.id),false)
@@ -183,10 +185,12 @@ class ClassListActivity : BaseActivity() {
 
 
                 //加载课程数据
+                showLoading()
                 loadClass()
             }
 
             override fun onFailed(code: String, message: String) {
+                hideLoading()
             }
         })
 

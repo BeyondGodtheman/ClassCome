@@ -69,7 +69,7 @@ class MineFragment : BaseFragment() {
                                     ?: "")
                             txt_user_name.text = it.data?.userName
                             txt_user_address.text = it.data?.address
-                            txt_points.text = StringUtil.formatMoney((it.data?.source?:"0").toDouble())
+                            txt_points.text = (StringUtil.formatMoney((it.data?.source?:"0").toDouble())+"积分")
                             txt_member.text = it.data?.gradeName
                         }
                     }

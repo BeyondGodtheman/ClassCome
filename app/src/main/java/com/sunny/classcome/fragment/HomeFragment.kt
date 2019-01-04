@@ -2,12 +2,10 @@ package com.sunny.classcome.fragment
 
 import android.content.Intent
 import android.support.v4.content.ContextCompat
-import android.support.v4.view.ViewCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.text.TextUtils
 import android.util.TypedValue
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.animation.LinearInterpolator
 import android.widget.ImageView
@@ -136,7 +134,7 @@ class HomeFragment : BaseFragment(){
                 loadClass(false)
             }
         })
-
+        showLoading()
         locationUtil.startLocation()
         loadBanner()
     }

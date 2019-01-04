@@ -14,6 +14,7 @@ import com.sunny.classcome.http.ApiManager
 import com.sunny.classcome.http.Constant
 import com.sunny.classcome.utils.*
 import kotlinx.android.synthetic.main.activity_order_detail.*
+import kotlinx.android.synthetic.main.fragment_base.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
@@ -428,6 +429,13 @@ class OrderDetailActivity : BaseActivity() {
         val type = intent.getIntExtra("type", 1)
         if (type == 2 || type == 3) {
             classBean = MyApplication.getApp().getData<ClassBean.Bean.Data>(Constant.COURSE, false)
+
+            if(classBean?.course?.coursetype == "4"){
+                txt_type.text = "场地"
+            }else{
+                txt_type.text = "培训"
+            }
+
             if (isAuthor) {
                 when (classBean?.course?.state) {
                     "2" -> if (type == 2) showPurchaser() else writeOff()  //已支付
@@ -550,6 +558,13 @@ class OrderDetailActivity : BaseActivity() {
                                 GlideUtil.loadPhoto(this@OrderDetailActivity, img_class, it[0].url
                                         ?: "")
                             }
+                        }
+
+                        when (classBean?.course?.coursetype) {
+                            "1" -> txt_type.text = "家教"
+                            "2" -> txt_type.text = "代课"
+                            "3" -> txt_type.text = "活动"
+
                         }
 
                     }
