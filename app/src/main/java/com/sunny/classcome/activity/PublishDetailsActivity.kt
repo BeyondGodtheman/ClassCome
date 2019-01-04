@@ -324,12 +324,13 @@ class PublishDetailsActivity : BaseActivity() {
             ToastUtil.show("请不要重复操作")
             return
         }
-
+        showLoading()
         val params = HashMap<String, String>()
         params["courseId"] = courseId
         params["relationType"] = relationType.toString()
         ApiManager.post(composites, params, Constant.COURSE_OPERATIONCOURSE, object : ApiManager.OnResult<BaseBean<String>>() {
             override fun onSuccess(data: BaseBean<String>) {
+                hideLoading()
                 ToastUtil.show(data.content?.info)
                 if (data.content?.statu == "1") {// 成功
                     when (relationType) {
@@ -344,6 +345,7 @@ class PublishDetailsActivity : BaseActivity() {
                         2 -> {
                             txt_accept.text = "已应聘"
                             isAppointment = "1"
+                            ApplicationSuccessActivity.start(this@PublishDetailsActivity,courseId)
                         }
                     }
 
@@ -351,6 +353,7 @@ class PublishDetailsActivity : BaseActivity() {
             }
 
             override fun onFailed(code: String, message: String) {
+                hideLoading()
             }
 
         })

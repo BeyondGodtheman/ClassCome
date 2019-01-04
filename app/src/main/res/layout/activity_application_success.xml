@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/color_white">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="130pt"
+        android:layout_marginTop="178pt">
+        
+        <View
+            android:layout_width="42pt"
+            android:layout_height="42pt"
+            android:background="@drawable/ic_complet"
+            android:layout_gravity="center_vertical"/>
+        
+        <TextView
+            style="@style/style_font_default_36pt"
+            android:textStyle="bold"
+            android:text="应聘成功"
+            android:layout_marginStart="26pt"/>
+    </LinearLayout>
+
+    <TextView
+        style="@style/style_font_default_30pt"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16pt"
+        android:text="@string/application_success_desc"
+        android:layout_marginStart="20pt"/>
+
+    <Button
+        android:id="@+id/btn_home"
+        style="@style/style_button"
+        android:text="查看订单"
+        android:layout_marginTop="190pt"/>
+
+    <Button
+        android:id="@+id/btn_my"
+        style="@style/style_btn_border_blue"
+        android:text="继续找课"
+        android:layout_marginTop="40pt"/>
+</LinearLayout>
