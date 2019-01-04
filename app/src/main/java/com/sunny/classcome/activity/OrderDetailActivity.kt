@@ -14,7 +14,6 @@ import com.sunny.classcome.http.ApiManager
 import com.sunny.classcome.http.Constant
 import com.sunny.classcome.utils.*
 import kotlinx.android.synthetic.main.activity_order_detail.*
-import kotlinx.android.synthetic.main.fragment_base.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
@@ -351,8 +350,8 @@ class OrderDetailActivity : BaseActivity() {
     }
 
     private fun cancleClass() {
-        txt_info.text = "已取消"
-        txt_prompt.text = "发布者取消"
+        txt_info.text = "订单已取消"
+//        txt_prompt.text = "发布者取消"
         txt_order_number.text = ("订单编号：${classBean?.course?.id}")
         txt_order_right.visibility = View.INVISIBLE
         txt_order_mid.visibility = View.INVISIBLE
@@ -454,6 +453,7 @@ class OrderDetailActivity : BaseActivity() {
                     }  //待支付
                     "2" -> {
                         if (classBean?.course?.state != "3") {
+                            classBean?.course?.stateInfo = "进行中"
                             showPaying()
                         } //进行中
                         else {
@@ -480,7 +480,11 @@ class OrderDetailActivity : BaseActivity() {
 
             }
 
+            if (classBean?.course?.state == "3"){
+                classBean?.course?.stateInfo = "已取消"
+            }
 
+            tv_status.text = classBean?.course?.stateInfo
             txt_date.text = DateUtil.dateFormatYYMMddHHssmm(classBean?.course?.createTime ?: "")
             txt_class.text = classBean?.course?.title
             classBean?.materialList?.let {
@@ -521,7 +525,12 @@ class OrderDetailActivity : BaseActivity() {
                             }
                         } else {
                             when (data.content?.order?.state) {
-                                "1" -> showOffShelf()
+                                "1" -> {
+                                    if (classBean?.course?.state != "3") {
+                                        classBean?.course?.stateInfo = "待支付"
+                                    }
+                                    showOffShelf()
+                                }
                                 "2" -> {
                                     if (data.content?.course?.state == "2") {
                                         showAudited2()
@@ -550,6 +559,11 @@ class OrderDetailActivity : BaseActivity() {
                             }
                         }
 
+                        if (data.content?.course?.state == "3"){
+                            classBean?.course?.stateInfo = "已取消"
+                        }
+
+                        tv_status.text = classBean?.course?.stateInfo
                         txt_date.text = DateUtil.dateFormatYYMMddHHssmm(classBean?.course?.createTime
                                 ?: "")
                         txt_class.text = classBean?.course?.title

@@ -1,6 +1,7 @@
 package com.sunny.classcome.adapter
 
 import android.content.Intent
+import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -70,8 +71,10 @@ class MyParticipatedAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleA
         }
 
         if (getData(position).course.state == "3"){
+            holder.itemView.txt_status.setTextColor(ContextCompat.getColor(context,R.color.color_default_font))
             holder.itemView.txt_status.text = "已取消"
         }else{
+            holder.itemView.txt_status.setTextColor(ContextCompat.getColor(context,R.color.color_price_red))
             if (getData(position).course.coursetype == "4" || getData(position).course.coursetype == "5"){
                 if(getData(position).order.state != "1" && getData(position).order.state != "2"){
                     holder.itemView.txt_status.text = getData(position).course.stateInfo
