@@ -22,10 +22,16 @@ class MyParticipatedAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleA
     override fun setLayout(parent: ViewGroup, viewType: Int): View = LayoutInflater.from(context).inflate(R.layout.item_my_class, parent, false)
 
     override fun onBindViewHolder(holder: BaseRecycleViewHolder, position: Int) {
-
+        holder.itemView.ll_user_info.visibility = View.VISIBLE
         holder.itemView.txt_left.visibility = View.GONE
         holder.itemView.txt_mid.visibility = View.GONE
         holder.itemView.txt_right.visibility = View.GONE
+
+
+        GlideUtil.loadHead(context, holder.itemView.img_user_head, getData(position).user?.userPic
+                ?: "")
+        holder.itemView.txt_user_name.text = getData(position).user?.userName ?: ""
+
 
         when (getData(position).order.state) {
             "1" -> {
@@ -75,7 +81,6 @@ class MyParticipatedAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleA
             }
         }
 
-
         getData(position).materialList?.let {
             if (it.isNotEmpty()) {
                 GlideUtil.loadPhoto(context, holder.itemView.img_class_photo, it[0].url ?: "")
@@ -105,6 +110,15 @@ class MyParticipatedAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleA
             holder.itemView.txt_date.text = timeSb
         }
 
+
+        holder.itemView.txt_type.text = when (getData(position).course.coursetype) {
+            "1" -> "家教"
+            "2" -> "代课"
+            "3" -> "活动"
+            "4" -> "场地"
+            "5" -> "培训"
+            else -> "未知"
+        }
 
         holder.itemView.setOnClickListener {
             if (getData(position).course.coursetype == "4" || getData(position).course.coursetype == "5") {

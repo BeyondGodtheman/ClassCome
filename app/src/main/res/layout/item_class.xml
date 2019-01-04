@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <ImageView
+        <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/img_class_photo"
             android:layout_width="230pt"
             android:layout_height="206pt"
@@ -21,6 +21,7 @@
             android:layout_marginEnd="23pt"
             android:contentDescription="@string/app"
             android:scaleType="fitXY"
+            app:riv_corner_radius="10pt"
             android:src="@drawable/bg_default_photo" />
 
         <TextView

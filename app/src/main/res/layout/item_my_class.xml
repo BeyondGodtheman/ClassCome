@@ -4,13 +4,46 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="380pt"
+    android:layout_marginBottom="15pt"
     android:background="@color/color_white"
-    android:orientation="vertical"
-    android:layout_marginBottom="15pt">
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="81pt">
+
+        <LinearLayout
+            android:id="@+id/ll_user_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:visibility="gone">
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/img_user_head"
+                android:layout_width="46pt"
+                android:layout_height="46pt"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="32pt"
+                android:scaleType="centerCrop"
+                app:riv_oval="true"
+                android:src="@mipmap/ic_default_head" />
+
+            <TextView
+                android:id="@+id/txt_user_name"
+                style="@style/style_font_gray_28pt"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="9pt"
+                android:text="@string/app" />
+
+            <View
+                android:layout_width="14pt"
+                android:layout_height="26pt"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="15pt"
+                android:background="@mipmap/ic_more" />
+        </LinearLayout>
+
 
         <View
             android:layout_width="match_parent"
@@ -39,7 +72,6 @@
             android:layout_width="200pt"
             android:layout_height="182pt"
             android:layout_marginStart="20pt"
-
             android:layout_marginEnd="20pt"
             android:scaleType="centerCrop"
             android:src="@drawable/bg_default_photo"
@@ -83,6 +115,20 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <View
+            android:layout_width="32pt"
+            android:layout_height="32pt"
+            android:background="@mipmap/ic_thumbtack_blue"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="41pt"/>
+
+        <TextView
+            android:id="@+id/txt_type"
+            style="@style/style_font_default_24pt"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="82pt"
+            android:text="@string/app"/>
+
         <!--进行中-->
         <LinearLayout
             android:id="@+id/ll_ing"
@@ -100,9 +146,9 @@
                 android:layout_height="58pt"
                 android:background="@drawable/draw_bg_fillet_gray_border"
                 android:gravity="center"
-                tools:text="@string/cancel_order"
+                android:textColor="@color/color_gray_font"
                 android:visibility="gone"
-                android:textColor="@color/color_gray_font" />
+                tools:text="@string/cancel_order" />
 
             <TextView
                 android:id="@+id/txt_mid"
@@ -112,9 +158,9 @@
                 android:layout_marginStart="16pt"
                 android:background="@drawable/draw_bg_fillet_blue_border"
                 android:gravity="center"
-                tools:text="@string/invite_users"
                 android:textColor="@color/color_nav_blue"
-                android:visibility="gone"/>
+                android:visibility="gone"
+                tools:text="@string/invite_users" />
 
             <TextView
                 android:id="@+id/txt_right"
@@ -124,9 +170,9 @@
                 android:layout_marginStart="16pt"
                 android:background="@drawable/draw_bg_fillet_blue_border"
                 android:gravity="center"
-                tools:text="@string/applicants"
                 android:textColor="@color/color_nav_blue"
-                android:visibility="gone"/>
+                android:visibility="gone"
+                tools:text="@string/applicants" />
         </LinearLayout>
 
     </RelativeLayout>

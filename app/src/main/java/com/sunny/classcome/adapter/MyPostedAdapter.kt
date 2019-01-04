@@ -23,7 +23,6 @@ class MyPostedAdapter(var baseActivity: BaseActivity, list: ArrayList<ClassBean.
     override fun setLayout(parent: ViewGroup, viewType: Int): View = LayoutInflater.from(context).inflate(R.layout.item_my_class, parent, false)
 
     override fun onBindViewHolder(holder: BaseRecycleViewHolder, position: Int) {
-
         holder.itemView.txt_left.visibility = View.GONE
         holder.itemView.txt_mid.visibility = View.GONE
         holder.itemView.txt_right.visibility = View.GONE
@@ -35,8 +34,8 @@ class MyPostedAdapter(var baseActivity: BaseActivity, list: ArrayList<ClassBean.
             }
             "2" -> {
                 if (getData(position).course.coursetype == "4" || getData(position).course.coursetype == "5") {
-                    cancelTrain(holder.itemView.txt_mid, getData(position).course.id)
-                    buy(holder.itemView.txt_right,position)
+                    cancelTrain(holder.itemView.txt_right, getData(position).course.id)
+                    buy(holder.itemView.txt_mid, position)
                 } else {
                     invite(holder.itemView.txt_left, getData(position).course.id)
                     applicants(holder.itemView.txt_mid, getData(position).course.id)
@@ -56,7 +55,7 @@ class MyPostedAdapter(var baseActivity: BaseActivity, list: ArrayList<ClassBean.
             "5" -> {
                 if (getData(position).course.coursetype == "4" || getData(position).course.coursetype == "5") {
                     cancelTrain(holder.itemView.txt_mid, getData(position).course.id)
-                    buy(holder.itemView.txt_right,position)
+                    buy(holder.itemView.txt_right, position)
                 } else {
                     cancelOrder(holder.itemView.txt_mid, getData(position).course.id)
                     if (getData(position).course.state == "5") {
@@ -66,13 +65,15 @@ class MyPostedAdapter(var baseActivity: BaseActivity, list: ArrayList<ClassBean.
             }
             "6" -> {
                 if (getData(position).course.state == "6") {
-                    comment(holder.itemView.txt_right,getData(position).course.id,getData(position).course.winningBidder?:"")
+                    comment(holder.itemView.txt_right, getData(position).course.id, getData(position).course.winningBidder
+                            ?: "")
                 }
                 refund(holder.itemView.txt_mid, getData(position).course.id)
             }
             "8" -> {
                 if (getData(position).course.state == "8") {
-                    comment(holder.itemView.txt_right,getData(position).course.id,getData(position).course.winningBidder?:"")
+                    comment(holder.itemView.txt_right, getData(position).course.id, getData(position).course.winningBidder
+                            ?: "")
                 }
                 cancelRefund(holder.itemView.txt_mid, getData(position).course.id)
             }
@@ -109,6 +110,14 @@ class MyPostedAdapter(var baseActivity: BaseActivity, list: ArrayList<ClassBean.
             holder.itemView.txt_date.text = timeSb.toString()
         }
 
+        holder.itemView.txt_type.text = when (getData(position).course.coursetype) {
+            "1" -> "家教"
+            "2" -> "代课"
+            "3" -> "活动"
+            "4" -> "场地"
+            "5" -> "培训"
+            else -> "未知"
+        }
 
         holder.itemView.setOnClickListener {
             if (getData(position).course.coursetype == "4" || getData(position).course.coursetype == "5") {
@@ -123,7 +132,7 @@ class MyPostedAdapter(var baseActivity: BaseActivity, list: ArrayList<ClassBean.
     //取消
     private fun cancelOrder(textView: TextView, id: String) {
         textView.apply {
-            showGrayBtn(this, "取消订单")
+            showGrayBtn(this, "取消发布")
             setOnClickListener {
                 CancelPromptActivity.start(context, 1, id)
             }
@@ -134,7 +143,7 @@ class MyPostedAdapter(var baseActivity: BaseActivity, list: ArrayList<ClassBean.
     //取消发布
     private fun cancelTrain(textView: TextView, id: String) {
         textView.apply {
-            showGrayBtn(this, "取消订单")
+            showGrayBtn(this, "取消发布")
             setOnClickListener {
                 CancelPromptActivity.start(context, 3, id)
             }
@@ -159,7 +168,7 @@ class MyPostedAdapter(var baseActivity: BaseActivity, list: ArrayList<ClassBean.
             setOnClickListener {
                 val params = hashMapOf<String, String>()
                 params["courseId"] = getData(position).course.id
-                params["useUserId"] = getData(position).course.winningBidder?:""
+                params["useUserId"] = getData(position).course.winningBidder ?: ""
                 ApiManager.post(baseActivity.composites, params, Constant.ORDER_ACCOUNTSORDER, object : ApiManager.OnResult<BaseBean<String>>() {
                     override fun onSuccess(data: BaseBean<String>) {
 
@@ -220,7 +229,7 @@ class MyPostedAdapter(var baseActivity: BaseActivity, list: ArrayList<ClassBean.
         textView.apply {
             showBlueBtn(this, "购买者")
             setOnClickListener {
-                BuyActivity.start(context, getData(position).course.id,getData(position))
+                BuyActivity.start(context, getData(position).course.id, getData(position))
             }
         }
     }
@@ -291,11 +300,11 @@ class MyPostedAdapter(var baseActivity: BaseActivity, list: ArrayList<ClassBean.
         }
     }
 
-    private fun comment(textView: TextView, courseId: String,userId:String) {
+    private fun comment(textView: TextView, courseId: String, userId: String) {
         textView.apply {
             showBlueBtn(this, "评价")
             setOnClickListener { _ ->
-                CommentActivity.start(context,courseId,userId)
+                CommentActivity.start(context, courseId, userId)
             }
         }
     }
