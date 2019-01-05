@@ -22,6 +22,7 @@
                 style="@style/style_font_default_32pt"
                 android:layout_marginStart="30pt"
                 android:layout_marginTop="13pt"
+                android:textColor="@color/color_nav_blue"
                 android:text="@string/train"/>
 
             <TextView
@@ -60,6 +61,7 @@
                 style="@style/style_font_default_32pt"
                 android:layout_marginStart="30pt"
                 android:layout_marginTop="13pt"
+                android:textColor="@color/color_nav_blue"
                 android:text="@string/field"/>
 
             <TextView
