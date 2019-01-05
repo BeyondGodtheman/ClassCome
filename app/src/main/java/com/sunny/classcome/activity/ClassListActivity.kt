@@ -3,9 +3,11 @@ package com.sunny.classcome.activity
 import android.content.Context
 import android.content.Intent
 import android.support.design.widget.TabLayout
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import com.scwang.smartrefresh.layout.api.RefreshLayout
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter
 import com.scwang.smartrefresh.layout.header.ClassicsHeader
@@ -43,6 +45,9 @@ class ClassListActivity : BaseActivity() {
         arrayListOf(img_local_bottom, img_hot_bottom, img_price_bottom, img_time_bottom)
     }
 
+    private val textSortList :ArrayList<TextView> by lazy {
+        arrayListOf(txt_sort_location,txt_sort_hot,txt_sort_price,txt_sort_time)
+    }
 
     override fun setLayout(): Int = R.layout.activity_class_list
 
@@ -143,15 +148,18 @@ class ClassListActivity : BaseActivity() {
     }
 
     private fun sort(mSortIndex: Int) {
-
         pageIndex = 1
-        bottomArrowList[mSortIndex].setImageResource(R.mipmap.ic_arrow_bottom_gray)
-        topArrowList[mSortIndex].setImageResource(R.mipmap.ic_arrow_top_gray)
-        if (mSortIndex != sortIndex) {
-            sortFlag = false
+
+        if (sortIndex != -1){
+            bottomArrowList[sortIndex].setImageResource(R.mipmap.ic_arrow_bottom_gray)
+            topArrowList[sortIndex].setImageResource(R.mipmap.ic_arrow_top_gray)
+            textSortList[sortIndex].setTextColor(ContextCompat.getColor(this,R.color.color_default_font))
+            if (mSortIndex != sortIndex) {
+                sortFlag = false
+            }
         }
         sortIndex = mSortIndex
-
+        textSortList[sortIndex].setTextColor(ContextCompat.getColor(this,R.color.color_nav_blue))
         sortFlag = if (sortFlag) {
             topArrowList[sortIndex].setImageResource(R.mipmap.ic_arrow_top_blue)
             false

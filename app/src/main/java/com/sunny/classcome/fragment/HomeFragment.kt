@@ -58,6 +58,10 @@ class HomeFragment : BaseFragment() {
         arrayListOf(img_local_bottom, img_hot_bottom, img_price_bottom, img_time_bottom)
     }
 
+    private val textSortList :ArrayList<TextView> by lazy {
+        arrayListOf(txt_sort_location,txt_sort_hot,txt_sort_price,txt_sort_time)
+    }
+
     private val locationUtil: LocationUtil by lazy {
         LocationUtil(requireContext()) {
             if (isShowLocal) {
@@ -264,10 +268,14 @@ class HomeFragment : BaseFragment() {
     private fun sort(mSortIndex: Int) {
         bottomArrowList[sortIndex].setImageResource(R.mipmap.ic_arrow_bottom_gray)
         topArrowList[sortIndex].setImageResource(R.mipmap.ic_arrow_top_gray)
+        textSortList[sortIndex].setTextColor(ContextCompat.getColor(requireContext(),R.color.color_default_font))
+
         if (mSortIndex != sortIndex) {
             sortFlag = false
         }
         sortIndex = mSortIndex
+
+        textSortList[sortIndex].setTextColor(ContextCompat.getColor(requireContext(),R.color.color_nav_blue))
 
         sortFlag = if (sortFlag) {
             topArrowList[sortIndex].setImageResource(R.mipmap.ic_arrow_top_blue)
