@@ -48,7 +48,7 @@ data class ClassBean(
                     var audit: String,
                     var category: String,
                     var description: String,
-                    var userId: String,
+                    var userId: String?,
                     var latitude: String?,
                     var longitude: String?,
                     var distance: String,

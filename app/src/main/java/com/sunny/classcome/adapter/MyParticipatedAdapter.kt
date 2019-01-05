@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.sunny.classcome.R
 import com.sunny.classcome.activity.CancelPromptActivity
+import com.sunny.classcome.activity.CommentActivity
 import com.sunny.classcome.activity.OrderDetailActivity
 import com.sunny.classcome.activity.PayActivity
 import com.sunny.classcome.base.BaseRecycleAdapter
@@ -67,6 +68,11 @@ class MyParticipatedAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleA
 //                if (getData(position).course.state == "5") {
 //                    cancel(holder.itemView.txt_right, position)
 //                }
+            }
+            "6" -> {
+                if (getData(position).course.coursetype !="4" && getData(position).course.coursetype !="5"){
+                    comment(holder.itemView.txt_right,getData(position).course.id, getData(position).course.userId?: "")
+                }
             }
         }
 
@@ -174,11 +180,11 @@ class MyParticipatedAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleA
         }
     }
 
-    private fun complete(textView: TextView) {
+    private fun comment(textView: TextView, courseId: String, userId: String) {
         textView.apply {
             showBlueBtn(this, "评价")
             setOnClickListener {
-
+                CommentActivity.start(context, courseId, userId)
             }
         }
     }

@@ -1,6 +1,7 @@
 package com.sunny.classcome.adapter
 
 import android.content.Intent
+import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,7 +27,7 @@ class MyPostedAdapter(var baseActivity: BaseActivity, list: ArrayList<ClassBean.
         holder.itemView.txt_left.visibility = View.GONE
         holder.itemView.txt_mid.visibility = View.GONE
         holder.itemView.txt_right.visibility = View.GONE
-
+        holder.itemView.txt_status.setTextColor(ContextCompat.getColor(context,R.color.color_price_red))
 
         when (getData(position).course.state) {
             "1" -> {
@@ -44,6 +45,7 @@ class MyPostedAdapter(var baseActivity: BaseActivity, list: ArrayList<ClassBean.
             }
             "3" -> {
 //                //订单取消
+                holder.itemView.txt_status.setTextColor(ContextCompat.getColor(context,R.color.color_default_font))
                 buy(holder.itemView.txt_mid, position)
                 publishAgain(holder.itemView.txt_left, position)
 

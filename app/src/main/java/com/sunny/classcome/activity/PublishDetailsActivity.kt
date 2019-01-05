@@ -100,7 +100,7 @@ class PublishDetailsActivity : BaseActivity() {
         coursetype = intent.getStringExtra("type")
 
         fragment = when (coursetype) {
-            "1","2","3" -> {
+            "1", "2", "3" -> {
                 title = "课程详情"
                 ll_class_desc.visibility = View.VISIBLE
                 courseDetailFragment
@@ -120,7 +120,7 @@ class PublishDetailsActivity : BaseActivity() {
         }
 
         val titleView = titleManager.iconTitle(title, View.OnClickListener {
-            share(classData?.course?.title?:"",classData?.course?.description?:"")
+            share(classData?.course?.title ?: "", classData?.course?.description ?: "")
         })
         titleView.view_icon_right.setBackgroundResource(R.drawable.ic_share)
 
@@ -180,13 +180,7 @@ class PublishDetailsActivity : BaseActivity() {
                 when (isAppointment) {
                     "1" -> ToastUtil.show("请不要重复操作")
                     "2" -> {
-                        if (coursetype == "4" || coursetype == "5") {
-                            classData?.let {
-                                PayActivity.start(this, it, "")
-                            }
-                        } else {
-                            loadOption(2)
-                        }
+                        loadOption(2)
                     }
                     "4" -> {
                         if (coursetype == "4" || coursetype == "5") {
@@ -198,7 +192,7 @@ class PublishDetailsActivity : BaseActivity() {
                         }
                     }
                     "5" -> {
-                        if (classDetailBean?.content?.resCourseVO?.state != "3"){
+                        if (classDetailBean?.content?.resCourseVO?.state != "3") {
                             pay()
                         }
                     }
@@ -232,8 +226,9 @@ class PublishDetailsActivity : BaseActivity() {
 
                 hideLoading()
                 initData(data.content)
-                txt_all.text = (data.content.resCourseVO.materialList?.size?:"0").toString()
-                initPhotoVideo(this@PublishDetailsActivity, viewPager, data.content.resCourseVO.materialList?: arrayListOf())
+                txt_all.text = (data.content.resCourseVO.materialList?.size ?: "0").toString()
+                initPhotoVideo(this@PublishDetailsActivity, viewPager, data.content.resCourseVO.materialList
+                        ?: arrayListOf())
 
                 uid = data.content.user.id
                 courseId = data.content.resCourseVO.course.id
@@ -271,10 +266,10 @@ class PublishDetailsActivity : BaseActivity() {
                     }
                     "4" -> "待支付"
                     "5" -> {
-                        if (classDetailBean?.content?.resCourseVO?.state == "3"){
+                        if (classDetailBean?.content?.resCourseVO?.state == "3") {
                             "已取消"
-                        }else
-                        "拼团待支付"
+                        } else
+                            "拼团待支付"
                     }
                     else -> ""
                 }
@@ -331,24 +326,31 @@ class PublishDetailsActivity : BaseActivity() {
         ApiManager.post(composites, params, Constant.COURSE_OPERATIONCOURSE, object : ApiManager.OnResult<BaseBean<String>>() {
             override fun onSuccess(data: BaseBean<String>) {
                 hideLoading()
-                ToastUtil.show(data.content?.info)
                 if (data.content?.statu == "1") {// 成功
-                    when (relationType) {
-                        -1 -> {
-                            txt_collection.text = "收藏"
-                            isCollection = "0"
+                    if (classData?.course?.coursetype == "4" || classData?.course?.coursetype == "5") {
+                        classData?.let {
+
+                            PayActivity.start(this@PublishDetailsActivity, it, "")
                         }
-                        1 -> {
-                            txt_collection.text = "已收藏"
-                            isCollection = "1"
-                        }
-                        2 -> {
-                            txt_accept.text = "已应聘"
-                            isAppointment = "1"
-                            ApplicationSuccessActivity.start(this@PublishDetailsActivity,courseId)
+                    } else {
+                        when (relationType) {
+                            -1 -> {
+                                txt_collection.text = "收藏"
+                                isCollection = "0"
+                            }
+                            1 -> {
+                                txt_collection.text = "已收藏"
+                                isCollection = "1"
+                            }
+                            2 -> {
+                                txt_accept.text = "已应聘"
+                                isAppointment = "1"
+                                ApplicationSuccessActivity.start(this@PublishDetailsActivity, courseId)
+                            }
                         }
                     }
-
+                }else{
+                    ToastUtil.show(data.content?.info)
                 }
             }
 
@@ -385,7 +387,7 @@ class PublishDetailsActivity : BaseActivity() {
     }
 
     private fun initData(bean: ClassDetailBean.Content) {
-        if ( bean.resCourseVO.materialList?.isNotEmpty() == true){
+        if (bean.resCourseVO.materialList?.isNotEmpty() == true) {
             GlideUtil.loadPhoto(this, img_class_photo, bean.resCourseVO.materialList!![0].url ?: "")
         }
 
@@ -408,13 +410,13 @@ class PublishDetailsActivity : BaseActivity() {
         EventBus.getDefault().unregister(this)
     }
 
-    private fun share(title:String,desc:String) {
+    private fun share(title: String, desc: String) {
         showLoading()
         ApiManager.post(composites, null, Constant.PUB_GETSHOWURL, object : ApiManager.OnResult<BaseBean<String>>() {
             override fun onSuccess(data: BaseBean<String>) {
                 hideLoading()
                 data.content?.data.let {
-                    WXEntryActivity.shareCourse(it ?: "",title,desc)
+                    WXEntryActivity.shareCourse(it ?: "", title, desc)
                 }
             }
 
