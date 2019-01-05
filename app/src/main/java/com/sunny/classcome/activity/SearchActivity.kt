@@ -5,16 +5,26 @@ import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.support.design.widget.TabLayout
+import android.support.v4.view.PagerAdapter
+import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.View
+import android.view.ViewGroup
+import android.widget.FrameLayout
+import android.widget.ImageView
 import com.sunny.classcome.R
+import com.sunny.classcome.adapter.SearchLabelAdapter
 import com.sunny.classcome.base.BaseActivity
+import com.sunny.classcome.bean.BaseBean
 import com.sunny.classcome.bean.ClassChildType
 import com.sunny.classcome.bean.ClassTypeBean
 import com.sunny.classcome.http.ApiManager
 import com.sunny.classcome.http.Constant
 import com.sunny.classcome.widget.popup.MoneyPopup
 import kotlinx.android.synthetic.main.activity_search.*
+import java.lang.StringBuilder
 import java.util.*
+import kotlin.collections.ArrayList
 
 class SearchActivity : BaseActivity() {
 
@@ -32,11 +42,25 @@ class SearchActivity : BaseActivity() {
 
     private var endPrice = ""
 
-    var subCategoryList = ArrayList<ClassTypeBean.SubCategory>()
+    private var subCategoryList = ArrayList<ClassTypeBean.SubCategory>()
 
-    var moneyList = arrayListOf(
+    private var classTypeBeanList = ArrayList<ClassTypeBean>()
+
+    private var bgList = arrayListOf(
+            R.drawable.bg_search_1,
+            R.drawable.bg_search_2,
+            R.drawable.bg_search_3,
+            R.drawable.bg_search_4,
+            R.drawable.bg_search_5,
+            R.drawable.bg_search_6
+    )
+
+    private var moneyList = arrayListOf(
             "无限制", "100元内", "100-200元", "200-500元", "500元以上"
     )
+
+    //选择条件
+    private val selectSet = HashSet<ClassTypeBean.SubCategory>()
 
     override fun setLayout(): Int = R.layout.activity_search
 
@@ -45,8 +69,16 @@ class SearchActivity : BaseActivity() {
         courseType = intent.getStringExtra("courseType") ?: ""
         pId = intent.getStringExtra("pId") ?: ""
 
+        showLoading()
+        if (courseType == "1" || courseType == "2" || courseType == "3") {
+            loadClass()
+        } else {
+            rl_top.layoutParams.height = resources.getDimension(R.dimen.pt220).toInt()
+            img_photo.scaleType = ImageView.ScaleType.CENTER_CROP
+            img_photo.setImageResource(R.drawable.bg_search_3)
+            loadOther()
+        }
 
-        loadNav()
         ll_icon_back.setOnClickListener(this)
         rl_title.setOnClickListener(this)
         txt_money.setOnClickListener(this)
@@ -59,13 +91,24 @@ class SearchActivity : BaseActivity() {
 
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabReselected(tab: TabLayout.Tab) {
-                category = subCategoryList[tab.position].id
+
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab) {
             }
 
             override fun onTabSelected(tab: TabLayout.Tab) {
+                if (courseType == "4" || courseType == "5") {
+                    category = subCategoryList[tab.position].id
+                } else {
+                    val index = when (tab.position) {
+                        0, 1, 2, 3 -> tab.position
+                        4, 5 -> 3
+                        6 -> 4
+                        else -> 5
+                    }
+                    img_photo.setImageResource(bgList[index])
+                }
             }
         })
 
@@ -131,7 +174,7 @@ class SearchActivity : BaseActivity() {
                 datePickerDialog.show()
             }
 
-            R.id.btn_search,R.id.txt_search -> {
+            R.id.btn_search, R.id.txt_search -> {
                 val startDate = if (txt_date.text.toString() == "无限制") "" else txt_date.text.toString()
                 val personType =
                         if (cbox_adult.isChecked && cbox_child.isChecked) {
@@ -142,18 +185,29 @@ class SearchActivity : BaseActivity() {
                             "2"
                         } else ""
 
-                SearchResultActivity.start(this,edit_keyword.text.toString(),courseType, category, startPrice, endPrice, cityId, countyId, townId, startDate, personType)
+                if (courseType == "1" || courseType == "2" || courseType == "3") {
+                    val categorySb = StringBuilder()
+                    selectSet.forEach {
+                        if (classTypeBeanList[tabLayout.selectedTabPosition].subCategoryList.contains(it)){
+                            categorySb.append(it.id).append(",")
+                        }
+                    }
+                    category = categorySb.toString()
+                }
+
+                SearchResultActivity.start(this, edit_keyword.text.toString(), courseType, category, startPrice, endPrice, cityId, countyId, townId, startDate, personType)
             }
 
         }
     }
 
 
-    private fun loadNav() {
+    private fun loadOther() {
         val params = HashMap<String, String>()
         params["pId"] = pId
         ApiManager.post(composites, params, Constant.COURSE_GETCATEGORY, object : ApiManager.OnResult<ClassChildType>() {
             override fun onSuccess(data: ClassChildType) {
+                hideLoading()
                 tabLayout.removeAllTabs()
                 subCategoryList.clear()
                 subCategoryList.addAll(data.content ?: arrayListOf())
@@ -169,11 +223,74 @@ class SearchActivity : BaseActivity() {
 
     }
 
+    private fun loadClass() {
+        ApiManager.post(composites, null, Constant.COURSE_GETCATEGORYALL, object : ApiManager.OnResult<BaseBean<ArrayList<ClassTypeBean>>>() {
+            override fun onSuccess(data: BaseBean<ArrayList<ClassTypeBean>>) {
+                hideLoading()
+                tabLayout.removeAllTabs()
+                subCategoryList.clear()
+                classTypeBeanList.clear()
+                data.content?.data?.forEach {
+                    classTypeBeanList.add(it)
+                    subCategoryList.add(ClassTypeBean.SubCategory(
+                            it.id, it.pId, it.name, it.sort
+                    ))
+                }
+
+                subCategoryList.forEach {
+                    tabLayout.addTab(tabLayout.newTab().setText(it.name).setTag(it.id))
+                }
+
+                initViewPager()
+
+            }
+
+            override fun onFailed(code: String, message: String) {
+                hideLoading()
+            }
+        })
+
+
+    }
+
+    fun initViewPager() {
+        viewPager.offscreenPageLimit = classTypeBeanList.size
+        viewPager.adapter = object : PagerAdapter() {
+            override fun isViewFromObject(view: View, `object`: Any): Boolean {
+                return view == `object`
+            }
+
+            override fun getCount(): Int = classTypeBeanList.size
+
+            override fun instantiateItem(container: ViewGroup, position: Int): Any {
+
+                val frameLayout = FrameLayout(this@SearchActivity)
+                val layoutParams = FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+                layoutParams.marginStart = resources.getDimension(R.dimen.pt15).toInt()
+                layoutParams.marginEnd = resources.getDimension(R.dimen.pt15).toInt()
+
+                val recyclerView = RecyclerView(this@SearchActivity)
+                recyclerView.layoutManager = GridLayoutManager(this@SearchActivity, 4)
+                recyclerView.adapter = SearchLabelAdapter(classTypeBeanList[position].subCategoryList, selectSet)
+                frameLayout.addView(recyclerView, layoutParams)
+                container.addView(frameLayout)
+                return frameLayout
+            }
+
+            override fun getPageTitle(position: Int): CharSequence? {
+                return classTypeBeanList[position].name
+            }
+        }
+
+        tabLayout.setupWithViewPager(viewPager)
+
+    }
+
     companion object {
-        fun start(context: Context, pId: String,courseType:String) {
+        fun start(context: Context, pId: String, courseType: String) {
             context.startActivity(Intent(context, SearchActivity::class.java)
                     .putExtra("pId", pId)
-                    .putExtra("courseType",courseType))
+                    .putExtra("courseType", courseType))
         }
     }
 

@@ -151,7 +151,14 @@ class SearchResultActivity : BaseActivity() {
 
         if (category.isNotEmpty()){
             val categoryArray = JSONArray()
-            categoryArray.put(category)
+            if (courseType == "4" || courseType == "5"){
+                categoryArray.put(category)
+            }else{
+                category.split(",").forEach {
+                    if (it.isNotEmpty())
+                    categoryArray.put(it)
+                }
+            }
             params["category"] = categoryArray
         }
 

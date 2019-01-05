@@ -10,10 +10,12 @@
     <dimen name="pt54">54pt</dimen>
     <dimen name="pt58">58pt</dimen>
     <dimen name="pt64">64pt</dimen>
+    <dimen name="pt220">220pt</dimen>
     <dimen name="pt325">325pt</dimen>
     <dimen name="pt375">375pt</dimen>
     <dimen name="pt390">390pt</dimen>
     <dimen name="pt500">500pt</dimen>
+    <dimen name="pt520">520pt</dimen>
     <dimen name="pt563">563pt</dimen>
     <dimen name="pt570">570pt</dimen>
     <dimen name="pt716">716pt</dimen>

@@ -11,5 +11,4 @@
     android:background="@drawable/draw_bg_fillet_gray_border"
     android:gravity="center"
     tools:text="瑜伽">
-
 </TextView>

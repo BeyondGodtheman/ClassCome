@@ -7,9 +7,16 @@
     android:orientation="vertical">
 
     <RelativeLayout
+        android:id="@+id/rl_top"
         android:layout_width="match_parent"
-        android:layout_height="220pt"
-        android:background="@mipmap/bg_top_search">
+        android:layout_height="520pt">
+
+        <ImageView
+            android:id="@+id/img_photo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@mipmap/bg_top_search"
+            android:scaleType="fitXY"/>
 
         <RelativeLayout
             android:id="@+id/rl_title"
@@ -52,13 +59,13 @@
                 <EditText
                     android:id="@+id/edit_keyword"
                     style="@style/style_font_default_28pt"
-                    android:layout_gravity="center_vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginEnd="42pt"
+                    android:layout_gravity="center_vertical"
                     android:layout_marginStart="17pt"
-                    android:hint="输入您想找的关键词"
+                    android:layout_marginEnd="42pt"
                     android:background="@color/color_transparent"
+                    android:hint="输入您想找的关键词"
                     android:lines="1"
                     android:textColor="@color/color_white" />
 
@@ -87,6 +94,12 @@
             app:tabSelectedTextColor="@color/color_white"
             app:tabTextAppearance="@style/style_font_gray_28pt"
             app:tabTextColor="@color/color_white" />
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/tabLayout" />
     </RelativeLayout>
 
     <RelativeLayout
