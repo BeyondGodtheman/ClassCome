@@ -150,17 +150,20 @@
             <View style="@style/style_view_divider" />
 
             <TextView
+                android:id="@+id/info_name"
                 style="@style/style_font_default_34pt"
                 android:layout_marginStart="40pt"
                 android:layout_marginTop="40pt"
-                android:text="基本信息" />
+                android:text="基本信息"/>
 
             <RelativeLayout
+                android:id="@+id/rl_person"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40pt"
                 android:layout_marginTop="35pt"
-                android:layout_marginBottom="28pt">
+                android:layout_marginBottom="28pt"
+                android:visibility="gone">
 
                 <TextView
                     android:id="@+id/text11"
@@ -235,9 +238,63 @@
                     tools:text="未验证" />
             </RelativeLayout>
 
+            <RelativeLayout
+                android:id="@+id/rl_company"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40pt"
+                android:layout_marginTop="35pt"
+                android:layout_marginBottom="28pt"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/text66"
+                    style="@style/style_font_gray_28pt"
+                    android:text="企业名称" />
+
+                <TextView
+                    android:id="@+id/txt_organization"
+                    style="@style/style_font_default_28pt"
+                    android:layout_marginStart="120pt"
+                    android:layout_toEndOf="@id/text66"
+                    tools:text="企业名称" />
+
+                <TextView
+                    android:id="@+id/text77"
+                    style="@style/style_font_gray_28pt"
+                    android:layout_below="@id/text66"
+                    android:layout_marginTop="20pt"
+                    android:text="所在地" />
+
+                <TextView
+                    android:id="@+id/txt_address"
+                    style="@style/style_font_default_28pt"
+                    android:layout_alignStart="@id/txt_organization"
+                    android:layout_alignTop="@id/text77"
+                    android:layout_toEndOf="@id/text77"
+                    tools:text="20" />
+
+
+                <TextView
+                    android:id="@+id/text88"
+                    style="@style/style_font_gray_28pt"
+                    android:layout_below="@id/text77"
+                    android:layout_marginTop="20pt"
+                    android:text="身份验证" />
+
+                <TextView
+                    android:id="@+id/txt_company_identity"
+                    style="@style/style_font_gray_28pt"
+                    android:layout_alignStart="@id/txt_organization"
+                    android:layout_alignTop="@id/text88"
+                    android:layout_toEndOf="@id/text88"
+                    tools:text="未验证" />
+            </RelativeLayout>
+
             <View style="@style/style_view_divider" />
 
             <TextView
+                android:id="@+id/txt_type_brief"
                 style="@style/style_font_default_34pt"
                 android:layout_marginStart="40pt"
                 android:layout_marginTop="40pt"

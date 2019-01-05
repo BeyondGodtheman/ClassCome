@@ -12,6 +12,7 @@ import com.sunny.classcome.http.Constant
 import com.sunny.classcome.utils.IntentUtil
 import com.sunny.classcome.utils.ToastUtil
 import kotlinx.android.synthetic.main.activity_company_profile_edit.*
+import org.json.JSONArray
 
 class CompanyProfileEditActivity : BaseActivity() {
     override fun setLayout(): Int = R.layout.activity_company_profile_edit
@@ -57,18 +58,21 @@ class CompanyProfileEditActivity : BaseActivity() {
     }
 
     private fun commit() {
-        val params = hashMapOf<String, String>()
-
+        showLoading()
+        val params = hashMapOf<String, Any>()
+        params["organization"] = txt_company_name.text.toString()
+        params["address"] = txt_address.text.toString()
         params["userInfo"] = view_up.getText()
 
-//        val jsonArray = JSONArray()
-//        view_up.list.forEach {
-//            jsonArray.put(it.url)
-//        }
-//        params["materialUrls"] =jsonArray.toString()
+        val jsonArray =  JSONArray()
+        view_up.list.forEach {
+            jsonArray.put(it.url)
+        }
+        params["materialUrls"] = jsonArray
 
         ApiManager.post(composites, params, Constant.USER_EDITMYINFO, object : ApiManager.OnResult<BaseBean<String>>() {
             override fun onSuccess(data: BaseBean<String>) {
+                hideLoading()
                 if (data.content?.statu == "1") {
                     finishAfterTransition()
                 }
@@ -76,6 +80,7 @@ class CompanyProfileEditActivity : BaseActivity() {
             }
 
             override fun onFailed(code: String, message: String) {
+                hideLoading()
             }
 
         })

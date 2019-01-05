@@ -74,6 +74,7 @@ class MyProfileEditActivity : BaseActivity() {
     }
 
     private fun commit(){
+        showLoading()
         val params = hashMapOf<String, Any>()
         params["sex"] = if (rbtn_man.isChecked) "1" else "2"
         params["age"] = txt_age.text.toString()
@@ -90,6 +91,7 @@ class MyProfileEditActivity : BaseActivity() {
 
         ApiManager.post(composites, params, Constant.USER_EDITMYINFO, object : ApiManager.OnResult<BaseBean<String>>() {
             override fun onSuccess(data: BaseBean<String>) {
+                hideLoading()
                 if (data.content?.statu == "1") {
                     finishAfterTransition()
                 }
@@ -97,6 +99,7 @@ class MyProfileEditActivity : BaseActivity() {
             }
 
             override fun onFailed(code: String, message: String) {
+                hideLoading()
             }
 
         })

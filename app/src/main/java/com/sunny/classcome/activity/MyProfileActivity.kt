@@ -18,10 +18,7 @@ import com.sunny.classcome.bean.CommentBean
 import com.sunny.classcome.bean.UserBean
 import com.sunny.classcome.http.ApiManager
 import com.sunny.classcome.http.Constant
-import com.sunny.classcome.utils.GlideUtil
-import com.sunny.classcome.utils.IntentUtil
-import com.sunny.classcome.utils.UserManger
-import com.sunny.classcome.utils.initPhotoVideo
+import com.sunny.classcome.utils.*
 import kotlinx.android.synthetic.main.activity_my_profile.*
 
 /**
@@ -56,8 +53,16 @@ class MyProfileActivity : BaseActivity() {
 
         val titleView = if (taUid.isEmpty()) {
             titleManager.defaultTitle("我的简介", "编辑", View.OnClickListener {
-                MyApplication.getApp().setData(Constant.USER_BEAN, userBean)
-                IntentUtil.start(this, MyProfileEditActivity::class.java)
+                if (userBean == null){
+                    ToastUtil.show("信息获取失败,请从新加载！")
+                }else{
+                    MyApplication.getApp().setData(Constant.USER_BEAN, userBean)
+                    if (userBean?.user?.authentication == "1"){
+                        IntentUtil.start(this, MyProfileEditActivity::class.java)
+                    }else{
+                        IntentUtil.start(this, CompanyProfileEditActivity::class.java)
+                    }
+                }
             })
         } else {
             titleManager.defaultTitle("我的简介")
@@ -112,25 +117,43 @@ class MyProfileActivity : BaseActivity() {
                     txt_partake_count.text = bean.teachingNum
                     txt_default_count.text = bean.violateNum
 
-                    txt_sex.text = if (bean.sex == "1") "男" else "女"
 
+                    if (bean.authentication == "1"){
+                        info_name.text = "基本信息"
+                        txt_type_brief.text = "个人简介"
+                        rl_person.visibility = View.VISIBLE
+                        txt_sex.text = if (bean.sex == "1") "男" else "女"
+                        if (bean.age > 0) {
+                            txt_age.text = bean.age.toString()
+                        }
 
-                    if (bean.isAuth == "1") {
-                        txt_identity.text = "已认证"
-                    } else {
-                        txt_identity.text = "未认证"
+                        txt_specialty.text = bean.profession
+
+                        if (bean.workAge > 0) {
+                            txt_work.text = ("${bean.workAge}年")
+                        }
+
+                        if (bean.isAuth == "1") {
+                            txt_identity.text = "已认证"
+                        } else {
+                            txt_identity.text = "未认证"
+                        }
+
+                    }else{
+                        info_name.text = "企业信息"
+                        txt_type_brief.text = "企业介绍"
+                        rl_company.visibility = View.VISIBLE
+                        txt_organization.text = bean.organization
+                        txt_address.text = bean.address
+
+                        if (bean.isAuth == "1") {
+                            txt_company_identity.text = "已认证"
+                        } else {
+                            txt_company_identity.text = "未认证"
+                        }
                     }
-                    if (bean.age > 0) {
-                        txt_age.text = bean.age.toString()
-                    }
 
-                    txt_specialty.text = bean.speciality
                     txt_brief.text = bean.userInfo
-                    txt_specialty.text = bean.profession
-
-                    if (bean.workAge > 0) {
-                        txt_work.text = ("${bean.workAge}年")
-                    }
 
                     data.content?.data?.materialList?.let {
                         if (it.size > 0) {
