@@ -327,29 +327,29 @@ class PublishDetailsActivity : BaseActivity() {
             override fun onSuccess(data: BaseBean<String>) {
                 hideLoading()
                 if (data.content?.statu == "1") {// 成功
-                    if (classData?.course?.coursetype == "4" || classData?.course?.coursetype == "5") {
-                        classData?.let {
-
-                            PayActivity.start(this@PublishDetailsActivity, it, "")
+                    when (relationType) {
+                        -1 -> {
+                            txt_collection.text = "收藏"
+                            isCollection = "0"
                         }
-                    } else {
-                        when (relationType) {
-                            -1 -> {
-                                txt_collection.text = "收藏"
-                                isCollection = "0"
-                            }
-                            1 -> {
-                                txt_collection.text = "已收藏"
-                                isCollection = "1"
-                            }
-                            2 -> {
+                        1 -> {
+                            txt_collection.text = "已收藏"
+                            isCollection = "1"
+                        }
+                        2 -> {
+                            if (classData?.course?.coursetype == "4" || classData?.course?.coursetype == "5") {
+                                classData?.let {
+                                    PayActivity.start(this@PublishDetailsActivity, it, "")
+                                }
+                            } else {
                                 txt_accept.text = "已应聘"
                                 isAppointment = "1"
                                 ApplicationSuccessActivity.start(this@PublishDetailsActivity, courseId)
                             }
                         }
                     }
-                }else{
+
+                } else {
                     ToastUtil.show(data.content?.info)
                 }
             }
