@@ -28,7 +28,7 @@ class MyParticipatedAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleA
         holder.itemView.txt_left.visibility = View.GONE
         holder.itemView.txt_mid.visibility = View.GONE
         holder.itemView.txt_right.visibility = View.GONE
-
+        holder.itemView.txt_status.setTextColor(ContextCompat.getColor(context,R.color.color_price_red))
 
         GlideUtil.loadHead(context, holder.itemView.img_user_head, getData(position).user?.userPic
                 ?: "")
@@ -62,6 +62,10 @@ class MyParticipatedAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleA
             "4" -> {
                 if (getData(position).course.state == "4") {
                     cancel(holder.itemView.txt_right, position)
+                }else{
+                    if (getData(position).course.coursetype =="4" || getData(position).course.coursetype =="5"){
+                        holder.itemView.txt_status.setTextColor(ContextCompat.getColor(context,R.color.color_default_font))
+                    }
                 }
             }
             "5" -> {
@@ -80,7 +84,6 @@ class MyParticipatedAdapter(list: ArrayList<ClassBean.Bean.Data>) : BaseRecycleA
             holder.itemView.txt_status.setTextColor(ContextCompat.getColor(context,R.color.color_default_font))
             holder.itemView.txt_status.text = "已取消"
         }else{
-            holder.itemView.txt_status.setTextColor(ContextCompat.getColor(context,R.color.color_price_red))
             if (getData(position).course.coursetype == "4" || getData(position).course.coursetype == "5"){
                 if(getData(position).order.state != "1" && getData(position).order.state != "2"){
                     holder.itemView.txt_status.text = getData(position).course.stateInfo
