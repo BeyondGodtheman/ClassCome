@@ -173,16 +173,16 @@ class OrderDetailActivity : BaseActivity() {
         }
 
         showBlueBtn(txt_order_right, "购买者")
-        txt_order_right.setOnClickListener { _ ->
+        txt_order_right.setOnClickListener {
             classBean?.let {
                 BuyActivity.start(this, classBean?.course?.id ?: "", it)
             }
 
         }
 
-        rl_money.visibility = View.VISIBLE
-        txt_money_desc.text = "支付金额"
-        txt_money_count.text = ("¥${classBean?.course?.sumPrice}")
+//        rl_money.visibility = View.VISIBLE
+//        txt_money_desc.text = "支付金额"
+//        txt_money_count.text = ("¥${classBean?.course?.sumPrice}")
 
 //        rl_contact.visibility = View.VISIBLE
 //        txt_contact_desc.text = "联系方式"

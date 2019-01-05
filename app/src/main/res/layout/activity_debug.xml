@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="40pt"
+        android:paddingEnd="40pt"
+        android:paddingTop="20pt"
+        android:paddingBottom="20pt"
+        android:background="@color/color_white"
+        android:layout_marginTop="20pt">
+
+        <TextView
+            style="@style/style_font_default_32pt"
+            android:text="信鸽Token" />
+
+        <EditText
+            android:id="@+id/edit_xg"
+            style="@style/EditDefaultStyle"
+            android:layout_width="match_parent"
+            android:layout_marginStart="20pt"
+            android:hint=""
+            android:textSize="32pt" />
+    </LinearLayout>
+</LinearLayout>

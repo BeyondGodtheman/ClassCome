@@ -21,6 +21,7 @@
         android:textStyle="bold" />
 
     <RelativeLayout
+        android:id="@+id/rl_version"
         android:layout_width="match_parent"
         android:layout_height="100pt"
         android:layout_marginTop="60pt"

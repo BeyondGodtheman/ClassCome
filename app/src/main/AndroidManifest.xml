@@ -268,5 +268,7 @@
             android:theme="@style/GuideTheme" />
         <!--应聘成功页面-->
         <activity android:name=".activity.ApplicationSuccessActivity"/>
+
+        <activity android:name=".activity.DebugActivity"/>
     </application>
 </manifest>
