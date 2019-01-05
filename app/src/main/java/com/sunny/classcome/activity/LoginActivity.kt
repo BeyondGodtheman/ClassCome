@@ -25,7 +25,7 @@ class LoginActivity : BaseActivity() {
 
 
     private val titleView: View by lazy {
-        titleManager.defaultTitle(getString(R.string.login_pass_title), getString(R.string.reg), View.OnClickListener {
+        titleManager.defaultTitle(getString(R.string.login), getString(R.string.reg), View.OnClickListener {
             startActivity(Intent(this, RegisterActivity::class.java))
         })
     }
