@@ -41,7 +41,7 @@ class HomeFragment : BaseFragment() {
     private var isShowLocal = false
     private var localStr = listOf<String>()
 
-    private var sortIndex = 0
+    private var sortIndex = -1
 
     private var sortFlag = false
 
@@ -266,13 +266,16 @@ class HomeFragment : BaseFragment() {
 
 
     private fun sort(mSortIndex: Int) {
-        bottomArrowList[sortIndex].setImageResource(R.mipmap.ic_arrow_bottom_gray)
-        topArrowList[sortIndex].setImageResource(R.mipmap.ic_arrow_top_gray)
-        textSortList[sortIndex].setTextColor(ContextCompat.getColor(requireContext(),R.color.color_default_font))
+        if (sortIndex != -1){
+            bottomArrowList[sortIndex].setImageResource(R.mipmap.ic_arrow_bottom_gray)
+            topArrowList[sortIndex].setImageResource(R.mipmap.ic_arrow_top_gray)
+            textSortList[sortIndex].setTextColor(ContextCompat.getColor(requireContext(),R.color.color_default_font))
 
-        if (mSortIndex != sortIndex) {
-            sortFlag = false
+            if (mSortIndex != sortIndex) {
+                sortFlag = false
+            }
         }
+
         sortIndex = mSortIndex
 
         textSortList[sortIndex].setTextColor(ContextCompat.getColor(requireContext(),R.color.color_nav_blue))
@@ -295,12 +298,15 @@ class HomeFragment : BaseFragment() {
             0 -> "sortAdress"
             1 -> "sortPopularity"
             2 -> "sortPrice"
-            else -> "sortTime"
+            3 -> "sortTime"
+            else -> ""
         }
         val params = HashMap<String, String>()
         params["cityId"] = UserManger.getAddress().split(",")[0]
         params["pageIndex"] = pageIndex.toString()
-        params[sortStr] = if (!sortFlag) "1" else "0"
+        if (sortStr.isNotEmpty()){
+            params[sortStr] = if (!sortFlag) "1" else "0"
+        }
 
         ApiManager.post(getBaseActivity().composites, params, Constant.COURSE_GETCOURSELISTS, object : ApiManager.OnResult<ClassBean>() {
             override fun onSuccess(data: ClassBean) {

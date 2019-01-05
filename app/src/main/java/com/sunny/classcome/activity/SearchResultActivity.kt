@@ -23,7 +23,7 @@ import org.json.JSONArray
 
 class SearchResultActivity : BaseActivity() {
 
-    private var sortIndex = 0
+    private var sortIndex = -1
     private var pageIndex = 1
     private var sortFlag = false
 
@@ -104,11 +104,13 @@ class SearchResultActivity : BaseActivity() {
 
 
     private fun sort(mSortIndex: Int) {
-        bottomArrowList[sortIndex].setImageResource(R.mipmap.ic_arrow_bottom_gray)
-        topArrowList[sortIndex].setImageResource(R.mipmap.ic_arrow_top_gray)
-        textSortList[sortIndex].setTextColor(ContextCompat.getColor(this,R.color.color_default_font))
-        if (mSortIndex != sortIndex) {
-            sortFlag = false
+        if (sortIndex != -1){
+            bottomArrowList[sortIndex].setImageResource(R.mipmap.ic_arrow_bottom_gray)
+            topArrowList[sortIndex].setImageResource(R.mipmap.ic_arrow_top_gray)
+            textSortList[sortIndex].setTextColor(ContextCompat.getColor(this,R.color.color_default_font))
+            if (mSortIndex != sortIndex) {
+                sortFlag = false
+            }
         }
         sortIndex = mSortIndex
 
@@ -131,7 +133,8 @@ class SearchResultActivity : BaseActivity() {
             0 -> "sortAdress"
             1 -> "sortPopularity"
             2 -> "sortPrice"
-            else -> "sortTime"
+            4 -> "sortTime"
+            else -> ""
         }
 
 
@@ -147,7 +150,9 @@ class SearchResultActivity : BaseActivity() {
             params["townId"] = townId
         }
 
-        params[sortStr] = if (!sortFlag) "1" else "0"
+        if (sortStr.isNotEmpty()){
+            params[sortStr] = if (!sortFlag) "1" else "0"
+        }
 
         if (category.isNotEmpty()){
             val categoryArray = JSONArray()

@@ -15,8 +15,10 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener
 import com.sunny.classcome.R
 import com.sunny.classcome.adapter.ClassListAdapter
 import com.sunny.classcome.base.BaseActivity
+import com.sunny.classcome.bean.BaseBean
 import com.sunny.classcome.bean.ClassBean
 import com.sunny.classcome.bean.ClassChildType
+import com.sunny.classcome.bean.ClassTypeBean
 import com.sunny.classcome.http.ApiManager
 import com.sunny.classcome.http.Constant
 import com.sunny.classcome.utils.UserManger
@@ -45,8 +47,8 @@ class ClassListActivity : BaseActivity() {
         arrayListOf(img_local_bottom, img_hot_bottom, img_price_bottom, img_time_bottom)
     }
 
-    private val textSortList :ArrayList<TextView> by lazy {
-        arrayListOf(txt_sort_location,txt_sort_hot,txt_sort_price,txt_sort_time)
+    private val textSortList: ArrayList<TextView> by lazy {
+        arrayListOf(txt_sort_location, txt_sort_hot, txt_sort_price, txt_sort_time)
     }
 
     override fun setLayout(): Int = R.layout.activity_class_list
@@ -79,7 +81,7 @@ class ClassListActivity : BaseActivity() {
         }
 
         showTitle(titleManager.iconTitle(title, View.OnClickListener {
-            SearchActivity.start(this,pId,courseType)
+            SearchActivity.start(this, pId, courseType)
         }))
 
         tabLayout.visibility = View.VISIBLE
@@ -127,7 +129,11 @@ class ClassListActivity : BaseActivity() {
             }
         })
 
-        loadNav()
+        if (courseType == "4" || courseType == "5"){
+            loadOtherNav()
+        }else{
+            loadClassNav()
+        }
     }
 
     override fun onClick(v: View) {
@@ -150,16 +156,16 @@ class ClassListActivity : BaseActivity() {
     private fun sort(mSortIndex: Int) {
         pageIndex = 1
 
-        if (sortIndex != -1){
+        if (sortIndex != -1) {
             bottomArrowList[sortIndex].setImageResource(R.mipmap.ic_arrow_bottom_gray)
             topArrowList[sortIndex].setImageResource(R.mipmap.ic_arrow_top_gray)
-            textSortList[sortIndex].setTextColor(ContextCompat.getColor(this,R.color.color_default_font))
+            textSortList[sortIndex].setTextColor(ContextCompat.getColor(this, R.color.color_default_font))
             if (mSortIndex != sortIndex) {
                 sortFlag = false
             }
         }
         sortIndex = mSortIndex
-        textSortList[sortIndex].setTextColor(ContextCompat.getColor(this,R.color.color_nav_blue))
+        textSortList[sortIndex].setTextColor(ContextCompat.getColor(this, R.color.color_nav_blue))
         sortFlag = if (sortFlag) {
             topArrowList[sortIndex].setImageResource(R.mipmap.ic_arrow_top_blue)
             false
@@ -173,10 +179,10 @@ class ClassListActivity : BaseActivity() {
     }
 
 
-    private fun loadNav() {
+    private fun loadOtherNav() {
         showLoading()
         val params = HashMap<String, String>()
-        if (courseType == "4" || courseType == "5"){
+        if (courseType == "4" || courseType == "5") {
             params["pId"] = pId
         }
         ApiManager.post(composites, params, Constant.COURSE_GETCATEGORY, object : ApiManager.OnResult<ClassChildType>() {
@@ -184,14 +190,30 @@ class ClassListActivity : BaseActivity() {
                 hideLoading()
                 tabLayout.removeAllTabs()
                 data.content?.forEach {
-                    tabLayout.addTab(tabLayout.newTab().setText(it.name).setTag(it.id),false)
+                    tabLayout.addTab(tabLayout.newTab().setText(it.name).setTag(it.id), false)
                 }
-//                data.content?.let {
-//                    if (it.isNotEmpty()){
-//                        category = it.first().id
-//                    }
-//                }
 
+                //加载课程数据
+                showLoading()
+                loadClass()
+            }
+
+            override fun onFailed(code: String, message: String) {
+                hideLoading()
+            }
+        })
+    }
+
+
+    private fun loadClassNav() {
+        showLoading()
+        ApiManager.post(composites, null, Constant.COURSE_GETCATEGORYALL, object : ApiManager.OnResult<BaseBean<ArrayList<ClassTypeBean>>>() {
+            override fun onSuccess(data: BaseBean<ArrayList<ClassTypeBean>>) {
+                hideLoading()
+                tabLayout.removeAllTabs()
+                data.content?.data?.forEach {
+                    tabLayout.addTab(tabLayout.newTab().setText(it.name).setTag(it.id), false)
+                }
 
                 //加载课程数据
                 showLoading()
@@ -219,11 +241,11 @@ class ClassListActivity : BaseActivity() {
 
         val params = HashMap<String, Any>()
         params["cityId"] = UserManger.getAddress().split(",")[0]
-        if (sortStr.isNotEmpty()){
+        if (sortStr.isNotEmpty()) {
             params[sortStr] = if (!sortFlag) "1" else "0"
         }
 
-        if (category.isNotEmpty()){
+        if (category.isNotEmpty()) {
             val categoryArray = JSONArray()
             categoryArray.put(category)
             params["category"] = categoryArray
@@ -237,9 +259,9 @@ class ClassListActivity : BaseActivity() {
                 if (pageIndex == 1) {
                     dataList.clear()
                     refresh.finishRefresh()
-                    if (data.content?.dataList == null){
+                    if (data.content?.dataList == null) {
                         layout_error.visibility = View.VISIBLE
-                    }else{
+                    } else {
                         layout_error.visibility = View.GONE
                     }
                 } else {

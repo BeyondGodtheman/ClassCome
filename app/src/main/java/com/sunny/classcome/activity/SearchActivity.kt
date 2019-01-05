@@ -212,7 +212,7 @@ class SearchActivity : BaseActivity() {
                 subCategoryList.clear()
                 subCategoryList.addAll(data.content ?: arrayListOf())
                 subCategoryList.forEach {
-                    tabLayout.addTab(tabLayout.newTab().setText(it.name).setTag(it.id))
+                    tabLayout.addTab(tabLayout.newTab().setText(it.name).setTag(it.id),false)
                 }
             }
 
@@ -238,7 +238,7 @@ class SearchActivity : BaseActivity() {
                 }
 
                 subCategoryList.forEach {
-                    tabLayout.addTab(tabLayout.newTab().setText(it.name).setTag(it.id))
+                    tabLayout.addTab(tabLayout.newTab().setText(it.name).setTag(it.id),false)
                 }
 
                 initViewPager()
