@@ -68,7 +68,7 @@ class MyProfileActivity : BaseActivity() {
         refresh.setEnableRefresh(false)
         refresh.setRefreshFooter(ClassicsFooter(this))
         refresh.setOnLoadMoreListener {
-            pageIndex ++
+            pageIndex++
             loadComment()
         }
 
@@ -120,90 +120,99 @@ class MyProfileActivity : BaseActivity() {
                     } else {
                         txt_identity.text = "未认证"
                     }
-                    txt_age.text = bean.age.toString()
+                    if (bean.age > 0) {
+                        txt_age.text = bean.age.toString()
+                    }
+
                     txt_specialty.text = bean.speciality
                     txt_brief.text = bean.userInfo
                     txt_specialty.text = bean.profession
-                    txt_work.text = ("${bean.workAge}年")
+
+                    if (bean.workAge > 0) {
+                        txt_work.text = ("${bean.workAge}年")
+                    }
+
+                    data.content?.data?.materialList?.let {
+                        if (it.size > 0) {
+                            ll_count.visibility = View.VISIBLE
+                        }
+                        txt_all.text = it.size.toString()
+                        viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+                            override fun onPageScrollStateChanged(p0: Int) {
+
+                            }
+
+                            override fun onPageScrolled(p0: Int, p1: Float, p2: Int) {
+
+                            }
+
+                            override fun onPageSelected(position: Int) {
+                                txt_current.text = (position + 1).toString()
+                            }
+
+                        })
+                        initPhotoVideo(this@MyProfileActivity, viewPager, it)
+                    }
+                }
+            }
+
+                override fun onFailed(code: String, message: String) {
+                    hideLoading()
                 }
 
-                data.content?.data?.materialList?.let {
-                    txt_all.text = it.size.toString()
-                    viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
-                        override fun onPageScrollStateChanged(p0: Int) {
+            })
 
-                        }
+            //加载发布的课程
+            loadPastRelease()
+            //加载评论
+            pageIndex = 1
+            loadComment()
+        }
 
-                        override fun onPageScrolled(p0: Int, p1: Float, p2: Int) {
-
-                        }
-
-                        override fun onPageSelected(position: Int) {
-                            txt_current.text = (position + 1).toString()
-                        }
-
-                    })
-                    initPhotoVideo(this@MyProfileActivity, viewPager, it)
+                private fun loadPastRelease() {
+            val params = HashMap<String, String>()
+            params["userId"] = if (taUid.isEmpty()) myUid else taUid
+            params["pageSize"] = "2"
+            ApiManager.post(composites, params, Constant.CURSE_GETUSERPUBLISHCOURSE, object : ApiManager.OnResult<ClassBean>() {
+                override fun onSuccess(data: ClassBean) {
+                    pastReleaseList.clear()
+                    pastReleaseList.addAll(data.content?.dataList ?: arrayListOf())
+                    recl.adapter?.notifyDataSetChanged()
                 }
-            }
 
-            override fun onFailed(code: String, message: String) {
-                hideLoading()
-            }
+                override fun onFailed(code: String, message: String) {
+                }
 
-        })
+            })
+        }
 
-        //加载发布的课程
-        loadPastRelease()
-        //加载评论
-        pageIndex = 1
-        loadComment()
-    }
+                private fun loadComment() {
+            val params = HashMap<String, String>()
+            params["id"] = if (taUid.isEmpty()) myUid else taUid
+            params["pageIndex"] = pageIndex.toString()
+            ApiManager.post(composites, params, Constant.USER_GETAPPRAISELIST, object : ApiManager.OnResult<BaseBean<CommentBean>>() {
+                override fun onSuccess(data: BaseBean<CommentBean>) {
+                    if (pageIndex == 1) {
+                        commentList.clear()
+                    } else {
+                        refresh.finishLoadMore()
+                        if (data.content?.data?.dataList == null || data.content?.data?.dataList?.isEmpty() == true) {
+                            pageIndex--
+                        }
+                    }
+                    data.content?.data?.dataList?.let {
+                        if (it.isNotEmpty()) {
+                            if (!commentList.containsAll(it))
+                                commentList.addAll(it)
+                        }
+                    }
+                    recl_comment.adapter?.notifyDataSetChanged()
+                }
 
-    private fun loadPastRelease() {
-        val params = HashMap<String, String>()
-        params["userId"] = if (taUid.isEmpty()) myUid else taUid
-        params["pageSize"] = "2"
-        ApiManager.post(composites, params, Constant.CURSE_GETUSERPUBLISHCOURSE, object : ApiManager.OnResult<ClassBean>() {
-            override fun onSuccess(data: ClassBean) {
-                pastReleaseList.clear()
-                pastReleaseList.addAll(data.content?.dataList ?: arrayListOf())
-                recl.adapter?.notifyDataSetChanged()
-            }
-
-            override fun onFailed(code: String, message: String) {
-            }
-
-        })
-    }
-
-    private fun loadComment() {
-        val params = HashMap<String, String>()
-        params["id"] = if (taUid.isEmpty()) myUid else taUid
-        params["pageIndex"] = pageIndex.toString()
-        ApiManager.post(composites, params, Constant.USER_GETAPPRAISELIST, object : ApiManager.OnResult<BaseBean<CommentBean>>() {
-            override fun onSuccess(data: BaseBean<CommentBean>) {
-                if (pageIndex == 1) {
-                    commentList.clear()
-                }else{
+                override fun onFailed(code: String, message: String) {
                     refresh.finishLoadMore()
-                    if (data.content?.data?.dataList == null || data.content?.data?.dataList?.isEmpty() == true){
-                        pageIndex --
-                    }
                 }
-                data.content?.data?.dataList?.let {
-                    if (it.isNotEmpty()) {
-                        if (!commentList.containsAll(it))
-                            commentList.addAll(it)
-                    }
-                }
-                recl_comment.adapter?.notifyDataSetChanged()
-            }
 
-            override fun onFailed(code: String, message: String) {
-                refresh.finishLoadMore()
-            }
-
-        })
+            })
+        }
     }
-}

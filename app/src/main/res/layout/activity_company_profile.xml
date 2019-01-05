@@ -229,7 +229,7 @@
                 style="@style/style_font_default_32pt"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="40pt"
-                android:text="过往发布信息" />
+                android:text="他的过往发布信息" />
 
             <TextView
                 android:id="@+id/txt_more"
