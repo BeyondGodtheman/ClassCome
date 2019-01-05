@@ -52,15 +52,15 @@ class MyClassActivity : BaseActivity() {
 
         getTitleName()
 
-        titleView = titleManager.arrowTitle(title + typeName, View.OnClickListener { _ ->
+        titleView = titleManager.arrowTitle(title + typeName, View.OnClickListener {
             SelectDialog(this) { type ->
                 courseType = type
                 getTitleName()
                 titleView.txt_arrow_title.text = (title + typeName)
 
-                fragments.forEach {
-                    it.setCourseType(courseType)
-                    it.autoLoad()
+                fragments.forEach { fragments ->
+                    fragments.setCourseType(courseType)
+                    fragments.autoLoad()
                 }
 
             }.show()
@@ -69,10 +69,10 @@ class MyClassActivity : BaseActivity() {
         showTitle(titleView)
 
 
-        fragments.add(MyClassFragment().setStatus(type.toString(), "7"))
-        fragments.add(MyClassFragment().setStatus(type.toString(), "4"))
-        fragments.add(MyClassFragment().setStatus(type.toString(), "5"))
-        fragments.add(MyClassFragment().setStatus(type.toString(), "6"))
+        fragments.add(MyClassFragment().setStatus(type.toString(), "7").setCourseType(courseType))
+        fragments.add(MyClassFragment().setStatus(type.toString(), "4").setCourseType(courseType))
+        fragments.add(MyClassFragment().setStatus(type.toString(), "5").setCourseType(courseType))
+        fragments.add(MyClassFragment().setStatus(type.toString(), "6").setCourseType(courseType))
 
         view_pager.offscreenPageLimit = 4
         view_pager.adapter = object : FragmentPagerAdapter(supportFragmentManager) {

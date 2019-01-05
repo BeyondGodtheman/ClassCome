@@ -79,6 +79,7 @@ class MyClassFragment : BaseFragment() {
             if (status == "4") {
                 refresh.closeHeaderOrFooter()
                 ll_error.visibility = View.VISIBLE
+                hideLoading()
                 return
             }
         }
@@ -124,8 +125,9 @@ class MyClassFragment : BaseFragment() {
         })
     }
 
-    fun setCourseType(courseType: String) {
+    fun setCourseType(courseType: String):MyClassFragment {
         this.courseType = courseType
+        return this
     }
 
     fun setStatus(type: String, status: String): MyClassFragment {
