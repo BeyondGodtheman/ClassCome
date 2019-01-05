@@ -17,6 +17,7 @@ import com.sunny.classcome.base.BaseActivity
 import com.sunny.classcome.bean.ClassBean
 import com.sunny.classcome.http.ApiManager
 import com.sunny.classcome.http.Constant
+import com.sunny.classcome.utils.UserManger
 import kotlinx.android.synthetic.main.activity_class_list.*
 import org.json.JSONArray
 
@@ -60,7 +61,7 @@ class SearchResultActivity : BaseActivity() {
         category = intent.getStringExtra("category") ?: ""
         startPrice = intent.getStringExtra("startPrice") ?: ""
         endPrice = intent.getStringExtra("endPrice") ?: ""
-        cityId = intent.getStringExtra("cityId") ?: ""
+        cityId = UserManger.getAddress().split(",")[0]
         countyId = intent.getStringExtra("countyId") ?: ""
         townId = intent.getStringExtra("townId") ?: ""
         startDate = intent.getStringExtra("startDate") ?: ""
