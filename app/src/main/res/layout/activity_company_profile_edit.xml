@@ -46,8 +46,7 @@
                     android:layout_marginStart="60pt"
                     android:layout_alignTop="@id/text22"
                     android:layout_toEndOf="@id/text22"
-                    android:inputType="number"
-                    tools:text="20" />
+                    tools:text="公司" />
 
                 <View
                     android:id="@+id/line22"
@@ -108,6 +107,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_marginEnd="35pt"
                     android:text="去验证 >"
+                    android:visibility="gone"
                     android:textColor="@color/color_primary"/>
 
             </RelativeLayout>

@@ -31,8 +31,10 @@ class CompanyProfileEditActivity : BaseActivity() {
 
             if (bean.user?.relationimgId != null) {
                 txt_identity.text = "已通过"
+                txt_go_identity.visibility = View.GONE
             } else {
                 txt_identity.text = "未通过"
+                txt_go_identity.visibility = View.VISIBLE
             }
 
             bean.materialList?.let {
@@ -64,7 +66,7 @@ class CompanyProfileEditActivity : BaseActivity() {
         params["address"] = txt_address.text.toString()
         params["userInfo"] = view_up.getText()
 
-        val jsonArray =  JSONArray()
+        val jsonArray = JSONArray()
         view_up.list.forEach {
             jsonArray.put(it.url)
         }

@@ -44,7 +44,8 @@ class MyPostedAdapter(var baseActivity: BaseActivity, list: ArrayList<ClassBean.
             }
             "3" -> {
 //                //订单取消
-                publishAgain(holder.itemView.txt_right, position)
+                buy(holder.itemView.txt_mid, position)
+                publishAgain(holder.itemView.txt_left, position)
 
             }
             "4" -> {
