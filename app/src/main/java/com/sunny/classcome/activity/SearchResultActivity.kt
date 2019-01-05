@@ -133,7 +133,7 @@ class SearchResultActivity : BaseActivity() {
             0 -> "sortAdress"
             1 -> "sortPopularity"
             2 -> "sortPrice"
-            4 -> "sortTime"
+            3 -> "sortTime"
             else -> ""
         }
 
