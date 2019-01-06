@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rl_head"
+        android:layout_width="match_parent"
+        android:layout_height="120pt"
+        android:background="@color/color_white"
+        android:paddingStart="40pt"
+        android:paddingEnd="40pt">
+
+        <TextView
+            style="@style/style_font_default_28pt"
+            android:layout_centerVertical="true"
+            android:text="@string/head" />
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/img_head"
+            android:layout_width="80pt"
+            android:layout_height="80pt"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="10pt"
+            android:layout_toStartOf="@id/img_more"
+            android:contentDescription="@string/head"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/ic_default_head"
+            app:riv_oval="true" />
+
+        <ImageView
+            android:id="@+id/img_more"
+            android:layout_width="21pt"
+            android:layout_height="35pt"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:contentDescription="@string/app"
+            android:src="@mipmap/ic_more" />
+    </RelativeLayout>
+
+    <View style="@style/style_view_line" />
+
+    <RelativeLayout
+        android:id="@+id/rl_name"
+        style="@style/style_item_layout_txt_txt_img"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+
+        <TextView
+            style="@style/style_font_default_28pt"
+            android:text="企业名称" />
+
+        <EditText
+            android:id="@+id/edit_name"
+            style="@style/style_font_default_28pt"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="10pt"
+            android:background="@color/color_transparent"
+            android:gravity="right"
+            android:hint="输入企业名称" />
+    </RelativeLayout>
+
+    <View style="@style/style_view_line" />
+
+    <RelativeLayout
+        android:id="@+id/rl_person"
+        style="@style/style_item_layout_txt_txt_img"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+
+        <TextView
+            style="@style/style_font_default_28pt"
+            android:text="联系人" />
+
+        <EditText
+            android:id="@+id/edit_person"
+            style="@style/style_font_default_28pt"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="10pt"
+            android:background="@color/color_transparent"
+            android:gravity="right"
+            android:hint="输入联系人" />
+    </RelativeLayout>
+
+    <View style="@style/style_view_line" />
+
+    <RelativeLayout
+        android:id="@+id/rl_phone"
+        style="@style/style_item_layout_txt_txt_img">
+
+        <TextView
+            style="@style/style_font_default_28pt"
+            android:text="@string/bind_phone" />
+
+        <TextView
+            android:id="@+id/txt_phone"
+            style="@style/style_font_default_28pt"
+            android:layout_marginEnd="10pt"
+            android:layout_toStartOf="@id/img_more5"
+            tools:text="13126597878" />
+
+        <ImageView
+            android:id="@+id/img_more5"
+            android:layout_width="21pt"
+            android:layout_height="35pt"
+            android:layout_alignParentEnd="true"
+            android:contentDescription="@string/app"
+            android:src="@mipmap/ic_more" />
+    </RelativeLayout>
+
+    <View style="@style/style_view_line" />
+
+    <RelativeLayout
+        android:id="@+id/rl_city"
+        style="@style/style_item_layout_txt_txt_img">
+
+        <TextView
+            style="@style/style_font_default_28pt"
+            android:text="@string/city" />
+
+        <TextView
+            android:id="@+id/txt_city"
+            style="@style/style_font_default_28pt"
+            android:layout_marginEnd="10pt"
+            android:layout_toStartOf="@id/img_more4"
+            android:text="@string/defaultLocation" />
+
+        <ImageView
+            android:id="@+id/img_more4"
+            android:layout_width="21pt"
+            android:layout_height="35pt"
+            android:layout_alignParentEnd="true"
+            android:contentDescription="@string/app"
+            android:src="@mipmap/ic_more" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_identity"
+        style="@style/style_item_layout_txt_txt_img"
+        android:layout_marginTop="16pt">
+
+        <TextView
+            style="@style/style_font_default_28pt"
+            android:text="企业认证" />
+
+        <TextView
+            android:id="@+id/txt_identity"
+            style="@style/style_font_default_28pt"
+            android:layout_marginEnd="10pt"
+            android:layout_toStartOf="@id/img_more6"
+            android:text="@string/unverified" />
+
+        <ImageView
+            android:id="@+id/img_more6"
+            android:layout_width="21pt"
+            android:layout_height="35pt"
+            android:layout_alignParentEnd="true"
+            android:contentDescription="@string/app"
+            android:src="@mipmap/ic_more" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/txt_commit"
+        style="@style/style_button"
+        android:layout_marginTop="124pt"
+        android:text="@string/commit" />
+
+
+</LinearLayout>

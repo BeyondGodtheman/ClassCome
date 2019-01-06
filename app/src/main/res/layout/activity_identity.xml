@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_white"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/txt_person"
+        android:layout_width="662pt"
+        android:layout_height="150pt"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="134pt"
+        android:background="@drawable/draw_bg_fillet_blue_border"
+        android:gravity="center"
+        android:text="个人用户"
+        android:textColor="@color/color_nav_blue"
+        android:textSize="36pt" />
+
+
+    <TextView
+        android:id="@+id/txt_company"
+        android:layout_width="662pt"
+        android:layout_height="150pt"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="118pt"
+        android:background="@drawable/draw_bg_fillet_orange_border"
+        android:gravity="center"
+        android:text="企业/机构用户"
+        android:textColor="@color/color_orange_font"
+        android:textSize="36pt" />
+</LinearLayout>

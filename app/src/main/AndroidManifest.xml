@@ -270,5 +270,10 @@
         <activity android:name=".activity.ApplicationSuccessActivity"/>
 
         <activity android:name=".activity.DebugActivity"/>
+
+
+        <activity android:name=".activity.IdentityActivity"/>
+
+        <activity android:name=".activity.ModifyCompanyActivity"/>
     </application>
 </manifest>

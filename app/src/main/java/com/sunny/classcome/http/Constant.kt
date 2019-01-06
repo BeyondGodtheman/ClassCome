@@ -73,6 +73,8 @@ object Constant {
 
     const val USER_EDITPERSONINFO = "user/editPersonInfo" //完善个人信息
 
+    const val USER_SAVEORGANIZATIOND = "user/saveOrganizationd" //完善企业信息
+
     const val USER_GETMYINFO = "user/getMyInfo" //我的简历
 
     const val USER_EDITMYINFO = "user/editMyInfo" //编辑简历

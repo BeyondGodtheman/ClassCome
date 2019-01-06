@@ -94,7 +94,13 @@ class MineFragment : BaseFragment() {
             R.id.img_user_head,
             R.id.txt_user_name,
             R.id.txt_user_address,
-            R.id.img_more -> intent(ModifyInfoActivity::class.java)
+            R.id.img_more -> {
+                if (UserManger.getMine()?.authentication == "1"){
+                    intent(ModifyInfoActivity::class.java)
+                }else{
+                    intent(ModifyCompanyActivity::class.java)
+                }
+            }
             R.id.img_message -> intent(MyMsgActivity::class.java)
 
             R.id.rl_points -> startActivity(Intent(context, PointActivity::class.java)

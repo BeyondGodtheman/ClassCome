@@ -73,6 +73,12 @@ class LoginActivity : BaseActivity() {
         MyApplication.getApp().removeData(Constant.LOGIN_PHONE)
     }
 
+    override fun update() {
+        if (UserManger.isLogin()){
+            finishAfterTransition()
+        }
+    }
+
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
         if (intent.getStringExtra("type") == "wx"){

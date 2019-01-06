@@ -11,10 +11,12 @@ import android.view.View
 import com.sunny.classcome.R
 import com.sunny.classcome.base.BaseActivity
 import com.sunny.classcome.bean.BaseBean
+import com.sunny.classcome.bean.LoginBean
 import com.sunny.classcome.http.ApiManager
 import com.sunny.classcome.http.Constant
 import com.sunny.classcome.utils.DigestUtils
 import com.sunny.classcome.utils.ToastUtil
+import com.sunny.classcome.utils.UserManger
 import kotlinx.android.synthetic.main.activity_register.*
 
 /**
@@ -99,11 +101,33 @@ class RegisterActivity : BaseActivity() {
         params["passWord"] = DigestUtils.md5(edit_reg_pass.text.toString())
         ApiManager.post(composites, params, Constant.USER_REGISTERUSER, object : ApiManager.OnResult<BaseBean<String>>() {
             override fun onSuccess(data: BaseBean<String>) {
-                hideLoading()
-                ToastUtil.show(data.content?.info)
                 if (data.content?.statu == "1") {
+                    login()
+                }else{
+                    ToastUtil.show(data.content?.info)
+                    hideLoading()
+                }
+            }
+
+            override fun onFailed(code: String, message: String) {
+                hideLoading()
+            }
+        })
+    }
+
+    private fun login(){
+        val params = HashMap<String, String>()
+        params["telephone"] = edit_reg_phone.text.toString()
+        params["passWord"] = DigestUtils.md5(edit_reg_pass.text.toString())
+        ApiManager.post(composites, params, Constant.USER_LOGINUSER, object : ApiManager.OnResult<LoginBean>() {
+            override fun onSuccess(data: LoginBean) {
+                hideLoading()
+                if (data.content.statu != "0"){
+                    UserManger.setLogin(data)
                     startActivity(Intent(this@RegisterActivity, RegSuccessActivity::class.java))
                     finishAfterTransition()
+                }else{
+                    ToastUtil.show(data.content.info)
                 }
             }
 

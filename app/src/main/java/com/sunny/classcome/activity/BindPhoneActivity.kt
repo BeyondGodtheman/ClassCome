@@ -1,5 +1,6 @@
 package com.sunny.classcome.activity
 
+import android.content.Intent
 import android.view.View
 import com.sunny.classcome.R
 import com.sunny.classcome.base.BaseActivity
@@ -77,6 +78,7 @@ class BindPhoneActivity : BaseActivity() {
                 hideLoading()
                 ToastUtil.show(data.content?.info)
                 if (data.content?.statu == "1"){
+                    startActivity(Intent(this@BindPhoneActivity, RegSuccessActivity::class.java))
                     finishAfterTransition()
                 }
             }
