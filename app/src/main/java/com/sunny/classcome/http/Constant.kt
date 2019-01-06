@@ -2,9 +2,9 @@ package com.sunny.classcome.http
 
 object Constant {
 
-    fun isDebug(): Boolean = true
+    fun isDebug(): Boolean = false
 
-    var isLog = true //是否打印LOG
+    var isLog = false //是否打印LOG
 
     const val WX_APP_ID = "wx91082899601368ba"
     const val WX_APP_SECRET = "50b644b0398c1940bb831182f91606f1"

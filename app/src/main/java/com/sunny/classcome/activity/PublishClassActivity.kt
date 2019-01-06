@@ -333,7 +333,7 @@ class PublishClassActivity : BaseActivity() {
             override fun onSuccess(data: BaseBean<String>) {
                 hideLoading()
                 if (data.content?.statu == "1") {
-                    PublishSuccessActivity.start(this@PublishClassActivity,coursetype)
+                    PublishSuccessActivity.start(this@PublishClassActivity,coursetype, data.content?.data?:"")
                     finishAfterTransition()
                 } else {
                     ToastUtil.show(data.content?.info)

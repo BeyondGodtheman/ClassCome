@@ -274,10 +274,5 @@
             style="@style/style_mine_layout_item"
             app:mine_layout_icon="@mipmap/ic_mine_business_cooperation"
             app:mine_layout_text_left="@string/business_cooperation"/>
-
-        <View
-            style="@style/style_view_line"
-            android:layout_height="60pt"/>
-
     </LinearLayout>
 </ScrollView>

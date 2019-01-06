@@ -114,6 +114,7 @@ class MyMsgActivity : BaseActivity() {
     }
 
     fun setMessageRed(msgList:ArrayList<MsgBean.Content.Bean.Data>){
+
         val params = HashMap<String, Any>()
 
         val idArray = JSONArray()
@@ -123,6 +124,11 @@ class MyMsgActivity : BaseActivity() {
                 idArray.put(it.id)
             }
         }
+
+        if (idArray.length() == 0){
+            return
+        }
+
         params["ids"] = idArray
         ApiManager.post(composites,params,Constant.COURSE_SETMSGISREAD,object : ApiManager.OnResult<BaseBean<String>>(){
             override fun onSuccess(data: BaseBean<String>) {

@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.activity_publish_success.*
 class PublishSuccessActivity: BaseActivity() {
 
     var courseType = "1"
-
+    var courseId = ""
     override fun setLayout(): Int = R.layout.activity_publish_success
 
     override fun initView() {
@@ -18,8 +18,17 @@ class PublishSuccessActivity: BaseActivity() {
 
         courseType = intent.getStringExtra("courseType")?:"1"
 
+        courseId = intent.getStringExtra("courseId")?:""
+
         btn_home.setOnClickListener(this)
         btn_my.setOnClickListener(this)
+        btn_invite.setOnClickListener(this)
+
+        if (courseType == "4" || courseId == "5"){
+            btn_my.visibility = View.VISIBLE
+        }else{
+            btn_invite.visibility = View.VISIBLE
+        }
     }
 
     override fun onClick(v: View) {
@@ -31,10 +40,20 @@ class PublishSuccessActivity: BaseActivity() {
                 MyClassActivity.start(this,1,courseType)
                 finishAfterTransition()
             }
+            R.id.btn_invite -> {
+                InviteActivity.start(this,courseId)
+                finishAfterTransition()
+            }
         }
     }
 
     companion object {
+        fun start(context: Context,courseType:String?,courseId:String) {
+            context.startActivity(Intent(context, PublishSuccessActivity::class.java)
+                    .putExtra("courseType",courseType)
+                    .putExtra("courseId",courseId))
+        }
+
         fun start(context: Context,courseType:String?) {
             context.startActivity(Intent(context, PublishSuccessActivity::class.java)
                     .putExtra("courseType",courseType))

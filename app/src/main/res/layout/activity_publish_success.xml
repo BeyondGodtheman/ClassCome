@@ -41,5 +41,13 @@
         android:id="@+id/btn_my"
         style="@style/style_btn_border_blue"
         android:text="查看我的发布"
-        android:layout_marginTop="40pt"/>
+        android:layout_marginTop="40pt"
+        android:visibility="gone"/>
+
+    <Button
+        android:id="@+id/btn_invite"
+        style="@style/style_btn_border_blue"
+        android:text="邀请应聘"
+        android:layout_marginTop="40pt"
+        android:visibility="gone"/>
 </LinearLayout>
